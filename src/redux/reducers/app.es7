@@ -1,0 +1,43 @@
+import typeList from '../constants/app';
+
+const initialState = {
+    isLoading: false,
+    data: {
+        functionalList: [],
+        classList: [],
+    },
+    errors: [],
+};
+
+export default (state = initialState, {type, payload}) => {
+    switch (type) {
+        case typeList.APP_LOAD:
+            return {
+                ...state,
+                isLoading: true,
+            };
+
+        case typeList.APP_SUCCESS:
+            return {
+                ...state,
+                data: payload.data,
+                isLoading: false,
+            };
+
+        case typeList.APP_ERROR:
+            return {
+                ...state,
+                errors: payload.errors,
+                isLoading: false,
+            };
+
+        case typeList.APP_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+            };
+
+        default:
+            return state;
+    }
+}

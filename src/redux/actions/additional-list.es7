@@ -1,0 +1,17 @@
+import typeList from '../constants/additional-list';
+
+function additionalListAdd () {
+    return {type: typeList.ADDITIONAL_LIST_ADD};
+}
+
+function additionalListRemove (id) {
+    return {
+        type: typeList.ADDITIONAL_LIST_REMOVE,
+        payload: id,
+    };
+}
+
+export {
+    additionalListAdd,
+    additionalListRemove,
+};

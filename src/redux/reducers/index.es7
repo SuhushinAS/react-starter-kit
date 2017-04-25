@@ -1,0 +1,9 @@
+import {combineReducers} from 'redux';
+
+import app from './app';
+import additionalList from './additional-list';
+
+export default combineReducers({
+    app,
+    additionalList,
+});

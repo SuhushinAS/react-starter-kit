@@ -1,0 +1,6 @@
+export default {
+    APP_LOAD: 'APP_LOAD',
+    APP_SUCCESS: 'APP_SUCCESS',
+    APP_ERROR: 'APP_ERROR',
+    APP_FAIL: 'APP_FAIL',
+};

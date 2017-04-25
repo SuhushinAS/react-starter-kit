@@ -1,0 +1,22 @@
+import React from 'react';
+import style from './style.less';
+
+export default (props, context, updater) => {
+    const {additionalList, additionalListAdd, additionalListRemove, functionalList, funcProp1, funcProp2} = props;
+    return (<div className={style.functional}>
+    <p className={style.functional__text}>It is simple component in <em>functional style</em></p>
+    <p>Prop list:</p>
+    <ul>
+        <li>prop1: {funcProp1}</li>
+        <li>prop2: {funcProp2}</li>
+    </ul>
+    <p>State list:</p>
+    <ol>
+        {functionalList.map((item, index) => <li key={index}>{item}</li>)}
+    </ol>
+    <p>Additional List <a href="#" onClick={additionalListAdd}>Add Item</a></p>
+    <ol>
+        {additionalList.map((item, index) => (<li key={index}>{item} (<a href="#" onClick={() => additionalListRemove(index)}>remove</a>)</li>))}
+    </ol>
+</div>);
+}

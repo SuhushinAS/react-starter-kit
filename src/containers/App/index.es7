@@ -1,0 +1,137 @@
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import {additionalListAdd, additionalListRemove} from './../../redux/actions/additional-list';
+
+import FunctionalStyle from '../../components/FunctionalStyle/index';
+import ClassStyle from '../../components/ClassStyle/index';
+
+function mapStateToProps (state) {
+    return {
+        additionalList: state.additionalList.additionalList,
+        classList: state.app.data.classList,
+        functionalList: state.app.data.functionalList,
+    };
+}
+function mapDispatchToProps (dispatch) {
+    return bindActionCreators({
+        additionalListAdd,
+        additionalListRemove,
+    }, dispatch);
+}
+
+class App extends Component {
+
+    /**
+     * Описание свойств.
+     * @type {{additionalList: *, additionalListAdd: *, additionalListRemove: *, classList: *, functionalList: *}}
+     */
+    static propTypes = {
+        additionalList: PropTypes.arrayOf(PropTypes.string),
+        additionalListAdd: PropTypes.func,
+        additionalListRemove: PropTypes.func,
+        classList: PropTypes.arrayOf(PropTypes.string),
+        functionalList: PropTypes.arrayOf(PropTypes.string),
+    };
+
+    /**
+     * Конструктор компонента
+     *
+     * @param props - Свойства переданые в компонент.
+     */
+    // constructor (props) {
+    //     super(props);
+    // }
+
+    /**
+     * Компонент будет примонтирован.
+     * В данный момент у нас нет возможности посмотреть DOM элементы.
+     */
+    // componentWillMount () {}
+
+    /**
+     * Компонент примонтировался.
+     * В данный момент у нас есть возможность использовать refs, а следовательно это то самое место, где мы хотели бы указать установку фокуса.
+     * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
+     */
+    // componentDidMount () {}
+
+    /**
+     * Компонент получает новые props.
+     * Этод метод не вызывается в момент первого render.
+     *
+     * @param nextProps - Новые свойства
+     */
+    // componentWillReceiveProps (nextProps) {
+    //     super.componentWillReceiveProps(nextProps);
+    // }
+
+    /**
+     * Должен ли компонент обновиться?
+     * На самом деле, обычно реакт сам отлично разбирается.
+     * Но иногда ручное управление позволяет существенно ускорить работу в "узких местах".
+     *
+     * @param nextProps - Новые свойства.
+     * @param nextState - Новое состояние.
+     *
+     * @return bool
+     */
+    // shouldComponentUpdate (nextProps, nextState) {
+    //     return super.shouldComponentUpdate(nextProps, nextState);
+    // }
+
+    /**
+     * Вызывается прямо перед render, когда новые props и state получены.
+     * В этом методе нельзя вызывать setState.
+     *
+     * @param nextProps - Новые свойства.
+     * @param nextState - Новое состояние.
+     */
+    // componentWillUpdate (nextProps, nextState) {}
+
+    // Отображение компонента
+    render () {
+        const {additionalList, additionalListAdd, additionalListRemove, classList, functionalList} = this.props,
+            data = {
+                additionalList,
+                additionalListAdd,
+                additionalListRemove,
+            },
+            classData = {
+                ...data,
+                classList,
+                classProp1: 'classVal1',
+                classProp2: 'classVal2',
+            },
+            funcData = {
+                ...data,
+                functionalList,
+                funcProp1: 'funcVal1',
+                funcProp2: 'funcVal2',
+            };
+        return (
+            <main>
+                <FunctionalStyle {...funcData}/>
+                <ClassStyle {...classData}/>
+            </main>
+        );
+    }
+
+    /**
+     * Вызывается сразу после render.
+     * Не вызывается в момент первого render'а компонента.
+     *
+     * @param prevProps - Предыдущие свойства.
+     * @param prevState - Предыдущее состояние.
+     */
+    // componentDidUpdate(prevProps, prevState) {}
+
+    /**
+     * Вызывается сразу перед тем, как компонент будет удален из DOM.
+     */
+    // componentWillUnmount () {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

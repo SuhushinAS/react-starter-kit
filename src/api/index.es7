@@ -1,0 +1,7 @@
+import ApiApp from './ApiApp';
+
+export default class Api {
+    constructor (base = '') {
+        this.containerApi1 = new ApiApp(base);
+    }
+}

@@ -1,0 +1,180 @@
+const webpack = require('webpack');
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const gradientTransparencyFix = require('postcss-gradient-transparency-fix');
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isProd = nodeEnv === 'production';
+const sourcePath = path.join(__dirname, 'src');
+const staticsPath = path.join(__dirname, 'dist');
+
+const extractCSS = new ExtractTextPlugin({filename: '[name].min.css', disable: false, allChunks: true});
+
+const plugins = [
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks: Infinity,
+        filename: '[name].bundle.min.js',
+    }),
+    new webpack.DefinePlugin({
+        'process.env': {NODE_ENV: JSON.stringify(nodeEnv)},
+    }),
+    new HtmlWebpackPlugin({
+        template: sourcePath + '/index.ejs',
+        production: isProd,
+        inject: true,
+    }),
+    new webpack.LoaderOptionsPlugin({
+        options: {
+            postcss: [
+                autoprefixer(),
+                gradientTransparencyFix,
+            ],
+        },
+    }),
+    new ProgressBarPlugin(),
+];
+
+if (isProd) {
+    plugins.push(
+        new CleanWebpackPlugin(staticsPath, {
+            verbose: true,
+            dry: false,
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                screw_ie8: true,
+                conditionals: true,
+                unused: true,
+                comparisons: true,
+                sequences: true,
+                dead_code: true,
+                evaluate: true,
+                if_return: true,
+                join_vars: true,
+            },
+            output: {comments: false},
+        }),
+        extractCSS
+    );
+} else {
+    plugins.push(
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin()
+    );
+}
+
+module.exports = {
+    devtool: isProd ? false : 'eval',
+    context: sourcePath,
+    entry: {
+        vendor: [
+            'babel-polyfill',
+            'react',
+            'react-dom',
+            'react-redux',
+            'redux',
+            'whatwg-fetch',
+        ],
+        index: 'index',
+    },
+    output: {
+        path: staticsPath,
+        filename: '[name].min.js',
+        library: ['corpportal', '[name]']
+    },
+    module: {
+        rules: [
+            {
+                test: /\.html$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {name: '[name].[ext]'}
+                }
+            },
+            {
+                test: /\.(less|css)$/,
+                use: isProd
+                    ?
+                        extractCSS.extract({
+                            fallback: 'style-loader',
+                            use: [
+                                {
+                                    loader: 'css-loader',
+                                    options: {
+                                        modules: true,
+                                        localIdentName: '[local]_[hash:base64:5]'
+                                    },
+                                },
+                                'postcss-loader',
+                                'less-loader'
+                            ],
+                        })
+                    :
+                        [
+                            'style-loader',
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    modules: true,
+                                    localIdentName: '[local]_[hash:base64:5]'
+                                },
+                            },
+                            'postcss-loader',
+                            'less-loader'
+                        ]
+            },
+            {
+                test: /\.(js|jsx|es7)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader', // Нужно обновить до версии 7, когда выйдет, иначе - deprecated
+                    options: {cacheDirectory: true},
+                },
+            },
+            {
+                test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {name: 'fonts/[name]_[hash:8].[ext]'},
+                },
+            },
+            {
+                test: /.*\.(png|jpg|jpeg|gif|svg)$/i,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 5000,
+                        name: 'img/[name]_[hash:8].[ext]',
+                    },
+                },
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '.es7'],
+        modules: [
+            sourcePath,
+            'node_modules'
+        ]
+    },
+    plugins: plugins,
+    devServer: !isProd ?
+        {
+            contentBase: sourcePath,
+            historyApiFallback: true,
+            port: 3000,
+            hot: true,
+            compress: isProd,
+            stats: {colors: true},
+        }
+        : {},
+};
