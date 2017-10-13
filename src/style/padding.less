@@ -1,0 +1,30 @@
+@import (reference) 'vars';
+@import (reference) 'responsive';
+
+.calc-padding-col(@index, @class, @query) {
+    .padding_@{class}_@{grid-col-name}_@{index} {
+        @media @query {
+            padding-left: percentage((@index / @grid-columns));
+        }
+    }
+}
+
+.loop-padding-col(@index, @class, @query) when (@index >= 0) {
+    .calc-padding-col(@index, @class, @query);
+    .loop-padding-col((@index - 1), @class, @query);
+}
+
+.make-padding-media(@class, @query) {
+    .loop-padding-col(@grid-columns, @class, @query);
+}
+
+.make-padding(@class) {
+    @query: e('@{class}-min');
+    .make-padding-media(@class, @@query);
+}
+
+.make-padding(xs);
+.make-padding(sm);
+.make-padding(md);
+.make-padding(lg);
+.make-padding(xl);

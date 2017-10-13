@@ -15,7 +15,8 @@ export default class BaseApi {
      */
     request (url, method = 'GET', data = null, headers = {}) {
         const options = {
-            method: 'GET', // TODO При интеграции заменить на POST
+            method: 'GET', // Заменить на POST с реальным API
+            credentials: 'include',
             headers: new Headers({
                 ...headers,
                 'X-HTTP-Method-Override': method,

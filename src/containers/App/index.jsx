@@ -1,62 +1,72 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {additionalListAdd, additionalListRemove} from './../../redux/actions/additional-list';
+// import {exampleSimple, exampleGet, exampleCreate, exampleUpdate, exampleDelete} from 'src/redux/actions/example';
 
-import FunctionalStyle from '../../components/FunctionalStyle/index';
-import ClassStyle from '../../components/ClassStyle/index';
-
-function mapStateToProps (state) {
+/**
+ * Привязка props к store
+ *
+ * @param state
+ * @return {{prop}}
+ */
+function mapStateToProps(state) {
     return {
-        additionalList: state.additionalList.additionalList,
-        classList: state.app.data.classList,
-        functionalList: state.app.data.functionalList,
+        // example: state.example,
     };
 }
-function mapDispatchToProps (dispatch) {
+
+/**
+ * Привязка props к actions
+ *
+ * @param dispatch
+ * @return {{importedAction: *}|B|N}
+ */
+function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        additionalListAdd,
-        additionalListRemove,
+        // exampleSimple,
+        // exampleGet,
+        // exampleCreate,
+        // exampleUpdate,
+        // exampleDelete,
     }, dispatch);
 }
 
-class App extends Component {
+class App extends React.Component {
 
     /**
      * Описание свойств.
-     * @type {{additionalList: *, additionalListAdd: *, additionalListRemove: *, classList: *, functionalList: *}}
+     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
      */
-    static propTypes = {
-        additionalList: PropTypes.arrayOf(PropTypes.string),
-        additionalListAdd: PropTypes.func,
-        additionalListRemove: PropTypes.func,
-        classList: PropTypes.arrayOf(PropTypes.string),
-        functionalList: PropTypes.arrayOf(PropTypes.string),
-    };
+    // static propTypes = {prop: PropTypes.bool};
+
+    /**
+     * Значения свойств по-умолчанию.
+     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
+     */
+    // static defaultProps = {prop: false};
 
     /**
      * Конструктор компонента
      *
      * @param props - Свойства переданые в компонент.
+     * @param context - Контекст.
+     * @param updater
      */
-    // constructor (props) {
-    //     super(props);
-    // }
+    // constructor(props, context, updater) {}
 
     /**
      * Компонент будет примонтирован.
      * В данный момент у нас нет возможности посмотреть DOM элементы.
      */
-    // componentWillMount () {}
+    // componentWillMount() {}
 
     /**
      * Компонент примонтировался.
      * В данный момент у нас есть возможность использовать refs, а следовательно это то самое место, где мы хотели бы указать установку фокуса.
      * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
      */
-    // componentDidMount () {}
+    // componentDidMount() {}
 
     /**
      * Компонент получает новые props.
@@ -64,9 +74,7 @@ class App extends Component {
      *
      * @param nextProps - Новые свойства
      */
-    // componentWillReceiveProps (nextProps) {
-    //     super.componentWillReceiveProps(nextProps);
-    // }
+    // componentWillReceiveProps(nextProps) {}
 
     /**
      * Должен ли компонент обновиться?
@@ -78,9 +86,7 @@ class App extends Component {
      *
      * @return bool
      */
-    // shouldComponentUpdate (nextProps, nextState) {
-    //     return super.shouldComponentUpdate(nextProps, nextState);
-    // }
+    // shouldComponentUpdate(nextProps, nextState) {}
 
     /**
      * Вызывается прямо перед render, когда новые props и state получены.
@@ -89,34 +95,13 @@ class App extends Component {
      * @param nextProps - Новые свойства.
      * @param nextState - Новое состояние.
      */
-    // componentWillUpdate (nextProps, nextState) {}
+    // componentWillUpdate(nextProps, nextState) {}
 
-    // Отображение компонента
-    render () {
-        const {additionalList, additionalListAdd, additionalListRemove, classList, functionalList} = this.props,
-            data = {
-                additionalList,
-                additionalListAdd,
-                additionalListRemove,
-            },
-            classData = {
-                ...data,
-                classList,
-                classProp1: 'classVal1',
-                classProp2: 'classVal2',
-            },
-            funcData = {
-                ...data,
-                functionalList,
-                funcProp1: 'funcVal1',
-                funcProp2: 'funcVal2',
-            };
-        return (
-            <main>
-                <FunctionalStyle {...funcData}/>
-                <ClassStyle {...classData}/>
-            </main>
-        );
+    /**
+     * Отображение компонента
+     */
+    render() {
+        return <div>Hi from new App!</div>;
     }
 
     /**
@@ -131,7 +116,7 @@ class App extends Component {
     /**
      * Вызывается сразу перед тем, как компонент будет удален из DOM.
      */
-    // componentWillUnmount () {}
+    // componentWillUnmount() {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

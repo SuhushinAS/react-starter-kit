@@ -1,0 +1,30 @@
+@import (reference) 'responsive';
+
+.make-display-media(@class, @query) {
+    .display_@{class}_block {
+        @media @query {
+            display: block;
+        }
+    }
+    .display_@{class}_inline-block {
+        @media @query {
+            display: inline-block;
+        }
+    }
+    .display_@{class}_none {
+        @media @query {
+            display: none;
+        }
+    }
+}
+
+.make-display(@class) {
+    @query: e('@{class}-min');
+    .make-display-media(@class, @@query);
+}
+
+.make-display(xs);
+.make-display(sm);
+.make-display(md);
+.make-display(lg);
+.make-display(xl);

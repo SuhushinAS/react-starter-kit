@@ -1,0 +1,48 @@
+@import (reference) '~src/style/vars';
+
+.baron {
+    &__clipper {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    &__scroller {
+        overflow-y: scroll;
+        height: 100%;
+        &::-webkit-scrollbar {
+            height: 0;
+            width: 0;
+        }
+    }
+
+    &__track {
+        bottom: 0;
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 0;
+        &._h {
+            left: 0;
+            top: auto;
+        }
+    }
+
+    & > &__track {
+        display: block;
+    }
+
+    &__bar {
+        background: fade(@c-black, 20%);
+        position: absolute;
+        right: 0;
+        transition: width ease 50ms;
+        width: 8px;
+        &._h {
+            bottom: 0;
+            height: 8px;
+            right: auto;
+            width: auto;
+        }
+    }
+}

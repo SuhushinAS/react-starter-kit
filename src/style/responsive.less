@@ -1,0 +1,30 @@
+@import (reference) 'vars';
+
+@size-xs-max: (@size-sm-min - 1px);
+@size-sm-max: (@size-md-min - 1px);
+@size-md-max: (@size-lg-min - 1px);
+@size-lg-max: (@size-xl-min - 1px);
+
+// Extra small screen / phone
+@xs-min: e('(min-width: @{size-xs-min})');
+@xs-max: e('(max-width: @{size-xs-max})');
+@xs: e('@{xs-min} and @{xs-max}');
+
+// Small screen / tablet
+@sm-min: e('(min-width: @{size-sm-min})');
+@sm-max: e('(max-width: @{size-sm-max})');
+@sm: e('@{sm-min} and @{sm-max}');
+
+// Medium screen / desktop
+@md-min: e('(min-width: @{size-md-min})');
+@md-max: e('(max-width: @{size-md-max})');
+@md: e('@{md-min} and @{md-max}');
+
+// Large screen / wide desktop
+@lg-min: e('(min-width: @{size-lg-min})');
+@lg-max: e('(max-width: @{size-lg-max})');
+@lg: e('@{lg-min} and @{lg-max}');
+
+// Extra large screen / wide desktop
+@xl-min: e('(min-width: @{size-xl-min})');
+@xl: @xl-min;

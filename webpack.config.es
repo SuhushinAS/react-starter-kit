@@ -1,15 +1,15 @@
-const webpack = require('webpack');
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const gradientTransparencyFix = require('postcss-gradient-transparency-fix');
-const nodeEnv = process.env.NODE_ENV || 'development';
-const isProd = nodeEnv === 'production';
-const sourcePath = path.join(__dirname, 'src');
-const staticsPath = path.join(__dirname, 'dist');
+const autoprefixer = require('autoprefixer'),
+    CleanWebpackPlugin = require('clean-webpack-plugin'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    HtmlWebpackPlugin = require('html-webpack-plugin'),
+    nodeEnv = process.env.NODE_ENV || 'development',
+    isProd = nodeEnv === 'production',
+    path = require('path'),
+    gradientTransparencyFix = require('postcss-gradient-transparency-fix'),
+    ProgressBarPlugin = require('progress-bar-webpack-plugin'),
+    webpack = require('webpack'),
+    sourcePath = path.resolve(__dirname, 'src'),
+    staticsPath = path.resolve(__dirname, 'dist');
 
 const extractCSS = new ExtractTextPlugin({filename: '[name].min.css', disable: false, allChunks: true});
 
@@ -74,9 +74,12 @@ if (isProd) {
 
 module.exports = {
     devtool: isProd ? false : 'eval',
+    watchOptions: {
+        aggregateTimeout: 100
+    },
     context: sourcePath,
     entry: {
-        vendor: [
+        'module-name': [
             'babel-polyfill',
             'react',
             'react-dom',
@@ -89,7 +92,8 @@ module.exports = {
     output: {
         path: staticsPath,
         filename: '[name].min.js',
-        library: ['corpportal', '[name]']
+        library: ['moduleName', '[name]'],
+        publicPath: '/',
     },
     module: {
         rules: [
@@ -103,48 +107,32 @@ module.exports = {
             {
                 test: /\.(less|css)$/,
                 use: isProd
-                    ?
-                        extractCSS.extract({
-                            fallback: 'style-loader',
+                    ? extractCSS.extract({
                             use: [
-                                {
-                                    loader: 'css-loader',
-                                    options: {
-                                        modules: true,
-                                        localIdentName: '[local]_[hash:base64:5]'
-                                    },
-                                },
+                                'css-loader',
                                 'postcss-loader',
-                                'less-loader'
+                                'less-loader',
                             ],
                         })
-                    :
-                        [
-                            'style-loader',
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    modules: true,
-                                    localIdentName: '[local]_[hash:base64:5]'
-                                },
-                            },
-                            'postcss-loader',
-                            'less-loader'
-                        ]
+                    : [
+                        'css-loader',
+                        'postcss-loader',
+                        'less-loader'
+                    ]
             },
             {
-                test: /\.(js|jsx|es7)$/,
+                test: /\.(js|jsx|es)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader', // Нужно обновить до версии 7, когда выйдет, иначе - deprecated
+                    loader: 'babel-loader',
                     options: {cacheDirectory: true},
                 },
             },
             {
-                test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+                test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
                 use: {
                     loader: 'file-loader',
-                    options: {name: 'fonts/[name]_[hash:8].[ext]'},
+                    options: {name: 'fonts/[name].[ext]'},
                 },
             },
             {
@@ -153,22 +141,26 @@ module.exports = {
                     loader: 'url-loader',
                     options: {
                         limit: 5000,
-                        name: 'img/[name]_[hash:8].[ext]',
+                        name: 'img/[name].[ext]',
                     },
                 },
             },
         ],
     },
     resolve: {
-        extensions: ['.js', '.jsx', '.es7'],
+        extensions: ['.js', '.jsx', '.es'],
         modules: [
             sourcePath,
-            'node_modules'
-        ]
+            path.resolve(__dirname, './node_modules'),
+        ],
+        alias: {
+            src: sourcePath,
+            vendor: path.resolve(__dirname, './../../'),
+        },
     },
     plugins: plugins,
-    devServer: !isProd ?
-        {
+    devServer: !isProd
+        ? {
             contentBase: sourcePath,
             historyApiFallback: true,
             port: 3000,

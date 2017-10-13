@@ -1,0 +1,35 @@
+@import (reference) 'vars';
+@import (reference) 'responsive';
+
+.calc-width-col(@index, @class, @query) {
+    .width_@{class}_@{grid-col-name}_@{index} {
+        @media @query {
+            width: percentage((@index / @grid-columns));
+        }
+    }
+}
+
+.loop-width-col(@index, @class, @query) when (@index >= 0) {
+    .calc-width-col(@index, @class, @query);
+    .loop-width-col((@index - 1), @class, @query);
+}
+
+.make-width-media(@class, @query) {
+    .loop-width-col(@grid-columns, @class, @query);
+    .width_@{class}_auto {
+        @media @query {
+            width: auto;
+        }
+    }
+}
+
+.make-width(@class) {
+    @query: e('@{class}-min');
+    .make-width-media(@class, @@query);
+}
+
+.make-width(xs);
+.make-width(sm);
+.make-width(md);
+.make-width(lg);
+.make-width(xl);

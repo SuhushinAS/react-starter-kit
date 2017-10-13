@@ -1,37 +1,41 @@
-import typeList from '../constants/app';
+import example from 'src/redux/constants/example';
 
 const initialState = {
     isLoading: false,
-    data: {
-        functionalList: [],
-        classList: [],
-    },
+    data: null,
     errors: [],
+    simple: false,
 };
 
 export default (state = initialState, {type, payload}) => {
     switch (type) {
-        case typeList.APP_LOAD:
+        case example.SIMPLE:
+            return {
+                ...state,
+                simple: !state.simple,
+            };
+
+        case example.GET_LOAD:
             return {
                 ...state,
                 isLoading: true,
             };
 
-        case typeList.APP_SUCCESS:
+        case example.GET_SUCCESS:
             return {
                 ...state,
                 data: payload.data,
                 isLoading: false,
             };
 
-        case typeList.APP_ERROR:
+        case example.GET_ERROR:
             return {
                 ...state,
                 errors: payload.errors,
                 isLoading: false,
             };
 
-        case typeList.APP_FAIL:
+        case example.GET_FAIL:
             return {
                 ...state,
                 isLoading: false,
