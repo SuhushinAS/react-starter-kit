@@ -1,85 +1,34 @@
-const autoprefixer = require('autoprefixer'),
-    CleanWebpackPlugin = require('clean-webpack-plugin'),
+const CleanWebpackPlugin = require('clean-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     nodeEnv = process.env.NODE_ENV || 'development',
-    isProd = nodeEnv === 'production',
+    isProd = 'production' === nodeEnv,
     path = require('path'),
-    gradientTransparencyFix = require('postcss-gradient-transparency-fix'),
-    ProgressBarPlugin = require('progress-bar-webpack-plugin'),
-    webpack = require('webpack'),
-    sourcePath = path.resolve(__dirname, 'src'),
-    staticsPath = path.resolve(__dirname, 'dist');
+    pathList = {
+        dist: path.resolve(__dirname, 'dist'),
+        src: path.resolve(__dirname, 'src'),
+    },
+    stats = {
+        colors: true,
+        errorDetails: true,
+        reasons: isProd,
+    },
+    webpack = require('webpack');
 
 const extractCSS = new ExtractTextPlugin({filename: '[name].min.css', disable: false, allChunks: true});
 
-const plugins = [
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: Infinity,
-        filename: '[name].bundle.min.js',
-    }),
-    new webpack.DefinePlugin({
-        'process.env': {NODE_ENV: JSON.stringify(nodeEnv)},
-    }),
-    new HtmlWebpackPlugin({
-        template: sourcePath + '/index.ejs',
-        production: isProd,
-        inject: true,
-    }),
-    new webpack.LoaderOptionsPlugin({
-        options: {
-            postcss: [
-                autoprefixer(),
-                gradientTransparencyFix,
-            ],
-        },
-    }),
-    new ProgressBarPlugin(),
-];
-
-if (isProd) {
-    plugins.push(
-        new CleanWebpackPlugin(staticsPath, {
-            verbose: true,
-            dry: false,
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            debug: false
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                conditionals: true,
-                unused: true,
-                comparisons: true,
-                sequences: true,
-                dead_code: true,
-                evaluate: true,
-                if_return: true,
-                join_vars: true,
-            },
-            output: {comments: false},
-        }),
-        extractCSS
-    );
-} else {
-    plugins.push(
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
-    );
-}
-
 module.exports = {
-    devtool: isProd ? false : 'eval',
-    watchOptions: {
-        aggregateTimeout: 100
+    context: pathList.src,
+    devServer: isProd ? {} : {
+        contentBase: pathList.src,
+        historyApiFallback: true,
+        hot: true,
+        port: 3000,
+        stats,
     },
-    context: sourcePath,
+    devtool: isProd ? false : 'eval',
     entry: {
-        'module-name': [
+        vendor: [
             'babel-polyfill',
             'react',
             'react-dom',
@@ -89,36 +38,50 @@ module.exports = {
         ],
         index: 'index',
     },
+    module: getModuleList(isProd, extractCSS),
     output: {
-        path: staticsPath,
+        path: pathList.dist,
         filename: '[name].min.js',
-        library: ['moduleName', '[name]'],
+        library: ['namespace', 'moduleName', '[name]'],
         publicPath: '/',
     },
-    module: {
+    plugins: getPluginList(isProd, extractCSS, webpack),
+    resolve: {
+        extensions: ['.js', '.jsx', '.es'],
+        modules: [
+            pathList.src,
+            path.resolve(__dirname, './node_modules'),
+        ],
+        alias: {src: pathList.src},
+    },
+    stats,
+    watchOptions: {aggregateTimeout: 100},
+};
+
+
+function getModuleList(isProd, extractCSS) {
+    return {
         rules: [
             {
                 test: /\.html$/,
                 use: {
                     loader: 'file-loader',
-                    options: {name: '[name].[ext]'}
-                }
+                    options: {name: '[name].[ext]'},
+                },
             },
             {
                 test: /\.(less|css)$/,
-                use: isProd
-                    ? extractCSS.extract({
-                            use: [
-                                'css-loader',
-                                'postcss-loader',
-                                'less-loader',
-                            ],
-                        })
-                    : [
+                use: isProd ? extractCSS.extract({
+                    use: [
                         'css-loader',
                         'postcss-loader',
-                        'less-loader'
-                    ]
+                        'less-loader',
+                    ],
+                }) : [
+                    'css-loader',
+                    'postcss-loader',
+                    'less-loader',
+                ],
             },
             {
                 test: /\.(js|jsx|es)$/,
@@ -146,27 +109,58 @@ module.exports = {
                 },
             },
         ],
-    },
-    resolve: {
-        extensions: ['.js', '.jsx', '.es'],
-        modules: [
-            sourcePath,
-            path.resolve(__dirname, './node_modules'),
-        ],
-        alias: {
-            src: sourcePath,
-            vendor: path.resolve(__dirname, './../../'),
-        },
-    },
-    plugins: plugins,
-    devServer: !isProd
-        ? {
-            contentBase: sourcePath,
-            historyApiFallback: true,
-            port: 3000,
-            hot: true,
-            compress: isProd,
-            stats: {colors: true},
-        }
-        : {},
-};
+    };
+}
+
+function getPluginList(isProd, extractCSS, webpack) {
+    const plugins = [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common',
+            minChunks: Infinity,
+            filename: '[name].min.js',
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {NODE_ENV: JSON.stringify(nodeEnv)},
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(pathList.src, './index.ejs'),
+            production: isProd,
+            inject: true,
+        }),
+    ];
+
+    if (isProd) {
+        plugins.push(
+            new CleanWebpackPlugin(pathList.dist, {
+                verbose: true,
+                dry: false,
+            }),
+            new webpack.LoaderOptionsPlugin({
+                minimize: true,
+                debug: false,
+            }),
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false,
+                    screw_ie8: true,
+                    conditionals: true,
+                    unused: true,
+                    comparisons: true,
+                    sequences: true,
+                    dead_code: true,
+                    evaluate: true,
+                    if_return: true,
+                    join_vars: true,
+                },
+                output: {comments: false},
+            }),
+            extractCSS
+        );
+    } else {
+        plugins.push(
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin()
+        );
+    }
+    return plugins;
+}
