@@ -1,21 +1,22 @@
 export default class BaseApi {
-    constructor (base = '') {
+    constructor(base = '') {
         this.base = base;
     }
 
     /**
      * Метод посылает запрос на
      *
-     * @param {string}      url
-     * @param {string}      method
-     * @param {FormData}    data
-     * @param {object}      headers
+     * @param {string}   url
+     * @param {string}   method
+     * @param {boolean}  isCors
+     * @param {FormData} data
+     * @param {object}   headers
      *
      * @returns {Promise}
      */
-    request (url, method = 'GET', data = null, headers = {}) {
+    request(url, method = 'GET', isCors = false, data = null, headers = {}) {
         const options = {
-            method: 'GET', // Заменить на POST с реальным API
+            method: isCors ? 'GET' : method, // Заменить на POST с реальным API
             credentials: 'include',
             headers: new Headers({
                 ...headers,
@@ -23,6 +24,9 @@ export default class BaseApi {
             }),
             body: data,
         };
+        if (isCors) {
+            options.mode = 'cors';
+        }
 
         return fetch(this.base + url, options).then((response) => response.json());
     }

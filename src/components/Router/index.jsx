@@ -1,9 +1,9 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import App from 'src/containers/App/index';
+import App from 'containers/App/index';
 
-export default function Router () {
+export default function Router() {
     return <BrowserRouter>
         <Switch>
             <Route exact path="/:module/:page/:type/:id" component={App} />

@@ -1,7 +1,7 @@
+import bemCn from 'bem-cn';
+import jQuery from 'jquery';
 import React from 'react';
 import ReactBaron from 'react-baron';
-import jQuery from 'jquery';
-import bemCn from 'bem-cn';
 
 import './style.less';
 
