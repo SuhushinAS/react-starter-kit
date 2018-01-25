@@ -1,11 +1,12 @@
+import Base from 'containers/Base/index';
 import React from 'react';
 // import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
-
-import Base from 'src/containers/Base/index';
-import {exampleSimple, exampleGet, exampleCreate, exampleUpdate, exampleDelete} from 'src/redux/actions/example';
+import {exampleActionListGet, exampleActionSimple} from 'redux/actions/example';
+import {exampleSelectorListGet} from 'redux/selectors/example';
+import ExampleComponent from 'components/Example/index';
 
 /**
  * Привязка props к store
@@ -13,9 +14,9 @@ import {exampleSimple, exampleGet, exampleCreate, exampleUpdate, exampleDelete} 
  * @param state
  * @return {{prop}}
  */
-function mapStateToProps(state) {
+function mapStateToProps(state/*, props*/) {
     return {
-        example: state.example,
+        exampleList: exampleSelectorListGet(state),
     };
 }
 
@@ -27,16 +28,12 @@ function mapStateToProps(state) {
  */
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        exampleSimple,
-        exampleGet,
-        exampleCreate,
-        exampleUpdate,
-        exampleDelete,
+        exampleActionSimple,
+        exampleActionListGet,
     }, dispatch);
 }
 
 class Example extends Base {
-
     /**
      * Описание свойств.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
@@ -56,6 +53,7 @@ class Example extends Base {
      * @param context - Контекст.
      * @param updater
      */
+
     // constructor(props, context, updater) {}
 
     /**
@@ -92,6 +90,7 @@ class Example extends Base {
      * Компонент будет примонтирован.
      * В данный момент у нас нет возможности посмотреть DOM элементы.
      */
+
     // componentWillMount() {}
 
     /**
@@ -99,7 +98,9 @@ class Example extends Base {
      * В данный момент у нас есть возможность использовать refs, а следовательно это то самое место, где мы хотели бы указать установку фокуса.
      * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
      */
-    // componentDidMount() {}
+    componentDidMount() {
+        this.props.exampleActionListGet();
+    }
 
     /**
      * Компонент получает новые props.
@@ -128,13 +129,14 @@ class Example extends Base {
      * @param nextProps - Новые свойства.
      * @param nextState - Новое состояние.
      */
+
     // componentWillUpdate(nextProps, nextState) {}
 
     /**
      * Отображение компонента
      */
     render() {
-        return null;
+        return <ExampleComponent {...this.props} />
     }
 
     /**

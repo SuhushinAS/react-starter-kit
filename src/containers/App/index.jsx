@@ -1,3 +1,4 @@
+import Example from 'containers/Example/index';
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -10,7 +11,7 @@ import {bindActionCreators} from 'redux';
  * @param state
  * @return {{prop}}
  */
-function mapStateToProps(state) {
+function mapStateToProps(/*state, props*/) {
     return {
         // example: state.example,
     };
@@ -33,7 +34,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 class App extends React.Component {
-
     /**
      * Описание свойств.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
@@ -95,13 +95,14 @@ class App extends React.Component {
      * @param nextProps - Новые свойства.
      * @param nextState - Новое состояние.
      */
+
     // componentWillUpdate(nextProps, nextState) {}
 
     /**
      * Отображение компонента
      */
     render() {
-        return <div>Hi from new App!</div>;
+        return <Example />;
     }
 
     /**

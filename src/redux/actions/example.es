@@ -1,18 +1,25 @@
-import example from 'src/redux/constants/example';
+const exampleConst = {
+    simple: 'Example Simple',
 
-function exampleSimple () {
-    return {type: example.SIMPLE};
+    getListError: 'Example List Get Error',
+    getListFail: 'Example List Get Fail',
+    getListStart: 'Example List Get Start',
+    getListSuccess: 'Example List Get Success',
+};
+
+function exampleActionSimple() {
+    return {type: exampleConst.simple};
 }
 
-function exampleGet () {
-    return function (dispatch, getState, {api}) {
-        dispatch({type: example.GET_LOAD});
+function exampleActionListGet() {
+    return function(dispatch, getState, {api}) {
+        dispatch({type: exampleConst.getListStart});
 
-        return api.Example.get()
+        return api.Example.listGet()
             .then((response) => {
                 if (response.errors.length) {
                     return dispatch({
-                        type: example.GET_ERROR,
+                        type: exampleConst.getListError,
                         payload: {
                             errors: response.errors,
                         },
@@ -20,22 +27,22 @@ function exampleGet () {
                 }
 
                 return dispatch({
-                    type: example.GET_SUCCESS,
+                    type: exampleConst.getListSuccess,
                     payload: {
                         data: response.data,
-                        errors: response.errors,
                     },
                 });
             })
             .catch((error) => {
                 console.error(error);
-                dispatch({type: example.GET_FAIL});
+                dispatch({type: exampleConst.getListFail});
                 throw(error);
             });
     };
 }
 
 export {
-    exampleSimple,
-    exampleGet,
+    exampleConst,
+    exampleActionSimple,
+    exampleActionListGet,
 };

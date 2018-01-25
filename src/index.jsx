@@ -2,10 +2,10 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 
-import Router from 'src/components/Router/index';
-import configureStore from 'src/redux/configure-store';
-import Api from './api/index';
-import reducers from 'src/redux/reducers/index';
+import Router from 'components/Router/index';
+import configureStore from 'redux/configure-store';
+import reducers from 'redux/reducers/index';
+import Api from 'api/index';
 
 const isProduction = 'production' === process.env.NODE_ENV;
 const host = '';
@@ -20,8 +20,8 @@ render(
 );
 
 if (module.hot) {
-    module.hot.accept('src/components/Router/index', () => {
-        const HotRouter = require('src/components/Router/index').default;
+    module.hot.accept('components/Router/index', () => {
+        const HotRouter = require('components/Router/index').default;
 
         render(
             <Provider store={store}>
@@ -32,8 +32,8 @@ if (module.hot) {
     });
 
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('src/redux/reducers', () => {
-        const nextReducer = require('src/redux/reducers').default;
+    module.hot.accept('redux/reducers', () => {
+        const nextReducer = require('redux/reducers').default;
         store.replaceReducer(nextReducer);
     });
 }

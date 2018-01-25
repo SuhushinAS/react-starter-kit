@@ -1,41 +1,47 @@
-import example from 'src/redux/constants/example';
+import {exampleConst} from 'redux/actions/example';
 
 const initialState = {
-    isLoading: false,
     data: null,
     errors: [],
+    isLoading: false,
+    list: [],
     simple: false,
 };
 
 export default (state = initialState, {type, payload}) => {
     switch (type) {
-        case example.SIMPLE:
+        case exampleConst.simple:
             return {
                 ...state,
                 simple: !state.simple,
             };
 
-        case example.GET_LOAD:
+        case exampleConst.getListStart:
             return {
                 ...state,
                 isLoading: true,
+                list: [],
             };
 
-        case example.GET_SUCCESS:
+        case exampleConst.getListSuccess:
             return {
                 ...state,
-                data: payload.data,
+                data: payload.data.reduce((prev, item) => ({
+                    ...prev,
+                    [item.id]: item,
+                }), {}),
                 isLoading: false,
+                list: payload.data.map((item) => item.id),
             };
 
-        case example.GET_ERROR:
+        case exampleConst.getListError:
             return {
                 ...state,
                 errors: payload.errors,
                 isLoading: false,
             };
 
-        case example.GET_FAIL:
+        case exampleConst.getListFail:
             return {
                 ...state,
                 isLoading: false,
@@ -44,4 +50,4 @@ export default (state = initialState, {type, payload}) => {
         default:
             return state;
     }
-}
+};

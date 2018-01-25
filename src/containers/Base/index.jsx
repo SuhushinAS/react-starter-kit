@@ -1,7 +1,6 @@
 import React from 'react';
 
 class Base extends React.Component {
-
     /**
      * Описание свойств.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
