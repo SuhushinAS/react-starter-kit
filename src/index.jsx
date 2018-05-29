@@ -2,7 +2,7 @@
 
 import getConfig from 'helpers/config.es';
 import configureStore from 'helpers/store.es';
-import App from 'modules/common/containers/App/index';
+import App from 'modules/common/containers/App/index.jsx';
 import {commonActionConfigSet} from 'modules/common/ducks/index.es';
 import * as React from 'react';
 import {render} from 'react-dom';
