@@ -1,24 +1,24 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    nodeEnv = process.env.NODE_ENV || 'development',
-    isProd = 'production' === nodeEnv,
-    path = require('path'),
-    pathList = {
-        dist: path.resolve(__dirname, 'www/build'),
-        public: path.resolve(__dirname, 'www'),
-        src: path.resolve(__dirname, 'src'),
-    },
-    stats = {
-        colors: true,
-        errorDetails: true,
-        reasons: isProd,
-    },
-    SvgStore = require('webpack-svgstore-plugin'),
-    webpack = require('webpack');
-
-const extractCSS = new ExtractTextPlugin({filename: '[name].min.css', disable: false, allChunks: true});
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const nodeEnv = process.env.NODE_ENV || 'development';
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const isProd = 'production' === nodeEnv;
+const path = require('path');
+const pathList = {
+    dist: path.resolve(__dirname, 'www/build'),
+    public: path.resolve(__dirname, 'www'),
+    src: path.resolve(__dirname, 'src'),
+};
+const stats = {
+    colors: true,
+    errorDetails: true,
+    reasons: isProd,
+};
+const SvgStore = require('webpack-svgstore-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     bail: isProd,
@@ -28,12 +28,12 @@ module.exports = {
         historyApiFallback: true,
         host: '0.0.0.0',
         hot: true,
-        port: 3000,
+        port: 8000,
         stats,
     },
     devtool: isProd ? false : 'eval',
     entry: {
-        vendor: [
+        common: [
             'babel-polyfill',
             'react',
             'react-dom',
@@ -44,24 +44,66 @@ module.exports = {
         index: 'index',
         svg: 'svg',
     },
-    module: getModuleList(isProd, extractCSS),
+    module: {
+        rules: getRuleList(),
+    },
     node: {
+        child_process: 'empty',
         dgram: 'empty',
         fs: 'empty',
         net: 'empty',
         tls: 'empty',
-        child_process: 'empty',
+    },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true,
+                uglifyOptions: {
+                    compress: {
+                        comparisons: true,
+                        conditionals: true,
+                        dead_code: true,
+                        evaluate: true,
+                        if_return: true,
+                        join_vars: true,
+                        sequences: true,
+                        unused: true,
+                        warnings: false,
+                    },
+                    output: {
+                        ascii_only: true,
+                        comments: false,
+                    },
+                    sourceMap: false,
+                },
+            }),
+            new OptimizeCSSAssetsPlugin(),
+        ],
+        splitChunks: {
+            cacheGroups: {
+                common: {
+                    chunks: 'all',
+                    name: 'common',
+                    test: /[\\/]node_modules[\\/]/,
+                },
+            },
+        },
     },
     output: {
         filename: '[name].min.js',
-        library: ['namespace', 'moduleName', '[name]'],
+        library: ['mag', 'MAGDelivery', '[name]'],
         path: pathList.dist,
         publicPath: '/build/',
     },
-    plugins: getPluginList(isProd, extractCSS, webpack),
+    plugins: getPluginList(),
     resolve: {
         extensions: ['.es', '.js', '.jsx'],
         modules: [
+            './',
+            './src/',
+            'node_modules',
             pathList.src,
             path.resolve(__dirname, './node_modules'),
         ],
@@ -70,147 +112,171 @@ module.exports = {
     watchOptions: {aggregateTimeout: 100},
 };
 
+/**
+ * Фнукция возвращает набор правил обработки.
+ * @returns {*[]} Набор правил обработки.
+ */
+function getRuleList() {
+    const ruleListBase = getRuleListBase();
+    const ruleListStyle = getRuleListStyle();
+    const ruleListResource = getRuleListResource();
 
-function getModuleList(isProd, extractCSS) {
-    return {
-        rules: [
-            {
-                test: /\.html$/,
-                use: {
-                    loader: 'file-loader',
-                    options: {name: '[name].[ext]'},
-                },
-            },
-            {
-                test: /\.css$/,
-                use: isProd ? extractCSS.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        'css-loader',
-                        'postcss-loader',
-                    ],
-                }) : [
-                    'style-loader',
-                    'css-loader',
-                    'postcss-loader',
-                ],
-            },
-            {
-                test: /\.less$/,
-                use: isProd ? extractCSS.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        'css-loader',
-                        'postcss-loader',
-                        'less-loader',
-                    ],
-                }) : [
-                    'style-loader',
-                    'css-loader',
-                    'postcss-loader',
-                    'less-loader',
-                ],
-            },
-            {
-                test: /\.(es|js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {cacheDirectory: true},
-                },
-            },
-            {
-                test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-                use: {
-                    loader: 'file-loader',
-                    options: {name: 'fonts/[name].[ext]'},
-                },
-            },
-            // {
-            //     test: /.*\.(png|jpg|jpeg|gif|svg)$/i,
-            //     use: {
-            //         loader: 'url-loader',
-            //         options: {
-            //             limit: 5000,
-            //             name: 'img/[name].[ext]',
-            //         },
-            //     },
-            // },
-            {
-                test: /.*\.(png|jpg|jpeg|gif|svg)$/i,
-                use: {
-                    loader: 'file-loader',
-                    options: {name: 'img/[name].[ext]'},
-                },
-            },
-        ],
-    };
+    return ruleListBase.concat(ruleListStyle, ruleListResource);
 }
 
-function getPluginList(isProd, extractCSS, webpack) {
-    const plugins = [
-        new webpack.optimize.CommonsChunkPlugin({
-            filename: '[name].min.js',
-            minChunks: Infinity,
-            name: 'common',
-        }),
+/**
+ * Фнукция возвращает набор базовых правил обработки.
+ * @returns {*[]} Набор правил обработки.
+ */
+function getRuleListBase() {
+    return [
+        {
+            test: /\.html$/,
+            use: {
+                loader: 'file-loader',
+                options: {name: '[name].[hash:5].[ext]'},
+            },
+        },
+        {
+            exclude: /node_modules/,
+            test: /\.(es|js|jsx)$/,
+            use: {
+                loader: 'babel-loader',
+                options: {cacheDirectory: true},
+            },
+        },
+    ];
+}
+
+/**
+ * Фнукция возвращает набор правил обработки стилей.
+ * @returns {*[]} Набор правил обработки.
+ */
+function getRuleListStyle() {
+    return [
+        {
+            test: /\.css$/,
+            use: [
+                isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+                'css-loader',
+                'postcss-loader',
+            ],
+        },
+        {
+            test: /\.less$/,
+            use: [
+                isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+                'css-loader',
+                'postcss-loader',
+                'less-loader',
+            ],
+        },
+    ];
+}
+
+/**
+ * Фнукция возвращает набор правил обработки ресурсов.
+ * @returns {*[]} Набор правил обработки.
+ */
+function getRuleListResource() {
+    return [
+        {
+            test: /\.(ttf|eot|svg|woff|woff2)(\?[a-z0-9]+)?$/,
+            use: {
+                loader: 'file-loader',
+                options: {name: 'fonts/[name].[hash:5].[ext]'},
+            },
+        },
+        {
+            test: /.*\.(png|jpg|jpeg|gif)$/i,
+            use: {
+                loader: 'file-loader',
+                options: {name: 'img/[name].[hash:5].[ext]'},
+            },
+        },
+    ];
+}
+
+/**
+ * Фнукция возвращает набор плагинов.
+ * @returns {*[]} Набор модулей.
+ */
+function getPluginList() {
+    const pluginListBase = getPluginListBase();
+    let pluginListOptional = [];
+
+    if (isProd) {
+        pluginListOptional = getPluginListProd();
+    } else {
+        pluginListOptional = getPluginListDev();
+    }
+
+    return pluginListBase.concat(pluginListOptional);
+}
+
+/**
+ * Фнукция возвращает базовый набор плагинов.
+ * @returns {*[]} Набор модулей.
+ */
+function getPluginListBase() {
+    return [
         new webpack.DefinePlugin({
             'process.env': {NODE_ENV: JSON.stringify(nodeEnv)},
         }),
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,
-            filename: path.resolve(pathList.public, 'index.html'),
+            filename: path.resolve(pathList.public, './index.html'),
+            hash: true,
             inject: true,
-            template: path.resolve(pathList.src, './index.htm'), // TODO При расширении .html почему-то глючит
+            template: path.resolve(pathList.src, './index.htm'),
         }),
         new HtmlWebpackHarddiskPlugin(),
         new SvgStore({
             svgOptions: {
                 plugins: [
                     {
-                        removeTitle: false,
-                        sortAttrs: true,
-                        removeUselessDefs: false,
                         removeEmptyContainers: false,
+                        removeTitle: false,
+                        removeUselessDefs: false,
+                        sortAttrs: true,
                     },
                 ],
             },
         }),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ];
+}
 
-    if (isProd) {
-        plugins.push(
-            new CleanWebpackPlugin(pathList.dist, {
-                verbose: true,
-                dry: false,
-            }),
-            extractCSS,
-            new webpack.LoaderOptionsPlugin({
-                minimize: true,
-                debug: false,
-            }),
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false,
-                    screw_ie8: true,
-                    conditionals: true,
-                    unused: true,
-                    comparisons: true,
-                    sequences: true,
-                    dead_code: true,
-                    evaluate: true,
-                    if_return: true,
-                    join_vars: true,
-                },
-                output: {comments: false},
-            })
-        );
-    } else {
-        plugins.push(
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.NamedModulesPlugin()
-        );
-    }
-    return plugins;
+/**
+ * Фнукция возвращает набор плагинов для Dev-режима.
+ * @returns {*[]} Набор модулей.
+ */
+function getPluginListProd() {
+    return [
+        new CleanWebpackPlugin(pathList.dist, {
+            dry: false,
+            verbose: true,
+        }),
+        new MiniCssExtractPlugin({
+            allChunks: true,
+            disable: false,
+            filename: '[name].min.css',
+        }),
+        new webpack.LoaderOptionsPlugin({
+            debug: false,
+            minimize: true,
+        }),
+        new webpack.NoEmitOnErrorsPlugin(),
+    ];
+}
+
+/**
+ * Фнукция возвращает набор плагинов для Dev-режима.
+ * @returns {*[]} Набор модулей.
+ */
+function getPluginListDev() {
+    return [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
+    ];
 }

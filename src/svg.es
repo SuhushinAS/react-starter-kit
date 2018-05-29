@@ -1,8 +1,10 @@
-import SvgXHR from 'webpack-svgstore-plugin/src/helpers/svgxhr';
+// @flow
 
-const __svg__ = {
-    path: './svg/*.svg',
+import * as svgXHR from 'webpack-svgstore-plugin/src/helpers/svgxhr';
+
+const svg = {
     name: './sprite.svg',
+    path: './svg/*.svg',
 };
 
-export default SvgXHR(__svg__);
+export default svgXHR(svg);

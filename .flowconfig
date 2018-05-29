@@ -1,0 +1,33 @@
+[ignore]
+
+[include]
+src
+
+[libs]
+
+[lints]
+all=warn
+
+[options]
+esproposal.class_instance_fields=enable
+esproposal.class_static_fields=enable
+log.file=logs/flow.log
+;merge_timeout=500
+module.file_ext=.css
+module.file_ext=.es
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.less
+module.name_mapper.extension='css' -> 'css'
+module.name_mapper.extension='less' -> 'css'
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=src
+
+suppress_type=$FlowIssue
+suppress_type=$FlowFixMe
+suppress_type=$FixMe
+
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
+
+[strict]

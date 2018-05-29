@@ -1,39 +1,37 @@
-import React from 'react';
+// @flow
+
+import getConfig from 'helpers/config.es';
+import configureStore from 'helpers/store.es';
+import App from 'modules/common/containers/App/index.jsx';
+import {commonActionConfigSet} from 'modules/common/ducks/index.es';
+import * as React from 'react';
 import {render} from 'react-dom';
-import {Provider} from 'react-redux';
+import 'style/index.less';
 
-import Router from 'components/Router/index';
-import configureStore from 'redux/configure-store';
-import reducers from 'redux/reducers/index';
-import Api from 'api/index';
+const root: HTMLElement | null = document.getElementById('root');
 
-const isProduction = 'production' === process.env.NODE_ENV;
-const host = '';
-const api = new Api(host);
-const store = configureStore(!isProduction, reducers, {api});
+/**
+ * Старт приложения
+ * @return {undefined}
+ */
+(async() => {
+    const config = await getConfig();
+    const store = configureStore(config.host);
 
-render(
-    <Provider store={store}>
-        <Router />
-    </Provider>,
-    document.getElementById('root')
-);
+    store.dispatch(commonActionConfigSet(config));
 
-if (module.hot) {
-    module.hot.accept('components/Router/index', () => {
-        const HotRouter = require('components/Router/index').default;
+    if (root) {
+        render(<App store={store} />, root);
+    }
 
-        render(
-            <Provider store={store}>
-                <HotRouter />
-            </Provider>,
-            document.getElementById('root')
-        );
-    });
 
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('redux/reducers', () => {
-        const nextReducer = require('redux/reducers').default;
-        store.replaceReducer(nextReducer);
-    });
-}
+    if (module.hot) {
+        module.hot.accept('modules/common/containers/App/index.jsx', () => {
+            if (root) {
+                const HotApp = require('modules/common/containers/App/index.jsx').default;
+
+                render(<HotApp store={store} />, root);
+            }
+        });
+    }
+})();
