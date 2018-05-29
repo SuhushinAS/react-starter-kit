@@ -1,33 +1,62 @@
+// @flow
+
+import type {TypeApiOptions, TypeApiResponse, TypeResponse} from 'api/types.es';
+
+const ApiOptionsDefault: TypeApiOptions = {
+    data: null,
+    headers: {},
+    isCors: false,
+};
+
 export default class BaseApi {
-    constructor(base = '') {
+    constructor(base: string = '') {
         this.base = base;
+    }
+
+    base: string;
+
+    sleeper(ms: number) {
+        return function(...rest: mixed[]): Promise<mixed> {
+            return new Promise((resolve) => setTimeout(() => resolve(...rest), ms));
+        };
     }
 
     /**
      * Метод посылает запрос на
-     *
-     * @param {string}   url
-     * @param {string}   method
-     * @param {boolean}  isCors
-     * @param {FormData} data
-     * @param {object}   headers
-     *
-     * @returns {Promise}
+     * @param {string}   url Адрес.
+     * @param {string}   method Метод.
+     * @param {*}  requestOptions Дополнительные опции запроса.
+     * @returns {Promise} Промис, который ресолвится с данными сервера.
      */
-    request(url, method = 'GET', isCors = false, data = null, headers = {}) {
-        const options = {
-            method: isCors ? 'GET' : method, // Заменить на POST с реальным API
+    async request(url: string, method: string = 'GET', requestOptions: TypeApiOptions = ApiOptionsDefault): Promise<TypeResponse> {
+        const {data, headers, isCors, ...rest} = requestOptions;
+        const options: RequestOptions = {
+            body: isCors ? JSON.stringify(data) : null,
             credentials: 'include',
-            headers: new Headers({
+            headers: {
                 ...headers,
+                'Content-Type': 'application/json',
                 'X-HTTP-Method-Override': method,
-            }),
-            body: data,
+            },
+            method: isCors ? 'POST' : 'GET',
+            ...rest,
         };
+
         if (isCors) {
             options.mode = 'cors';
         }
 
-        return fetch(this.base + url, options).then((response) => response.json());
+        const requestUrl: string = isCors ? this.base + url : url;
+        const response: Response = await fetch(requestUrl, options);
+        const responseData: TypeApiResponse = await response.json();
+
+        return {
+            data: responseData,
+            http: {
+                ok: response.ok,
+                status: response.status,
+                statusText: response.statusText,
+            },
+        };
     }
-};
+}
