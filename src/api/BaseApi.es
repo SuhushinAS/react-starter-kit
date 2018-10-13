@@ -1,8 +1,8 @@
 // @flow
 
-import type {TypeApiOptions, TypeApiResponse, TypeResponse} from 'api/types.es';
+import type {TApiOptions, TApiResponse, TResponse} from 'api/types.es';
 
-const ApiOptionsDefault: TypeApiOptions = {
+const ApiOptionsDefault: TApiOptions = {
     data: null,
     headers: {},
     isCors: false,
@@ -28,7 +28,7 @@ export default class BaseApi {
      * @param {*}  requestOptions Дополнительные опции запроса.
      * @returns {Promise} Промис, который ресолвится с данными сервера.
      */
-    async request(url: string, method: string = 'GET', requestOptions: TypeApiOptions = ApiOptionsDefault): Promise<TypeResponse> {
+    async request(url: string, method: string = 'GET', requestOptions: TApiOptions = ApiOptionsDefault): Promise<TResponse> {
         const {data, headers, isCors, ...rest} = requestOptions;
         const options: RequestOptions = {
             body: isCors ? JSON.stringify(data) : null,
@@ -48,7 +48,7 @@ export default class BaseApi {
 
         const requestUrl: string = isCors ? this.base + url : url;
         const response: Response = await fetch(requestUrl, options);
-        const responseData: TypeApiResponse = await response.json();
+        const responseData: TApiResponse = await response.json();
 
         return {
             data: responseData,

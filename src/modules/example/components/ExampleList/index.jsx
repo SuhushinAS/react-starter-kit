@@ -1,10 +1,10 @@
 // @flow
 
-import type {ExampleType} from 'modules/example/types.es';
+import type {TExample} from 'modules/example/types.es';
 import * as React from 'react';
 
-type ExampleListTypeProps = {
-    exampleList: ExampleType[],
+type TExampleListProps = {
+    exampleList: TExample[],
 };
 
 /**
@@ -12,7 +12,7 @@ type ExampleListTypeProps = {
  * @param {*} props Свойства компонента.
  * @return {*} Представление компонента.
  */
-export default function ExampleList(props: ExampleListTypeProps) {
+export default function ExampleList(props: TExampleListProps) {
     const {exampleList} = props;
 
     if (0 < exampleList.length) {

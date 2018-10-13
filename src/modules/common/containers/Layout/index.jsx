@@ -36,13 +36,13 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({}, dispatch);
 }
 
-type LayoutTypeProps = {
+type TLayoutProps = {
     commonLoading: number,
     main: React.Node,
     side: React.Node,
 };
 
-class Layout extends React.Component<LayoutTypeProps> {
+class Layout extends React.Component<TLayoutProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html

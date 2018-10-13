@@ -2,7 +2,7 @@
 
 import getApi from 'helpers/api';
 import reducer from 'helpers/reducer';
-import type {TypeStore} from 'helpers/types.es';
+import type {TStore} from 'helpers/types.es';
 import {applyMiddleware, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
 
@@ -11,12 +11,12 @@ import thunk from 'redux-thunk';
  * @param {string} host Хост сервера.
  * @return {*} Стор.
  */
-export default function configureStore(host: string): TypeStore {
+export default function configureStore(host: string): TStore {
     const middlewares: any[] = [thunk.withExtraArgument(getApi(host))];
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-    const store: TypeStore = createStore(reducer, enhancer);
+    const store: TStore = createStore(reducer, enhancer);
 
     if (module.hot) {
         /* $FlowFixMe */

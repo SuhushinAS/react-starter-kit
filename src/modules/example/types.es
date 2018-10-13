@@ -2,55 +2,55 @@
 
 // /* flow-include
 
-import type {TypeApiResponseError, TypeApiResponseNotice, TypeGenApiResponse, TypeGenResponse} from 'api/types.es';
+import type {TApiResponseError, TApiResponseNotice, TGenApiResponse, TGenResponse} from 'api/types.es';
 
-export type ExampleTypeListGetFilter = {
+export type TExampleListGetFilter = {
     name?: string,
 } | null;
 
-export type ExampleTypeStore = {|
-    data: ExampleTypeData,
+export type TExampleStore = {|
+    data: TExampleData,
     isLoading: boolean,
     list: number[],
     more: boolean,
     simple: boolean,
 |};
 
-export type ExampleTypeData = {|
-    [number]: ExampleType,
+export type TExampleData = {|
+    [number]: TExample,
 |};
 
-export type ExampleType = {
+export type TExample = {
     id: number,
     name: string,
 };
 
-export type ExampleTypeCreateResponseData = {|
+export type TExampleCreateResponseData = {|
     id: number,
 |};
-export type ExampleTypeCreateApiResponse = TypeGenApiResponse<ExampleTypeCreateResponseData, TypeApiResponseError, TypeApiResponseNotice>;
-export type ExampleTypeCreateResponse = TypeGenResponse<ExampleTypeCreateApiResponse>;
+export type TExampleCreateApiResponse = TGenApiResponse<TExampleCreateResponseData, TApiResponseError, TApiResponseNotice>;
+export type TExampleCreateResponse = TGenResponse<TExampleCreateApiResponse>;
 
-export type ExampleTypeDeleteResponseData = {|
+export type TExampleDeleteResponseData = {|
     success: boolean,
 |};
-export type ExampleTypeDeleteApiResponse = TypeGenApiResponse<ExampleTypeDeleteResponseData, TypeApiResponseError, TypeApiResponseNotice>;
-export type ExampleTypeDeleteResponse = TypeGenResponse<ExampleTypeDeleteApiResponse>;
+export type TExampleDeleteApiResponse = TGenApiResponse<TExampleDeleteResponseData, TApiResponseError, TApiResponseNotice>;
+export type TExampleDeleteResponse = TGenResponse<TExampleDeleteApiResponse>;
 
-export type ExampleTypeEditResponseData = {|
+export type TExampleEditResponseData = {|
     id: number,
 |};
-export type ExampleTypeEditApiResponse = TypeGenApiResponse<ExampleTypeEditResponseData, TypeApiResponseError, TypeApiResponseNotice>;
-export type ExampleTypeEditResponse = TypeGenResponse<ExampleTypeEditApiResponse>;
+export type TExampleEditApiResponse = TGenApiResponse<TExampleEditResponseData, TApiResponseError, TApiResponseNotice>;
+export type TExampleEditResponse = TGenResponse<TExampleEditApiResponse>;
 
-export type ExampleTypeGetResponseData = ExampleType;
-export type ExampleTypeGetApiResponse = TypeGenApiResponse<ExampleTypeGetResponseData, TypeApiResponseError, TypeApiResponseNotice>;
-export type ExampleTypeGetResponse = TypeGenResponse<ExampleTypeGetApiResponse>;
+export type TExampleGetResponseData = TExample;
+export type TExampleGetApiResponse = TGenApiResponse<TExampleGetResponseData, TApiResponseError, TApiResponseNotice>;
+export type TExampleGetResponse = TGenResponse<TExampleGetApiResponse>;
 
-export type ExampleTypeListGetResponseData = {|
-    list: ExampleType[],
+export type TExampleListGetResponseData = {|
+    list: TExample[],
 |};
-export type ExampleTypeListGetApiResponse = TypeGenApiResponse<ExampleTypeListGetResponseData, TypeApiResponseError, TypeApiResponseNotice>;
-export type ExampleTypeListGetResponse = TypeGenResponse<ExampleTypeListGetApiResponse>;
+export type TExampleListGetApiResponse = TGenApiResponse<TExampleListGetResponseData, TApiResponseError, TApiResponseNotice>;
+export type TExampleListGetResponse = TGenResponse<TExampleListGetApiResponse>;
 
 // */

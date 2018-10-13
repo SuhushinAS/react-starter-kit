@@ -1,7 +1,7 @@
 // @flow
 
-import type {TypeState} from 'helpers/types.es';
-import type {ExampleType, ExampleTypeData, ExampleTypeStore} from 'modules/example/types.es';
+import type {TState} from 'helpers/types.es';
+import type {TExample, TExampleData, TExampleStore} from 'modules/example/types.es';
 import {createSelector} from 'reselect';
 
 /**
@@ -9,7 +9,7 @@ import {createSelector} from 'reselect';
  * @param {*} state Состояние.
  * @return {*} Ветка.
  */
-export function exampleSelector(state: TypeState): ExampleTypeStore {
+export function exampleSelector(state: TState): TExampleStore {
     return state.example;
 }
 
@@ -18,21 +18,27 @@ export function exampleSelector(state: TypeState): ExampleTypeStore {
  * @param {*} state Состояние.
  * @return {*} Данные.
  */
-export function exampleSelectorData(state: TypeState): ExampleTypeData {
+export function exampleSelectorData(state: TState): TExampleData {
     return exampleSelector(state).data;
 }
 
 /**
- * Вспомогательная функция для селектора.
- * @param {*} example Ветка состояния.
- * @return {*} Выборка состояния.
+ * Селектор данных.
+ * @param {*} state Состояние.
+ * @return {*} Данные.
  */
-function exampleList(example): ExampleType[] {
-    return example.list.map((id) => example.data[id]);
+export function exampleSelectorIdList(state: TState): number[] {
+    return exampleSelector(state).list;
 }
 
-const exampleSelectorList = createSelector([exampleSelector], exampleList);
+/**
+ * Вспомогательная функция для селектора.
+ * @param list Список.
+ * @param data Данные.
+ * @return {*} Выборка состояния.
+ */
+function exampleList(list, data): TExample[] {
+    return list.map((id) => data[id]);
+}
 
-export {
-    exampleSelectorList,
-};
+export const exampleSelectorList = createSelector([exampleSelectorIdList, exampleSelectorData], exampleList);

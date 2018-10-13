@@ -1,21 +1,21 @@
 // @flow
 
-import type {TypeApiResponse} from 'api/types.es';
-import type {TypeReducer} from 'helpers/types.es';
+import type {TApiResponse} from 'api/types.es';
+import type {TReducer} from 'helpers/types.es';
 import HTTPStatus from 'http-status';
 
-type TypeStateDefault = any;
+type TStateDefault = any;
 
-type TypePayloadDefault = {
-    data: TypePayloadDataDefault,
+type TPayloadDefault = {
+    data: TPayloadDataDefault,
 };
 
-type TypePayloadDataDefault = {
-    list: TypePayloadDataItemDefault[],
+type TPayloadDataDefault = {
+    list: TPayloadDataItemDefault[],
     more: boolean,
 };
 
-type TypePayloadDataItemDefault = {
+type TPayloadDataItemDefault = {
     id: number,
 };
 
@@ -27,7 +27,7 @@ type sortKey = number | string;
  * @param {*} payload Данные.
  * @return {{data, isLoading: boolean, list}} Новое состояние.
  */
-export function listGetSuccess(state: TypeStateDefault, payload: TypePayloadDefault): TypeStateDefault {
+export function listGetSuccess(state: TStateDefault, payload: TPayloadDefault): TStateDefault {
     return {
         ...state,
         data: payload.data.list.reduce((prev, item) => ({
@@ -40,8 +40,8 @@ export function listGetSuccess(state: TypeStateDefault, payload: TypePayloadDefa
     };
 }
 
-type TypeResponse = Error | {
-    data: TypeApiResponse,
+type TResponse = Error | {
+    data: TApiResponse,
     http: {
         status: number,
     },
@@ -62,7 +62,7 @@ const errorList = [
  * @param {*} response Ответ сервера.
  * @return {*} Данные для редьюсера.
  */
-export function actionHandlerDefault(response: TypeResponse): mixed {
+export function actionHandlerDefault(response: TResponse): mixed {
     if ('AbortError' !== response.name) {
         console.error(response);
     }
@@ -86,7 +86,7 @@ export function actionHandlerDefault(response: TypeResponse): mixed {
  * @param {*} reducerList Набор редьюсеров.
  * @return {*} Функция, возвращает состояние изменённое редьюсером или старое.
  */
-export function defaultReducer<S, A: *>(initialState: S, reducerList: { [key: string]: TypeReducer<S, A> }): TypeReducer<S, A> {
+export function defaultReducer<S, A: *>(initialState: S, reducerList: { [key: string]: TReducer<S, A> }): TReducer<S, A> {
     return (state: S = initialState, {type, payload}: A): S => {
         const reducer: (state: S, payload?: {}) => S = reducerList[type];
 
@@ -98,7 +98,7 @@ export function defaultReducer<S, A: *>(initialState: S, reducerList: { [key: st
     };
 }
 
-type TypeSortItemFactor = string;
+type TSortItemFactor = string;
 
 export type SortItemData = {};
 
@@ -108,7 +108,7 @@ export type SortItemData = {};
  * @param {*} getSortItem Получение пункта.
  * @return {Function} Сортировка.
  */
-export function listSort(data: SortItemData, getSortItem: (data: SortItemData, id: sortKey) => TypeSortItemFactor): (sortKey, sortKey) => number {
+export function listSort(data: SortItemData, getSortItem: (data: SortItemData, id: sortKey) => TSortItemFactor): (sortKey, sortKey) => number {
     return function(idLeft: sortKey, idRight: sortKey) {
         const left = getSortItem(data, idLeft);
         const right = getSortItem(data, idRight);

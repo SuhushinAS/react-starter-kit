@@ -2,7 +2,7 @@
 
 import ExampleApi from 'modules/example/api/index.es';
 
-export type TypeApi = {
+export type TApi = {
     exampleApi: ExampleApi,
 };
 
@@ -11,7 +11,7 @@ export type TypeApi = {
  * @param {string} host Хост сервера.
  * @return {*} Объекты Api
  */
-export default function getApi(host: string): TypeApi {
+export default function getApi(host: string): TApi {
     return {
         exampleApi: new ExampleApi(host),
     };

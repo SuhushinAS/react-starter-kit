@@ -7,12 +7,12 @@ const itemCount = 3;
 const itemTypeCount = 3;
 const loaderItemList = Array(itemCount).fill(0);
 
-type LoaderTypeProps = {
+type TLoaderProps = {
     show: boolean,
     size: number,
 };
 
-class Loader extends React.Component<LoaderTypeProps> {
+class Loader extends React.Component<TLoaderProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html

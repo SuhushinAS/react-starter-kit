@@ -2,39 +2,39 @@
 
 // /* flow-include
 
-export type TypeApiOptions = {
+export type TApiOptions = {
     data?: null | {} | any[],
     headers?: {},
     isCors?: boolean,
 };
 
-export type TypeGenApiResponse<Data, Errors, Notice> = {
+export type TGenApiResponse<Data, Errors, Notice> = {
     data: Data,
     errors: Errors[],
     notice: Notice[],
 };
 
-export type TypeApiResponse = TypeGenApiResponse<TypeApiResponseData, TypeApiResponseError, TypeApiResponseNotice>;
+export type TApiResponse = TGenApiResponse<TApiResponseData, TApiResponseError, TApiResponseNotice>;
 
-export type TypeApiResponseData = any;
+export type TApiResponseData = any;
 
-export type TypeApiResponseError = {|
+export type TApiResponseError = {|
     code: number,
     title: string,
     detail: string,
     data: any,
 |};
 
-export type TypeApiResponseNotice = {};
+export type TApiResponseNotice = {};
 
-export type TypeGenResponse<ApiResponse> = {
+export type TGenResponse<ApiResponse> = {
     data: ApiResponse,
-    http: TypeHttpResponse,
+    http: THttpResponse,
 };
 
-export type TypeResponse = TypeGenResponse<TypeApiResponse>;
+export type TResponse = TGenResponse<TApiResponse>;
 
-export type TypeHttpResponse = {
+export type THttpResponse = {
     ok: boolean,
     status: number,
     statusText: string,

@@ -1,13 +1,13 @@
 // @flow
 
-import type {CommonTypeKeyList} from 'modules/common/types.es';
+import type {TCommonKeyList} from 'modules/common/types.es';
 import * as React from 'react';
 
-type KeyHandlerTypeProps = {
-    keyList: CommonTypeKeyList,
+type TKeyHandlerProps = {
+    keyList: TCommonKeyList,
 };
 
-class KeyHandler extends React.Component<KeyHandlerTypeProps> {
+class KeyHandler extends React.Component<TKeyHandlerProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
@@ -62,7 +62,7 @@ class KeyHandler extends React.Component<KeyHandlerTypeProps> {
      * @param {*} nextProps Новые свойства
      * @return {undefined}
      */
-    componentWillReceiveProps(nextProps: KeyHandlerTypeProps) {
+    componentWillReceiveProps(nextProps: TKeyHandlerProps) {
         Object.keys(this.props.keyList).forEach(this.handlerRemove);
         Object.keys(nextProps.keyList).forEach(this.handlerAdd);
     }

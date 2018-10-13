@@ -7,6 +7,6 @@ const reducers = {
     example,
 };
 
-export type TypeReducers = typeof reducers;
+export type TReducers = typeof reducers;
 
 export default combineReducers(reducers);

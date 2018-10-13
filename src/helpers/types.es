@@ -1,21 +1,21 @@
 // @flow
 
-import type {TypeResponse} from 'api/types.es';
-import type {TypeApi} from 'helpers/api.es';
-import type {TypeReducers} from 'helpers/reducer.es';
+import type {TResponse} from 'api/types.es';
+import type {TApi} from 'helpers/api.es';
+import type {TReducers} from 'helpers/reducer.es';
 import type {Dispatch as ReduxDispatch, Store as ReduxStore} from 'redux';
 
 type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V;
 
-export type TypeActionDefault = {
+export type TActionDefault = {
     payload?: {},
     type: string,
 };
-export type TypeReducer<S, A: TypeActionDefault> = (S, A) => S;
-export type TypeState = $ObjMap<TypeReducers, $ExtractFunctionReturn>;
-export type TypeStore = ReduxStore<TypeState, TypeActionDefault, TypeDispatch>;
-export type TypeGetState = () => TypeState;
-export type TypeDispatch =
-    & ReduxDispatch<TypeActionDefault>
-    & TypeThunk<TypeActionDefault>
-export type TypeThunk<A> = ((TypeDispatch, TypeGetState, TypeApi) => Promise<TypeResponse> | TypeResponse) => A;
+export type TReducer<S, A: TActionDefault> = (S, A) => S;
+export type TState = $ObjMap<TReducers, $ExtractFunctionReturn>;
+export type TStore = ReduxStore<TState, TActionDefault, TDispatch>;
+export type TGetState = () => TState;
+export type TDispatch =
+    & ReduxDispatch<TActionDefault>
+    & TThunk<TActionDefault>
+export type TThunk<A> = ((TDispatch, TGetState, TApi) => Promise<TResponse> | TResponse) => A;

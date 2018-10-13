@@ -1,10 +1,10 @@
 // @flow
 
-import type {TypeActionDefault, TypeThunk} from 'helpers/types.es';
+import type {TActionDefault, TThunk} from 'helpers/types.es';
 import ExampleList from 'modules/example/components/ExampleList/index';
 import {exampleActionListGet} from 'modules/example/ducks/index.es';
 import {exampleSelectorList} from 'modules/example/selectors/index.es';
-import type {ExampleType} from 'modules/example/types.es';
+import type {TExample} from 'modules/example/types.es';
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
@@ -33,12 +33,12 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-type ExampleTypeProps = {
-    exampleActionListGet: () => TypeThunk<TypeActionDefault>,
-    exampleList: ExampleType[],
+type TExampleProps = {
+    exampleActionListGet: () => TThunk<TActionDefault>,
+    exampleList: TExample[],
 };
 
-class Example extends React.Component<ExampleTypeProps> {
+class Example extends React.Component<TExampleProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html

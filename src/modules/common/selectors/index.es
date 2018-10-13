@@ -1,14 +1,14 @@
 // @flow
 
-import type {TypeState} from 'helpers/types.es';
-import type {CommonTypeSearch, CommonTypeStore, CommonTypeTile} from 'modules/common/types.es';
+import type {TState} from 'helpers/types.es';
+import type {TCommonSearch, TCommonStore, TCommonTile} from 'modules/common/types.es';
 
 /**
  * Селектор.
  * @param {*} state Состояние.
  * @return {*} Ветка.
  */
-export function commonSelector(state: TypeState): CommonTypeStore {
+export function commonSelector(state: TState): TCommonStore {
     return state.commonReducer;
 }
 
@@ -17,7 +17,7 @@ export function commonSelector(state: TypeState): CommonTypeStore {
  * @param {*} state Состояние.
  * @return {*} Ветка.
  */
-export function commonSelectorHost(state: TypeState): ?string {
+export function commonSelectorHost(state: TState): ?string {
     return commonSelector(state).host;
 }
 
@@ -26,7 +26,7 @@ export function commonSelectorHost(state: TypeState): ?string {
  * @param {*} state Состояние.
  * @return {*} Ветка.
  */
-export function commonSelectorLoading(state: TypeState): number {
+export function commonSelectorLoading(state: TState): number {
     return commonSelector(state).loading;
 }
 
@@ -35,7 +35,7 @@ export function commonSelectorLoading(state: TypeState): number {
  * @param {*} state Состояние.
  * @return {*} Ветка.
  */
-export function commonSelectorSearch(state: TypeState): CommonTypeSearch {
+export function commonSelectorSearch(state: TState): TCommonSearch {
     return commonSelector(state).search;
 }
 
@@ -44,6 +44,6 @@ export function commonSelectorSearch(state: TypeState): CommonTypeSearch {
  * @param {*} state Состояние.
  * @return {*} Ветка.
  */
-export function commonSelectorTile(state: TypeState): CommonTypeTile {
+export function commonSelectorTile(state: TState): TCommonTile {
     return commonSelector(state).tile;
 }

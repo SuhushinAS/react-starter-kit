@@ -1,9 +1,9 @@
 // @flow
 
-import type {ConfigDataType} from 'helpers/config.es';
+import type {TConfigData} from 'helpers/config.es';
 import {actionHandlerDefault, defaultReducer} from 'helpers/ducks.es';
-import type {TypeDispatch} from 'helpers/types.es';
-import type {CommonTypeStore} from 'modules/common/types.es';
+import type {TDispatch} from 'helpers/types.es';
+import type {TCommonStore} from 'modules/common/types.es';
 
 const commonConst = {
     configSet: 'mag-delivery/common/CONFIG_SET',
@@ -11,7 +11,7 @@ const commonConst = {
     loadingInc: 'mag-delivery/common/LOADING_INC',
 };
 
-const initialState: CommonTypeStore = {
+const initialState: TCommonStore = {
     host: null,
     loading: 0,
     search: {
@@ -28,7 +28,7 @@ const initialState: CommonTypeStore = {
  * @param {*} config Конфиг.
  * @return {{payload: {config: *}, type: string}} Данные для редьюсера.
  */
-export function commonActionConfigSet(config: ConfigDataType) {
+export function commonActionConfigSet(config: TConfigData) {
     return {
         payload: {
             config,
@@ -63,7 +63,7 @@ export function commonActionLoadingInc() {
  * @param {string} type Тип для редьюсера.
  * @return {Function} Обработать успешный ответ.
  */
-export function handleUpdateSuccess(dispatch: TypeDispatch, type: string) {
+export function handleUpdateSuccess(dispatch: TDispatch, type: string) {
     return function(response: any) {
         if (0 === response.data.errors.length) {
             dispatch(commonActionLoadingDec());
@@ -87,7 +87,7 @@ export function handleUpdateSuccess(dispatch: TypeDispatch, type: string) {
  * @param {string} type Тип для редьюсера.
  * @return {Function} Обработать успешный ответ.
  */
-export function handleUpdateFail(dispatch: TypeDispatch, type: string) {
+export function handleUpdateFail(dispatch: TDispatch, type: string) {
     return function(error: any) {
         dispatch(commonActionLoadingDec());
         dispatch({type});

@@ -1,35 +1,35 @@
 // @flow
 
-import type {TypeApiResponseError, TypeApiResponseNotice, TypeGenApiResponse, TypeGenResponse} from 'api/types.es';
+import type {TApiResponseError, TApiResponseNotice, TGenApiResponse, TGenResponse} from 'api/types.es';
 
 // /* flow-include
 
-export type CommonTypeStore = {|
+export type TCommonStore = {|
     host: ?string,
     loading: number,
-    search: CommonTypeSearch,
-    tile: CommonTypeTile,
+    search: TCommonSearch,
+    tile: TCommonTile,
 |};
 
-export type CommonTypeSearch = {|
+export type TCommonSearch = {|
     params: any,
 |};
 
-export type CommonTypeTile = {|
+export type TCommonTile = {|
     params: any,
     url: string,
 |};
 
-export type CommonTypeKeyList = {
+export type TCommonKeyList = {
     [string]: {
         [number]: (any) => any,
     },
 };
 
-export type CommonTypeCreateResponseData = {|
+export type TCommonCreateResponseData = {|
     id: number,
 |};
-export type CommonTypeCreateApiResponse = TypeGenApiResponse<CommonTypeCreateResponseData, TypeApiResponseError, TypeApiResponseNotice>;
-export type CommonTypeCreateResponse = TypeGenResponse<CommonTypeCreateApiResponse>;
+export type TCommonCreateApiResponse = TGenApiResponse<TCommonCreateResponseData, TApiResponseError, TApiResponseNotice>;
+export type TCommonCreateResponse = TGenResponse<TCommonCreateApiResponse>;
 
 // */

@@ -1,11 +1,11 @@
 // @flow
 
-import type {TypeApi} from 'helpers/api.es';
+import type {TApi} from 'helpers/api.es';
 import {listGetSuccess} from 'helpers/ducks';
 import {actionHandlerDefault, defaultReducer} from 'helpers/ducks.es';
-import type {TypeDispatch, TypeGetState} from 'helpers/types.es';
+import type {TDispatch, TGetState} from 'helpers/types.es';
 import {commonActionLoadingDec, commonActionLoadingInc} from 'modules/common/ducks/index.es';
-import type {ExampleTypeListGetResponse, ExampleTypeStore} from 'modules/example/types.es';
+import type {TExampleListGetResponse, TExampleStore} from 'modules/example/types.es';
 
 const exampleConst = {
     listGetFail: 'EXAMPLE__LIST-GET_FAIL',
@@ -14,7 +14,7 @@ const exampleConst = {
     simple: 'EXAMPLE__SIMPLE',
 };
 
-const initialState: ExampleTypeStore = {
+const initialState: TExampleStore = {
     data: {},
     isLoading: false,
     list: [],
@@ -35,11 +35,11 @@ export function exampleActionSimple() {
  * @returns {function(*, *, *)} Функция, которая вызывает изменения состояния.
  */
 export function exampleActionListGet() {
-    return (dispatch: TypeDispatch, getState: TypeGetState, api: TypeApi) => {
+    return (dispatch: TDispatch, getState: TGetState, api: TApi) => {
         dispatch(commonActionLoadingInc());
         dispatch({type: exampleConst.listGetStart});
 
-        return api.exampleApi.listGet().then((response: ExampleTypeListGetResponse) => {
+        return api.exampleApi.listGet().then((response: TExampleListGetResponse) => {
             if (0 === response.data.errors.length) {
                 dispatch(commonActionLoadingDec());
                 dispatch({

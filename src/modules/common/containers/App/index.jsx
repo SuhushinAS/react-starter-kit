@@ -4,7 +4,7 @@ import Router from 'modules/common/components/Router/index';
 import * as React from 'react';
 import {Provider} from 'react-redux';
 
-type AppTypeProps = {
+type TAppProps = {
     store: any,
 };
 
@@ -12,7 +12,7 @@ type AppTypeProps = {
  * Роутер приложения.
  * @return {*} Набор роутов.
  */
-export default class App extends React.Component<AppTypeProps> {
+export default class App extends React.Component<TAppProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html

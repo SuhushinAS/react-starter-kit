@@ -2,12 +2,12 @@
 
 import BaseApi from 'api/BaseApi';
 import type {
-    ExampleType, ExampleTypeCreateResponse, ExampleTypeDeleteResponse, ExampleTypeEditResponse, ExampleTypeGetResponse, ExampleTypeListGetFilter,
-    ExampleTypeListGetResponse,
+    TExample, TExampleCreateResponse, TExampleDeleteResponse, TExampleEditResponse, TExampleGetResponse, TExampleListGetFilter,
+    TExampleListGetResponse,
 } from 'modules/example/types.es';
 
 export default class ExampleApi extends BaseApi {
-    listGet(filter: ExampleTypeListGetFilter = null, limit: number = 0, offset: number = 0): Promise<ExampleTypeListGetResponse> {
+    listGet(filter: TExampleListGetFilter = null, limit: number = 0, offset: number = 0): Promise<TExampleListGetResponse> {
         return this.request('/api/v1/example', 'GET', {
             data: {
                 filter,
@@ -18,27 +18,27 @@ export default class ExampleApi extends BaseApi {
         });
     }
 
-    create(data: ExampleType): Promise<ExampleTypeCreateResponse> {
+    create(data: TExample): Promise<TExampleCreateResponse> {
         return this.request('/api/v1/example', 'CREATE', {
             data,
             isCors: false,
         });
     }
 
-    update(exampleId: number, data: ExampleType): Promise<ExampleTypeEditResponse> {
+    update(exampleId: number, data: TExample): Promise<TExampleEditResponse> {
         return this.request(`/api/v1/example?v=${exampleId}`, 'PUT', {
             data,
             isCors: false,
         });
     }
 
-    delete(exampleId: number): Promise<ExampleTypeDeleteResponse> {
+    delete(exampleId: number): Promise<TExampleDeleteResponse> {
         return this.request(`/api/v1/example?v=${exampleId}`, 'DELETE', {
             isCors: false,
         });
     }
 
-    get(exampleId: number): Promise<ExampleTypeGetResponse> {
+    get(exampleId: number): Promise<TExampleGetResponse> {
         return this.request(`/api/v1/example?v=${exampleId}`, 'GET', {
             isCors: false,
         });
