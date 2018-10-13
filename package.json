@@ -65,7 +65,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git@gitlab.userstory.ru:a.suhushin/react-starter-kit.git"
+    "url": "git@github.com:SuhushinAS/react-starter-kit.git"
   },
   "scripts": {
     "start": "webpack-dev-server -d --config webpack.config.es",

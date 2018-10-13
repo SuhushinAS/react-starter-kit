@@ -79,13 +79,7 @@ module.exports = {
             new OptimizeCSSAssetsPlugin(),
         ],
         splitChunks: {
-            cacheGroups: {
-                common: {
-                    chunks: 'all',
-                    name: 'common',
-                    test: /[\\/]node_modules[\\/]/,
-                },
-            },
+            automaticNameDelimiter: '-',
         },
     },
     output: {
