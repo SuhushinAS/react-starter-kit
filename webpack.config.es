@@ -166,6 +166,12 @@ function getRuleListStyle() {
                 'css-loader',
                 'postcss-loader',
                 'less-loader',
+                {
+                    loader: 'less-loader',
+                    options: {
+                        javascriptEnabled: true,
+                    },
+                },
             ],
         },
     ];
@@ -250,6 +256,9 @@ function getPluginListProd() {
         new webpack.LoaderOptionsPlugin({
             debug: false,
             minimize: true,
+            options: {
+                customInterpolateName: (url) => url.toLowerCase(),
+            },
         }),
         new webpack.NoEmitOnErrorsPlugin(),
     ];

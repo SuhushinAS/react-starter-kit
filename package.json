@@ -47,7 +47,6 @@
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-gradient-transparency-fix": "^3.0.0",
     "postcss-loader": "^3.0.0",
-    "prop-types": "^15.6.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",

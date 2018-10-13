@@ -5,10 +5,9 @@ import ExampleList from 'modules/example/components/ExampleList/index';
 import {exampleActionListGet} from 'modules/example/ducks/index.es';
 import {exampleSelectorList} from 'modules/example/selectors/index.es';
 import type {ExampleType} from 'modules/example/types.es';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 
 /**
@@ -41,15 +40,6 @@ type ExampleTypeProps = {
 
 class Example extends React.Component<ExampleTypeProps> {
     /**
-     * Описание свойств.
-     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-     */
-    static propTypes = {
-        exampleActionListGet: PropTypes.func,
-        exampleList: PropTypes.any,
-    };
-
-    /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
      */
@@ -60,11 +50,10 @@ class Example extends React.Component<ExampleTypeProps> {
     /**
      * Конструктор компонента.
      * @param {*} props Свойства переданые в компонент.
-     * @param {*} context Контекст.
      * @return {undefined}
      */
-    // constructor(props, context) {
-    //     super(props, context);
+    // constructor(props) {
+    //     super(props);
     //     this.state = this.initState(props);
     // }
 
@@ -78,12 +67,16 @@ class Example extends React.Component<ExampleTypeProps> {
     // }
 
     /**
-     * Компонент будет примонтирован.
-     * В данный момент у нас нет возможности посмотреть DOM элементы.
-     * @return {undefined}
+     * Отображение компонента
+     * @return {*} Представление компонента.
      */
-
-    // componentWillMount() {}
+    render() {
+        return (
+            <div>
+                <ExampleList exampleList={this.props.exampleList} />
+            </div>
+        );
+    }
 
     /**
      * Компонент примонтировался.
@@ -97,14 +90,6 @@ class Example extends React.Component<ExampleTypeProps> {
     }
 
     /**
-     * Компонент получает новые props.
-     * Этод метод не вызывается в момент первого render.
-     * @param {*} nextProps Новые свойства
-     * @return {undefined}
-     */
-    // componentWillReceiveProps(nextProps) {}
-
-    /**
      * Должен ли компонент обновиться?
      * На самом деле, обычно реакт сам отлично разбирается.
      * Но иногда ручное управление позволяет существенно ускорить работу в "узких местах".
@@ -113,28 +98,6 @@ class Example extends React.Component<ExampleTypeProps> {
      * @return {boolean} Должен ли компонент обновиться?
      */
     // shouldComponentUpdate(nextProps, nextState) {}
-
-    /**
-     * Вызывается прямо перед render, когда новые props и state получены.
-     * В этом методе нельзя вызывать setState.
-     * @param {*} nextProps Новые свойства.
-     * @param {*} nextState Новое состояние.
-     * @return {undefined}
-     */
-
-    // componentWillUpdate(nextProps, nextState) {}
-
-    /**
-     * Отображение компонента
-     * @return {*} Представление компонента.
-     */
-    render() {
-        return (
-            <div>
-                <ExampleList exampleList={this.props.exampleList} />
-            </div>
-        );
-    }
 
     /**
      * Вызывается сразу после render.

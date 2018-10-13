@@ -10,28 +10,25 @@ import 'style/index.less';
 
 const root: HTMLElement | null = document.getElementById('root');
 
-/**
- * Старт приложения
- * @return {undefined}
- */
-(async() => {
-    const config = await getConfig();
-    const store = configureStore(config.host);
+if (root) {
+    /**
+     * Старт приложения
+     * @return {undefined}
+     */
+    (async() => {
+        const config = await getConfig();
+        const store = configureStore(config.host);
 
-    store.dispatch(commonActionConfigSet(config));
+        store.dispatch(commonActionConfigSet(config));
 
-    if (root) {
         render(<App store={store} />, root);
-    }
 
-
-    if (module.hot) {
-        module.hot.accept('modules/common/containers/App/index.jsx', () => {
-            if (root) {
+        if (module.hot) {
+            module.hot.accept('modules/common/containers/App/index.jsx', () => {
                 const HotApp = require('modules/common/containers/App/index.jsx').default;
 
                 render(<HotApp store={store} />, root);
-            }
-        });
-    }
-})();
+            });
+        }
+    })();
+}

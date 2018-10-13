@@ -2,7 +2,6 @@
 
 import Header from 'modules/common/components/Header/index';
 import {commonSelectorLoading} from 'modules/common/selectors/index.es';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
@@ -44,16 +43,6 @@ type LayoutTypeProps = {
 };
 
 class Layout extends React.Component<LayoutTypeProps> {
-    /**
-     * Описание свойств.
-     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-     */
-    static propTypes = {
-        commonLoading: PropTypes.number,
-        main: PropTypes.any,
-        side: PropTypes.any,
-    };
-
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html

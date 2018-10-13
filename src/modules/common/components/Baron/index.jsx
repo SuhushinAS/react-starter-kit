@@ -1,22 +1,11 @@
 // @flow
 
-import bemCn from 'bem-cn';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import ReactBaron from 'react-baron';
 
 import './style.less';
 
-const block = bemCn('baron');
-const bem = {
-    barCls: block('bar')(),
-    barOnCls: block(),
-    clipperCls: block('clipper'),
-    scrollerCls: block('scroller')(),
-    trackCls: block('track')(),
-};
-
-type BaronTypeProps = {
+type TBaronProps = {
     children: React.Node,
     className?: string,
     rest?: any,
@@ -29,16 +18,21 @@ type BaronTypeProps = {
  * @param {*} rest Прочие параметры.
  * @return {*} Представление.
  */
-export default function Baron({children, className, ...rest}: BaronTypeProps) {
+export default function Baron({children, className, ...props}: TBaronProps) {
+    const clipperCls = ['baron__clipper'];
+    if (className) {
+        clipperCls.push(className);
+    }
     return (
-        <ReactBaron {...rest} {...bem} clipperCls={bem.clipperCls.mix(className)()}>
+        <ReactBaron
+            {...props}
+            barCls="baron__bar"
+            barOnCls="baron"
+            clipperCls={clipperCls.join(' ')}
+            scrollerCls="baron__scroller"
+            trackCls="baron__track"
+        >
             {children}
         </ReactBaron>
     );
 }
-
-Baron.propTypes = {
-    children: PropTypes.any,
-    className: PropTypes.string,
-    rest: PropTypes.any,
-};

@@ -1,7 +1,6 @@
 // @flow
 
 import type {ExampleType} from 'modules/example/types.es';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
 type ExampleListTypeProps = {
@@ -26,10 +25,6 @@ export default function ExampleList(props: ExampleListTypeProps) {
 
     return null;
 }
-
-ExampleList.prototype.propTypes = {
-    exampleList: PropTypes.array,
-};
 
 /**
  * Вывод одного элемента.

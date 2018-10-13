@@ -1,7 +1,6 @@
 // @flow
 
 import type {CommonTypeKeyList} from 'modules/common/types.es';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
 type KeyHandlerTypeProps = {
@@ -9,14 +8,6 @@ type KeyHandlerTypeProps = {
 };
 
 class KeyHandler extends React.Component<KeyHandlerTypeProps> {
-    /**
-     * Описание свойств.
-     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-     */
-    static propTypes = {
-        keyList: PropTypes.any,
-    };
-
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html

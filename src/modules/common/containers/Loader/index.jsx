@@ -1,6 +1,5 @@
 // @flow
 
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import './style.less';
 
@@ -14,15 +13,6 @@ type LoaderTypeProps = {
 };
 
 class Loader extends React.Component<LoaderTypeProps> {
-    /**
-     * Описание свойств.
-     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-     */
-    static propTypes = {
-        show: PropTypes.bool,
-        size: PropTypes.number,
-    };
-
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
