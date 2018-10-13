@@ -1,6 +1,5 @@
 // @flow
 
-import Header from 'modules/common/components/Header/index';
 import {commonSelectorLoading} from 'modules/common/selectors/index.es';
 import * as React from 'react';
 import {connect} from 'react-redux';
@@ -9,10 +8,10 @@ import {bindActionCreators} from 'redux';
 
 const layoutPropList = {
     main: {
-        className: 'width_xs_24 width_md_15 width_lg_17 width_xl_19 h_full po_r z_1 d_xs_i-b d_md_t-c v-a_m',
+        className: 'width_xs_24 width_md_15 width_lg_17 width_xl_19 h_full po_r d_t-c',
     },
     side: {
-        className: 'width_xs_24 width_md_9 width_lg_7 width_xl_5 h_full bg_white po_r z_2 d_xs_i-b d_md_t-c v-a_m',
+        className: 'width_xs_24 width_md_9 width_lg_7 width_xl_5 h_full bg_white po_r d_t-c',
     },
 };
 
@@ -58,7 +57,7 @@ class Layout extends React.Component<TLayoutProps> {
             <div className="h_full d_t w_full t-l_f">
                 <div className="d_t-r">
                     <div className="d_t-c po_r z_2">
-                        <Header isLoading={0 < this.props.commonLoading} />
+                        Header
                     </div>
                 </div>
                 {this.renderRow()}
@@ -72,7 +71,7 @@ class Layout extends React.Component<TLayoutProps> {
         if ('undefined' === typeof main) {
             return (
                 <div className="d_t-r h_full">
-                    <div className="d_t-c po_r z_1">
+                    <div className="d_t-c po_r">
                         {side}
                     </div>
                 </div>
@@ -82,7 +81,7 @@ class Layout extends React.Component<TLayoutProps> {
         if ('undefined' === typeof side) {
             return (
                 <div className="d_t-r h_full">
-                    <div className="d_t-c po_r z_1">
+                    <div className="d_t-c po_r">
                         {main}
                     </div>
                 </div>

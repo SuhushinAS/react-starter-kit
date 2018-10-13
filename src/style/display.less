@@ -1,5 +1,29 @@
 @import (reference) 'responsive';
 
+.d_b {
+    display: block;
+}
+
+.d_i-b {
+    display: inline-block;
+}
+
+.d_t {
+    display: table;
+}
+
+.d_t-r {
+    display: table-row;
+}
+
+.d_t-c {
+    display: table-cell;
+}
+
+.t-l_f {
+    table-layout: fixed;
+}
+
 .make-display-media(@class, @query) {
     .display_@{class}_block {
         @media @query {

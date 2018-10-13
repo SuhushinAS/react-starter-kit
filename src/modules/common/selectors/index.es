@@ -9,7 +9,7 @@ import type {TCommonSearch, TCommonStore, TCommonTile} from 'modules/common/type
  * @return {*} Ветка.
  */
 export function commonSelector(state: TState): TCommonStore {
-    return state.commonReducer;
+    return state.common;
 }
 
 /**

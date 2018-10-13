@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import ReactBaron from 'react-baron';
+import ReactBaron from 'react-baron/dist/es5.js';
 
 import './style.less';
 

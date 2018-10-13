@@ -1,14 +1,16 @@
 // @flow
 
 import type {TActionDefault, TThunk} from 'helpers/types.es';
-import ExampleList from 'modules/example/components/ExampleList/index.jsx';
-import {exampleActionListGet} from 'modules/example/ducks/index.es';
-import {exampleSelectorList} from 'modules/example/selectors/index.es';
-import type {TExample} from 'modules/example/types.es';
+import BaronTestList from 'modules/baron-test/components/BaronTestList/index.jsx';
+import {baronTestActionListGet} from 'modules/baron-test/ducks/index.es';
+import {baronTestSelectorList} from 'modules/baron-test/selectors/index.es';
+import type {TBaronTest} from 'modules/baron-test/types.es';
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
+import Layout from 'modules/common/containers/Layout/index.jsx';
+import Baron from 'modules/common/components/Baron/index.jsx';
 
 /**
  * Привязка store к props.
@@ -18,7 +20,7 @@ import {bindActionCreators} from 'redux';
  */
 function mapStateToProps(state) {
     return {
-        exampleList: exampleSelectorList(state),
+        baronTestList: baronTestSelectorList(state),
     };
 }
 
@@ -29,22 +31,22 @@ function mapStateToProps(state) {
  */
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        exampleActionListGet,
+        baronTestActionListGet,
     }, dispatch);
 }
 
-type TExampleProps = {
-    exampleActionListGet: () => TThunk<TActionDefault>,
-    exampleList: TExample[],
+type TBaronTestProps = {
+    baronTestActionListGet: () => TThunk<TActionDefault>,
+    baronTestList: TBaronTest[],
 };
 
-class Example extends React.Component<TExampleProps> {
+class BaronTest extends React.Component<TBaronTestProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
      */
     static defaultProps = {
-        exampleList: [],
+        baronTestList: [],
     };
 
     /**
@@ -72,8 +74,16 @@ class Example extends React.Component<TExampleProps> {
      */
     render() {
         return (
-            <div>
-                <ExampleList exampleList={this.props.exampleList} />
+            <Layout main={this.renderMain()} />
+        );
+    }
+
+    renderMain() {
+        return (
+            <div className="b_0 l_0 o_a po_a r_0 t_0">
+                <Baron>
+                    <BaronTestList baronTestList={this.props.baronTestList} />
+                </Baron>
             </div>
         );
     }
@@ -86,7 +96,7 @@ class Example extends React.Component<TExampleProps> {
      * @return {undefined}
      */
     componentDidMount() {
-        this.props.exampleActionListGet();
+        this.props.baronTestActionListGet();
     }
 
     /**
@@ -115,4 +125,4 @@ class Example extends React.Component<TExampleProps> {
     // componentWillUnmount() {}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Example));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BaronTest));

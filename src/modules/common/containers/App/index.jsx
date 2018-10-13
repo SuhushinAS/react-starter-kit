@@ -1,6 +1,6 @@
 // @flow
 
-import Router from 'modules/common/components/Router/index';
+import Router from 'modules/common/components/Router/index.jsx';
 import * as React from 'react';
 import {Provider} from 'react-redux';
 
