@@ -17,7 +17,6 @@ const stats = {
     errorDetails: true,
     reasons: isProd,
 };
-const SvgStore = require('webpack-svgstore-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -34,7 +33,6 @@ module.exports = {
     devtool: isProd ? false : 'eval',
     entry: {
         common: [
-            'babel-polyfill',
             'react',
             'react-dom',
             'react-redux',
@@ -42,7 +40,6 @@ module.exports = {
             'whatwg-fetch',
         ],
         index: 'index',
-        svg: 'svg',
     },
     module: {
         rules: getRuleList(),
@@ -181,14 +178,14 @@ function getRuleListStyle() {
 function getRuleListResource() {
     return [
         {
-            test: /\.(ttf|eot|svg|woff|woff2)(\?[a-z0-9]+)?$/,
+            test: /\.(ttf|eot|woff|woff2)(\?[a-z0-9]+)?$/,
             use: {
                 loader: 'file-loader',
                 options: {name: 'fonts/[name].[hash:5].[ext]'},
             },
         },
         {
-            test: /.*\.(png|jpg|jpeg|gif)$/i,
+            test: /.*\.(png|jpg|jpeg|gif|svg)$/i,
             use: {
                 loader: 'file-loader',
                 options: {name: 'img/[name].[hash:5].[ext]'},
@@ -231,18 +228,6 @@ function getPluginListBase() {
             template: path.resolve(pathList.src, './index.htm'),
         }),
         new HtmlWebpackHarddiskPlugin(),
-        new SvgStore({
-            svgOptions: {
-                plugins: [
-                    {
-                        removeEmptyContainers: false,
-                        removeTitle: false,
-                        removeUselessDefs: false,
-                        sortAttrs: true,
-                    },
-                ],
-            },
-        }),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ];
 }

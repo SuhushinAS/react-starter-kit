@@ -4,22 +4,10 @@
  * Функция для получения начальной конфигурации.
  * @return {Promise<*>} Промис, который ресолвится с хостом сервера.
  */
-export default async function getConfig(): Promise<ConfigDataType> {
-    const response: ConfigType = await fetch('/config.json').then((res: Response) => res.json());
-
-    return response.data;
+export default async function getConfig(): Promise<ConfigType> {
+    return await fetch('/api/v1/config').then((res: Response) => res.json());
 }
 
 export type ConfigType = {
-    data: ConfigDataType,
-};
-
-export type ConfigDataType = {
     host: string,
-    tile: {
-        params: {
-            attribution: string,
-        },
-        url: string,
-    },
 };
