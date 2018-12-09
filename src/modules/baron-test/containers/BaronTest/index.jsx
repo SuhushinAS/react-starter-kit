@@ -10,7 +10,6 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import Layout from 'modules/common/containers/Layout/index.jsx';
-import Baron from 'modules/common/components/Baron/index.jsx';
 
 /**
  * Привязка store к props.
@@ -81,9 +80,7 @@ class BaronTest extends React.Component<TBaronTestProps> {
     renderMain() {
         return (
             <div className="b_0 l_0 o_a po_a r_0 t_0">
-                <Baron>
-                    <BaronTestList baronTestList={this.props.baronTestList} />
-                </Baron>
+                <BaronTestList baronTestList={this.props.baronTestList} />
             </div>
         );
     }
