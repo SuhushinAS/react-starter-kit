@@ -1,12 +1,15 @@
 // @flow
 
 import type {TResponse} from 'api/types.js';
-import type {TApi} from 'helpers/api.js';
-import type {TReducers} from 'helpers/reducer.js';
+import type {TApi} from 'app/api.js';
+import type {TReducers} from 'app/reducer.js';
 import type {Dispatch as ReduxDispatch, Store as ReduxStore} from 'redux';
 
 type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V;
 
+export type TConfig = {
+    host: string,
+};
 export type TActionDefault = {
     payload?: {},
     type: string,

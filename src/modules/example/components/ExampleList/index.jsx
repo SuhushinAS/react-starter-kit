@@ -1,7 +1,7 @@
 // @flow
 
 import type {TExample} from 'modules/example/types.js';
-import * as React from 'react';
+import React from 'react';
 
 type TExampleListProps = {
     exampleList: TExample[],

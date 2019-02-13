@@ -1,6 +1,6 @@
 // @flow
 
-import type {TApiOptions, TApiResponse, TResponse} from 'api/types.js';
+import type {TApiOptions, TResponse} from 'api/types.js';
 
 const ApiOptionsDefault: TApiOptions = {
     data: null,
@@ -8,7 +8,7 @@ const ApiOptionsDefault: TApiOptions = {
     isCors: false,
 };
 
-export default class BaseApi {
+export default class Api {
     constructor(base: string = '') {
         this.base = base;
     }
@@ -48,15 +48,6 @@ export default class BaseApi {
 
         const requestUrl: string = isCors ? this.base + url : url;
         const response: Response = await fetch(requestUrl, options);
-        const responseData: TApiResponse = await response.json();
-
-        return {
-            data: responseData,
-            http: {
-                ok: response.ok,
-                status: response.status,
-                statusText: response.statusText,
-            },
-        };
+        return await response.json();
     }
 }

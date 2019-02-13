@@ -1,7 +1,7 @@
 // @flow
 
-import type {TState} from 'helpers/types.js';
-import type {TExample, TExampleData, TExampleStore} from 'modules/example/types.js';
+import type {TState} from 'app/types.js';
+import type {TExampleData, TExampleStore} from 'modules/example/types.js';
 import {createSelector} from 'reselect';
 
 /**
@@ -22,23 +22,4 @@ export function exampleSelectorData(state: TState): TExampleData {
     return exampleSelector(state).data;
 }
 
-/**
- * Селектор данных.
- * @param {*} state Состояние.
- * @return {*} Данные.
- */
-export function exampleSelectorIdList(state: TState): number[] {
-    return exampleSelector(state).list;
-}
-
-/**
- * Вспомогательная функция для селектора.
- * @param list Список.
- * @param data Данные.
- * @return {*} Выборка состояния.
- */
-function exampleList(list, data): TExample[] {
-    return list.map((id) => data[id]);
-}
-
-export const exampleSelectorList = createSelector([exampleSelectorIdList, exampleSelectorData], exampleList);
+export const exampleSelectorList = createSelector([exampleSelectorData], (data) => Object.keys(data).map((id) => data[id]));

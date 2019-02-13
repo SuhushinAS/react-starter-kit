@@ -1,80 +1,29 @@
 // @flow
 
-import type {TActionDefault, TThunk} from 'app/types.js';
-import ExampleList from 'modules/example/components/ExampleList/index.jsx';
-import {exampleActionListGet} from 'modules/example/ducks/index.js';
-import {exampleSelectorList} from 'modules/example/selectors/index.js';
-import type {TExample} from 'modules/example/types.js';
 import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
-import {bindActionCreators} from 'redux';
 
-/**
- * Привязка store к props.
- * @param {*} state Состояние.
- // * @param {*} props Свойства.
- * @return {{prop}} Объкет, элементы которого будут добавлены в props.
- */
-function mapStateToProps(state) {
-    return {
-        exampleList: exampleSelectorList(state),
-    };
-}
+type TExampleProps = {};
 
-/**
- * Привязка actions к props.
- * @param {function} dispatch Функция для вызова редьюсера.
- * @return {{importedAction: *}|B|N} Объкет, элементы которого будут добавлены в props.
- */
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        exampleActionListGet,
-    }, dispatch);
-}
-
-type TExampleProps = {
-    exampleActionListGet: () => TThunk<TActionDefault>,
-    exampleList: TExample[],
-};
-
-class Example extends React.Component<TExampleProps> {
+class ExampleList extends React.Component<TExampleProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
      */
     static defaultProps = {
-        exampleList: [],
+        list: [],
     };
-
-    /**
-     * Конструктор компонента.
-     * @param {*} props Свойства переданые в компонент.
-     * @return {undefined}
-     */
-    // constructor(props) {
-    //     super(props);
-    //     this.state = this.initState(props);
-    // }
-
-    /**
-     * Инициализиоовать состояние.
-     * @param {*} props Свойства.
-     * @return {*} Состояние.
-     */
-    // initState(props) {
-    //     return {};
-    // }
 
     /**
      * Отображение компонента
      * @return {*} Представление компонента.
      */
     render() {
+        console.log(this.props);
         return (
-            <div>
-                <ExampleList exampleList={this.props.exampleList} />
-            </div>
+            <table>
+                <tbody>
+                </tbody>
+            </table>
         );
     }
 
@@ -85,9 +34,7 @@ class Example extends React.Component<TExampleProps> {
      * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
      * @return {undefined}
      */
-    componentDidMount() {
-        this.props.exampleActionListGet();
-    }
+    // componentDidMount() {}
 
     /**
      * Должен ли компонент обновиться?
@@ -115,4 +62,4 @@ class Example extends React.Component<TExampleProps> {
     // componentWillUnmount() {}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Example));
+export default ExampleList;

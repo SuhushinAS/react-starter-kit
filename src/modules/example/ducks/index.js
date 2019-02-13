@@ -1,91 +1,75 @@
 // @flow
 
-import type {TApi} from 'helpers/api.js';
-import {listGetSuccess} from 'helpers/ducks';
-import {actionHandlerDefault, defaultReducer} from 'helpers/ducks.js';
-import type {TDispatch, TGetState} from 'helpers/types.js';
+import type {TApi} from 'app/api.js';
+import {createReducer} from 'app/reducer.js';
+import type {TDispatch, TGetState} from 'app/types.js';
 import {commonActionLoadingDec, commonActionLoadingInc} from 'modules/common/ducks/index.js';
 import type {TExampleListGetResponse, TExampleStore} from 'modules/example/types.js';
 
 const exampleConst = {
-    listGetFail: 'EXAMPLE__LIST-GET_FAIL',
-    listGetStart: 'EXAMPLE__LIST-GET_START',
-    listGetSuccess: 'EXAMPLE__LIST-GET_SUCCESS',
-    simple: 'EXAMPLE__SIMPLE',
+    listGet: 'EXAMPLE__LIST-GET',
+    loadStart: 'EXAMPLE__LOAD_START',
+    loadStop: 'EXAMPLE__LOAD_STOP',
 };
 
 const initialState: TExampleStore = {
     data: {},
     isLoading: false,
-    list: [],
     more: true,
-    simple: false,
 };
 
 /**
- * Пример простого экшена.
- * @returns {{type: string}} Объект с типом для изменения состояния.
- */
-export function exampleActionSimple() {
-    return {type: exampleConst.simple};
-}
-
-/**
- * Экшн для получения списка.
- * @returns {function(*, *, *)} Функция, которая вызывает изменения состояния.
+ * Получить список.
+ * @return {*} Данные для редьюсера.
  */
 export function exampleActionListGet() {
     return (dispatch: TDispatch, getState: TGetState, api: TApi) => {
         dispatch(commonActionLoadingInc());
-        dispatch({type: exampleConst.listGetStart});
+        dispatch({type: exampleConst.loadStart});
 
         return api.exampleApi.listGet().then((response: TExampleListGetResponse) => {
-            if (0 === response.data.errors.length) {
+            if (0 === response.errors.length) {
                 dispatch(commonActionLoadingDec());
                 dispatch({
-                    payload: {
-                        data: response.data.data,
-                    },
-                    type: exampleConst.listGetSuccess,
+                    payload: response.data,
+                    type: exampleConst.listGet,
                 });
 
                 return response;
             }
 
-            throw response;
+            throw new Error(response);
         }).catch((error) => {
             dispatch(commonActionLoadingDec());
-            dispatch({type: exampleConst.listGetFail});
+            dispatch({type: exampleConst.loadStop});
 
-            return actionHandlerDefault(error);
+            console.error(error);
         });
     };
 }
 
-const exampleReducerListGet = {
-    [exampleConst.listGetFail]: (state) => ({
-        ...state,
-        isLoading: false,
-    }),
-    [exampleConst.listGetStart]: (state) => ({
-        ...state,
-        isLoading: true,
-        list: [],
-    }),
-    [exampleConst.listGetSuccess]: listGetSuccess,
-    [exampleConst.simple]: (state) => ({
-        ...state,
-        simple: !state.simple,
-    }),
-};
-
-/**
- * Редьюсер - обновляет состояние в зависимости от действия.
- * @param {*} state Предыдущее состяние.
- * @param {string} type Название действия.
- * @param {*} payload Дополнительные данные для действия.
- * @returns {*} Функция для обновления состояния.
- */
-export default defaultReducer(initialState, {
-    ...exampleReducerListGet,
+export default createReducer(initialState, {
+    [exampleConst.listGet](state, {list, more}) {
+        return {
+            ...state,
+            data: list.reduce((prev, item) => ({
+                ...prev,
+                [item.id]: item,
+            }), {}),
+            isLoading: false,
+            more,
+        };
+    },
+    [exampleConst.loadStart](state) {
+        return {
+            ...state,
+            isLoading: true,
+        };
+    },
+    [exampleConst.loadStop](state) {
+        return {
+            ...state,
+            isLoading: false,
+        };
+    },
 });

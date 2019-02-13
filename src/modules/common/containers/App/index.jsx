@@ -1,8 +1,10 @@
 // @flow
 
-import Router from 'modules/common/components/Router/index.jsx';
-import * as React from 'react';
+import history from 'app/browser-history.js';
+import Example from 'modules/example/containers/Example/index.jsx';
+import React from 'react';
 import {Provider} from 'react-redux';
+import {Redirect, Route, Router as ReactRouter, Switch} from 'react-router-dom';
 
 type TAppProps = {
     store: any,
@@ -14,14 +16,6 @@ type TAppProps = {
  */
 export default class App extends React.Component<TAppProps> {
     /**
-     * Значения свойств по-умолчанию.
-     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-     */
-    static defaultProps = {
-        children: null,
-    };
-
-    /**
      * Отображение компонента
      * @return {*} Представление компонента.
      */
@@ -30,7 +24,12 @@ export default class App extends React.Component<TAppProps> {
 
         return (
             <Provider store={store}>
-                <Router />
+                <ReactRouter history={history}>
+                    <Switch>
+                        <Route component={Example} path="/example" />
+                        <Redirect to="/example" />
+                    </Switch>
+                </ReactRouter>
             </Provider>
         );
     }

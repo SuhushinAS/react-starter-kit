@@ -14,7 +14,7 @@ export type TGenApiResponse<Data, Errors, Notice> = {
     notice: Notice[],
 };
 
-export type TApiResponse = TGenApiResponse<TApiResponseData, TApiResponseError, TApiResponseNotice>;
+export type TResponse = TGenApiResponse<TApiResponseData, TApiResponseError, TApiResponseNotice>;
 
 export type TApiResponseData = any;
 
@@ -26,18 +26,5 @@ export type TApiResponseError = {|
 |};
 
 export type TApiResponseNotice = {};
-
-export type TGenResponse<ApiResponse> = {
-    data: ApiResponse,
-    http: THttpResponse,
-};
-
-export type TResponse = TGenResponse<TApiResponse>;
-
-export type THttpResponse = {
-    ok: boolean,
-    status: number,
-    statusText: string,
-};
 
 // */

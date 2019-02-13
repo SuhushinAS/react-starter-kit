@@ -1,7 +1,7 @@
 // @flow
 
-import type {TState} from 'helpers/types.js';
-import type {TCommonSearch, TCommonStore, TCommonTile} from 'modules/common/types.js';
+import type {TState} from 'app/types.js';
+import type {TCommonStore} from 'modules/common/types.js';
 
 /**
  * Селектор.
@@ -19,31 +19,4 @@ export function commonSelector(state: TState): TCommonStore {
  */
 export function commonSelectorHost(state: TState): ?string {
     return commonSelector(state).host;
-}
-
-/**
- * Селектор.
- * @param {*} state Состояние.
- * @return {*} Ветка.
- */
-export function commonSelectorLoading(state: TState): number {
-    return commonSelector(state).loading;
-}
-
-/**
- * Селектор.
- * @param {*} state Состояние.
- * @return {*} Ветка.
- */
-export function commonSelectorSearch(state: TState): TCommonSearch {
-    return commonSelector(state).search;
-}
-
-/**
- * Селектор.
- * @param {*} state Состояние.
- * @return {*} Ветка.
- */
-export function commonSelectorTile(state: TState): TCommonTile {
-    return commonSelector(state).tile;
 }
