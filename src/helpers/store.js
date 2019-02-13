@@ -2,7 +2,7 @@
 
 import getApi from 'helpers/api';
 import reducer from 'helpers/reducer';
-import type {TStore} from 'helpers/types.es';
+import type {TStore} from 'helpers/types.js';
 import {applyMiddleware, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
 
@@ -20,8 +20,8 @@ export default function configureStore(host: string): TStore {
 
     if (module.hot) {
         /* $FlowFixMe */
-        module.hot.accept('helpers/reducer.es', () => {
-            const hotReducer = require('helpers/reducer.es').default;
+        module.hot.accept('helpers/reducer.js', () => {
+            const hotReducer = require('helpers/reducer.js').default;
 
             store.replaceReducer(hotReducer);
         });

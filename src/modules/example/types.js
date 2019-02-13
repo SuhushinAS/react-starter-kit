@@ -2,7 +2,7 @@
 
 // /* flow-include
 
-import type {TApiResponseError, TApiResponseNotice, TGenApiResponse, TGenResponse} from 'api/types.es';
+import type {TApiResponseError, TApiResponseNotice, TGenApiResponse, TGenResponse} from 'api/types.js';
 
 export type TExampleListGetFilter = {
     name?: string,

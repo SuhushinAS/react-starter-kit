@@ -1,9 +1,9 @@
 // @flow
 
-import getConfig from 'helpers/config.es';
-import configureStore from 'helpers/store.es';
+import getConfig from 'helpers/config.js';
+import configureStore from 'helpers/store.js';
 import App from 'modules/common/containers/App/index.jsx';
-import {commonActionConfigSet} from 'modules/common/ducks/index.es';
+import {commonActionConfigSet} from 'modules/common/ducks/index.js';
 import * as React from 'react';
 import {render} from 'react-dom';
 import 'style/index.less';
@@ -24,11 +24,7 @@ if (root) {
         render(<App store={store} />, root);
 
         if (module.hot) {
-            module.hot.accept('modules/common/containers/App/index.jsx', () => {
-                const HotApp = require('modules/common/containers/App/index.jsx').default;
-
-                render(<HotApp store={store} />, root);
-            });
+            module.hot.accept('modules/common/containers/App/index.jsx', () => render(<App store={store} />, root));
         }
     })();
 }

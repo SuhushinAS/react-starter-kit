@@ -1,14 +1,14 @@
 // @flow
 
-import type {TConfigData} from 'helpers/config.es';
-import {actionHandlerDefault, defaultReducer} from 'helpers/ducks.es';
-import type {TDispatch} from 'helpers/types.es';
-import type {TCommonStore} from 'modules/common/types.es';
+import type {TConfigData} from 'helpers/config.js';
+import {actionHandlerDefault, defaultReducer} from 'helpers/ducks.js';
+import type {TDispatch} from 'helpers/types.js';
+import type {TCommonStore} from 'modules/common/types.js';
 
 const commonConst = {
-    configSet: 'mag-delivery/common/CONFIG_SET',
-    loadingDec: 'mag-delivery/common/LOADING_DEC',
-    loadingInc: 'mag-delivery/common/LOADING_INC',
+    configSet: 'COMMON__CONFIG_SET',
+    loadingDec: 'COMMON__LOADING_DEC',
+    loadingInc: 'COMMON__LOADING_INC',
 };
 
 const initialState: TCommonStore = {

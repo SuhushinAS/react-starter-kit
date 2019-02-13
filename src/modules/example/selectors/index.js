@@ -1,7 +1,7 @@
 // @flow
 
-import type {TState} from 'helpers/types.es';
-import type {TExample, TExampleData, TExampleStore} from 'modules/example/types.es';
+import type {TState} from 'helpers/types.js';
+import type {TExample, TExampleData, TExampleStore} from 'modules/example/types.js';
 import {createSelector} from 'reselect';
 
 /**

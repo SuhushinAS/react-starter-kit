@@ -1,6 +1,6 @@
 // @flow
 
-import type {TApiOptions, TApiResponse, TResponse} from 'api/types.es';
+import type {TApiOptions, TApiResponse, TResponse} from 'api/types.js';
 
 const ApiOptionsDefault: TApiOptions = {
     data: null,

@@ -1,4 +1,18 @@
 {
+    "env": {
+        "production": {
+            "plugins": [
+                "@babel/transform-react-constant-elements",
+                "@babel/transform-react-inline-elements"
+            ]
+        }
+    },
+    "plugins": [
+        "@babel/transform-runtime",
+        "@babel/proposal-export-namespace-from",
+        "@babel/syntax-dynamic-import",
+        "@babel/proposal-class-properties"
+    ],
     "presets": [
         [
             "@babel/env",
@@ -8,11 +22,5 @@
         ],
         "@babel/flow",
         "@babel/react"
-    ],
-    "plugins": [
-        "@babel/transform-runtime",
-        "@babel/proposal-export-namespace-from",
-        "@babel/syntax-dynamic-import",
-        "@babel/proposal-class-properties"
     ]
 }

@@ -1,10 +1,10 @@
 // @flow
 
-import type {TActionDefault, TThunk} from 'helpers/types.es';
+import type {TActionDefault, TThunk} from 'helpers/types.js';
 import ExampleList from 'modules/example/components/ExampleList/index.jsx';
-import {exampleActionListGet} from 'modules/example/ducks/index.es';
-import {exampleSelectorList} from 'modules/example/selectors/index.es';
-import type {TExample} from 'modules/example/types.es';
+import {exampleActionListGet} from 'modules/example/ducks/index.js';
+import {exampleSelectorList} from 'modules/example/selectors/index.js';
+import type {TExample} from 'modules/example/types.js';
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';

@@ -1,6 +1,6 @@
 // @flow
 
-import {commonSelectorLoading} from 'modules/common/selectors/index.es';
+import {commonSelectorLoading} from 'modules/common/selectors/index.js';
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';

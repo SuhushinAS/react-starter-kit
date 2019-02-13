@@ -1,10 +1,8 @@
 // @flow
 
-import ExampleApi from 'modules/example/api/index.es';
-import BaronTestApi from 'modules/baron-test/api/index.es';
+import ExampleApi from 'modules/example/api/index.js';
 
 export type TApi = {
-    baronTestApi: BaronTestApi,
     exampleApi: ExampleApi,
 };
 
@@ -15,7 +13,6 @@ export type TApi = {
  */
 export default function getApi(host: string): TApi {
     return {
-        baronTestApi: new BaronTestApi(host),
         exampleApi: new ExampleApi(host),
     };
 }

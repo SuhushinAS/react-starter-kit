@@ -1,8 +1,8 @@
 // @flow
 
-import type {TResponse} from 'api/types.es';
-import type {TApi} from 'helpers/api.es';
-import type {TReducers} from 'helpers/reducer.es';
+import type {TResponse} from 'api/types.js';
+import type {TApi} from 'helpers/api.js';
+import type {TReducers} from 'helpers/reducer.js';
 import type {Dispatch as ReduxDispatch, Store as ReduxStore} from 'redux';
 
 type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V;

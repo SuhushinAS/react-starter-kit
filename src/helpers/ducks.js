@@ -1,7 +1,7 @@
 // @flow
 
-import type {TApiResponse} from 'api/types.es';
-import type {TReducer} from 'helpers/types.es';
+import type {TApiResponse} from 'api/types.js';
+import type {TReducer} from 'helpers/types.js';
 import HTTPStatus from 'http-status';
 
 type TStateDefault = any;
@@ -108,8 +108,8 @@ export type SortItemData = {};
  * @param {*} getSortItem Получение пункта.
  * @return {Function} Сортировка.
  */
-export function listSort(data: SortItemData, getSortItem: (data: SortItemData, id: sortKey) => TSortItemFactor): (sortKey, sortKey) => number {
-    return function(idLeft: sortKey, idRight: sortKey) {
+export function listSort(data: SortItemData, getSortItem: (data: SortItemData, id: sortKey) => TSortItemFactor) {
+    return function (idLeft: sortKey, idRight: sortKey) {
         const left = getSortItem(data, idLeft);
         const right = getSortItem(data, idRight);
 

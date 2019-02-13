@@ -2,11 +2,13 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const nodeEnv = process.env.NODE_ENV || 'development';
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const isProd = 'production' === nodeEnv;
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
+
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isProd = 'production' === nodeEnv;
 const pathList = {
     dist: path.resolve(__dirname, 'www/build'),
     public: path.resolve(__dirname, 'www'),
@@ -17,30 +19,13 @@ const stats = {
     errorDetails: true,
     reasons: isProd,
 };
-const webpack = require('webpack');
 
 module.exports = {
     bail: isProd,
     context: pathList.src,
-    devServer: isProd ? {} : {
-        contentBase: pathList.public,
-        historyApiFallback: true,
-        host: '0.0.0.0',
-        hot: true,
-        port: 8000,
-        stats,
-    },
+    devServer: getDevServer(),
     devtool: isProd ? false : 'eval',
-    entry: {
-        common: [
-            'react',
-            'react-dom',
-            'react-redux',
-            'redux',
-            'whatwg-fetch',
-        ],
-        index: 'index',
-    },
+    entry: 'index',
     module: {
         rules: getRuleList(),
     },
@@ -51,7 +36,48 @@ module.exports = {
         net: 'empty',
         tls: 'empty',
     },
-    optimization: {
+    optimization: getOptimization(),
+    output: {
+        filename: '[name].min.js',
+        library: ['reactStarterKit', '[name]'],
+        path: pathList.dist,
+        publicPath: '/build/',
+    },
+    plugins: getPluginList(),
+    resolve: {
+        extensions: ['.js', '.jsx'],
+        modules: [pathList.src, path.resolve(__dirname, './node_modules')],
+    },
+    stats,
+    watchOptions: {aggregateTimeout: 100},
+};
+
+/**
+ * Получить настройки сервера разработки.
+ * @return {*} Настройки сервера разработки.
+ */
+function getDevServer() {
+    if (isProd) {
+        return {};
+    }
+
+    return {
+        contentBase: pathList.public,
+        disableHostCheck: true,
+        historyApiFallback: true,
+        host: '0.0.0.0',
+        hot: true,
+        port: 8000,
+        stats,
+    };
+}
+
+/**
+ * Получить настройки оптимизации.
+ * @return {*} Настройки оптимизации.
+ */
+function getOptimization() {
+    return {
         minimizer: [
             new UglifyJsPlugin({
                 cache: true,
@@ -76,32 +102,23 @@ module.exports = {
                     sourceMap: false,
                 },
             }),
-            new OptimizeCSSAssetsPlugin(),
+            new OptimizeCSSAssetsPlugin({
+                cssProcessorOptions: {
+                    autoprefixer: false,
+                    mergeIdents: false,
+                    reduceIdents: false,
+                    safe: true,
+                    zIndex: false,
+                },
+            }),
         ],
+        noEmitOnErrors: true,
+        nodeEnv,
         splitChunks: {
-            automaticNameDelimiter: '-',
+            chunks: 'all',
         },
-    },
-    output: {
-        filename: '[name].min.js',
-        library: ['mag', 'MAGDelivery', '[name]'],
-        path: pathList.dist,
-        publicPath: '/build/',
-    },
-    plugins: getPluginList(),
-    resolve: {
-        extensions: ['.es', '.js', '.jsx'],
-        modules: [
-            './',
-            './src/',
-            'node_modules',
-            pathList.src,
-            path.resolve(__dirname, './node_modules'),
-        ],
-    },
-    stats,
-    watchOptions: {aggregateTimeout: 100},
-};
+    };
+}
 
 /**
  * Фнукция возвращает набор правил обработки.
@@ -130,7 +147,7 @@ function getRuleListBase() {
         },
         {
             exclude: /node_modules/,
-            test: /\.(es|js|jsx)$/,
+            test: /\.(js|jsx)$/,
             use: {
                 loader: 'babel-loader',
                 options: {cacheDirectory: true},
@@ -147,11 +164,7 @@ function getRuleListStyle() {
     return [
         {
             test: /\.css$/,
-            use: [
-                isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-                'css-loader',
-                'postcss-loader',
-            ],
+            use: [isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'postcss-loader'],
         },
         {
             test: /\.less$/,
@@ -159,7 +172,6 @@ function getRuleListStyle() {
                 isProd ? MiniCssExtractPlugin.loader : 'style-loader',
                 'css-loader',
                 'postcss-loader',
-                'less-loader',
                 {
                     loader: 'less-loader',
                     options: {
@@ -263,8 +275,5 @@ function getPluginListProd() {
  * @returns {*[]} Набор модулей.
  */
 function getPluginListDev() {
-    return [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
-    ];
+    return [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()];
 }

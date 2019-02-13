@@ -1,20 +1,20 @@
 // @flow
 
-import type {TApi} from 'helpers/api.es';
+import type {TApi} from 'helpers/api.js';
 import {listGetSuccess} from 'helpers/ducks';
-import {actionHandlerDefault, defaultReducer} from 'helpers/ducks.es';
-import type {TDispatch, TGetState} from 'helpers/types.es';
-import {commonActionLoadingDec, commonActionLoadingInc} from 'modules/common/ducks/index.es';
-import type {TBaronTestListGetResponse, TBaronTestStore} from 'modules/baron-test/types.es';
+import {actionHandlerDefault, defaultReducer} from 'helpers/ducks.js';
+import type {TDispatch, TGetState} from 'helpers/types.js';
+import {commonActionLoadingDec, commonActionLoadingInc} from 'modules/common/ducks/index.js';
+import type {TExampleListGetResponse, TExampleStore} from 'modules/example/types.js';
 
-const baronTestConst = {
-    listGetFail: 'BARON-TEST__LIST-GET_FAIL',
-    listGetStart: 'BARON-TEST__LIST-GET_START',
-    listGetSuccess: 'BARON-TEST__LIST-GET_SUCCESS',
-    simple: 'BARON-TEST__SIMPLE',
+const exampleConst = {
+    listGetFail: 'EXAMPLE__LIST-GET_FAIL',
+    listGetStart: 'EXAMPLE__LIST-GET_START',
+    listGetSuccess: 'EXAMPLE__LIST-GET_SUCCESS',
+    simple: 'EXAMPLE__SIMPLE',
 };
 
-const initialState: TBaronTestStore = {
+const initialState: TExampleStore = {
     data: {},
     isLoading: false,
     list: [],
@@ -26,27 +26,27 @@ const initialState: TBaronTestStore = {
  * Пример простого экшена.
  * @returns {{type: string}} Объект с типом для изменения состояния.
  */
-export function baronTestActionSimple() {
-    return {type: baronTestConst.simple};
+export function exampleActionSimple() {
+    return {type: exampleConst.simple};
 }
 
 /**
  * Экшн для получения списка.
  * @returns {function(*, *, *)} Функция, которая вызывает изменения состояния.
  */
-export function baronTestActionListGet() {
+export function exampleActionListGet() {
     return (dispatch: TDispatch, getState: TGetState, api: TApi) => {
         dispatch(commonActionLoadingInc());
-        dispatch({type: baronTestConst.listGetStart});
+        dispatch({type: exampleConst.listGetStart});
 
-        return api.baronTestApi.listGet().then((response: TBaronTestListGetResponse) => {
+        return api.exampleApi.listGet().then((response: TExampleListGetResponse) => {
             if (0 === response.data.errors.length) {
                 dispatch(commonActionLoadingDec());
                 dispatch({
                     payload: {
                         data: response.data.data,
                     },
-                    type: baronTestConst.listGetSuccess,
+                    type: exampleConst.listGetSuccess,
                 });
 
                 return response;
@@ -55,25 +55,25 @@ export function baronTestActionListGet() {
             throw response;
         }).catch((error) => {
             dispatch(commonActionLoadingDec());
-            dispatch({type: baronTestConst.listGetFail});
+            dispatch({type: exampleConst.listGetFail});
 
             return actionHandlerDefault(error);
         });
     };
 }
 
-const baronTestReducerListGet = {
-    [baronTestConst.listGetFail]: (state) => ({
+const exampleReducerListGet = {
+    [exampleConst.listGetFail]: (state) => ({
         ...state,
         isLoading: false,
     }),
-    [baronTestConst.listGetStart]: (state) => ({
+    [exampleConst.listGetStart]: (state) => ({
         ...state,
         isLoading: true,
         list: [],
     }),
-    [baronTestConst.listGetSuccess]: listGetSuccess,
-    [baronTestConst.simple]: (state) => ({
+    [exampleConst.listGetSuccess]: listGetSuccess,
+    [exampleConst.simple]: (state) => ({
         ...state,
         simple: !state.simple,
     }),
@@ -87,5 +87,5 @@ const baronTestReducerListGet = {
  * @returns {*} Функция для обновления состояния.
  */
 export default defaultReducer(initialState, {
-    ...baronTestReducerListGet,
+    ...exampleReducerListGet,
 });

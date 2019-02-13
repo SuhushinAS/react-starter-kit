@@ -4,7 +4,7 @@ import BaseApi from 'api/BaseApi';
 import type {
     TExample, TExampleCreateResponse, TExampleDeleteResponse, TExampleEditResponse, TExampleGetResponse, TExampleListGetFilter,
     TExampleListGetResponse,
-} from 'modules/example/types.es';
+} from 'modules/example/types.js';
 
 export default class ExampleApi extends BaseApi {
     listGet(filter: TExampleListGetFilter = null, limit: number = 0, offset: number = 0): Promise<TExampleListGetResponse> {

@@ -1,6 +1,6 @@
 // @flow
 
-import type {TCommonKeyList} from 'modules/common/types.es';
+import type {TCommonKeyList} from 'modules/common/types.js';
 import * as React from 'react';
 
 type TKeyHandlerProps = {

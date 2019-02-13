@@ -68,9 +68,9 @@
         "url": "git@github.com:SuhushinAS/react-starter-kit.git"
     },
     "scripts": {
-        "start": "webpack-dev-server -d --config webpack.config.es",
-        "dev": "webpack -d --watch --config webpack.config.es",
-        "build": "cross-env NODE_ENV=production webpack -p --progress --config webpack.config.es"
+        "start": "webpack-dev-server -d",
+        "dev": "webpack -d --watch",
+        "build": "cross-env NODE_ENV=production webpack -p --progress"
     },
     "version": "0.0.1"
 }

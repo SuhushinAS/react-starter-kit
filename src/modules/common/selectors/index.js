@@ -1,7 +1,7 @@
 // @flow
 
-import type {TState} from 'helpers/types.es';
-import type {TCommonSearch, TCommonStore, TCommonTile} from 'modules/common/types.es';
+import type {TState} from 'helpers/types.js';
+import type {TCommonSearch, TCommonStore, TCommonTile} from 'modules/common/types.js';
 
 /**
  * Селектор.

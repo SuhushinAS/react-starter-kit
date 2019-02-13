@@ -14,7 +14,6 @@ esproposal.class_static_fields=enable
 log.file=logs/flow.log
 ;merge_timeout=500
 module.file_ext=.css
-module.file_ext=.es
 module.file_ext=.js
 module.file_ext=.jsx
 module.file_ext=.less

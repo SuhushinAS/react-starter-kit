@@ -1,6 +1,6 @@
 // @flow
 
-import type {TApiResponseError, TApiResponseNotice, TGenApiResponse, TGenResponse} from 'api/types.es';
+import type {TApiResponseError, TApiResponseNotice, TGenApiResponse, TGenResponse} from 'api/types.js';
 
 // /* flow-include
 
