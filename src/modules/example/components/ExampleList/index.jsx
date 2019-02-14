@@ -2,9 +2,10 @@
 
 import type {TExample} from 'modules/example/types.js';
 import React from 'react';
+import Item from 'modules/example/components/ExampleItem/index.jsx';
 
 type TExampleListProps = {
-    exampleList: TExample[],
+    list: TExample[],
 };
 
 /**
@@ -13,26 +14,13 @@ type TExampleListProps = {
  * @return {*} Представление компонента.
  */
 export default function ExampleList(props: TExampleListProps) {
-    const {exampleList} = props;
-
-    if (0 < exampleList.length) {
-        return (
-            <ul>
-                {exampleList.map(renderExampleItem)}
-            </ul>
-        );
-    }
-
-    return null;
-}
-
-/**
- * Вывод одного элемента.
- * @param {*} item Данные элемента.
- * @return {*} Представление элемента.
- */
-function renderExampleItem(item) {
     return (
-        <li key={item.id}>{item.name}</li>
+        <ul>
+            {props.list.map((item) => <Item item={item} key={item.id} />)}
+        </ul>
     );
 }
+
+ExampleList.defaultProps = {
+    list: [],
+};

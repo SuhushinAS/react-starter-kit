@@ -1,6 +1,5 @@
 // @flow
 
-import type {TActionDefault, TThunk} from 'app/types.js';
 import ExampleList from 'modules/example/components/ExampleList/index.jsx';
 import {exampleActionListGet} from 'modules/example/ducks/index.js';
 import {exampleSelectorList} from 'modules/example/selectors/index.js';
@@ -8,33 +7,10 @@ import type {TExample} from 'modules/example/types.js';
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {bindActionCreators} from 'redux';
-
-/**
- * Привязка store к props.
- * @param {*} state Состояние.
- // * @param {*} props Свойства.
- * @return {{prop}} Объкет, элементы которого будут добавлены в props.
- */
-function mapStateToProps(state) {
-    return {
-        exampleList: exampleSelectorList(state),
-    };
-}
-
-/**
- * Привязка actions к props.
- * @param {function} dispatch Функция для вызова редьюсера.
- * @return {{importedAction: *}|B|N} Объкет, элементы которого будут добавлены в props.
- */
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        exampleActionListGet,
-    }, dispatch);
-}
+import {bindActionCreators, compose} from 'redux';
 
 type TExampleProps = {
-    exampleActionListGet: () => TThunk<TActionDefault>,
+    exampleActionListGet: bindActionCreators<typeof exampleActionListGet>,
     exampleList: TExample[],
 };
 
@@ -73,7 +49,7 @@ class Example extends React.Component<TExampleProps> {
     render() {
         return (
             <div>
-                <ExampleList exampleList={this.props.exampleList} />
+                <ExampleList list={this.props.exampleList} />
             </div>
         );
     }
@@ -115,4 +91,14 @@ class Example extends React.Component<TExampleProps> {
     // componentWillUnmount() {}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Example));
+export default compose(
+    withRouter,
+    connect(
+        (state) => ({
+            exampleList: exampleSelectorList(state),
+        }),
+        {
+            exampleActionListGet,
+        }
+    )
+)(Example);

@@ -1,5 +1,4 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -9,11 +8,8 @@ const webpack = require('webpack');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = 'production' === nodeEnv;
-const pathList = {
-    dist: path.resolve(__dirname, 'www/build'),
-    public: path.resolve(__dirname, 'www'),
-    src: path.resolve(__dirname, 'src'),
-};
+const publicPath = path.resolve(__dirname, 'www');
+const srcPath = path.resolve(__dirname, 'src');
 const stats = {
     colors: true,
     errorDetails: true,
@@ -22,10 +18,10 @@ const stats = {
 
 module.exports = {
     bail: isProd,
-    context: pathList.src,
+    context: srcPath,
     devServer: getDevServer(),
     devtool: isProd ? false : 'eval',
-    entry: 'index',
+    entry: 'index.jsx',
     module: {
         rules: getRuleList(),
     },
@@ -38,15 +34,15 @@ module.exports = {
     },
     optimization: getOptimization(),
     output: {
-        filename: '[name].min.js',
+        filename: 'build/[name].min.js',
         library: ['reactStarterKit', '[name]'],
-        path: pathList.dist,
-        publicPath: '/build/',
+        path: publicPath,
+        publicPath: '/',
     },
     plugins: getPluginList(),
     resolve: {
         extensions: ['.js', '.jsx'],
-        modules: [pathList.src, path.resolve(__dirname, './node_modules')],
+        modules: [srcPath, path.resolve(__dirname, './node_modules')],
     },
     stats,
     watchOptions: {aggregateTimeout: 100},
@@ -62,7 +58,7 @@ function getDevServer() {
     }
 
     return {
-        contentBase: pathList.public,
+        contentBase: publicPath,
         disableHostCheck: true,
         historyApiFallback: true,
         host: '0.0.0.0',
@@ -115,6 +111,7 @@ function getOptimization() {
         noEmitOnErrors: true,
         nodeEnv,
         splitChunks: {
+            automaticNameDelimiter: '-',
             chunks: 'all',
         },
     };
@@ -142,7 +139,7 @@ function getRuleListBase() {
             test: /\.html$/,
             use: {
                 loader: 'file-loader',
-                options: {name: '[name].[hash:5].[ext]'},
+                options: {name: 'build/[name].[hash:5].[ext]'},
             },
         },
         {
@@ -193,14 +190,14 @@ function getRuleListResource() {
             test: /\.(ttf|eot|woff|woff2)(\?[a-z0-9]+)?$/,
             use: {
                 loader: 'file-loader',
-                options: {name: 'fonts/[name].[hash:5].[ext]'},
+                options: {name: 'build/fonts/[name].[hash:5].[ext]'},
             },
         },
         {
             test: /.*\.(png|jpg|jpeg|gif|svg)$/i,
             use: {
                 loader: 'file-loader',
-                options: {name: 'img/[name].[hash:5].[ext]'},
+                options: {name: 'build/img/[name].[hash:5].[ext]'},
             },
         },
     ];
@@ -233,13 +230,12 @@ function getPluginListBase() {
             'process.env': {NODE_ENV: JSON.stringify(nodeEnv)},
         }),
         new HtmlWebpackPlugin({
-            alwaysWriteToDisk: true,
-            filename: path.resolve(pathList.public, './index.html'),
+            filename: 'index.html',
             hash: true,
             inject: true,
-            template: path.resolve(pathList.src, './index.htm'),
+            production: isProd,
+            template: path.resolve(srcPath, 'index.htm'),
         }),
-        new HtmlWebpackHarddiskPlugin(),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ];
 }
@@ -250,14 +246,11 @@ function getPluginListBase() {
  */
 function getPluginListProd() {
     return [
-        new CleanWebpackPlugin(pathList.dist, {
-            dry: false,
-            verbose: true,
-        }),
+        new CleanWebpackPlugin(path.resolve(publicPath, 'build'), {verbose: true}),
         new MiniCssExtractPlugin({
             allChunks: true,
             disable: false,
-            filename: '[name].min.css',
+            filename: 'build/[name].min.css',
         }),
         new webpack.LoaderOptionsPlugin({
             debug: false,
