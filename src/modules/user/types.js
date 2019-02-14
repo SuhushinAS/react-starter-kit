@@ -26,6 +26,8 @@ export type TUser = {
 export type TUserListGetResponseData = {|
     list: TUser[],
 |};
-export type TUserListGetApiResponse = TGenApiResponse<TUserListGetResponseData, TApiResponseError, TApiResponseNotice>;
+export type TUserListGetResponse = TGenApiResponse<TUserListGetResponseData, TApiResponseError, TApiResponseNotice>;
+
+export type TUserUpdateResponse = TGenApiResponse<TUser, TApiResponseError, TApiResponseNotice>;
 
 // */

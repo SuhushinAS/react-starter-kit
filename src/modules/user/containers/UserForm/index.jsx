@@ -1,16 +1,18 @@
 // @flow
 
 import type {BrowserHistory} from 'history';
+import {userActionEdit} from 'modules/user/ducks/index.js';
 import {userSelectorItem} from 'modules/user/selectors/index.js';
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import {compose} from 'redux';
+import {bindActionCreators, compose} from 'redux';
 
 type TExampleProps = {
     baseUrl: string;
     history: BrowserHistory,
     id: string,
+    userActionEdit: bindActionCreators<typeof userActionEdit>
 };
 
 type TExampleState = {
@@ -52,7 +54,7 @@ class UserForm extends React.Component<TExampleProps, TExampleState> {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.saveUser(this.state);
+        this.props.userActionEdit(this.state.id, this.state);
         this.closeUser();
     };
 
@@ -160,6 +162,9 @@ export default compose(
     connect(
         (state, prop) => ({
             user: userSelectorItem(state, prop.id),
-        })
+        }),
+        {
+            userActionEdit,
+        }
     )
 )(UserForm);
