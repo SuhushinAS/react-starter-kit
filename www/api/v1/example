@@ -2,64 +2,33 @@
     "data": {
         "list": [
             {
-                "company": "CODACT",
-                "firstName": "Monroe",
                 "id": 1,
-                "lastName": "Rojas",
-                "email": "monroe.rojas@codact.biz",
-                "picture": "http://i.pravatar.cc/50?img=1"
+                "name": "First Example"
             },
             {
-                "company": "VIASIA",
-                "firstName": "Reynolds",
                 "id": 2,
-                "lastName": "Hardy",
-                "email": "reynolds.hardy@viasia.name",
-                "picture": "http://i.pravatar.cc/50?img=2"
+                "name": "Second Example"
             },
             {
-                "company": "INDEXIA",
-                "firstName": "Zimmerman",
                 "id": 3,
-                "lastName": "Kirby",
-                "email": "zimmerman.kirby@indexia.io",
-                "picture": "http://i.pravatar.cc/50?img=3"
+                "name": "Third Example"
             },
             {
-                "company": "PEARLESEX",
-                "firstName": "Good",
                 "id": 4,
-                "lastName": "Byers",
-                "email": "good.byers@pearlesex.me",
-                "picture": "http://i.pravatar.cc/50?img=4"
+                "name": "Fourth Example"
             },
             {
-                "company": "GEEKOL",
-                "firstName": "Gross",
                 "id": 5,
-                "lastName": "Cochran",
-                "email": "gross.cochran@geekol.info",
-                "picture": "http://i.pravatar.cc/50?img=5"
+                "name": "Fifth Example"
             },
             {
-                "company": "INEAR",
-                "firstName": "Yvonne",
                 "id": 6,
-                "lastName": "Mejia",
-                "email": "yvonne.mejia@inear.net",
-                "picture": "http://i.pravatar.cc/50?img=6"
-            },
-            {
-                "company": "MANGELICA",
-                "firstName": "Noemi",
-                "id": 7,
-                "lastName": "Hopper",
-                "email": "noemi.hopper@mangelica.co.uk",
-                "picture": "http://i.pravatar.cc/50?img=7"
+                "name": "Sixth Example"
             }
         ],
         "more": false
     },
     "errors": [],
-    "notice": []
+    "notice": [],
+    "page": {}
 }
