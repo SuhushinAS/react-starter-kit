@@ -1,9 +1,11 @@
 // @flow
 
 import ExampleApi from 'modules/example/api/index.js';
+import UserApi from 'modules/user/api/index.js';
 
 export type TApi = {
     exampleApi: ExampleApi,
+    userApi: UserApi,
 };
 
 /**
@@ -14,5 +16,6 @@ export type TApi = {
 export default function getApi(host: string): TApi {
     return {
         exampleApi: new ExampleApi(host),
+        userApi: new UserApi(host),
     };
 }

@@ -1,26 +1,22 @@
 // @flow
 
-import ExampleList from 'modules/example/components/ExampleList/index.jsx';
-import {exampleActionListGet} from 'modules/example/ducks/index.js';
-import {exampleSelectorList} from 'modules/example/selectors/index.js';
-import type {TExample} from 'modules/example/types.js';
+import UserItem from 'modules/user/containers/UserItem/index.jsx';
+import type {TUser} from 'modules/user/types.js';
 import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
-import {bindActionCreators, compose} from 'redux';
 
-type TExampleProps = {
-    exampleActionListGet: bindActionCreators<typeof exampleActionListGet>,
-    exampleList: TExample[],
+type TUserListProps = {
+    baseUrl: string,
+    list: TUser[],
 };
 
-class Example extends React.Component<TExampleProps> {
+class UserList extends React.Component<TUserListProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
      */
     static defaultProps = {
-        exampleList: [],
+        baseUrl: '',
+        list: [],
     };
 
     /**
@@ -28,10 +24,16 @@ class Example extends React.Component<TExampleProps> {
      * @param {*} props Свойства переданые в компонент.
      * @return {undefined}
      */
-    constructor(props) {
-        super(props);
-        props.exampleActionListGet();
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
+
+    /**
+     * Вывести пользователя.
+     * @param {*} user Пользователь.
+     * @return {*} Представление.
+     */
+    renderItem = (user) => <UserItem baseUrl={this.props.baseUrl} key={user.id} user={user} />;
 
     /**
      * Вывести компонент.
@@ -39,9 +41,11 @@ class Example extends React.Component<TExampleProps> {
      */
     render() {
         return (
-            <div>
-                <ExampleList list={this.props.exampleList} />
-            </div>
+            <table>
+                <tbody>
+                    {this.props.list.map(this.renderItem)}
+                </tbody>
+            </table>
         );
     }
 
@@ -80,14 +84,4 @@ class Example extends React.Component<TExampleProps> {
     // componentWillUnmount() {}
 }
 
-export default compose(
-    withRouter,
-    connect(
-        (state) => ({
-            exampleList: exampleSelectorList(state),
-        }),
-        {
-            exampleActionListGet,
-        }
-    )
-)(Example);
+export default UserList;

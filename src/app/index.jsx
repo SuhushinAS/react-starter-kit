@@ -5,6 +5,7 @@ import history from 'app/browser-history.js';
 import reducer from 'app/reducer.js';
 import {commonActionConfigSet} from 'modules/common/ducks/index.js';
 import Example from 'modules/example/containers/Example/index.jsx';
+import User from 'modules/user/containers/User/index.jsx';
 import React from 'react';
 import {Provider} from 'react-redux';
 import {Redirect, Route, Router as ReactRouter, Switch} from 'react-router-dom';
@@ -70,7 +71,8 @@ export default class App extends React.Component<TAppProps> {
                     <ReactRouter history={history}>
                         <Switch>
                             <Route component={Example} path="/example" />
-                            <Redirect to="/example" />
+                            <Route component={User} path="/user" />
+                            <Redirect to="/user" />
                         </Switch>
                     </ReactRouter>
                 </Provider>

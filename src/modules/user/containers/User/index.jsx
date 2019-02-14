@@ -1,26 +1,28 @@
 // @flow
 
-import ExampleList from 'modules/example/components/ExampleList/index.jsx';
-import {exampleActionListGet} from 'modules/example/ducks/index.js';
-import {exampleSelectorList} from 'modules/example/selectors/index.js';
-import type {TExample} from 'modules/example/types.js';
+import UserForm from 'modules/user/containers/UserForm/index.jsx';
+import UserList from 'modules/user/containers/UserList/index.jsx';
+import {userActionListGet} from 'modules/user/ducks/index.js';
+import {userSelectorList} from 'modules/user/selectors/index.js';
+import type {TUser} from 'modules/user/types.js';
 import React from 'react';
 import {connect} from 'react-redux';
+import {Route, Switch} from 'react-router';
 import {withRouter} from 'react-router-dom';
 import {bindActionCreators, compose} from 'redux';
 
-type TExampleProps = {
-    exampleActionListGet: bindActionCreators<typeof exampleActionListGet>,
-    exampleList: TExample[],
+type TUserProps = {
+    userActionListGet: bindActionCreators<typeof userActionListGet>,
+    userList: TUser[],
 };
 
-class Example extends React.Component<TExampleProps> {
+class User extends React.Component<TUserProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
      */
     static defaultProps = {
-        exampleList: [],
+        userList: [],
     };
 
     /**
@@ -30,7 +32,7 @@ class Example extends React.Component<TExampleProps> {
      */
     constructor(props) {
         super(props);
-        props.exampleActionListGet();
+        props.userActionListGet();
     }
 
     /**
@@ -39,11 +41,17 @@ class Example extends React.Component<TExampleProps> {
      */
     render() {
         return (
-            <div>
-                <ExampleList list={this.props.exampleList} />
-            </div>
+            <Switch>
+                <Route exact path={`${this.props.match.url}/:id/:action`} render={this.renderForm} />
+                <Route exact path={`${this.props.match.url}/:action`} render={this.renderForm} />
+                <Route exact path={this.props.match.url} render={this.renderList} />
+            </Switch>
         );
     }
+
+    renderList = () => <UserList baseUrl={this.props.match.url} list={this.props.userList} />;
+
+    renderForm = (props) => <UserForm baseUrl={this.props.match.url} id={props.match.params.id} />;
 
     /**
      * Компонент примонтировался.
@@ -81,13 +89,12 @@ class Example extends React.Component<TExampleProps> {
 }
 
 export default compose(
-    withRouter,
     connect(
         (state) => ({
-            exampleList: exampleSelectorList(state),
+            userList: userSelectorList(state),
         }),
         {
-            exampleActionListGet,
+            userActionListGet,
         }
     )
-)(Example);
+)(User);
