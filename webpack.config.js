@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
@@ -75,27 +75,12 @@ function getDevServer() {
 function getOptimization() {
     return {
         minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true,
-                sourceMap: true,
-                uglifyOptions: {
-                    compress: {
-                        comparisons: true,
-                        conditionals: true,
-                        dead_code: true,
-                        evaluate: true,
-                        if_return: true,
-                        join_vars: true,
-                        sequences: true,
-                        unused: true,
-                        warnings: false,
-                    },
+            new TerserPlugin({
+                extractComments: false,
+                terserOptions: {
                     output: {
-                        ascii_only: true,
                         comments: false,
                     },
-                    sourceMap: false,
                 },
             }),
             new OptimizeCSSAssetsPlugin({
