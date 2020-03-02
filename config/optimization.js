@@ -10,6 +10,7 @@ function optimization(config) {
     const {mode} = config;
 
     return {
+        ...config,
         optimization: {
             minimizer: [
                 new TerserPlugin({
@@ -37,7 +38,6 @@ function optimization(config) {
                 chunks: 'all',
             },
         },
-        ...config,
     };
 }
 

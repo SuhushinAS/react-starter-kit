@@ -13,6 +13,7 @@ const development = ({contentBase}) => (config) => {
     };
 
     return {
+        ...config,
         bail: isProd,
         devServer: isProd
             ? {}
@@ -35,7 +36,6 @@ const development = ({contentBase}) => (config) => {
         },
         stats,
         watchOptions: {aggregateTimeout: 300},
-        ...config,
     };
 };
 
