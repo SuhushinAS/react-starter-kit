@@ -1,5 +1,3 @@
 node_modules
 .idea
-www/build
-www/build/*
-www/index.html
+www/*

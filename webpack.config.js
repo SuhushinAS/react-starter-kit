@@ -1,5 +1,5 @@
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
@@ -7,8 +7,11 @@ const compose = require('./config/compose');
 const development = require('./config/development');
 const optimization = require('./config/optimization');
 
-const publicPath = path.resolve(__dirname, 'www');
-const srcPath = path.resolve(__dirname, 'src');
+const paths = {
+    dist: path.join(__dirname, 'www'),
+    public: path.join(__dirname, 'public'),
+    src: 'src',
+};
 
 /**
  * Получить конфигурацию webpack.
@@ -23,9 +26,8 @@ function webpackConfig(env, argv) {
 
     return compose(
         optimization,
-        development({contentBase: publicPath})
+        development({contentBase: paths.public})
     )({
-        context: srcPath,
         entry: 'index.jsx',
         mode,
         module: {
@@ -34,7 +36,7 @@ function webpackConfig(env, argv) {
                     test: /\.html$/u,
                     use: {
                         loader: 'file-loader',
-                        options: {name: 'build/[name].[hash:5].[ext]'},
+                        options: {name: '[name].[hash:5].[ext]'},
                     },
                 },
                 {
@@ -65,33 +67,33 @@ function webpackConfig(env, argv) {
                     test: /\.(ttf|eot|woff|woff2)(\?[a-z0-9]+)?$/u,
                     use: {
                         loader: 'file-loader',
-                        options: {name: 'build/fonts/[name].[hash:5].[ext]'},
+                        options: {name: 'fonts/[name].[hash:5].[ext]'},
                     },
                 },
                 {
                     test: /.*\.(png|jpg|jpeg|gif|svg)$/iu,
                     use: {
                         loader: 'file-loader',
-                        options: {name: 'build/img/[name].[hash:5].[ext]'},
+                        options: {name: 'images/[name].[hash:5].[ext]'},
                     },
                 },
             ],
         },
         output: {
-            filename: 'build/[name].min.js',
+            filename: 'js/[name].min.js',
             library: ['reactStarterKit', '[name]'],
-            path: publicPath,
+            path: paths.dist,
             publicPath: '/',
         },
         plugins: [
-            ...(isProd ? [new CleanWebpackPlugin(path.resolve(publicPath, 'build'), {verbose: true})] : []),
+            ...(isProd ? [new CleanWebpackPlugin({dry: false, verbose: true})] : []),
             new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(mode)}}),
             new HtmlWebpackPlugin({
                 filename: 'index.html',
                 hash: true,
                 inject: true,
                 production: isProd,
-                template: path.resolve(srcPath, 'index.htm'),
+                template: path.join(paths.src, 'index.tpl'),
             }),
             new webpack.IgnorePlugin(/^\.\/locale$/u, /moment$/u),
             ...(isProd
@@ -99,7 +101,7 @@ function webpackConfig(env, argv) {
                       new MiniCssExtractPlugin({
                           allChunks: true,
                           disable: false,
-                          filename: 'build/[name].min.css',
+                          filename: 'css/[name].min.css',
                       }),
                       new webpack.LoaderOptionsPlugin({
                           debug: false,
