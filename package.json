@@ -15,6 +15,7 @@
         "reselect": "^4.0.0",
         "whatwg-fetch": "^3.0.0"
     },
+    "description": "reactStarterKit",
     "devDependencies": {
         "@babel/cli": "^7.8.4",
         "@babel/core": "^7.8.6",
@@ -34,6 +35,7 @@
         "autoprefixer": "^9.7.4",
         "babel-loader": "^8.0.6",
         "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^5.1.1",
         "cross-env": "^7.0.0",
         "css-loader": "^3.4.2",
         "file-loader": "^5.1.0",
@@ -54,10 +56,8 @@
         "webpack-cli": "^3.3.11",
         "webpack-dev-server": "^3.10.3"
     },
-    "description": "Настройка окружения для React",
     "keywords": [
-        "react",
-        "starterkit"
+        "reactStarterKit"
     ],
     "license": "UNLICENSED",
     "name": "react-starter-kit",
