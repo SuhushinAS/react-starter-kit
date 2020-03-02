@@ -1,5 +1,4 @@
 // @flow
-
 import type {TReducer} from 'app/types.js';
 import common from 'modules/common/ducks/index.js';
 import example from 'modules/example/ducks/index.js';

@@ -1,5 +1,4 @@
 // @flow
-
 import type {TApi} from 'app/api.js';
 import {createReducer} from 'app/reducer.js';
 import type {TDispatch, TGetState} from 'app/types.js';
@@ -30,24 +29,27 @@ export function userActionEdit(id, data) {
         dispatch(commonActionLoadingInc());
         dispatch({type: userConst.loadStart});
 
-        return api.userApi.update(id, data).then((response: TUserListGetResponse) => {
-            if (0 === response.errors.length) {
+        return api.userApi
+            .update(id, data)
+            .then((response: TUserListGetResponse) => {
+                if (0 === response.errors.length) {
+                    dispatch(commonActionLoadingDec());
+                    dispatch({
+                        payload: data,
+                        type: userConst.update,
+                    });
+
+                    return response;
+                }
+
+                throw new Error(response);
+            })
+            .catch((error) => {
                 dispatch(commonActionLoadingDec());
-                dispatch({
-                    payload: data,
-                    type: userConst.update,
-                });
+                dispatch({type: userConst.loadStop});
 
-                return response;
-            }
-
-            throw new Error(response);
-        }).catch((error) => {
-            dispatch(commonActionLoadingDec());
-            dispatch({type: userConst.loadStop});
-
-            console.error(error);
-        });
+                console.error(error);
+            });
     };
 }
 
@@ -60,24 +62,27 @@ export function userActionListGet() {
         dispatch(commonActionLoadingInc());
         dispatch({type: userConst.loadStart});
 
-        return api.userApi.listGet().then((response: TUserListGetResponse) => {
-            if (0 === response.errors.length) {
+        return api.userApi
+            .listGet()
+            .then((response: TUserListGetResponse) => {
+                if (0 === response.errors.length) {
+                    dispatch(commonActionLoadingDec());
+                    dispatch({
+                        payload: response.data,
+                        type: userConst.listGet,
+                    });
+
+                    return response;
+                }
+
+                throw new Error(response);
+            })
+            .catch((error) => {
                 dispatch(commonActionLoadingDec());
-                dispatch({
-                    payload: response.data,
-                    type: userConst.listGet,
-                });
+                dispatch({type: userConst.loadStop});
 
-                return response;
-            }
-
-            throw new Error(response);
-        }).catch((error) => {
-            dispatch(commonActionLoadingDec());
-            dispatch({type: userConst.loadStop});
-
-            console.error(error);
-        });
+                console.error(error);
+            });
     };
 }
 
@@ -85,10 +90,13 @@ export default createReducer(initialState, {
     [userConst.listGet](state, {list, more}) {
         return {
             ...state,
-            data: list.reduce((prev, item) => ({
-                ...prev,
-                [item.id]: item,
-            }), {}),
+            data: list.reduce(
+                (prev, item) => ({
+                    ...prev,
+                    [item.id]: item,
+                }),
+                {}
+            ),
             isLoading: false,
             more,
         };

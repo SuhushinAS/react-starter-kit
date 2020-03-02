@@ -1,5 +1,4 @@
 // @flow
-
 import Api from 'api/index.js';
 import type {TUser, TUserListGetFilter, TUserListGetResponse, TUserUpdateResponse} from 'modules/user/types.js';
 

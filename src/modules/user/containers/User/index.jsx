@@ -1,5 +1,4 @@
 // @flow
-
 import UserForm from 'modules/user/containers/UserForm/index.jsx';
 import UserList from 'modules/user/containers/UserList/index.jsx';
 import {userActionListGet} from 'modules/user/ducks/index.js';

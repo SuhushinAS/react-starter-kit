@@ -1,5 +1,4 @@
 // @flow
-
 import history from 'app/browser-history.js';
 import Example from 'modules/example/containers/Example/index.jsx';
 import React from 'react';

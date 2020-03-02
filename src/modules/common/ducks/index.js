@@ -1,5 +1,4 @@
 // @flow
-
 import type {TConfig} from 'app/config.js';
 import {createReducer} from 'app/reducer.js';
 import type {TCommonStore} from 'modules/common/types.js';

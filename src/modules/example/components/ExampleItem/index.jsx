@@ -1,5 +1,4 @@
 // @flow
-
 import type {TExample} from 'modules/example/types.js';
 import React from 'react';
 

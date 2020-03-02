@@ -1,5 +1,4 @@
 // @flow
-
 import ExampleList from 'modules/example/components/ExampleList/index.jsx';
 import {exampleActionListGet} from 'modules/example/ducks/index.js';
 import {exampleSelectorList} from 'modules/example/selectors/index.js';

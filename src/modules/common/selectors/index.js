@@ -1,5 +1,4 @@
 // @flow
-
 import type {TState} from 'app/types.js';
 import type {TCommonStore} from 'modules/common/types.js';
 

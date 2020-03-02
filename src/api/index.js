@@ -1,5 +1,4 @@
 // @flow
-
 import type {TApiOptions, TResponse} from 'api/types.js';
 
 const ApiOptionsDefault: TApiOptions = {

@@ -1,5 +1,4 @@
 // @flow
-
 import type {BrowserHistory} from 'history';
 import {userActionEdit} from 'modules/user/ducks/index.js';
 import {userSelectorItem} from 'modules/user/selectors/index.js';
@@ -9,10 +8,10 @@ import {withRouter} from 'react-router';
 import {bindActionCreators, compose} from 'redux';
 
 type TExampleProps = {
-    baseUrl: string;
+    baseUrl: string,
     history: BrowserHistory,
     id: string,
-    userActionEdit: bindActionCreators<typeof userActionEdit>
+    userActionEdit: bindActionCreators<typeof userActionEdit>,
 };
 
 type TExampleState = {
@@ -80,32 +79,47 @@ class UserForm extends React.Component<TExampleProps, TExampleState> {
                         <tbody>
                             <tr>
                                 <td colSpan={2}>
-                                    <img src={this.state.picture} alt={`${this.state.firstName} ${this.state.lastName}`} />
+                                    <img alt={`${this.state.firstName} ${this.state.lastName}`} src={this.state.picture} />
                                 </td>
                             </tr>
                             <tr>
-                                <td><label htmlFor="firstName">First name</label></td>
+                                <td>
+                                    <label htmlFor="firstName">First name</label>
+                                </td>
                                 <td>
                                     <input id="firstName" name="firstName" onChange={this.onChange} type="text" value={this.state.firstName} />
                                 </td>
                             </tr>
                             <tr>
-                                <td><label htmlFor="lastName">Last name</label></td>
-                                <td><input id="lastName" name="lastName" onChange={this.onChange} type="text" value={this.state.lastName} /></td>
+                                <td>
+                                    <label htmlFor="lastName">Last name</label>
+                                </td>
+                                <td>
+                                    <input id="lastName" name="lastName" onChange={this.onChange} type="text" value={this.state.lastName} />
+                                </td>
                             </tr>
                             <tr>
-                                <td><label htmlFor="company">Company</label></td>
-                                <td><input id="company" name="company" onChange={this.onChange} type="text" value={this.state.company} /></td>
+                                <td>
+                                    <label htmlFor="company">Company</label>
+                                </td>
+                                <td>
+                                    <input id="company" name="company" onChange={this.onChange} type="text" value={this.state.company} />
+                                </td>
                             </tr>
                             <tr>
-                                <td><label htmlFor="email">Email</label></td>
-                                <td><input id="email" name="email" onChange={this.onChange} type="text" value={this.state.email} /></td>
+                                <td>
+                                    <label htmlFor="email">Email</label>
+                                </td>
+                                <td>
+                                    <input id="email" name="email" onChange={this.onChange} type="text" value={this.state.email} />
+                                </td>
                             </tr>
                             <tr>
                                 <td colSpan={2}>
-                                    <button type="submit">Save</button>
-                                    {' '}
-                                    <button type="button" onClick={this.closeUser}>Cancel</button>
+                                    <button type="submit">Save</button>{' '}
+                                    <button onClick={this.closeUser} type="button">
+                                        Cancel
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

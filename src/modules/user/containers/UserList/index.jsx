@@ -1,5 +1,4 @@
 // @flow
-
 import UserItem from 'modules/user/containers/UserItem/index.jsx';
 import type {TUser} from 'modules/user/types.js';
 import React from 'react';
@@ -42,9 +41,7 @@ class UserList extends React.Component<TUserListProps> {
     render() {
         return (
             <table>
-                <tbody>
-                    {this.props.list.map(this.renderItem)}
-                </tbody>
+                <tbody>{this.props.list.map(this.renderItem)}</tbody>
             </table>
         );
     }

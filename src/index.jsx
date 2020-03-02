@@ -1,5 +1,4 @@
 // @flow
-
 import App from 'app/index.jsx';
 import React from 'react';
 import {render} from 'react-dom';

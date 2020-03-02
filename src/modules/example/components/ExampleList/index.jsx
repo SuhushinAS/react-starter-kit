@@ -1,8 +1,7 @@
 // @flow
-
+import Item from 'modules/example/components/ExampleItem/index.jsx';
 import type {TExample} from 'modules/example/types.js';
 import React from 'react';
-import Item from 'modules/example/components/ExampleItem/index.jsx';
 
 type TExampleListProps = {
     list: TExample[],
@@ -16,7 +15,9 @@ type TExampleListProps = {
 export default function ExampleList(props: TExampleListProps) {
     return (
         <ul>
-            {props.list.map((item) => <Item item={item} key={item.id} />)}
+            {props.list.map((item) => (
+                <Item item={item} key={item.id} />
+            ))}
         </ul>
     );
 }

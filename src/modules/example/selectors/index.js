@@ -1,5 +1,4 @@
 // @flow
-
 import type {TState} from 'app/types.js';
 import type {TExampleData, TExampleStore} from 'modules/example/types.js';
 import {createSelector} from 'reselect';

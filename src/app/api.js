@@ -1,5 +1,4 @@
 // @flow
-
 import ExampleApi from 'modules/example/api/index.js';
 import UserApi from 'modules/user/api/index.js';
 

@@ -1,5 +1,4 @@
 // @flow
-
 import getApi from 'app/api.js';
 import history from 'app/browser-history.js';
 import reducer from 'app/reducer.js';
@@ -36,7 +35,7 @@ export default class App extends React.Component<TAppProps> {
         const store = this.configureStore(config.host);
         store.dispatch(commonActionConfigSet(config));
         this.setState({
-            store
+            store,
         });
     }
 

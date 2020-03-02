@@ -1,5 +1,4 @@
 // @flow
-
 // /* flow-include
 
 export type TApiOptions = {
@@ -20,9 +19,9 @@ export type TApiResponseData = any;
 
 export type TApiResponseError = {|
     code: number,
-    title: string,
-    detail: string,
     data: any,
+    detail: string,
+    title: string,
 |};
 
 export type TApiResponseNotice = {};

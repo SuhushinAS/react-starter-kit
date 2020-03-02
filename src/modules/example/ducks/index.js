@@ -1,5 +1,4 @@
 // @flow
-
 import type {TApi} from 'app/api.js';
 import {createReducer} from 'app/reducer.js';
 import type {TDispatch, TGetState} from 'app/types.js';
@@ -27,24 +26,27 @@ export function exampleActionListGet() {
         dispatch(commonActionLoadingInc());
         dispatch({type: exampleConst.loadStart});
 
-        return api.exampleApi.listGet().then((response: TExampleListGetResponse) => {
-            if (0 === response.errors.length) {
+        return api.exampleApi
+            .listGet()
+            .then((response: TExampleListGetResponse) => {
+                if (0 === response.errors.length) {
+                    dispatch(commonActionLoadingDec());
+                    dispatch({
+                        payload: response.data,
+                        type: exampleConst.listGet,
+                    });
+
+                    return response;
+                }
+
+                throw new Error(response);
+            })
+            .catch((error) => {
                 dispatch(commonActionLoadingDec());
-                dispatch({
-                    payload: response.data,
-                    type: exampleConst.listGet,
-                });
+                dispatch({type: exampleConst.loadStop});
 
-                return response;
-            }
-
-            throw new Error(response);
-        }).catch((error) => {
-            dispatch(commonActionLoadingDec());
-            dispatch({type: exampleConst.loadStop});
-
-            console.error(error);
-        });
+                console.error(error);
+            });
     };
 }
 
@@ -52,10 +54,13 @@ export default createReducer(initialState, {
     [exampleConst.listGet](state, {list, more}) {
         return {
             ...state,
-            data: list.reduce((prev, item) => ({
-                ...prev,
-                [item.id]: item,
-            }), {}),
+            data: list.reduce(
+                (prev, item) => ({
+                    ...prev,
+                    [item.id]: item,
+                }),
+                {}
+            ),
             isLoading: false,
             more,
         };

@@ -1,5 +1,4 @@
 // @flow
-
 // /* flow-include
 
 export type TCommonStore = {|

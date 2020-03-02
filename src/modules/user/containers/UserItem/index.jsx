@@ -1,5 +1,4 @@
 // @flow
-
 import type {TUser} from 'modules/user/types.js';
 import React from 'react';
 import {Link} from 'react-router-dom';
@@ -28,7 +27,7 @@ class UserItem extends React.Component<TUserItemProps> {
         return (
             <tr>
                 <td>
-                    <img src={user.picture} alt={fullName} />
+                    <img alt={fullName} src={user.picture} />
                 </td>
                 <td>{fullName}</td>
                 <td>{user.company}</td>
