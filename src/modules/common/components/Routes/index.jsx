@@ -1,6 +1,9 @@
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router';
 
+/**
+ * Маршруты.
+ */
 export class Routes extends React.Component {
     /**
      * Значения свойств по-умолчанию.

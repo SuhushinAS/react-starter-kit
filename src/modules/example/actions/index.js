@@ -3,7 +3,11 @@ import {exampleApi} from 'modules/example/api';
 import {exampleActions} from 'modules/example/constants';
 import {actionLoadStart, dispatchLoadStop} from 'modules/load/actions';
 
-export const actionExampleListGet = () => (dispatch, getState) => {
+/**
+ * Получить список.
+ * @return {*} Список.
+ */
+export const actionExampleListGet = () => (dispatch) => {
     dispatch(actionLoadStart(exampleActions.listGet));
     return exampleApi
         .listGet()

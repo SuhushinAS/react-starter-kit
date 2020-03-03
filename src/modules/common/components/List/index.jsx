@@ -10,6 +10,11 @@ class List extends React.Component {
         return <div className="list">{this.props.list.map(this.renderItem)}</div>;
     }
 
+    /**
+     * Вывести элемент.
+     * @param {*} id Идентификатор.
+     * @return {*} Представление.
+     */
     renderItem = (id) => {
         const {ItemComponent} = this.props;
 

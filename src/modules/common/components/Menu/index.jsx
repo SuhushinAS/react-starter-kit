@@ -2,6 +2,9 @@ import MenuItem from 'modules/common/components/MenuItem';
 import React from 'react';
 import './style.less';
 
+/**
+ * Меню.
+ */
 export class Menu extends React.Component {
     /**
      * Значения свойств по-умолчанию.
@@ -19,6 +22,13 @@ export class Menu extends React.Component {
         return <ul className="menu">{this.props.list.map(this.renderItem)}</ul>;
     }
 
+    /**
+     * Вывести элемент.
+     * @param {*} id Идентификатор.
+     * @param {*} name Название.
+     * @param {*} path Путь.
+     * @return {*} Представление.
+     */
     renderItem = ({id, name, path}) => (
         <li className="menu__item" key={id}>
             <MenuItem name={name} path={path} />

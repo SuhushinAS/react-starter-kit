@@ -7,8 +7,17 @@ import React from 'react';
 import {Router} from 'react-router-dom';
 import routeList from './route-list.json';
 
+/**
+ * Вывести маршрут.
+ * @param {*} props Совйства.
+ * @return {*} Маршрут.
+ */
 const renderRoute = (props) => <LazyRoute key={props.id} {...props} />;
 
+/**
+ * Вывести приложение.
+ * @return {*} приложение.
+ */
 const App = () => (
     <Router history={history}>
         <Layout side={<Menu list={routeList} />}>

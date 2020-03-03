@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * Ленивая загрузка модуля.
+ */
 export class LazyModule extends React.PureComponent {
     /**
      * Значения свойств по-умолчанию.
@@ -47,6 +50,9 @@ export class LazyModule extends React.PureComponent {
         this.isMount = false;
     }
 
+    /**
+     * Импортировать компонент.
+     */
     importComponent() {
         const {path} = this.props;
 
@@ -57,12 +63,19 @@ export class LazyModule extends React.PureComponent {
         }
     }
 
+    /**
+     * Обработать импорт.
+     * @param {*} component Компонент
+     */
     handleImport = (component) => {
         if (this.isMount) {
             this.setState({Component: component.default});
         }
     };
 
+    /**
+     * Обработать ошибку.
+     */
     handleError = () => {
         console.warn(`"${this.props.path}" is not found`);
     };

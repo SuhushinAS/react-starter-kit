@@ -12,6 +12,9 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import './style.less';
 
+/**
+ * Пример компонента.
+ */
 export class Example extends React.Component {
     /**
      * Значения свойств по-умолчанию.
@@ -44,6 +47,11 @@ export class Example extends React.Component {
         );
     }
 
+    /**
+     * Вывести элемент.
+     * @param {string} id Идентификатор.
+     * @return {*} Представление.
+     */
     renderItem = (id) => (
         <div className="example__item" key={id}>
             <ExampleItem id={id} />

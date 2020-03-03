@@ -2,6 +2,9 @@ import {ConfigContext} from 'app/context/config';
 import Api from 'modules/common/helpers/api';
 import React from 'react';
 
+/**
+ * Провайдер конфигурации.
+ */
 export class ConfigProvider extends React.Component {
     /**
      * Значения свойств по-умолчанию.
@@ -18,12 +21,16 @@ export class ConfigProvider extends React.Component {
      */
     constructor(props) {
         super(props);
-        this.api.request(props.path).then(this.handleGetApi);
+        this.api.request(props.path).then(this.handleGetConfig);
     }
 
     api = new Api();
 
-    handleGetApi = (config) => {
+    /**
+     * Обработать получение Конфигурации.
+     * @param {*} config Конфигурация.
+     */
+    handleGetConfig = (config) => {
         this.setState({config});
     };
 

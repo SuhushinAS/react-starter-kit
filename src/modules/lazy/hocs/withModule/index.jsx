@@ -1,11 +1,20 @@
 import storage from 'app/helpers/storage';
-import React from 'react';
 
+/**
+ * Добавить модуль.
+ * @param {*} name Название
+ * @param {*} reducers Редьюсеры.
+ * @return {*} Модуль.
+ */
 const withModule = (name, reducers) => (Component) => {
     storage.updateStore({[name]: reducers});
-    return (props) => {
-        return <Component {...props} />;
-    };
+
+    /**
+     * Вывести компонент.
+     * @param {*} props Свойства.
+     * @return {*} Представление.
+     */
+    return Component;
 };
 
 export default withModule;

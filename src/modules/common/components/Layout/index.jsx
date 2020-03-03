@@ -1,6 +1,12 @@
 import React from 'react';
 import './style.less';
 
+/**
+ * Вывести базовую разметку приложения.
+ * @param {*} children Дети.
+ * @param {*} side Боковая панель.
+ * @return {*} Базовая разметку приложения.
+ */
 const Layout = ({children, side}) => (
     <div className="layout">
         <div className="layout__main">{children}</div>

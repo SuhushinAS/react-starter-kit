@@ -1,6 +1,11 @@
 import {getList, selectData, selectIdList, selectItem} from 'modules/common/helpers/selector';
 import {createSelector} from 'reselect';
 
+/**
+ * Выбрать модуль.
+ * @param {*} state Стейт.
+ * @return {*} модуль.
+ */
 export const selectExample = (state) => state.example;
 
 export const selectExampleData = selectData(selectExample);
