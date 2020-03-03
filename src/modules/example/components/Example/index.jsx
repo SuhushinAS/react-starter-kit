@@ -38,7 +38,7 @@ export class Example extends React.Component {
     render() {
         return (
             <div className="example">
-                {/*<Icon Component={Logo} />*/}
+                {/* <Icon Component={Logo} />*/}
                 {this.props.exampleList.map(this.renderItem)}
             </div>
         );
