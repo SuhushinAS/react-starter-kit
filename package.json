@@ -4,6 +4,7 @@
         "favicons-webpack-plugin": "^2.1.0",
         "history": "^4.10.1",
         "http-status": "^1.4.2",
+        "lodash.isequal": "^4.5.0",
         "normalize.css": "^8.0.1",
         "react": "^16.13.0",
         "react-baron": "^3.0.0",

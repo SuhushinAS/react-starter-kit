@@ -1,16 +1,9 @@
-// @flow
-import Api from 'api/index.js';
-import type {TExampleListGetResponse} from 'modules/example/types.js';
+import Api from 'modules/common/helpers/api';
 
-export default class ExampleApi extends Api {
-    listGet(filter: TExampleListGetFilter = null, limit: number = 0, offset: number = 0): Promise<TExampleListGetResponse> {
-        return this.request('/api/v1/example', 'GET', {
-            data: {
-                filter,
-                limit,
-                offset,
-            },
-            isCors: false,
-        });
+export class ExampleApi extends Api {
+    listGet(filter = null, limit = 0, offset = 0) {
+        return this.request('/api/v1/example');
     }
 }
+
+export const exampleApi = new ExampleApi();

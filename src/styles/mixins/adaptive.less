@@ -1,0 +1,29 @@
+@size-xs-min: 0;
+@size-sm-min: 600px;
+@size-md-min: 900px;
+@size-lg-min: 1200px;
+@size-xl-min: 1500px;
+
+@size-xs-max: (@size-sm-min - 1px);
+@size-sm-max: (@size-md-min - 1px);
+@size-md-max: (@size-lg-min - 1px);
+@size-lg-max: (@size-xl-min - 1px);
+
+@xs-min: ~'(min-width: @{size-xs-min})';
+@xs-max: ~'(max-width: @{size-xs-max})';
+@xs: @xs-min and @xs-max;
+
+@sm-min: ~'(min-width: @{size-sm-min})';
+@sm-max: ~'(max-width: @{size-sm-max})';
+@sm: @sm-min and @sm-max;
+
+@md-min: ~'(min-width: @{size-md-min})';
+@md-max: ~'(max-width: @{size-md-max})';
+@md: @md-min and @md-max;
+
+@lg-min: ~'(min-width: @{size-lg-min})';
+@lg-max: ~'(max-width: @{size-lg-max})';
+@lg: @lg-min and @lg-max;
+
+@xl-min: ~'(min-width: @{size-xl-min})';
+@xl: @xl-min;

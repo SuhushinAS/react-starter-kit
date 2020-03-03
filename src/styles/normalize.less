@@ -1,65 +1,16 @@
-@import '~normalize.css/normalize.css';
-@import (reference) 'vars';
-@import (reference) 'text';
+@import "~normalize.css";
 
-@roboto-font-path: '../fonts';
+* {
+  box-sizing: border-box;
+}
 
-html, body {
-    height: 100%;
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
 }
 
 body {
-    .text_p;
-    display: table;
-    font-family: Roboto, Helvetica, sans-serif;
-    table-layout: fixed;
-    width: 100%;
-}
-
-button, input, optgroup, select, textarea {
-    font-family: Roboto, Helvetica, sans-serif;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-h1 {
-    .text_h1;
-    margin: 0;
-}
-
-h2 {
-    .text_h2;
-    margin: 0;
-}
-
-h3 {
-    .text_h3;
-    margin: 0;
-}
-
-h4 {
-    .text_h4;
-    margin: 0;
-}
-
-h5 {
-    .text_h5;
-    margin: 0;
-}
-
-h6 {
-    .text_h6;
-    margin: 0;
-}
-
-p, li {
-    .text_p;
-    margin: 0;
-}
-
-img {
-    display: inline-block;
-    max-width: 100%;
+  overflow: hidden;
 }

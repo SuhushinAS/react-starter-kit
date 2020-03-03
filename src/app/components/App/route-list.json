@@ -1,0 +1,8 @@
+[
+    {
+        "component": "example/components/Example",
+        "id": "example",
+        "name": "Example",
+        "path": "/example"
+    }
+]

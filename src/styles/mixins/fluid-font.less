@@ -1,0 +1,17 @@
+@import (reference) 'adaptive';
+@import (reference) 'fluid-prop';
+
+.fluid-font(@f-sm, @l-sm, @f-md, @l-md) {
+
+    .fluid-prop(font-size, @f-sm, @size-sm-min, @f-md, @size-sm-max);
+
+    .fluid-prop(line-height, @l-sm, @size-sm-min, @l-md, @size-sm-max);
+
+    font-size: @f-sm;
+    line-height: @l-sm;
+
+    @media @md-min {
+        font-size: @f-md;
+        line-height: @l-md;
+    }
+}
