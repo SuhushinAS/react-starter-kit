@@ -1,6 +1,7 @@
 {
     "author": "SuhushinAS",
     "dependencies": {
+        "favicons-webpack-plugin": "^2.1.0",
         "history": "^4.10.1",
         "http-status": "^1.4.2",
         "normalize.css": "^8.0.1",

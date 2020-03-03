@@ -1,6 +1,7 @@
 const path = require('path');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
@@ -111,6 +112,19 @@ function webpackConfig(env, argv) {
                           options: {
                               customInterpolateName: (url) => url.toLowerCase(),
                           },
+                      }),
+                      new FaviconsWebpackPlugin({
+                          cache: true,
+                          favicons: {
+                              appName: 'reactStarterKit',
+                              background: '#ffffff',
+                              theme_color: '#ffffff',
+                          },
+                          inject: true,
+                          logo: 'images/logo.svg',
+                          outputPath: '/',
+                          prefix: '/',
+                          publicPath: '/',
                       }),
                       new webpack.NoEmitOnErrorsPlugin(),
                   ]

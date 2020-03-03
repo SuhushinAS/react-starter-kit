@@ -2,7 +2,7 @@
 import App from 'app/index.jsx';
 import React from 'react';
 import {render} from 'react-dom';
-import 'style/index.less';
+import 'styles/index.less';
 
 const root: HTMLElement | null = document.getElementById('root');
 
