@@ -5,6 +5,11 @@ const initialState = {
     data: {},
 };
 
+/**
+ * Обработать загрузку.
+ * @param {string} type Тип.
+ * @return {*} Стейт.
+ */
 const reducerLoad = (type) => (state, id) => ({
     ...state,
     data: {

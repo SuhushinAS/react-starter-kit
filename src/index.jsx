@@ -8,6 +8,9 @@ import 'styles/index.less';
 
 const root = document.getElementById('root');
 
+/**
+ * Вывести приложение.
+ */
 function renderApp() {
     ReactDOM.render(
         <ConfigProvider>
