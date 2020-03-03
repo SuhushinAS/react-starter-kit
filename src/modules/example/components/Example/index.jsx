@@ -4,6 +4,7 @@ import withConfig from 'app/context/config';
 import {actionExampleListGet} from 'modules/example/actions';
 import {exampleApi} from 'modules/example/api';
 import ExampleItem from 'modules/example/components/ExampleItem';
+import {moduleName} from 'modules/example/constants';
 import reducers from 'modules/example/reducers';
 import {selectExampleIdList} from 'modules/example/selectors';
 import withModule from 'modules/lazy/hocs/withModule';
@@ -96,7 +97,7 @@ export class Example extends React.Component {
 }
 
 export default compose(
-    withModule('example', reducers),
+    withModule(moduleName, reducers),
     withConfig,
     connect((state) => ({
         exampleList: selectExampleIdList(state),

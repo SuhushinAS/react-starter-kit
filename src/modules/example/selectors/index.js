@@ -1,4 +1,5 @@
 import {getList, selectData, selectIdList, selectItem} from 'modules/common/helpers/selector';
+import {moduleName} from 'modules/example/constants';
 import {createSelector} from 'reselect';
 
 /**
@@ -6,7 +7,7 @@ import {createSelector} from 'reselect';
  * @param {*} state Стейт.
  * @return {*} модуль.
  */
-export const selectExample = (state) => state.example;
+export const selectExample = (state) => state[moduleName];
 
 export const selectExampleData = selectData(selectExample);
 
