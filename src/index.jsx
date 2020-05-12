@@ -1,16 +1,29 @@
-// @flow
-
-import App from 'app/index.jsx';
+import App from 'app/components/App';
+import ConfigProvider from 'app/components/ConfigProvider';
+import storage from 'app/helpers/storage';
 import React from 'react';
-import {render} from 'react-dom';
-import 'style/index.less';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import 'styles/index.less';
 
-const root: HTMLElement | null = document.getElementById('root');
+const root = document.getElementById('root');
 
-if (root) {
-    render(<App />, root);
+/**
+ * Вывести приложение.
+ */
+function renderApp() {
+    ReactDOM.render(
+        <ConfigProvider>
+            <Provider store={storage.store}>
+                <App />
+            </Provider>
+        </ConfigProvider>,
+        root
+    );
+}
 
-    if (module.hot) {
-        module.hot.accept('app/index.jsx', () => render(<App />, root));
-    }
+renderApp();
+
+if (module.hot) {
+    module.hot.accept('app/components/App', renderApp);
 }

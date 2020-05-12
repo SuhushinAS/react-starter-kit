@@ -1,25 +1,18 @@
-// @flow
-
-import type {TState} from 'app/types.js';
-import type {TExampleData, TExampleStore} from 'modules/example/types.js';
+import {getList, selectData, selectIdList, selectItem} from 'modules/common/helpers/selector';
+import {moduleName} from 'modules/example/constants';
 import {createSelector} from 'reselect';
 
 /**
- * Селектор.
- * @param {*} state Состояние.
- * @return {*} Ветка.
+ * Выбрать модуль.
+ * @param {*} state Стейт.
+ * @return {*} модуль.
  */
-export function exampleSelector(state: TState): TExampleStore {
-    return state.example;
-}
+export const selectExample = (state) => state[moduleName];
 
-/**
- * Селектор данных.
- * @param {*} state Состояние.
- * @return {*} Данные.
- */
-export function exampleSelectorData(state: TState): TExampleData {
-    return exampleSelector(state).data;
-}
+export const selectExampleData = selectData(selectExample);
 
-export const exampleSelectorList = createSelector([exampleSelectorData], (data) => Object.keys(data).map((id) => data[id]));
+export const selectExampleItem = selectItem(selectExampleData);
+
+export const selectExampleIdList = selectIdList(selectExample);
+
+export const selectExampleList = createSelector([selectExampleData, selectExampleIdList], getList);

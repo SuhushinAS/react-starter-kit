@@ -1,1 +1,1 @@
-Окружение для создания react-приложения
+reactStarterKit

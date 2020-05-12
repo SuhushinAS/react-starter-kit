@@ -1,0 +1,13 @@
+.font-face(@title, @name, @path, @weight, @style) {
+    @ttf: url('@{path}@{name}.ttf') format('truetype');
+    @woff: url('@{path}@{name}.woff') format('woff');
+    @woff2: url('@{path}@{name}.woff2') format('woff2');
+
+    @font-face {
+        font-display: swap;
+        font-family: @title;
+        font-style: @style;
+        font-weight: @weight;
+        src: @woff, @woff2, @ttf;
+    }
+}

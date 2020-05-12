@@ -1,0 +1,10 @@
+@import (reference) 'prop';
+
+.fluid-prop(@prop, @p-min, @w-min, @p-max, @w-max) {
+    @p-k: unit((@p-max - @p-min)/(@w-max - @w-min));
+    @p-b: @p-min - @p-k * @w-min;
+
+    @media (min-width: @w-min) and (max-width: @w-max) {
+        .prop(@prop, ~'calc(@{p-k} * 100vw + @{p-b})');
+    }
+}

@@ -1,0 +1,12 @@
+@import (reference) "~styles/mixins/color";
+
+.menu-item {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+
+    &_current {
+        background-color: @c-primary-2;
+        cursor: default;
+    }
+}
