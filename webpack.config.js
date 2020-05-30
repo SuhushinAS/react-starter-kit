@@ -1,10 +1,10 @@
 const path = require('path');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const compose = require('./config/compose');
 const development = require('./config/development');
 const optimization = require('./config/optimization');
@@ -55,15 +55,7 @@ function webpackConfig(env, argv) {
                 },
                 {
                     test: /\.less$/u,
-                    use: [
-                        styleLoader,
-                        'css-loader',
-                        'postcss-loader',
-                        {
-                            loader: 'less-loader',
-                            options: {javascriptEnabled: true},
-                        },
-                    ],
+                    use: [styleLoader, 'css-loader', 'postcss-loader', 'less-loader'],
                 },
                 {
                     test: /\.(ttf|eot|woff|woff2)(\?[a-z0-9]+)?$/u,
@@ -97,8 +89,12 @@ function webpackConfig(env, argv) {
                 production: isProd,
                 template: path.join(paths.src, 'index.tpl'),
             }),
-            new CopyPlugin([{from: paths.public, to: paths.dist}]),
+            new CopyPlugin({patterns: [{from: paths.public, to: paths.dist}]}),
             new webpack.IgnorePlugin(/^\.\/locale$/u, /moment$/u),
+            new WorkboxPlugin.GenerateSW({
+                clientsClaim: true,
+                skipWaiting: true,
+            }),
             ...(isProd
                 ? [
                       new MiniCssExtractPlugin({
@@ -109,26 +105,10 @@ function webpackConfig(env, argv) {
                       new webpack.LoaderOptionsPlugin({
                           debug: false,
                           minimize: true,
-                          options: {
-                              customInterpolateName: (url) => url.toLowerCase(),
-                          },
+                          options: {customInterpolateName: (url) => url.toLowerCase()},
                       }),
-                      new FaviconsWebpackPlugin({
-                          cache: true,
-                          favicons: {
-                              appName: 'reactStarterKit',
-                              background: '#ffffff',
-                              theme_color: '#ffffff',
-                          },
-                          inject: true,
-                          logo: 'images/logo.svg',
-                          outputPath: '/',
-                          prefix: '/',
-                          publicPath: '/',
-                      }),
-                      new webpack.NoEmitOnErrorsPlugin(),
                   ]
-                : [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()]),
+                : [new webpack.HotModuleReplacementPlugin()]),
         ],
         resolve: {
             extensions: ['.js', '.jsx'],

@@ -8,6 +8,7 @@
     <meta content="index,follow" name="robots" />
     <meta content="yes" name="apple-touch-fullscreen" />
     <meta content="reactStarterKit" name="og:site_name" />
+    <link rel="manifest" href="/manifest.webmanifest">
     <title>reactStarterKit</title>
 </head>
 <body>
