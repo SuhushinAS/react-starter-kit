@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const compose = require('./config/compose');
 const development = require('./config/development');
 const optimization = require('./config/optimization');
@@ -90,6 +91,10 @@ function webpackConfig(env, argv) {
             }),
             new CopyPlugin({patterns: [{from: paths.public, to: paths.dist}]}),
             new webpack.IgnorePlugin(/^\.\/locale$/u, /moment$/u),
+            new WorkboxPlugin.GenerateSW({
+                clientsClaim: true,
+                skipWaiting: true,
+            }),
             ...(isProd
                 ? [
                       new MiniCssExtractPlugin({
