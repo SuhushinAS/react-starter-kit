@@ -1,7 +1,6 @@
 const path = require('path');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
@@ -59,10 +58,7 @@ function webpackConfig(env, argv) {
                         styleLoader,
                         'css-loader',
                         'postcss-loader',
-                        {
-                            loader: 'less-loader',
-                            options: {javascriptEnabled: true},
-                        },
+                        'less-loader',
                     ],
                 },
                 {
@@ -97,7 +93,7 @@ function webpackConfig(env, argv) {
                 production: isProd,
                 template: path.join(paths.src, 'index.tpl'),
             }),
-            new CopyPlugin([{from: paths.public, to: paths.dist}]),
+            new CopyPlugin({patterns: [{from: paths.public, to: paths.dist}]}),
             new webpack.IgnorePlugin(/^\.\/locale$/u, /moment$/u),
             ...(isProd
                 ? [
@@ -109,26 +105,10 @@ function webpackConfig(env, argv) {
                       new webpack.LoaderOptionsPlugin({
                           debug: false,
                           minimize: true,
-                          options: {
-                              customInterpolateName: (url) => url.toLowerCase(),
-                          },
+                          options: {customInterpolateName: (url) => url.toLowerCase()},
                       }),
-                      new FaviconsWebpackPlugin({
-                          cache: true,
-                          favicons: {
-                              appName: 'reactStarterKit',
-                              background: '#ffffff',
-                              theme_color: '#ffffff',
-                          },
-                          inject: true,
-                          logo: 'images/logo.svg',
-                          outputPath: '/',
-                          prefix: '/',
-                          publicPath: '/',
-                      }),
-                      new webpack.NoEmitOnErrorsPlugin(),
                   ]
-                : [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()]),
+                : [new webpack.HotModuleReplacementPlugin()]),
         ],
         resolve: {
             extensions: ['.js', '.jsx'],
