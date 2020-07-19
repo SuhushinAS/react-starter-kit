@@ -1,16 +1,75 @@
-@import "~normalize.css";
+@import 'font';
+@import 'mixins';
+@import '~normalize.css';
 
 * {
     box-sizing: border-box;
+
+    &::before,
+    &::after {
+        box-sizing: border-box;
+    }
 }
 
 html,
 body,
 #root {
     height: 100%;
+    margin: 0;
+    overflow: hidden;
     width: 100%;
 }
 
 body {
-    overflow: hidden;
+    .f_p();
+
+    color: @c-gray-100;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    .f_h1();
+}
+
+h2 {
+    .f_h2();
+}
+
+h3 {
+    .f_h3();
+}
+
+h4 {
+    .f_h4();
+}
+
+h5 {
+    .f_h5();
+}
+
+h6 {
+
+    .f_h6();
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    .f_p();
+
+    color: @c-gray-100;
+    margin: 0;
 }

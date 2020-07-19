@@ -8,7 +8,7 @@ import './style.less';
  * @return {*} Базовая разметку приложения.
  */
 const Layout = ({children, side}) => (
-    <div className="layout">
+    <div className="layout box">
         <div className="layout__main">{children}</div>
         <div className="layout__side">{side}</div>
     </div>

@@ -1,10 +1,10 @@
-@import (reference) "~styles/mixins/color";
-@import (reference) "~styles/mixins/grid";
+@import (reference) 'src/styles/mixins';
 
 .list {
     &__item {
-        background-color: @c-primary-3;
-        margin-left: @grid-left;
-        margin-right: @grid-right;
+        .fluid-prop-full(margin-left, @grid-offset-sm, @grid-offset-md, @grid-offset-lg);
+        .fluid-prop-full(margin-right, @grid-offset-sm, @grid-offset-md, @grid-offset-lg);
+
+        background-color: @c-primary-300;
     }
 }

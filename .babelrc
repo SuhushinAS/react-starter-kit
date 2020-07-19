@@ -20,7 +20,6 @@
                 "modules": false
             }
         ],
-        "@babel/flow",
         "@babel/react"
     ]
 }

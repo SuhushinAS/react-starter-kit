@@ -1,0 +1,54 @@
+@import (reference) 'mixins';
+
+.box {
+    .fluid-prop-full(padding-left, @grid-offset-sm, @grid-offset-md, @grid-offset-lg);
+    .fluid-prop-full(padding-right, @grid-offset-sm, @grid-offset-md, @grid-offset-lg);
+    .fluid-prop-full(width, @grid-width-sm, @grid-width-md, @grid-width-lg);
+
+    margin: auto;
+    max-width: 100%;
+
+    &__row {
+        .fluid-prop-full(margin-left, -@grid-offset-sm, -@grid-offset-md, -@grid-offset-lg);
+        .fluid-prop-full(margin-right, -@grid-offset-sm, -@grid-offset-md, -@grid-offset-lg);
+
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__col {
+        .fluid-prop-full(padding-left, @grid-offset-sm, @grid-offset-md, @grid-offset-lg);
+        .fluid-prop-full(padding-right, @grid-offset-sm, @grid-offset-md, @grid-offset-lg);
+
+        .col-make(xs, @xs-min);
+        .col-make(sm, @sm-min);
+        .col-make(md, @md-min);
+        .col-make(lg, @lg-min);
+
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+        transition: flex-basis @animation, max-width @animation;
+    }
+}
+
+.col-make(@class, @query) {
+    .col-loop(@grid-columns, @class, @query);
+
+    &_@{class}_auto {
+        @media @query {
+            flex-basis: auto;
+        }
+    }
+}
+
+.col-loop(@index, @class, @query) when (@index >= 0) {
+    .col-loop((@index - 1), @class, @query);
+
+    &_@{class}_@{index} {
+        @media @query {
+            flex-basis: percentage(@index / @grid-columns);
+            max-width: percentage(@index / @grid-columns);
+        }
+    }
+}

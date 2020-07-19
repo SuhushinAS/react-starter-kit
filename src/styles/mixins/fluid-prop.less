@@ -1,10 +1,44 @@
+@import (reference) 'adaptive';
+@import (reference) 'grid';
 @import (reference) 'prop';
 
 .fluid-prop(@prop, @p-min, @w-min, @p-max, @w-max) {
     @p-k: unit((@p-max - @p-min)/(@w-max - @w-min));
     @p-b: @p-min - @p-k * @w-min;
+    @p-x: @p-k * 100vw;
 
     @media (min-width: @w-min) and (max-width: @w-max) {
-        .prop(@prop, ~'calc(@{p-k} * 100vw + @{p-b})');
+        .prop(@prop, ~'calc(@{p-x} + @{p-b})');
+    }
+}
+
+.fluid-prop-full(@prop, @p-sm, @p-md, @p-lg) {
+    .fluid-prop(@prop, @p-sm, @size-sm-min, @p-md, @size-sm-max);
+    .fluid-prop(@prop, @p-md, @size-md-min, @p-lg, @size-md-max);
+
+    .prop(@prop, @p-lg);
+
+    @media (max-width: @size-xs-max) {
+        .prop(@prop, @p-sm);
+    }
+}
+
+.fluid-prop-sm(@prop, @p-sm, @p-md) {
+    .fluid-prop(@prop, @p-sm, @size-sm-min, @p-md, @size-sm-max);
+
+    .prop(@prop, @p-md);
+
+    @media (max-width: @size-xs-max) {
+        .prop(@prop, @p-sm);
+    }
+}
+
+.fluid-prop-md(@prop, @p-md, @p-lg) {
+    .fluid-prop(@prop, @p-md, @size-md-min, @p-lg, @size-md-max);
+
+    .prop(@prop, @p-lg);
+
+    @media (max-width: @size-sm-max) {
+        .prop(@prop, @p-md);
     }
 }

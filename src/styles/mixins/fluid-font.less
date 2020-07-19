@@ -1,17 +1,37 @@
 @import (reference) 'adaptive';
 @import (reference) 'fluid-prop';
 
-.fluid-font(@f-sm, @l-sm, @f-md, @l-md) {
+.make-font-fluid(@f-min, @l-min, @w-min, @f-max, @l-max, @w-max) {
+    .fluid-prop(font-size, @f-min, @w-min, @f-max, @w-max);
+    .fluid-prop(line-height, @l-min, @w-min, @l-max, @w-max);
+}
 
-    .fluid-prop(font-size, @f-sm, @size-sm-min, @f-md, @size-sm-max);
+.font-fluid(@f-min, @l-min, @f-max, @l-max) {
+    @screen-min: @size-sm-min;
+    @screen-max: @size-lg-min;
 
-    .fluid-prop(line-height, @l-sm, @size-sm-min, @l-md, @size-sm-max);
+    .make-font-fluid(@f-min, @l-min, @screen-min, @f-max, @l-max, @screen-max);
 
-    font-size: @f-sm;
-    line-height: @l-sm;
+    font-size: @f-max;
+    line-height: @l-max;
 
-    @media @md-min {
-        font-size: @f-md;
-        line-height: @l-md;
+    @media (max-width: @screen-min) {
+        font-size: @f-min;
+        line-height: @l-min;
     }
+}
+
+.font-fluid-full(@f-sm, @l-sm, @f-md, @l-md, @f-lg, @l-lg) {
+    .fluid-prop-full(font-size, @f-sm, @f-md, @f-lg);
+    .fluid-prop-full(line-height, @l-sm, @l-md, @l-lg);
+}
+
+.font-fluid-sm(@f-sm, @l-sm, @f-md, @l-md) {
+    .fluid-prop-sm(font-size, @f-sm, @f-md);
+    .fluid-prop-sm(line-height, @l-sm, @l-md);
+}
+
+.font-fluid-md(@f-md, @l-md, @f-lg, @l-lg) {
+    .fluid-prop-md(font-size, @f-md, @f-lg);
+    .fluid-prop-md(line-height, @l-md, @l-lg);
 }

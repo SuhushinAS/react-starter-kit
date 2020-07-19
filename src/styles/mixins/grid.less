@@ -1,8 +1,11 @@
+@import 'metric';
+
 @grid-columns: 12;
 
-@grid-offset: 30px;
+@grid-offset-sm: 0;
+@grid-offset-md: @metric-300;
+@grid-offset-lg: @metric-400;
 
-@grid-width: 960px;
-
-@grid-left: floor(@grid-offset / 2);
-@grid-right: ceil(@grid-offset / 2);
+@grid-width-sm: 600px;
+@grid-width-md: 730px;
+@grid-width-lg: 1110px;
