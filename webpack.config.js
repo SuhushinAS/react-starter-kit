@@ -91,10 +91,10 @@ function webpackConfig(env, argv) {
             }),
             new CopyPlugin({patterns: [{from: paths.public, to: paths.dist}]}),
             new webpack.IgnorePlugin(/^\.\/locale$/u, /moment$/u),
-            new WorkboxPlugin.GenerateSW({
-                clientsClaim: true,
-                skipWaiting: true,
-            }),
+            // new WorkboxPlugin.GenerateSW({
+            //     clientsClaim: true,
+            //     skipWaiting: true,
+            // }),
             ...(isProd
                 ? [
                       new MiniCssExtractPlugin({
