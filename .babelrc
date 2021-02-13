@@ -1,25 +1,30 @@
 {
     "env": {
+        "development": {
+            "plugins": ["babel-plugin-flow-react-proptypes"]
+        },
         "production": {
             "plugins": [
-                "@babel/transform-react-constant-elements",
-                "@babel/transform-react-inline-elements"
+                "@babel/plugin-transform-react-constant-elements",
+                "@babel/plugin-transform-react-inline-elements",
+                "babel-plugin-transform-react-remove-prop-types"
             ]
         }
     },
     "plugins": [
-        "@babel/transform-runtime",
-        "@babel/proposal-export-namespace-from",
-        "@babel/syntax-dynamic-import",
-        "@babel/proposal-class-properties"
+        "@babel/plugin-transform-runtime",
+        "@babel/plugin-proposal-export-namespace-from",
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-proposal-class-properties"
     ],
     "presets": [
         [
-            "@babel/env",
+            "@babel/preset-env",
             {
                 "modules": false
             }
         ],
-        "@babel/react"
+        "@babel/preset-react",
+        "@babel/preset-flow"
     ]
 }

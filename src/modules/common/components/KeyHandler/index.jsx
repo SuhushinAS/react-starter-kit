@@ -1,9 +1,14 @@
+// @flow
 import React from 'react';
+
+type TKeyHandlerProps = {
+    keyList: any,
+};
 
 /**
  * Обработать нажатия клавиш.
  */
-export class KeyHandler extends React.Component {
+export class KeyHandler extends React.Component<TKeyHandlerProps> {
     /**
      * Добавить обработчик.
      * @param {string} eventName Название события.
@@ -63,7 +68,7 @@ export class KeyHandler extends React.Component {
 
     /**
      * Должен ли компонент обновиться?
-     * На самом деле, обычно реакт сам отлично разбирается.
+     * На самом деле, обычно react сам отлично разбирается.
      * Но иногда ручное управление позволяет существенно ускорить работу в "узких местах".
      * @param {*} props Новые свойства.
      * @param {*} state Новое состояние.

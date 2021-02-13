@@ -12,33 +12,24 @@
     }
 }
 
-.fluid-prop-full(@prop, @p-sm, @p-md, @p-lg) {
-    .fluid-prop(@prop, @p-sm, @size-sm-min, @p-md, @size-sm-max);
-    .fluid-prop(@prop, @p-md, @size-md-min, @p-lg, @size-md-max);
+.fluid-prop-2x(@prop, @p-1, @p-2, @s-1, @s-2) {
+    .fluid-prop(@prop, @p-1, @s-1, @p-2, (@s-2 - 1px));
 
-    .prop(@prop, @p-lg);
+    .prop(@prop, @p-2);
 
-    @media (max-width: @size-xs-max) {
-        .prop(@prop, @p-sm);
+    @media (max-width: (@s-1 - 1px)) {
+        .prop(@prop, @p-1);
     }
 }
 
-.fluid-prop-sm(@prop, @p-sm, @p-md) {
-    .fluid-prop(@prop, @p-sm, @size-sm-min, @p-md, @size-sm-max);
-
-    .prop(@prop, @p-md);
-
-    @media (max-width: @size-xs-max) {
-        .prop(@prop, @p-sm);
-    }
+.fluid-prop-sm(@prop, @p-1, @p-2) {
+    .fluid-prop-2x(@prop, @p-1, @p-2, @size-sm-min, @size-md-min);
 }
 
-.fluid-prop-md(@prop, @p-md, @p-lg) {
-    .fluid-prop(@prop, @p-md, @size-md-min, @p-lg, @size-md-max);
+.fluid-prop-md(@prop, @p-1, @p-2) {
+    .fluid-prop-2x(@prop, @p-1, @p-2, @size-md-min, @size-lg-min);
+}
 
-    .prop(@prop, @p-lg);
-
-    @media (max-width: @size-sm-max) {
-        .prop(@prop, @p-md);
-    }
+.fluid-prop-lg(@prop, @p-1, @p-2) {
+    .fluid-prop-2x(@prop, @p-1, @p-2, @size-lg-min, @size-xl-min);
 }

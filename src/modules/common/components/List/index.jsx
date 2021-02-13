@@ -1,7 +1,16 @@
+// @flow
 import React from 'react';
 import './style.less';
 
-class List extends React.Component {
+type TListProps = {
+    ItemComponent: any,
+    list: string[],
+};
+
+/**
+ * Вывести список.
+ */
+class List extends React.Component<TListProps> {
     /**
      * Вывести компонент.
      * @return {*} Представление.
@@ -15,7 +24,7 @@ class List extends React.Component {
      * @param {*} id Идентификатор.
      * @return {*} Представление.
      */
-    renderItem = (id) => {
+    renderItem = (id: string) => {
         const {ItemComponent} = this.props;
 
         return (

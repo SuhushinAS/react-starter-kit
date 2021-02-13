@@ -1,15 +1,14 @@
+// @flow
+import SvgIcon from 'modules/common/components/SvgIcon';
+import Message from 'modules/locale/components/Message';
 import React from 'react';
+
+type THomeProps = {};
 
 /**
  * Пример компонента.
  */
-export class Home extends React.Component {
-    /**
-     * Значения свойств по-умолчанию.
-     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-     */
-    static defaultProps = {};
-
+export class Home extends React.Component<THomeProps> {
     /**
      * Вывести компонент.
      * @return {*} Представление.
@@ -17,13 +16,14 @@ export class Home extends React.Component {
     render() {
         return (
             <div className="home">
-                <h1>Header 1</h1>
-                <h2>Header 2</h2>
-                <h3>Header 3</h3>
-                <h4>Header 4</h4>
-                <h5>Header 5</h5>
-                <h6>Header 6</h6>
-                <p>Paragraph</p>
+                <div className="box">
+                    <h1>
+                        <Message id="home.header.title" />
+                    </h1>
+                    <h2>
+                        <SvgIcon name="logo" />
+                    </h2>
+                </div>
             </div>
         );
     }

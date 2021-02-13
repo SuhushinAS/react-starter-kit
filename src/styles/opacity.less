@@ -1,0 +1,13 @@
+@import (reference) 'mixins';
+
+.opacity {
+    opacity: 1;
+
+    &_animate {
+        transition: opacity @animation-x3;
+    }
+
+    &_hidden {
+        opacity: 0;
+    }
+}

@@ -1,5 +1,5 @@
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 /**
  * Получить конфигурацию webpack.
@@ -12,8 +12,10 @@ function optimization(config) {
     return {
         ...config,
         optimization: {
+            chunkIds: 'named',
+            emitOnErrors: false,
             minimizer: [
-                new TerserPlugin({
+                new TerserWebpackPlugin({
                     extractComments: false,
                     terserOptions: {
                         output: {
@@ -21,7 +23,7 @@ function optimization(config) {
                         },
                     },
                 }),
-                new OptimizeCSSAssetsPlugin({
+                new OptimizeCSSAssetsWebpackPlugin({
                     cssProcessorOptions: {
                         autoprefixer: false,
                         mergeIdents: false,
@@ -31,11 +33,26 @@ function optimization(config) {
                     },
                 }),
             ],
-            noEmitOnErrors: true,
+            moduleIds: 'named',
             nodeEnv: mode,
             splitChunks: {
-                automaticNameDelimiter: '-',
-                chunks: 'all',
+                cacheGroups: {
+                    common: {
+                        chunks: 'initial',
+                        minChunks: 2,
+                        name: 'common',
+                    },
+                    icons: {
+                        chunks: 'all',
+                        name: 'icons',
+                        test: /\.svg$/u,
+                    },
+                    vendor: {
+                        chunks: 'all',
+                        name: 'vendor',
+                        test: /[\\/]node_modules[\\/]/u,
+                    },
+                },
             },
         },
     };

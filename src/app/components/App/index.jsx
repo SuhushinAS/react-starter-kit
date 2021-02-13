@@ -1,29 +1,32 @@
-import history from 'app/helpers/history';
-import Layout from 'modules/common/components/Layout';
-import Menu from 'modules/common/components/Menu';
+// @flow
 import Routes from 'modules/common/components/Routes';
-import LazyRoute from 'modules/lazy/components/LazyRoute';
+import ExampleRouter from 'modules/example/components/ExampleRouter';
+import Home from 'modules/home/components/Home';
+import Layout from 'modules/layout/components/Layout';
 import React from 'react';
-import {Router} from 'react-router-dom';
-import routeList from './route-list.json';
 
-/**
- * Вывести маршрут.
- * @param {*} props Совйства.
- * @return {*} Маршрут.
- */
-const renderRoute = (props) => <LazyRoute key={props.id} {...props} />;
+const routeList = [
+    {
+        component: ExampleRouter,
+        path: '/example',
+    },
+    {
+        component: Home,
+        isExact: true,
+        path: '/',
+    },
+];
 
 /**
  * Вывести приложение.
  * @return {*} приложение.
  */
-const App = () => (
-    <Router history={history}>
-        <Layout side={<Menu list={routeList} />}>
-            <Routes list={routeList} renderRoute={renderRoute} />
+const App = () => {
+    return (
+        <Layout>
+            <Routes list={routeList} />
         </Layout>
-    </Router>
-);
+    );
+};
 
 export default App;
