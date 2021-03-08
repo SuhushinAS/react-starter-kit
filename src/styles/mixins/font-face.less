@@ -11,3 +11,13 @@
         src: @woff, @woff2, @ttf;
     }
 }
+
+.font-face-single(@title, @path, @weight, @style, @format) {
+    @font-face {
+        font-display: swap;
+        font-family: @title;
+        font-style: @style;
+        font-weight: @weight;
+        src: url('~fonts/@{path}') format('@{format}');
+    }
+}

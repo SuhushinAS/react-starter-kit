@@ -1,9 +1,14 @@
+// @flow
 import App from 'app/components/App';
-import ConfigProvider from 'app/components/ConfigProvider';
-import storage from 'app/helpers/storage';
+import {apiList} from 'app/storage/api';
+import {store} from 'app/storage/store';
+import history from 'helpers/history';
+import Config from 'modules/config/components/Config';
+import LocaleProvider from 'modules/locale/components/LocaleProvider';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
+import {Router} from 'react-router';
 import 'styles/index.less';
 
 const root = document.getElementById('root');
@@ -12,31 +17,32 @@ const root = document.getElementById('root');
  * Вывести приложение.
  */
 function renderApp() {
-    ReactDOM.render(
-        <ConfigProvider>
-            <Provider store={storage.store}>
-                <App />
-            </Provider>
-        </ConfigProvider>,
-        root
-    );
+    if (root) {
+        ReactDOM.render(
+            <Provider store={store}>
+                <LocaleProvider>
+                    <Router history={history}>
+                        <Config apiList={apiList}>
+                            <App />
+                        </Config>
+                    </Router>
+                </LocaleProvider>
+            </Provider>,
+            root
+        );
+    }
 }
 
 renderApp();
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker
-            .register('/service-worker.js')
-            .then((registration) => {
-                console.log('SW registered: ', registration);
-            })
-            .catch((registrationError) => {
-                console.log('SW registration failed: ', registrationError);
-            });
-    });
-}
-
 if (module.hot) {
     module.hot.accept('app/components/App', renderApp);
 }
+
+window.addEventListener('load', () => {
+    if ('serviceWorker' in navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.register('/sw.js').catch((registrationError) => {
+            console.error('SW registration failed: ', registrationError);
+        });
+    }
+});

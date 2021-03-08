@@ -1,14 +1,17 @@
-// import {ConfigContext} from 'app/context/config';
-import {selectExampleItem} from 'modules/example/selectors';
+// @flow
+import type {TExample} from 'modules/example/types';
 import React from 'react';
-import {connect} from 'react-redux';
+
+type TExampleItemProps = {
+    item: TExample,
+};
 
 /**
  * Функциональный компонент.
  * @param {*} props Свойства компонента.
  * @return {*} Представление.
  */
-export const ExampleItem = ({exampleItem}) => {
+export const ExampleItem = ({item}: TExampleItemProps) => {
     // Объявляем новую переменную состояния "count"
     // const [count, setCount] = React.useState(0);
 
@@ -18,15 +21,13 @@ export const ExampleItem = ({exampleItem}) => {
     // return () => {};
     // });
 
-    // const config = React.useContext(ConfigContext);
+    // const config = React.useContext(Context);
 
-    return <div>{exampleItem.name}</div>;
+    return <div>{item.name}</div>;
 };
 
 ExampleItem.defaultProps = {
     name: 'ExampleItem',
 };
 
-export default connect((state, {id}) => ({
-    exampleItem: selectExampleItem(state, id),
-}))(ExampleItem);
+export default ExampleItem;

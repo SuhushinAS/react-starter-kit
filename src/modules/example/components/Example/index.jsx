@@ -1,22 +1,14 @@
-import withConfig from 'app/context/config';
-// import {ReactComponent as Logo} from 'icons/logo.svg';
-// import Icon from 'modules/common/components/Icon';
-import {actionExampleListGet} from 'modules/example/actions';
-import {exampleApi} from 'modules/example/api';
-import ExampleItem from 'modules/example/components/ExampleItem';
-import {moduleName} from 'modules/example/constants';
-import reducers from 'modules/example/reducers';
-import {selectExampleIdList} from 'modules/example/selectors';
-import withModule from 'modules/lazy/hocs/withModule';
+// @flow
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
 import './style.less';
+import {Link} from 'react-router-dom';
+
+type TExampleProps = {};
 
 /**
  * Пример компонента.
  */
-export class Example extends React.Component {
+export class Example extends React.Component<TExampleProps> {
     /**
      * Значения свойств по-умолчанию.
      * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
@@ -25,15 +17,12 @@ export class Example extends React.Component {
 
     /**
      * Конструктор компонента.
-     * @param {*} props Свойства переданые в компонент.
+     * @param {*} props Свойства переданные в компонент.
      * @return {undefined}
      */
-    constructor(props) {
-        super(props);
-        const {config} = this.props;
-
-        exampleApi.host = config.host;
-    }
+    // constructor(props: TExampleProps) {
+    //     super(props);
+    // }
 
     /**
      * Вывести компонент.
@@ -42,22 +31,13 @@ export class Example extends React.Component {
     render() {
         return (
             <div className="example">
-                {/* <Icon Component={Logo} />*/}
-                {this.props.exampleList.map(this.renderItem)}
+                <h1>Example</h1>
+                <div>
+                    <Link to="/example/list">List</Link>
+                </div>
             </div>
         );
     }
-
-    /**
-     * Вывести элемент.
-     * @param {string} id Идентификатор.
-     * @return {*} Представление.
-     */
-    renderItem = (id) => (
-        <div className="example__item" key={id}>
-            <ExampleItem id={id} />
-        </div>
-    );
 
     /**
      * Компонент примонтировался.
@@ -66,9 +46,7 @@ export class Example extends React.Component {
      * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
      * @return {undefined}
      */
-    componentDidMount() {
-        this.props.dispatch(actionExampleListGet());
-    }
+    // componentDidMount() {}
 
     /**
      * Должен ли компонент обновиться?
@@ -96,10 +74,4 @@ export class Example extends React.Component {
     // componentWillUnmount() {}
 }
 
-export default compose(
-    withModule(moduleName, reducers),
-    withConfig,
-    connect((state) => ({
-        exampleList: selectExampleIdList(state),
-    }))
-)(Example);
+export default Example;

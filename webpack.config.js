@@ -1,10 +1,10 @@
 const path = require('path');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const SvgSpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const webpack = require('webpack');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 const compose = require('./config/compose');
 const development = require('./config/development');
 const optimization = require('./config/optimization');
@@ -35,13 +35,6 @@ function webpackConfig(env, argv) {
         module: {
             rules: [
                 {
-                    test: /\.html$/u,
-                    use: {
-                        loader: 'file-loader',
-                        options: {name: '[name].[hash:5].[ext]'},
-                    },
-                },
-                {
                     exclude: /node_modules/u,
                     test: /\.(js|jsx)$/u,
                     use: {
@@ -61,60 +54,98 @@ function webpackConfig(env, argv) {
                     test: /\.(ttf|eot|woff|woff2)(\?[a-z0-9]+)?$/u,
                     use: {
                         loader: 'file-loader',
-                        options: {name: 'fonts/[name].[hash:5].[ext]'},
+                        options: {name: 'fonts/[name].[ext]'},
                     },
                 },
                 {
-                    test: /.*\.(png|jpg|jpeg|gif|svg)$/iu,
+                    test: /\.svg$/u,
+                    use: {
+                        loader: 'svg-sprite-loader',
+                        options: {
+                            esModule: false,
+                            extract: true,
+                            spriteFilename: 'sprite.svg',
+                        },
+                    },
+                },
+                {
+                    test: /.*\.(png|jpg|jpeg|gif)$/iu,
                     use: {
                         loader: 'file-loader',
-                        options: {name: 'images/[name].[hash:5].[ext]'},
+                        options: {name: 'images/[name].[ext]'},
                     },
                 },
             ],
         },
         output: {
-            filename: 'js/[name].min.js',
-            library: ['reactStarterKit', '[name]'],
+            filename: '[name].min.js',
+            library: ['reactStarterKit'],
             path: paths.dist,
             publicPath: '/',
         },
         plugins: [
-            ...(isProd ? [new CleanWebpackPlugin({dry: false, verbose: true})] : []),
+            ...getPrePlugins(isProd),
             new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(mode)}}),
-            new HtmlWebpackPlugin({
-                filename: 'index.html',
-                hash: true,
-                inject: true,
-                production: isProd,
-                template: path.join(paths.src, 'index.tpl'),
-            }),
-            new CopyPlugin({patterns: [{from: paths.public, to: paths.dist}]}),
-            new webpack.IgnorePlugin(/^\.\/locale$/u, /moment$/u),
-            // new WorkboxPlugin.GenerateSW({
-            //     clientsClaim: true,
-            //     skipWaiting: true,
-            // }),
-            ...(isProd
-                ? [
-                      new MiniCssExtractPlugin({
-                          allChunks: true,
-                          disable: false,
-                          filename: 'css/[name].min.css',
-                      }),
-                      new webpack.LoaderOptionsPlugin({
-                          debug: false,
-                          minimize: true,
-                          options: {customInterpolateName: (url) => url.toLowerCase()},
-                      }),
-                  ]
-                : [new webpack.HotModuleReplacementPlugin()]),
+            getHTML('index'),
+            new SvgSpriteLoaderPlugin(),
+            new CopyWebpackPlugin({patterns: [{from: paths.public, to: paths.dist}]}),
+            new webpack.IgnorePlugin({contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u}),
+            ...getPostPlugins(isProd),
         ],
         resolve: {
             extensions: ['.js', '.jsx'],
             modules: ['src', 'node_modules'],
         },
     });
+}
+
+/**
+ * Получить настройки для HtmlWebpackPlugin.
+ * @param {string} page Страница.
+ * @returns {HtmlWebpackPlugin} Настройки для HtmlWebpackPlugin.
+ */
+function getHTML(page) {
+    return new HtmlWebpackPlugin({
+        filename: `${page}.html`,
+        hash: true,
+        inject: true,
+        minify: false,
+        scriptLoading: 'defer',
+        template: path.join(paths.src, `${page}.html`),
+    });
+}
+
+/**
+ * Получить набор начальных плагинов.
+ * @param {boolean} isProd Продакшн.
+ * @returns {*} Набор начальных плагинов.
+ */
+function getPrePlugins(isProd) {
+    if (isProd) {
+        return [new CleanWebpackPlugin({dry: false, verbose: true})];
+    }
+
+    return [];
+}
+
+/**
+ * Получить набор конечных плагинов.
+ * @param {boolean} isProd Продакшн.
+ * @returns {*} Набор конечных плагинов.
+ */
+function getPostPlugins(isProd) {
+    if (isProd) {
+        return [
+            new MiniCssExtractPlugin({filename: '[name].min.css'}),
+            new webpack.LoaderOptionsPlugin({
+                debug: false,
+                minimize: true,
+                options: {customInterpolateName: (url) => url.toLowerCase()},
+            }),
+        ];
+    }
+
+    return [new webpack.HotModuleReplacementPlugin()];
 }
 
 module.exports = webpackConfig;

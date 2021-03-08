@@ -1,0 +1,33 @@
+@import (reference) 'mixins';
+
+.link {
+    color: @c-secondary-90;
+
+    &:link {
+        color: @c-secondary-90;
+    }
+
+    &:visited {
+        color: @c-secondary-90;
+    }
+
+    &:hover {
+        color: @c-secondary-80;
+    }
+
+    &:active {
+        color: @c-secondary-100;
+    }
+
+    &:focus {
+        color: @c-secondary-90;
+    }
+
+    &__default {
+        color: @c-secondary-90;
+    }
+
+    &__disable {
+        color: @c-gray-60;
+    }
+}

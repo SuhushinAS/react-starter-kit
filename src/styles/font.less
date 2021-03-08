@@ -1,64 +1,48 @@
 @import (reference) 'mixins';
 
-.f_h1() {
-    .font-family-roboto();
-    .font-fluid-sm(28px, 40px, 32px, 48px);
+.f_h1 {
+    .font-fluid-md(36px, 40px, 68px, 74px);
 
-    font-weight: 300;
+    font-weight: bold;
 }
 
-.f_h2() {
-    .font-family-roboto();
-    .font-fluid-sm(24px, 40px, 28px, 40px);
+.f_h2 {
+    .font-fluid-md(32px, 36px, 56px, 74px);
 
-    font-weight: 400;
+    font-weight: bold;
 }
 
-.f_h3() {
-    .font-family-roboto();
-    .font-fluid-sm(20px, 32px, 24px, 40px);
+.f_h3 {
+    .font-fluid-md(28px, 32px, 44px, 52px);
 
-    font-weight: 500;
+    font-weight: bold;
 }
 
-.f_h4() {
-    .font-family-roboto();
-    .font-fluid-sm(18px, 32px, 20px, 32px);
+.f_h4 {
+    .font-fluid-md(26px, 28px, 36px, 44px);
 
-    font-weight: 500;
+    font-weight: bold;
 }
 
-.f_h5() {
-    .font-family-roboto();
-    .font-fluid-sm(16px, 24px, 18px, 32px);
+.f_h5 {
+    .font-fluid-md(24px, 28px, 28px, 32px);
 
-    font-weight: 700;
+    font-weight: bold;
 }
 
-.f_h6() {
-    .font-family-roboto();
-    .font-fluid-sm(14px, 24px, 16px, 24px);
+.f_h6 {
+    .font-fluid-md(22px, 24px, 24px, 28px);
 
-    font-weight: 700;
+    font-weight: bold;
 }
 
-.f_p() {
-    .font-family-roboto();
-    .font-fluid-sm(14px, 24px, 16px, 24px);
-
-    font-weight: 400;
-    margin: 0;
+.f_p {
+    .font-fluid-md(14px, 20px, 16px, 20px);
 }
 
-.font-face(@roboto-font-name, 'roboto/roboto-thin', 100, normal);
-.font-face(@roboto-font-name, 'roboto/roboto-thin-italic', 100, italic);
-.font-face(@roboto-font-name, 'roboto/roboto-light', 300, normal);
-.font-face(@roboto-font-name, 'roboto/roboto-light-italic', 300, italic);
-.font-face(@roboto-font-name, 'roboto/roboto-regular', 400, normal);
-.font-face(@roboto-font-name, 'roboto/roboto-regular-italic', 400, italic);
-.font-face(@roboto-font-name, 'roboto/roboto-medium', 500, normal);
-.font-face(@roboto-font-name, 'roboto/roboto-medium-italic', 500, italic);
-.font-face(@roboto-font-name, 'roboto/roboto-bold', 700, normal);
-.font-face(@roboto-font-name, 'roboto/roboto-bold-italic', 700, italic);
-.font-face(@roboto-font-name, 'roboto/roboto-black', 900, normal);
-.font-face(@roboto-font-name, 'roboto/roboto-black-italic', 900, italic);
+.font-face(@font-name-primary, 'roboto/roboto-light', 300, normal);
+.font-face(@font-name-primary, 'roboto/roboto-light-italic', 300, italic);
+.font-face(@font-name-primary, 'roboto/roboto-regular', 400, normal);
+.font-face(@font-name-primary, 'roboto/roboto-regular-italic', 400, italic);
+.font-face(@font-name-primary, 'roboto/roboto-bold', 700, normal);
+.font-face(@font-name-primary, 'roboto/roboto-bold-italic', 700, italic);

@@ -1,31 +1,6 @@
 @import (reference) 'adaptive';
 @import (reference) 'fluid-prop';
 
-.make-font-fluid(@f-min, @l-min, @w-min, @f-max, @l-max, @w-max) {
-    .fluid-prop(font-size, @f-min, @w-min, @f-max, @w-max);
-    .fluid-prop(line-height, @l-min, @w-min, @l-max, @w-max);
-}
-
-.font-fluid(@f-min, @l-min, @f-max, @l-max) {
-    @screen-min: @size-sm-min;
-    @screen-max: @size-lg-min;
-
-    .make-font-fluid(@f-min, @l-min, @screen-min, @f-max, @l-max, @screen-max);
-
-    font-size: @f-max;
-    line-height: @l-max;
-
-    @media (max-width: @screen-min) {
-        font-size: @f-min;
-        line-height: @l-min;
-    }
-}
-
-.font-fluid-full(@f-sm, @l-sm, @f-md, @l-md, @f-lg, @l-lg) {
-    .fluid-prop-full(font-size, @f-sm, @f-md, @f-lg);
-    .fluid-prop-full(line-height, @l-sm, @l-md, @l-lg);
-}
-
 .font-fluid-sm(@f-sm, @l-sm, @f-md, @l-md) {
     .fluid-prop-sm(font-size, @f-sm, @f-md);
     .fluid-prop-sm(line-height, @l-sm, @l-md);

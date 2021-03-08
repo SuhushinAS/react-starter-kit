@@ -1,9 +1,12 @@
-@import 'font';
-@import 'mixins';
 @import '~normalize.css';
+@import (reference) 'link';
+@import (reference) 'mixins';
+@import (reference) 'font';
 
 * {
     box-sizing: border-box;
+    outline: none;
+    touch-action: pan-x pan-y;
 
     &::before,
     &::after {
@@ -21,9 +24,10 @@ body,
 }
 
 body {
+    .font-family-primary();
     .f_p();
 
-    color: @c-gray-100;
+    color: @c-primary-90;
 }
 
 h1,
@@ -59,17 +63,31 @@ h5 {
 }
 
 h6 {
-
     .f_h6();
 }
 
-button,
-input,
-optgroup,
-select,
-textarea {
+li,
+p {
     .f_p();
+}
 
-    color: @c-gray-100;
+img {
+    display: inline-block;
+    font-size: 0;
+    line-height: 0;
+    max-width: 100%;
+}
+
+label {
+    display: block;
     margin: 0;
+}
+
+input,
+textarea {
+    .prop(-webkit-appearance, none);
+}
+
+a {
+    .link();
 }

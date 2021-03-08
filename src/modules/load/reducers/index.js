@@ -1,4 +1,5 @@
-import {createReducer} from 'modules/common/helpers/reducer';
+// @flow
+import {createReducer} from 'helpers/reducer';
 import {loadActions} from 'modules/load/constants';
 
 const initialState = {

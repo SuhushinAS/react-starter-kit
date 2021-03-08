@@ -1,6 +1,18 @@
-@animation: 300ms ease;
-@animation-in: 300ms ease-in;
-@animation-out: 300ms ease-out;
+@animation-duration: 300ms;
+@animation-duration-x2: 600ms;
+@animation-duration-x3: 900ms;
+
+@animation: @animation-duration ease;
+@animation-in: @animation-duration ease-in;
+@animation-out: @animation-duration ease-out;
+
+@animation-x2: @animation-duration-x2 ease;
+@animation-in-x2: @animation-duration-x2 ease-in;
+@animation-out-x2: @animation-duration-x2 ease-out;
+
+@animation-x3: @animation-duration-x3 ease;
+@animation-in-x3: @animation-duration-x3 ease-in;
+@animation-out-x3: @animation-duration-x3 ease-out;
 
 @keyframes spin {
     100% {

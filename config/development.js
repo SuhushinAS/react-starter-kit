@@ -26,15 +26,19 @@ const development = ({contentBase}) => (config) => {
                   port: 8000,
                   stats,
               },
-        devtool: isProd ? false : 'eval',
-        node: {
-            child_process: 'empty',
-            dgram: 'empty',
-            fs: 'empty',
-            net: 'empty',
-            tls: 'empty',
+        devtool: isProd ? false : 'eval-source-map',
+        resolve: {
+            fallback: {
+                child_process: 'empty',
+                dgram: 'empty',
+                fs: 'empty',
+                net: 'empty',
+                tls: 'empty',
+            },
+            ...config.resolve,
         },
         stats,
+        target: isProd ? 'browserslist' : 'web',
         watchOptions: {aggregateTimeout: 300},
     };
 };

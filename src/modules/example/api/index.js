@@ -1,4 +1,5 @@
-import Api from 'modules/common/helpers/api';
+// @flow
+import Api from 'helpers/api';
 
 /**
  * Апи.
@@ -6,13 +7,13 @@ import Api from 'modules/common/helpers/api';
 export class ExampleApi extends Api {
     /**
      * Получить список.
-     * @param {*} filter Фильтр.
-     * @param {*} limit Лимит.
-     * @param {*} offset Смещение.
+     // * @param {*} filter Фильтр.
+     // * @param {*} limit Лимит.
+     // * @param {*} offset Смещение.
      * @return {*} Список.
      */
-    listGet(filter = null, limit = 0, offset = 0) {
-        return this.request('/api/v1/example');
+    listGet() {
+        return this.requestLocal('/api/v1/example.json');
     }
 }
 

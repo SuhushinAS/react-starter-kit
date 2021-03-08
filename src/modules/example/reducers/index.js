@@ -1,7 +1,9 @@
-import {createReducer, listGet, update} from 'modules/common/helpers/reducer';
+// @flow
+import {createReducer, listGet, update} from 'helpers/reducer';
 import {exampleActions} from 'modules/example/constants';
+import type {TExampleStore} from 'modules/example/types';
 
-const initialState = {
+const initialState: TExampleStore = {
     data: {},
     list: [],
 };
