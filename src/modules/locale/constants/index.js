@@ -6,5 +6,5 @@ export const localeActions = {
 };
 
 export const moduleName = 'locale';
-export const defaultLocale = 'en';
+export const defaultLocale = 'ru';
 export const currentLocaleKey = 'currentLocale';

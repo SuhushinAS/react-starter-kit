@@ -1,4 +1,5 @@
 // @flow
+import {RootContext} from 'modules/common/context';
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router';
 
@@ -8,7 +9,7 @@ type TRoutesProps = {
 };
 
 type TRoute = {
-    component: React.Node,
+    component: React$ComponentType<any>,
     isExact: boolean,
     path: string,
 };
@@ -46,13 +47,30 @@ export class Routes extends React.Component<TRoutesProps> {
     }
 
     /**
-     * Вывести Компонент по пути.
+     * Вывести Маршрут.
      * @param {*} component Компонент.
      * @param {boolean} isExact Точное совпадение.
      * @param {string} path Путь.
-     * @return {*} Компонент.
+     * @return {*} представление.
      */
-    renderRoute = ({component, isExact, path}) => <Route component={component} exact={isExact} key={path} path={`${this.props.root}${path}`} />;
+    renderRoute = ({component, isExact, path}) => (
+        <Route exact={isExact} key={path} path={`${this.props.root}${path}`} render={this.renderComponent(component)} />
+    );
+
+    /**
+     * Вывести компонент
+     * @param {*} Component Компонент.
+     * @return {*} представление.
+     */
+    renderComponent = (Component) => (props) => {
+        const {root} = this.props;
+
+        return (
+            <RootContext.Provider value={root}>
+                <Component {...props} root={root} />
+            </RootContext.Provider>
+        );
+    };
 }
 
 export default Routes;

@@ -1,8 +1,6 @@
 // @flow
-import React from 'react';
-
 type TIfProps = {
-    children: React.Node,
+    children: React$Node,
     condition: boolean,
 };
 

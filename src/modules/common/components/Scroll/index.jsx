@@ -4,7 +4,7 @@ import React from 'react';
 import './style.less';
 
 type TScrollProps = {
-    children: React.Node,
+    children: React$Node,
     direction: string,
 };
 

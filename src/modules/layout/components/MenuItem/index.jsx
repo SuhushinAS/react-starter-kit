@@ -2,7 +2,7 @@
 import React from 'react';
 import {matchPath, withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
-import 'modules/layout/components/MenuItem/style.less';
+import './style.less';
 
 export type TMenuItemProps = {
     location: any,

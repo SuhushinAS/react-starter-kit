@@ -14,3 +14,9 @@ export type TGetState = () => TState;
 export type TDispatch = Dispatch<TActionDefault>;
 export type TThunk<A> = ((TDispatch, TGetState) => Promise<TResponse> | TResponse) => A;
 export type TStore = Store<TState, TActionDefault, TDispatch>;
+export type TMatch = {
+    isExact: boolean,
+    params: {[string]: string},
+    path: string,
+    url: string,
+};

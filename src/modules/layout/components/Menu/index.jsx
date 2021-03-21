@@ -24,11 +24,6 @@ export class Menu extends React.Component<TMenuProps> {
     static defaultProps = {
         list: [
             {
-                id: 'catalog',
-                name: 'Catalog',
-                path: '/catalog',
-            },
-            {
                 id: 'example',
                 name: 'Example',
                 path: '/example',

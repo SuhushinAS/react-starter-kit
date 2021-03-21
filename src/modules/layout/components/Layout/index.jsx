@@ -31,8 +31,6 @@ export const Layout = ({children}: TLayoutProps) => {
                         </footer>
                     </div>
                 </Scroll>
-                {/* scroll-start */}
-                {/* scroll-stop */}
             </div>
         </div>
     );

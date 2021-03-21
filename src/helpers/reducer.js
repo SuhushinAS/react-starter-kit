@@ -1,6 +1,6 @@
 // @flow
 import type {TState} from 'app/types';
-import {getId} from 'helpers/action';
+import {getIdDefault} from 'helpers/action';
 
 /**
  * Создать редьюсер.
@@ -25,7 +25,7 @@ export const createReducer = (initialState: any, reducers: any) => (state: TStat
  * @param {*} list Список.
  * @return {*} Стейт.
  */
-export const listGet = (state: TState, {data, list}: any) => ({
+export const listGet = (state: any, {data, list}: any) => ({
     ...state,
     data,
     list,
@@ -37,10 +37,10 @@ export const listGet = (state: TState, {data, list}: any) => ({
  * @param item Элемент.
  * @return {*} Стейт.
  */
-export const update = (state: any, {item}: any) => ({
+export const update = (state: any, {data}: any) => ({
     ...state,
     data: {
         ...state.data,
-        [getId(item)]: item,
+        [getIdDefault(data)]: data,
     },
 });

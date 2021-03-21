@@ -14,7 +14,7 @@ type TMessageProps = {
  * @param {*} values Значения
  * @return {string | T} Сообщение.
  */
-export function message({id, intl, values}: TMessageProps) {
+export function message({id, intl, values}: TMessageProps): string {
     return intl.formatMessage({defaultMessage: '\u00A0', id}, values);
 }
 

@@ -1,6 +1,5 @@
 // @flow
 import App from 'app/components/App';
-import {apiList} from 'app/storage/api';
 import {store} from 'app/storage/store';
 import history from 'helpers/history';
 import Config from 'modules/config/components/Config';
@@ -22,7 +21,7 @@ function renderApp() {
             <Provider store={store}>
                 <LocaleProvider>
                     <Router history={history}>
-                        <Config apiList={apiList}>
+                        <Config>
                             <App />
                         </Config>
                     </Router>
