@@ -91,6 +91,7 @@
     "scripts": {
         "build": "cross-env NODE_ENV=production webpack --progress --mode=production",
         "eslint": "eslint --ext .js,.jsx --fix ./src",
+        "flow": "flow check",
         "serve": "cross-env NODE_ENV=production webpack serve --mode=production",
         "start": "cross-env NODE_ENV=development webpack serve --mode=development",
         "stylelint": "stylelint ./**/*.{css,less} --fix"

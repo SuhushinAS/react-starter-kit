@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 
 type TLocaleProps = {
-    children: React.Node,
+    children: React$Node,
     dispatch: TDispatch,
     loadMessages: ?boolean,
     locale: string,

@@ -4,7 +4,7 @@ export type TExampleState = {|
 |};
 
 export type TExampleStore = {|
-    data: {},
+    data: TExampleData,
     list: string[],
 |};
 

@@ -1,4 +1,5 @@
 // @flow
+import type {TMatch} from 'app/types';
 import Routes from 'modules/common/components/Routes';
 import Example from 'modules/example/components/Example';
 import ExampleList from 'modules/example/components/ExampleList';
@@ -6,7 +7,7 @@ import React from 'react';
 import {withRouter} from 'react-router';
 
 type TExampleRouterProps = {
-    match: any,
+    match: TMatch,
 };
 
 const routeList = [

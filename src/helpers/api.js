@@ -8,10 +8,16 @@ export class Api {
      * @param {string} host Хост.
      */
     constructor(host: string = '') {
-        this.host = host;
+        Api.host = host;
     }
 
-    host: string;
+    static host: string = '';
+    static options: any = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'GET',
+    };
 
     /**
      * Получть JSON.
@@ -25,11 +31,11 @@ export class Api {
      * @param {*} options Опции.
      * @return {*} Опции.
      */
-    getOptions(options = {}) {
+    getOptions(options: any = {}) {
         const {headers = {}} = options;
         return {
-            headers: {'Content-Type': 'application/json', ...headers},
-            method: 'GET',
+            ...Api.options,
+            headers: {...Api.options.headers, ...headers},
             ...options,
         };
     }
@@ -41,7 +47,7 @@ export class Api {
      * @return {*} Запрос.
      */
     request(path: string = '', options) {
-        return fetch(`${this.host}${path}`, this.getOptions(options)).then(this.getJSON);
+        return fetch(`${Api.host}${path}`, this.getOptions(options)).then(this.getJSON);
     }
 
     /**

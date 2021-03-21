@@ -48,7 +48,7 @@ function webpackConfig(env, argv) {
                 },
                 {
                     test: /\.less$/u,
-                    use: [styleLoader, 'css-loader', 'postcss-loader', 'less-loader'],
+                    use: [styleLoader, 'css-loader', 'postcss-loader', {loader: 'less-loader', options: {lessOptions: {paths: [__dirname]}}}],
                 },
                 {
                     test: /\.(ttf|eot|woff|woff2)(\?[a-z0-9]+)?$/u,

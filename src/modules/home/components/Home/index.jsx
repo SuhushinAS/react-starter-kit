@@ -18,7 +18,7 @@ export class Home extends React.Component<THomeProps> {
             <div className="home">
                 <div className="box">
                     <h1>
-                        <Message id="home.header.title" />
+                        <Message id="home.title" />
                     </h1>
                     <h2>
                         <SvgIcon name="logo" />

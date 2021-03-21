@@ -9,24 +9,19 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 
 type TConfigProps = {
-    apiList: Api[],
-    children: React.Node,
+    children: React$Node,
     config: TConfig,
     dispatch: TDispatch,
+};
+
+type TConfigState = {
+    config: TConfig,
 };
 
 /**
  * Пример компонента.
  */
-export class Config extends React.Component<TConfigProps> {
-    /**
-     * Значения свойств по-умолчанию.
-     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-     */
-    static defaultProps = {
-        apiList: [],
-    };
-
+export class Config extends React.Component<TConfigProps, TConfigState> {
     /**
      * Конструктор компонента.
      * @param {*} props Свойства переданные в компонент.
@@ -37,12 +32,15 @@ export class Config extends React.Component<TConfigProps> {
         props.dispatch(actionConfigGet());
     }
 
+    state = {};
+
     /**
      * Вывести компонент.
      * @return {*} Представление.
      */
     render() {
-        const {children, config} = this.props;
+        const {children} = this.props;
+        const {config} = this.state;
 
         if (config) {
             return children;
@@ -58,18 +56,12 @@ export class Config extends React.Component<TConfigProps> {
      * @return {undefined}
      */
     componentDidUpdate(props) {
-        if (props.config !== this.props.config) {
-            this.props.apiList.forEach(this.initHost);
+        const {config} = this.props;
+        if (props.config !== config) {
+            Api.host = config.host;
+            this.setState({config});
         }
     }
-
-    /**
-     * Инициировать хост Апи.
-     * @param api Апи.
-     */
-    initHost = (api) => {
-        api.host = this.props.config.host;
-    };
 }
 
 export default compose(connect((state) => ({config: selectConfig(state)})))(Config);

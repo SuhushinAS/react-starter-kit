@@ -17,7 +17,7 @@ const reducers = {
             [locale]: data,
         },
     }),
-    [localeActions.getList]: (state, list) => ({
+    [localeActions.getList]: (state, {list}) => ({
         ...state,
         list,
     }),
