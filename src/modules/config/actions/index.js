@@ -11,8 +11,5 @@ import {actionLoadStart, dispatchLoadStop} from 'modules/load/actions';
  */
 export const actionConfigGet = () => (dispatch: TDispatch) => {
     dispatch(actionLoadStart(configActions.update));
-    return configApi
-        .get()
-        .then(dispatchData(dispatch, configActions.update))
-        .then(dispatchLoadStop(dispatch, configActions.update));
+    return configApi.get().then(dispatchData(dispatch, configActions.update)).then(dispatchLoadStop(dispatch, configActions.update));
 };
