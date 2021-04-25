@@ -17,7 +17,4 @@ export const selectExampleItem = selectItem(selectExampleData);
 
 export const selectExampleIdList = selectIdList(selectExample);
 
-export const selectExampleList = createSelector(
-    [selectExampleData, selectExampleIdList],
-    getList
-);
+export const selectExampleList = createSelector([selectExampleData, selectExampleIdList], getList);

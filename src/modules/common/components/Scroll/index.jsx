@@ -49,7 +49,7 @@ export class Scroll extends React.Component<TScrollProps> {
 
     /**
      * Вывести компонент.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     render() {
         const {children, direction} = this.props;
@@ -87,14 +87,14 @@ export class Scroll extends React.Component<TScrollProps> {
     }
 
     /**
-     * Должен ли компонент обновиться?
-     * На самом деле, обычно react сам отлично разбирается.
-     * Но иногда ручное управление позволяет существенно ускорить работу в "узких местах".
-     * @param {*} props Новые свойства.
-     * @param {*} state Новое состояние.
-     * @return {boolean} Должен ли компонент обновиться?
+     * Вызывается сразу перед тем, как компонент будет удален из DOM.
+     * @return {undefined}
      */
-    // shouldComponentUpdate(props, state) {}
+    componentWillUnmount() {
+        if (this.baron) {
+            this.baron.dispose();
+        }
+    }
 
     /**
      * Вызывается сразу после render.
@@ -104,16 +104,6 @@ export class Scroll extends React.Component<TScrollProps> {
     componentDidUpdate() {
         if (this.baron) {
             this.baron.update();
-        }
-    }
-
-    /**
-     * Вызывается сразу перед тем, как компонент будет удален из DOM.
-     * @return {undefined}
-     */
-    componentWillUnmount() {
-        if (this.baron) {
-            this.baron.dispose();
         }
     }
 }

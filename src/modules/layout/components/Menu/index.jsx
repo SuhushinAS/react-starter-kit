@@ -1,7 +1,7 @@
 // @flow
+import 'modules/layout/components/Menu/style.less';
 import MenuItem from 'modules/layout/components/MenuItem';
 import React from 'react';
-import 'modules/layout/components/Menu/style.less';
 
 type TMenuProps = {
     list: TMenuItem[],
@@ -33,7 +33,7 @@ export class Menu extends React.Component<TMenuProps> {
 
     /**
      * Вывести компонент.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     render() {
         return <ul className="menu">{this.props.list.map(this.renderItem)}</ul>;
@@ -44,7 +44,7 @@ export class Menu extends React.Component<TMenuProps> {
      * @param {*} id Идентификатор.
      * @param {*} name Название.
      * @param {*} path Путь.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     renderItem = ({id, name, path}: TMenuItem) => (
         <li className="menu__item" key={id}>

@@ -3,6 +3,15 @@
  * АПИ.
  */
 export class Api {
+    static host: string = '';
+
+    static options: any = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'GET',
+    };
+
     /**
      * Конструктор.
      * @param {string} host Хост.
@@ -10,14 +19,6 @@ export class Api {
     constructor(host: string = '') {
         Api.host = host;
     }
-
-    static host: string = '';
-    static options: any = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        method: 'GET',
-    };
 
     /**
      * Получть JSON.

@@ -32,11 +32,9 @@ export class Config extends React.Component<TConfigProps, TConfigState> {
         props.dispatch(actionConfigGet());
     }
 
-    state = {};
-
     /**
      * Вывести компонент.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     render() {
         const {children} = this.props;
@@ -48,6 +46,8 @@ export class Config extends React.Component<TConfigProps, TConfigState> {
 
         return null;
     }
+
+    state = {};
 
     /**
      * Вызывается сразу после render.

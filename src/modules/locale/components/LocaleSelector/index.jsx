@@ -17,7 +17,7 @@ type TLocaleSelectorProps = {
 export class LocaleSelector extends React.Component<TLocaleSelectorProps> {
     /**
      * Вывести компонент.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     render() {
         const {localeCurrent, localeList} = this.props;

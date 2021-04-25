@@ -9,22 +9,9 @@ type TExampleItemProps = {
 /**
  * Функциональный компонент.
  * @param {*} props Свойства компонента.
- * @return {*} Представление.
+ * @return {JSX.Element} Представление.
  */
-export const ExampleItem = ({item}: TExampleItemProps) => {
-    // Объявляем новую переменную состояния "count"
-    // const [count, setCount] = React.useState(0);
-
-    // По принципу componentDidMount и componentDidUpdate:
-    // React.useEffect(() => {
-    // По принципу componentWillUnmount;
-    // return () => {};
-    // });
-
-    // const config = React.useContext(Context);
-
-    return <div>{item.name}</div>;
-};
+export const ExampleItem = ({item}: TExampleItemProps) => <div>{item.name}</div>;
 
 ExampleItem.defaultProps = {
     name: 'ExampleItem',

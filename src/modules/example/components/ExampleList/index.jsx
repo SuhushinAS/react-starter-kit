@@ -27,7 +27,7 @@ export class ExampleList extends React.Component<TExampleListProps> {
 
     /**
      * Вывести компонент.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     render() {
         return <div className="box">{this.props.exampleList.map(this.renderItem)}</div>;
@@ -36,7 +36,7 @@ export class ExampleList extends React.Component<TExampleListProps> {
     /**
      * Вывести элемент.
      * @param {*} item Идентификатор.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     renderItem = (item: TExample) => (
         <div className="example__item" key={item.id}>

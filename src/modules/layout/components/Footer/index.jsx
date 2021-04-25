@@ -2,19 +2,10 @@
 import React from 'react';
 import './style.less';
 
-type TFooterProps = {};
-
 /**
  * Пример компонента.
+ * @return {JSX.Element} Представление.
  */
-export class Footer extends React.Component<TFooterProps> {
-    /**
-     * Вывести компонент.
-     * @return {*} Представление.
-     */
-    render() {
-        return <div className="footer">Footer</div>;
-    }
-}
+export const Footer = () => <div className="footer">Footer</div>;
 
 export default Footer;

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import './style.less';
 import {Link} from 'react-router-dom';
+import './style.less';
 
 type TExampleProps = {};
 
@@ -26,7 +26,7 @@ export class Example extends React.Component<TExampleProps> {
 
     /**
      * Вывести компонент.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     render() {
         return (
