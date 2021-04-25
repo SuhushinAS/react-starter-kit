@@ -41,7 +41,7 @@ export class KeyHandler extends React.Component<TKeyHandlerProps> {
 
     /**
      * Вывести компонент.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     render() {
         return null;

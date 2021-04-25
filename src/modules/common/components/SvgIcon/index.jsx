@@ -49,8 +49,6 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
 
     isMount = true;
 
-    state = {};
-
     /**
      * Вызывается сразу после render.
      * Не вызывается в момент первого render компонента.
@@ -120,6 +118,8 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
 
         return null;
     }
+
+    state = {};
 }
 
 export default SvgIcon;

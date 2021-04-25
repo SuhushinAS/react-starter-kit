@@ -10,6 +10,6 @@ type TIfProps = {
  * @param {boolean} condition Условие.
  * @return {*} Компонент по условию.
  */
-const If = ({children, condition}: TIfProps) => condition && children;
+export const If = ({children, condition}: TIfProps) => condition && children;
 
 export default If;

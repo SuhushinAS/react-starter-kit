@@ -29,7 +29,7 @@ export class Routes extends React.Component<TRoutesProps> {
 
     /**
      * Вывести компонент.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     render() {
         const {list, root} = this.props;
@@ -51,7 +51,7 @@ export class Routes extends React.Component<TRoutesProps> {
      * @param {*} component Компонент.
      * @param {boolean} isExact Точное совпадение.
      * @param {string} path Путь.
-     * @return {*} представление.
+     * @return {JSX.Element} Представление.
      */
     renderRoute = ({component, isExact, path}) => (
         <Route exact={isExact} key={path} path={`${this.props.root}${path}`} render={this.renderComponent(component)} />
@@ -60,7 +60,7 @@ export class Routes extends React.Component<TRoutesProps> {
     /**
      * Вывести компонент
      * @param {*} Component Компонент.
-     * @return {*} представление.
+     * @return {JSX.Element} Представление.
      */
     renderComponent = (Component) => (props) => {
         const {root} = this.props;

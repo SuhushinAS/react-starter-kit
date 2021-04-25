@@ -35,7 +35,7 @@ export class LocaleProvider extends React.Component<TLocaleProps> {
 
     /**
      * Вывести компонент.
-     * @return {*} Представление.
+     * @return {JSX.Element} Представление.
      */
     render() {
         const {children, locale, messages} = this.props;

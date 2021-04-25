@@ -15,7 +15,7 @@ export type TMenuItemProps = {
  * @param {*} location Местоположение.
  * @param {*} name Название.
  * @param {*} path Путь.
- * @return {*} Представление.
+ * @return {JSX.Element} Представление.
  */
 export const MenuItem = ({location, name, path}: TMenuItemProps) => {
     if (matchPath(location.pathname, {path})) {
