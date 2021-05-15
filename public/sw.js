@@ -30,27 +30,37 @@ function onInstall(e) {
  * @param {*} event Событие
  */
 function onFetch(event) {
-    event.respondWith(
-        new Promise(function (resolve) {
-            fetch(event.request)
-                .then(function (response) {
-                    const responseClone = response.clone();
+    const {request} = event;
+    const url = new URL(request.url);
 
-                    caches.open(cacheName).then(function (cache) {
-                        cache.put(event.request, responseClone);
-                    });
+    if (url.origin === location.origin) {
+        event.respondWith(cacheLite(request));
+    }
+}
 
-                    resolve(response);
-                })
-                .catch(function (e) {
-                    caches.match(event.request).then(function (response) {
-                        if (response) {
-                            resolve(response);
-                        }
-
-                        resolve(caches.match('/'));
-                    });
+/**
+ * Кеширование.
+ * @param request Запрос.
+ * @return {*} Результат кеширования.
+ */
+function cacheLite(request) {
+    return new Promise(function (resolve) {
+        fetch(request)
+            .then(function (response) {
+                caches.open(cacheName).then(function (cache) {
+                    cache.put(request, response);
                 });
-        })
-    );
+
+                resolve(response.clone());
+            })
+            .catch(function () {
+                caches.match(request).then(function (response) {
+                    if (response) {
+                        resolve(response);
+                    }
+
+                    resolve(caches.match('/'));
+                });
+            });
+    });
 }
