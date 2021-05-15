@@ -11,7 +11,7 @@ export const Home = () => (
     <div className="home">
         <div className="box">
             <h1>
-                <Message id="home.title" />
+                <Message id="home.header.title" />
             </h1>
             <h2>
                 <SvgIcon name="logo" />

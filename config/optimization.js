@@ -1,35 +1,19 @@
-const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
-/**
- * Получить конфигурацию webpack.
- * @param {*} config конфигурация webpack.
- * @return {*} конфигурация webpack.
- */
-function optimization(config) {
-    const {mode} = config;
-
+module.exports = ({mode}) => {
     return {
-        ...config,
         optimization: {
             chunkIds: 'named',
             emitOnErrors: false,
             minimizer: [
                 new TerserWebpackPlugin({
                     extractComments: false,
-                    terserOptions: {
-                        output: {
-                            comments: false,
-                        },
-                    },
+                    terserOptions: {output: {comments: false}},
                 }),
-                new OptimizeCSSAssetsWebpackPlugin({
-                    cssProcessorOptions: {
-                        autoprefixer: false,
-                        mergeIdents: false,
-                        reduceIdents: false,
-                        safe: true,
-                        zIndex: false,
+                new CssMinimizerPlugin({
+                    minimizerOptions: {
+                        preset: ['default', {discardComments: {removeAll: true}}],
                     },
                 }),
             ],
@@ -56,6 +40,4 @@ function optimization(config) {
             },
         },
     };
-}
-
-module.exports = optimization;
+};

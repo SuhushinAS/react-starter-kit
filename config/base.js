@@ -1,10 +1,7 @@
-/**
- * Получить конфигурацию webpack.
- * @param {*} config конфигурация webpack.
- * @return {*} конфигурация webpack.
- */
-const development = ({contentBase}) => (config) => {
-    const {mode} = config;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+module.exports = (options) => {
+    const {dist, mode} = options;
     const isProd = 'production' === mode;
     const stats = {
         colors: true,
@@ -13,12 +10,11 @@ const development = ({contentBase}) => (config) => {
     };
 
     return {
-        ...config,
         bail: isProd,
         devServer: isProd
             ? {}
             : {
-                  contentBase,
+                  contentBase: options.public,
                   disableHostCheck: true,
                   historyApiFallback: true,
                   host: '0.0.0.0',
@@ -27,7 +23,18 @@ const development = ({contentBase}) => (config) => {
                   stats,
               },
         devtool: isProd ? false : 'eval-source-map',
+        entry: 'index.jsx',
+        mode,
+        output: {
+            clean: true,
+            filename: '[name].min.js',
+            library: ['reactStarterKit'],
+            path: dist,
+            publicPath: '/',
+        },
+        plugins: [new CopyWebpackPlugin({patterns: [{from: options.public, to: options.dist}]})],
         resolve: {
+            extensions: ['.js', '.jsx'],
             fallback: {
                 child_process: 'empty',
                 dgram: 'empty',
@@ -35,12 +42,10 @@ const development = ({contentBase}) => (config) => {
                 net: 'empty',
                 tls: 'empty',
             },
-            ...config.resolve,
+            modules: ['src', 'node_modules'],
         },
         stats,
         target: isProd ? 'browserslist' : 'web',
         watchOptions: {aggregateTimeout: 300},
     };
 };
-
-module.exports = development;
