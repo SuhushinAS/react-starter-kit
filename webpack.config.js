@@ -1,12 +1,7 @@
 const path = require('path');
-const {merge} = require('webpack-merge');
-const asset = require('./config/asset');
-const base = require('./config/base');
-const html = require('./config/html');
-const optimization = require('./config/optimization');
-const script = require('./config/script');
-const style = require('./config/style');
-const svg = require('./config/svg');
+const {configs, merge} = require('@suhushinas/webpack-config');
+
+const {asset, base, html, optimization, script, style, svg} = configs;
 
 /**
  * Получить конфигурацию webpack.
