@@ -48,17 +48,17 @@
         "lint-staged": "^11.0.0",
         "mini-css-extract-plugin": "^1.6.0",
         "postcss": "^8.2.15",
-        "postcss-loader": "^5.1.0",
         "postcss-flexbugs-fixes": "^5.0.2",
         "postcss-gradient-transparency-fix": "^4.0.0",
+        "postcss-loader": "^5.1.0",
         "style-loader": "^2.0.0",
         "svg-sprite-loader": "^6.0.6",
         "terser-webpack-plugin": "^5.1.1",
         "url-loader": "^4.1.1",
         "webpack": "^5.37.0",
-        "webpack-merge": "^5.7.3",
         "webpack-cli": "^4.7.0",
-        "webpack-dev-server": "^3.11.2"
+        "webpack-dev-server": "^3.11.2",
+        "webpack-merge": "^5.7.3"
     },
     "engineStrict": true,
     "engines": {
