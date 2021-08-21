@@ -14,13 +14,11 @@ module.exports = (options) => {
         devServer: isProd
             ? {}
             : {
-                  contentBase: options.public,
-                  disableHostCheck: true,
                   historyApiFallback: true,
                   host: '0.0.0.0',
                   hot: true,
                   port: 8000,
-                  stats,
+                  static: options.public,
               },
         devtool: isProd ? false : 'eval-source-map',
         entry: 'index.jsx',
