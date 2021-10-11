@@ -8,15 +8,17 @@ import {getIdDefault} from 'helpers/action';
  * @param {*} reducers Редьюсеры.
  * @return {*} редьюсер.
  */
-export const createReducer = (initialState: any, reducers: any) => (state: TState = initialState, {data, type}: any) => {
-    const reducer = reducers[type];
+export const createReducer =
+    (initialState: any, reducers: any) =>
+    (state: TState = initialState, {data, type}: any) => {
+        const reducer = reducers[type];
 
-    if ('function' === typeof reducer) {
-        return reducer(state, data);
-    }
+        if ('function' === typeof reducer) {
+            return reducer(state, data);
+        }
 
-    return state;
-};
+        return state;
+    };
 
 /**
  * Получить список.

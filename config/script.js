@@ -20,7 +20,7 @@ module.exports = ({mode}) => {
                 {
                     exclude: /node_modules/u,
                     test: /\.(js|jsx)$/u,
-                    use: {loader: 'babel-loader', options: {cacheDirectory: true}},
+                    use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
                 },
             ],
         },

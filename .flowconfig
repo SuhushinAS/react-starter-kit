@@ -12,8 +12,6 @@ untyped-import=off
 unclear-type=off
 
 [options]
-esproposal.class_instance_fields=enable
-esproposal.class_static_fields=enable
 log.file=logs/flow.log
 ;merge_timeout=500
 module.file_ext=.css

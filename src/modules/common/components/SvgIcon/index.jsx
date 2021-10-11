@@ -13,9 +13,9 @@ type TImport = {
 };
 
 type TIcon = {
-    id: string,
+    symbol: string,
     toString: any,
-    url: string,
+    view: string,
     viewBox: string,
 };
 
@@ -106,12 +106,12 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
      * @return {*} Представление компонента.
      */
     render() {
-        const {id, url, viewBox} = this.state;
+        const {symbol, viewBox} = this.state;
 
-        if (id) {
+        if (symbol) {
             return (
                 <svg className="svg-icon" viewBox={viewBox}>
-                    <use xlinkHref={url} />
+                    <use xlinkHref={symbol} />
                 </svg>
             );
         }
