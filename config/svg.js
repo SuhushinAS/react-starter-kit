@@ -1,4 +1,4 @@
-const SvgSpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const SvgSpriteLoaderPlugin = require('external-svg-sprite-loader');
 
 module.exports = () => {
     return {
@@ -8,12 +8,8 @@ module.exports = () => {
                     test: /\.svg$/u,
                     use: [
                         {
-                            loader: 'svg-sprite-loader',
-                            options: {
-                                esModule: false,
-                                extract: true,
-                                spriteFilename: 'sprite.svg',
-                            },
+                            loader: SvgSpriteLoaderPlugin.loader,
+                            options: {name: 'sprite.svg'},
                         },
                     ],
                 },

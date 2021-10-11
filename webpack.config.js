@@ -25,8 +25,12 @@ function webpackConfig(env, argv) {
         root,
         src: 'src',
     };
-
-    const result = {};
+    const clean = 'production' === mode ? true : {keep: /\.svg$/u};
+    const result = {
+        output: {
+            clean,
+        },
+    };
 
     return merge(asset(options), base(options), html(options), optimization(options), script(options), style(options), svg(options), result);
 }
