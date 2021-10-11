@@ -6,14 +6,16 @@ module.exports = () => {
             rules: [
                 {
                     test: /\.svg$/u,
-                    use: {
-                        loader: 'svg-sprite-loader',
-                        options: {
-                            esModule: false,
-                            extract: true,
-                            spriteFilename: 'sprite.svg',
+                    use: [
+                        {
+                            loader: 'svg-sprite-loader',
+                            options: {
+                                esModule: false,
+                                extract: true,
+                                spriteFilename: 'sprite.svg',
+                            },
                         },
-                    },
+                    ],
                 },
             ],
         },
