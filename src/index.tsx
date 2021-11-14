@@ -16,15 +16,17 @@ const root = document.getElementById('root');
 function renderApp() {
   if (root) {
     ReactDOM.render(
-      <Provider store={store}>
-        <LocaleProviderContainer>
-          <BrowserRouter>
-            <ConfigContainer>
-              <App />
-            </ConfigContainer>
-          </BrowserRouter>
-        </LocaleProviderContainer>
-      </Provider>,
+      <React.StrictMode>
+        <Provider store={store}>
+          <LocaleProviderContainer>
+            <BrowserRouter>
+              <ConfigContainer>
+                <App />
+              </ConfigContainer>
+            </BrowserRouter>
+          </LocaleProviderContainer>
+        </Provider>
+      </React.StrictMode>,
       root
     );
   }
