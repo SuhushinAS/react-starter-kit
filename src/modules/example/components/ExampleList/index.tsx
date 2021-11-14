@@ -1,4 +1,4 @@
-import type {TDispatch} from 'app/types';
+import type {TDispatch, TState} from 'app/types';
 import {actionExampleListGet} from 'modules/example/actions';
 import ExampleItem from 'modules/example/components/ExampleItem';
 import {selectExampleList} from 'modules/example/selectors';
@@ -56,7 +56,7 @@ export class ExampleList extends React.Component<TExampleListProps> {
 }
 
 export default compose(
-    connect((state) => ({
+    connect((state: TState) => ({
         exampleList: selectExampleList(state),
     }))
 )(ExampleList);

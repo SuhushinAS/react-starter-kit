@@ -1,3 +1,4 @@
+import {TState} from 'app/types';
 import type {TDispatch} from 'app/types';
 import {actionLocaleSetCurrent} from 'modules/locale/actions';
 import {selectLocaleCurrent, selectLocaleList} from 'modules/locale/selectors';
@@ -48,7 +49,7 @@ export class LocaleSelector extends React.Component<TLocaleSelectorProps> {
     };
 }
 
-export default connect((state) => ({
+export default connect((state: TState) => ({
     localeCurrent: selectLocaleCurrent(state),
     localeList: selectLocaleList(state),
 }))(LocaleSelector);

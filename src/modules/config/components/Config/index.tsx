@@ -1,3 +1,4 @@
+import {TState} from 'app/types';
 import type {TDispatch} from 'app/types';
 import Api from 'helpers/api';
 import {actionConfigGet} from 'modules/config/actions';
@@ -63,4 +64,4 @@ export class Config extends React.Component<TConfigProps, TConfigState> {
     }
 }
 
-export default compose(connect((state) => ({config: selectConfig(state)})))(Config);
+export default compose(connect((state: TState) => ({config: selectConfig(state)})))(Config);

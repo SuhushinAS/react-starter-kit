@@ -1,3 +1,4 @@
+import {TState} from 'app/types';
 import type {TDispatch} from 'app/types';
 import {selectLoadItem} from 'modules/load/selectors';
 import {actionLocaleGetList, actionLocaleGetMessages, actionLocaleInit} from 'modules/locale/actions';
@@ -64,7 +65,7 @@ export class LocaleProvider extends React.Component<TLocaleProps> {
 }
 
 export default compose(
-    connect((state) => {
+    connect((state: TState) => {
         const locale = selectLocaleCurrent(state);
         return {
             loadMessages: selectLoadItem(state, localeActions.getData),

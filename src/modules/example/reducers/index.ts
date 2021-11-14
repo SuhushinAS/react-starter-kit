@@ -12,4 +12,4 @@ const reducers = {
     [exampleActions.update]: update,
 };
 
-export default createReducer(initialState, reducers);
+export default createReducer<TExampleStore>(initialState, reducers);

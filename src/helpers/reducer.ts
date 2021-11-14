@@ -1,13 +1,17 @@
 import {getIdDefault} from 'helpers/action';
 
+type GReducers<T> = {
+    [key: string]: (state: T, data: any) => T;
+};
+
 /**
  * Создать редьюсер.
  * @param {*} initialState Начальное состояние.
  * @param {*} reducers Редьюсеры.
  * @return {*} редьюсер.
  */
-export function createReducer<TState = any>(initialState: TState, reducers: any) {
-    return (state: TState = initialState, {data, type}: any) => {
+export function createReducer<T = any>(initialState, reducers: GReducers<T>) {
+    return function (state: T = initialState, {data, type}): T {
         const reducer = reducers[type];
 
         if ('function' === typeof reducer) {

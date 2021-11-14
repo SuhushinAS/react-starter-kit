@@ -10,4 +10,4 @@ const reducers = {
     [configActions.update]: (state, config) => ({...state, ...config}),
 };
 
-export default createReducer(initialState, reducers);
+export default createReducer<TConfig>(initialState, reducers);
