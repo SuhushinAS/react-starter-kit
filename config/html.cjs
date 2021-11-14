@@ -1,7 +1,7 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import path from 'path';
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-export default ({pages, src}) => {
+module.exports = ({pages, src}) => {
     return {
         plugins: pages.map(
             (page) =>

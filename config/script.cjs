@@ -1,4 +1,4 @@
-import webpack from 'webpack';
+const webpack = require('webpack');
 
 /**
  * Обработка имён файлов.
@@ -7,7 +7,7 @@ import webpack from 'webpack';
  */
 const customInterpolateName = (url) => url.toLowerCase();
 
-export default ({mode}) => {
+module.exports = ({mode}) => {
     const isProd = 'production' === mode;
 
     const plugins = isProd

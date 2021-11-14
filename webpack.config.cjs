@@ -1,16 +1,12 @@
-import path, {dirname} from 'path';
-import {fileURLToPath} from 'url';
-import {merge} from 'webpack-merge';
-import asset from './config/asset.js';
-import base from './config/base.js';
-import html from './config/html.js';
-import optimization from './config/optimization.js';
-import script from './config/script.js';
-import style from './config/style.js';
-import svg from './config/svg.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const path = require('path');
+const {merge} = require('webpack-merge');
+const asset = require('./config/asset.cjs');
+const base = require('./config/base.cjs');
+const html = require('./config/html.cjs');
+const optimization = require('./config/optimization.cjs');
+const script = require('./config/script.cjs');
+const style = require('./config/style.cjs');
+const svg = require('./config/svg.cjs');
 
 /**
  * Получить конфигурацию webpack.
@@ -39,4 +35,4 @@ function webpackConfig(env, argv) {
     return merge(asset(options), base(options), html(options), optimization(options), script(options), style(options), svg(options), result);
 }
 
-export default webpackConfig;
+module.exports = webpackConfig;

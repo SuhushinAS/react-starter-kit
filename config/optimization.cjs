@@ -1,7 +1,7 @@
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import TerserWebpackPlugin from 'terser-webpack-plugin';
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
-export default ({mode}) => {
+module.exports = ({mode}) => {
     return {
         optimization: {
             chunkIds: 'named',

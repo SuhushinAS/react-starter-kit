@@ -1,6 +1,6 @@
-import CopyWebpackPlugin from 'copy-webpack-plugin';
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-export default (options) => {
+module.exports = (options) => {
     const {dist, mode} = options;
     const isProd = 'production' === mode;
     const stats = {

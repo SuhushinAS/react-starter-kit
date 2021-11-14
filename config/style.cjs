@@ -1,6 +1,6 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-export default ({mode, root}) => {
+module.exports = ({mode, root}) => {
     const isProd = 'production' === mode;
     const styleLoader = isProd ? MiniCssExtractPlugin.loader : 'style-loader';
     const cssLoader = {loader: 'css-loader', options: {esModule: false}};
