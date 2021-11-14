@@ -1,8 +1,8 @@
 import React from 'react';
 
 type TIfProps = {
-    children: React.ReactNode;
-    condition: boolean;
+  children: React.ReactNode;
+  condition: boolean;
 };
 
 /**
@@ -12,5 +12,3 @@ type TIfProps = {
  * @return {*} Компонент по условию.
  */
 export const If = ({children, condition}: TIfProps) => condition && children;
-
-export default If;

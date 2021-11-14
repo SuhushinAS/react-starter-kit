@@ -24,9 +24,9 @@ export const makeSelectParam = (key: string) => createEqualSelector(getParam(key
  * @return {*} селектор фильтра.
  */
 export const makeSelectFilter = (selectList: any) =>
-    createSelector([selectList, getParam('filter'), makeSelectParam('filterData')], (list, filter, filterData) =>
-        filter ? list.filter((item) => filter(item, filterData)) : list
-    );
+  createSelector([selectList, getParam('filter'), makeSelectParam('filterData')], (list, filter, filterData) =>
+    filter ? list.filter((item) => filter(item, filterData)) : list
+  );
 
 /**
  * Создать селектор сортировки.
@@ -34,9 +34,9 @@ export const makeSelectFilter = (selectList: any) =>
  * @return {*} Селектор сортировки.
  */
 export const makeSelectSort = (selectList: any) =>
-    createSelector([selectList, getParam('sort'), makeSelectParam('sortData')], (list, sort, sortData) =>
-        sort ? list.sort((a, b) => sort(a, b, sortData)) : list
-    );
+  createSelector([selectList, getParam('sort'), makeSelectParam('sortData')], (list, sort, sortData) =>
+    sort ? list.sort((a, b) => sort(a, b, sortData)) : list
+  );
 
 /**
  * Создать селектор сортировки.
@@ -44,9 +44,9 @@ export const makeSelectSort = (selectList: any) =>
  * @return {*} Селектор сортировки.
  */
 export const makeSelectProcess = (selectList: any) =>
-    createSelector([selectList, getParam('process'), makeSelectParam('processData')], (list, process, processData) =>
-        process ? process(list, processData) : list
-    );
+  createSelector([selectList, getParam('process'), makeSelectParam('processData')], (list, process, processData) =>
+    process ? process(list, processData) : list
+  );
 
 /**
  * Получить список.

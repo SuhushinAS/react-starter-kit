@@ -9,10 +9,10 @@ import {actionLoadStart, dispatchLoadStop} from 'modules/load/actions';
  * @return {*} Список.
  */
 export const actionExampleListGet = () => (dispatch: TDispatch) => {
-    dispatch(actionLoadStart(exampleActions.listGet));
-    return exampleApi
-        .listGet()
-        .then(normalizeListDefault)
-        .then(dispatchData(dispatch, exampleActions.listGet))
-        .then(dispatchLoadStop(dispatch, exampleActions.listGet));
+  dispatch(actionLoadStart(exampleActions.listGet));
+  return exampleApi
+    .listGet()
+    .then(normalizeListDefault)
+    .then(dispatchData(dispatch, exampleActions.listGet))
+    .then(dispatchLoadStop(dispatch, exampleActions.listGet));
 };

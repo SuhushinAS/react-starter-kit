@@ -1,13 +1,13 @@
 export type TLocaleStore = {
-    current: string;
-    data: TLocaleData;
-    list: string[];
+  current: string;
+  data: TLocaleData;
+  list: string[];
 };
 
 export type TLocaleData = {
-    [key: string]: TLocale;
+  [key: string]: TLocale;
 };
 
 export type TLocale = {
-    [key: string]: string;
+  [key: string]: string;
 };

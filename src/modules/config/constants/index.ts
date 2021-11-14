@@ -1,5 +1,5 @@
 export const configActions = {
-    update: 'config__update',
+  update: 'config__update',
 };
 
 export const moduleName = 'config';

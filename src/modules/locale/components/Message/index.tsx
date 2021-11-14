@@ -1,9 +1,9 @@
 import {injectIntl} from 'react-intl';
 
 type TMessageProps = {
-    id: string;
-    intl: any;
-    values?: any;
+  id: string;
+  intl: any;
+  values?: any;
 };
 
 /**
@@ -14,7 +14,7 @@ type TMessageProps = {
  * @return {string} Сообщение.
  */
 export function message({id, intl, values}: TMessageProps) {
-    return intl.formatMessage({defaultMessage: '\u00A0', id}, values);
+  return intl.formatMessage({defaultMessage: '\u00A0', id}, values);
 }
 
-export default injectIntl(message);
+export const Message = injectIntl(message);

@@ -1,75 +1,53 @@
-import {RootContext} from 'modules/common/context';
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router';
+import {Navigate, Route, Routes as ReactRoutes} from 'react-router-dom';
 
 type TRoutesProps = {
-    list: TRoute[];
-    root: string;
+  list: TRoute[];
+  root: string;
 };
 
 export type TRoute = {
-    component: React.ComponentType<any>;
-    isExact?: boolean;
-    path: string;
+  component: React.ComponentType<any>;
+  path: string;
 };
 
 /**
  * Маршруты.
  */
 export class Routes extends React.Component<TRoutesProps> {
-    /**
-     * Значения свойств по-умолчанию.
-     * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-     */
-    static defaultProps = {
-        list: [],
-        root: '',
-    };
+  /**
+   * Значения свойств по-умолчанию.
+   * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
+   */
+  static defaultProps = {
+    list: [],
+    root: '',
+  };
 
-    /**
-     * Вывести компонент.
-     * @return {JSX.Element} Представление.
-     */
-    render() {
-        const {list, root} = this.props;
+  /**
+   * Вывести компонент.
+   * @return {JSX.Element} Представление.
+   */
+  render() {
+    const {list, root} = this.props;
 
-        if (0 === list.length) {
-            return null;
-        }
-
-        return (
-            <Switch>
-                {list.map(this.renderRoute)}
-                <Redirect to={root} />
-            </Switch>
-        );
+    if (0 === list.length) {
+      return null;
     }
 
-    /**
-     * Вывести Маршрут.
-     * @param {*} component Компонент.
-     * @param {boolean} isExact Точное совпадение.
-     * @param {string} path Путь.
-     * @return {JSX.Element} Представление.
-     */
-    renderRoute = ({component, isExact, path}: TRoute) => (
-        <Route exact={isExact} key={path} path={`${this.props.root}${path}`} render={this.renderComponent(component)} />
+    return (
+      <ReactRoutes>
+        {list.map(this.renderRoute)}
+        <Route element={<Navigate replace to={root} />} path="/" />
+      </ReactRoutes>
     );
+  }
 
-    /**
-     * Вывести компонент
-     * @param {*} Component Компонент.
-     * @return {JSX.Element} Представление.
-     */
-    renderComponent = (Component) => (props) => {
-        const {root} = this.props;
-
-        return (
-            <RootContext.Provider value={root}>
-                <Component {...props} root={root} />
-            </RootContext.Provider>
-        );
-    };
+  /**
+   * Вывести Маршрут.
+   * @param {*} component Компонент.
+   * @param {string} path Путь.
+   * @return {JSX.Element} Представление.
+   */
+  renderRoute = ({component: Component, path}: TRoute) => <Route element={<Component />} key={path} path={path} />;
 }
-
-export default Routes;

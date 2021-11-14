@@ -2,7 +2,7 @@ import {createReducer} from 'helpers/reducer';
 import {loadActions} from 'modules/load/constants';
 
 const initialState = {
-    data: {},
+  data: {},
 };
 
 /**
@@ -11,16 +11,16 @@ const initialState = {
  * @return {*} Стейт.
  */
 const reducerLoad = (type) => (state, id) => ({
-    ...state,
-    data: {
-        ...state.data,
-        [id]: type,
-    },
+  ...state,
+  data: {
+    ...state.data,
+    [id]: type,
+  },
 });
 
 const reducers = {
-    [loadActions.start]: reducerLoad(true),
-    [loadActions.stop]: reducerLoad(false),
+  [loadActions.start]: reducerLoad(true),
+  [loadActions.stop]: reducerLoad(false),
 };
 
-export default createReducer(initialState, reducers);
+export const load = createReducer(initialState, reducers);

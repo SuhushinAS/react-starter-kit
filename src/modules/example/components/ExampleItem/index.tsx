@@ -2,7 +2,7 @@ import type {TExample} from 'modules/example/types';
 import React from 'react';
 
 type TExampleItemProps = {
-    item: TExample,
+  item: TExample;
 };
 
 /**
@@ -13,7 +13,5 @@ type TExampleItemProps = {
 export const ExampleItem = ({item}: TExampleItemProps) => <div>{item.name}</div>;
 
 ExampleItem.defaultProps = {
-    name: 'ExampleItem',
+  name: 'ExampleItem',
 };
-
-export default ExampleItem;

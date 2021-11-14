@@ -3,11 +3,11 @@ import {configActions} from 'modules/config/constants';
 import type {TConfig} from 'modules/config/types';
 
 const initialState: TConfig = {
-    host: '',
+  host: '',
 };
 
 const reducers = {
-    [configActions.update]: (state, config) => ({...state, ...config}),
+  [configActions.update]: (state, config) => ({...state, ...config}),
 };
 
-export default createReducer<TConfig>(initialState, reducers);
+export const config = createReducer<TConfig>(initialState, reducers);

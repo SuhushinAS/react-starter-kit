@@ -1,4 +1,4 @@
 export const loadActions = {
-    start: 'load__start',
-    stop: 'load__stop',
+  start: 'load__start',
+  stop: 'load__stop',
 };

@@ -1,16 +1,16 @@
 export type TExampleState = {
-    example: TExampleStore;
+  example: TExampleStore;
 };
 
 export type TExampleStore = {
-    data: TExampleData;
-    list: string[];
+  data: TExampleData;
+  list: string[];
 };
 
 export type TExampleData = {
-    [key: string]: TExample;
+  [key: string]: TExample;
 };
 
 export type TExample = {
-    [key: string]: string;
+  [key: string]: string;
 };

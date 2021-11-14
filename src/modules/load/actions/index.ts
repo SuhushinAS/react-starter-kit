@@ -19,6 +19,6 @@ export const actionLoadStop = actionLoad(loadActions.stop);
  * @return {*} Диспатчить остановку.
  */
 export const dispatchLoadStop = (dispatch: TDispatch, key: string) => (data: any) => {
-    dispatch(actionLoadStop(key));
-    return data;
+  dispatch(actionLoadStop(key));
+  return data;
 };

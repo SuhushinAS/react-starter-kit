@@ -10,11 +10,11 @@ import {selectLocaleCurrent} from 'modules/locale/selectors';
  * @return {*} Словарь.
  */
 export const actionLocaleGetMessages = (locale) => (dispatch) => {
-    dispatch(actionLoadStart(localeActions.getData));
-    return localeApi
-        .getData(locale)
-        .then((data) => dispatchData(dispatch, localeActions.getData)({data, locale}))
-        .then(dispatchLoadStop(dispatch, localeActions.getData));
+  dispatch(actionLoadStart(localeActions.getData));
+  return localeApi
+    .getData(locale)
+    .then((data) => dispatchData(dispatch, localeActions.getData)({data, locale}))
+    .then(dispatchLoadStop(dispatch, localeActions.getData));
 };
 
 /**
@@ -22,8 +22,8 @@ export const actionLocaleGetMessages = (locale) => (dispatch) => {
  * @return {*} Словарь.
  */
 export const actionLocaleGetList = () => (dispatch) => {
-    dispatch(actionLoadStart(localeActions.getList));
-    return localeApi.getList().then(dispatchData(dispatch, localeActions.getList)).then(dispatchLoadStop(dispatch, localeActions.getList));
+  dispatch(actionLoadStart(localeActions.getList));
+  return localeApi.getList().then(dispatchData(dispatch, localeActions.getList)).then(dispatchLoadStop(dispatch, localeActions.getList));
 };
 
 /**
@@ -32,11 +32,11 @@ export const actionLocaleGetList = () => (dispatch) => {
  * @return {*} Экшен.
  */
 export const actionLocaleSetCurrent = (locale) => {
-    localStorage.setItem(currentLocaleKey, locale);
-    return {
-        data: {locale},
-        type: localeActions.setCurrent,
-    };
+  localStorage.setItem(currentLocaleKey, locale);
+  return {
+    data: {locale},
+    type: localeActions.setCurrent,
+  };
 };
 
 /**
@@ -44,8 +44,8 @@ export const actionLocaleSetCurrent = (locale) => {
  * @return {*} Словарь.
  */
 export const actionLocaleInit = () => (dispatch, getState) => {
-    const state = getState();
-    let locale = selectLocaleCurrent(state) || localStorage.getItem(currentLocaleKey) || defaultLocale;
+  const state = getState();
+  let locale = selectLocaleCurrent(state) || localStorage.getItem(currentLocaleKey) || defaultLocale;
 
-    return dispatch(actionLocaleSetCurrent(locale));
+  return dispatch(actionLocaleSetCurrent(locale));
 };

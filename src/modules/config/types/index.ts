@@ -1,3 +1,3 @@
 export type TConfig = {
-    host: string;
+  host: string;
 };

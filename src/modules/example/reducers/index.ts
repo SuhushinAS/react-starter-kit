@@ -3,13 +3,13 @@ import {exampleActions} from 'modules/example/constants';
 import type {TExampleStore} from 'modules/example/types';
 
 const initialState: TExampleStore = {
-    data: {},
-    list: [],
+  data: {},
+  list: [],
 };
 
 const reducers = {
-    [exampleActions.listGet]: listGet,
-    [exampleActions.update]: update,
+  [exampleActions.listGet]: listGet,
+  [exampleActions.update]: update,
 };
 
-export default createReducer<TExampleStore>(initialState, reducers);
+export const example = createReducer<TExampleStore>(initialState, reducers);

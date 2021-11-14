@@ -26,15 +26,15 @@ export const getData = (getIdFn: TGetId) => (acc: any, item: any) => ({...acc, [
  * @return {*} Нормализованный список.
  */
 export const normalizeList =
-    (getIdFn: TGetId) =>
-    ({data}: any) => {
-        const {list} = data;
-        return {
-            ...data,
-            data: list.reduce(getData(getIdFn), {}),
-            list: list.map(getIdFn),
-        };
+  (getIdFn: TGetId) =>
+  ({data}: any) => {
+    const {list} = data;
+    return {
+      ...data,
+      data: list.reduce(getData(getIdFn), {}),
+      list: list.map(getIdFn),
     };
+  };
 
 /**
  * Нормализовать список.
@@ -51,12 +51,12 @@ export const normalizeListDefault = normalizeList(getIdDefault);
  * @return {*} Данные.
  */
 export const dispatchData =
-    (dispatch: TDispatch, type: string, add: any = {}) =>
-    (params: any) => {
-        const data = {...params, ...add};
-        dispatch({data, type});
-        return data;
-    };
+  (dispatch: TDispatch, type: string, add: any = {}) =>
+  (params: any) => {
+    const data = {...params, ...add};
+    dispatch({data, type});
+    return data;
+  };
 
 /**
  * Обработка данных после отправки данных по форме
@@ -66,15 +66,15 @@ export const dispatchData =
  * @returns {function(*): void} данные
  */
 export const dispatchFormData =
-    ({dispatch, type, actions}: {actions: any; dispatch?: TDispatch; type: string}) =>
-    (response: any) => {
-        if (response.success) {
-            if (dispatch) {
-                dispatch({data: response, type});
-            }
-        } else {
-            actions.setErrors(response.errorData);
-        }
-        actions.setSubmitting(false);
-        return response;
-    };
+  ({dispatch, type, actions}: {actions: any; dispatch?: TDispatch; type: string}) =>
+  (response: any) => {
+    if (response.success) {
+      if (dispatch) {
+        dispatch({data: response, type});
+      }
+    } else {
+      actions.setErrors(response.errorData);
+    }
+    actions.setSubmitting(false);
+    return response;
+  };
