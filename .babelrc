@@ -1,8 +1,5 @@
 {
     "env": {
-        "development": {
-            "plugins": ["babel-plugin-flow-react-proptypes"]
-        },
         "production": {
             "plugins": [
                 "@babel/plugin-transform-react-constant-elements",
@@ -25,6 +22,6 @@
             }
         ],
         "@babel/preset-react",
-        "@babel/preset-flow"
+        "@babel/preset-typescript"
     ]
 }

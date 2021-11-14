@@ -1,0 +1,32 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "@typescript-eslint/adjacent-overload-signatures": 2,
+        "@typescript-eslint/ban-ts-comment": 2,
+        "@typescript-eslint/ban-types": 2,
+        "@typescript-eslint/consistent-type-assertions": 2,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/member-delimiter-style": 2,
+        "@typescript-eslint/no-array-constructor": 2,
+        "@typescript-eslint/no-empty-function": 2,
+        "@typescript-eslint/no-empty-interface": 2,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/no-inferrable-types": 0,
+        "@typescript-eslint/no-misused-new": 2,
+        "@typescript-eslint/no-namespace": 2,
+        "@typescript-eslint/no-non-null-assertion": 2,
+        "@typescript-eslint/no-this-alias": 2,
+        "@typescript-eslint/no-unused-vars": 0,
+        "@typescript-eslint/no-use-before-define": 2,
+        "@typescript-eslint/no-var-requires": 2,
+        "@typescript-eslint/prefer-namespace-keyword": 2,
+        "@typescript-eslint/triple-slash-reference": 2,
+        "@typescript-eslint/type-annotation-spacing": 2
+    }
+}

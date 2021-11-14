@@ -1,4 +1,3 @@
 /www/**
 /coverage/**
-/flow-typed/**
 **/*.min.js
