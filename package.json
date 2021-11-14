@@ -106,9 +106,9 @@
         "url": "git@github.com:SuhushinAS/react-starter-kit.git"
     },
     "scripts": {
-        "build": "cross-env NODE_ENV=production webpack --progress --mode=production",
+        "build": "cross-env NODE_ENV=production webpack --progress --mode=production --config=webpack.config.cjs",
         "eslint": "eslint --ext .js,.jsx --fix ./src",
-        "serve": "cross-env NODE_ENV=production webpack serve --mode=production",
+        "serve": "cross-env NODE_ENV=production webpack serve --mode=production --config=webpack.config.cjs",
         "start": "cross-env NODE_ENV=development webpack serve --mode=development --config=webpack.config.cjs",
         "stylelint": "stylelint ./**/*.{css,less} --fix"
     },
