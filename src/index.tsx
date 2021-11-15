@@ -1,5 +1,5 @@
 import {App} from 'app/components/App';
-import {store} from 'app/storage/store';
+import {store} from 'app/store';
 import {ConfigContainer} from 'modules/config/components/Config';
 import {LocaleProviderContainer} from 'modules/locale/components/LocaleProvider';
 import React from 'react';

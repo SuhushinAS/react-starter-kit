@@ -1,0 +1,68 @@
+@import (reference) 'src/styles/mixins';
+
+.scroll {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    width: 100%;
+
+    &__scroller {
+        border: 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+        padding: 0;
+        width: 100%;
+    }
+
+    &__track {
+        background-color: fade(@c-gray-40, 25%);
+        border-radius: 4px;
+        bottom: 5px;
+        display: none;
+        position: absolute;
+        right: 5px;
+        z-index: 9;
+
+        &_h {
+            height: 6px;
+            left: 5px;
+        }
+
+        &_v {
+            top: 5px;
+            width: 6px;
+        }
+    }
+
+    &_on_h > &__track_h {
+        display: block;
+    }
+
+    &_on_v > &__track_v {
+        display: block;
+    }
+
+    &__bar {
+        background-color: @c-gray-60;
+        border-radius: 3px;
+        position: absolute;
+        transition: background @animation, border-radius @animation, width @animation;
+
+        &_h {
+            height: 4px;
+            top: 1px;
+        }
+
+        &_v {
+            right: 1px;
+            width: 4px;
+        }
+    }
+}
