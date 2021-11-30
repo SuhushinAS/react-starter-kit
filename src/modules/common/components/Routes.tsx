@@ -7,7 +7,7 @@ type TRoutesProps = {
 };
 
 export type TRoute = {
-  component: React.ComponentType<any>;
+  component: React.ComponentType;
   path: string;
 };
 

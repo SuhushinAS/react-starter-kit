@@ -1,5 +1,6 @@
 @import (reference) 'adaptive';
 @import (reference) 'grid';
+@import (reference) 'prev-size';
 @import (reference) 'prop';
 
 .fluid-prop(@prop, @p-min, @w-min, @p-max, @w-max) {
@@ -13,11 +14,11 @@
 }
 
 .fluid-prop-2x(@prop, @p-1, @p-2, @s-1, @s-2) {
-    .fluid-prop(@prop, @p-1, @s-1, @p-2, (@s-2 - 1px));
+    .fluid-prop(@prop, @p-1, @s-1, @p-2, .prev-size(@s-2)[]);
 
     .prop(@prop, @p-2);
 
-    @media (max-width: (@s-1 - 1px)) {
+    @media (max-width: .prev-size(@s-1)[]) {
         .prop(@prop, @p-1);
     }
 }

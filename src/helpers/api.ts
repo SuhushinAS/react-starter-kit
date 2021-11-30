@@ -42,12 +42,23 @@ export class Api {
 
   /**
    * Отправить запрос.
-   * @param {string} path Адрес.
+   * @param {string} url Адрес.
    * @param {*} options Опции.
    * @return {*} Запрос.
    */
-  request(path: string = '', options) {
-    return fetch(`${Api.host}${path}`, this.getOptions(options)).then(this.getJSON);
+  request(url: string = '', options) {
+    return this.fetch(url, Api.host, options);
+  }
+
+  /**
+   * Отправить запрос.
+   * @param {string} url Адрес.
+   * @param {string} host Хост.
+   * @param {*} options Опции.
+   * @return {*} Запрос.
+   */
+  fetch(url: string = '', host: string = '', options = {}) {
+    return fetch(`${host}${url}`, this.getOptions(options)).then(this.getJSON);
   }
 
   /**
@@ -56,7 +67,7 @@ export class Api {
    * @return {Promise<Response>} Ответ.
    */
   requestLocal(url = '') {
-    return fetch(`/local${url}`, this.getOptions()).then(this.getJSON);
+    return this.fetch(url, '/local');
   }
 }
 
