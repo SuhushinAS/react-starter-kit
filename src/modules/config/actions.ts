@@ -11,5 +11,6 @@ import {status} from 'modules/status/reducers';
  */
 export const actionConfigGet = () => (dispatch: TDispatch) => {
   dispatch(status.actions.loadStart(configActions.update));
+
   return configApi.get().then(dispatchData(dispatch, configActions.update)).then(loadStop(dispatch, configActions.update));
 };

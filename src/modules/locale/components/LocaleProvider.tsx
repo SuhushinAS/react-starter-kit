@@ -1,10 +1,10 @@
 import type {TDispatch} from 'app/types';
 import {TState} from 'app/types';
-import {selectLoadItem} from 'modules/load/selectors';
 import {actionLocaleGetList, actionLocaleGetMessages, actionLocaleInit} from 'modules/locale/actions';
 import {localeActions} from 'modules/locale/constants';
 import {selectLocaleCurrent, selectLocaleList, selectMessages} from 'modules/locale/selectors';
 import type {TLocale} from 'modules/locale/types';
+import {selectLoadItem} from 'modules/status/selectors';
 import React from 'react';
 import {IntlProvider} from 'react-intl';
 import {connect} from 'react-redux';
@@ -66,7 +66,7 @@ export const LocaleProviderContainer = compose(
   connect((state: TState) => {
     const locale = selectLocaleCurrent(state);
     return {
-      loadMessages: selectLoadItem(state, localeActions.getData),
+      loadMessages: selectLoadItem(localeActions.getData)(state),
       locale,
       localeList: selectLocaleList(state),
       messages: selectMessages(state, locale),

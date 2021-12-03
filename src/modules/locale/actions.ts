@@ -1,8 +1,9 @@
 import {dispatchData} from 'helpers/action';
-import {actionLoadStart, dispatchLoadStop} from 'modules/load/actions';
 import {localeApi} from 'modules/locale/api';
 import {currentLocaleKey, defaultLocale, localeActions} from 'modules/locale/constants';
 import {selectLocaleCurrent} from 'modules/locale/selectors';
+import {loadStop} from 'modules/status/actions';
+import {status} from 'modules/status/reducers';
 
 /**
  * Получить словарь.
@@ -10,11 +11,11 @@ import {selectLocaleCurrent} from 'modules/locale/selectors';
  * @return {*} Словарь.
  */
 export const actionLocaleGetMessages = (locale) => (dispatch) => {
-  dispatch(actionLoadStart(localeActions.getData));
+  dispatch(status.actions.loadStart(localeActions.getData));
   return localeApi
     .getData(locale)
     .then((data) => dispatchData(dispatch, localeActions.getData)({data, locale}))
-    .then(dispatchLoadStop(dispatch, localeActions.getData));
+    .then(loadStop(dispatch, localeActions.getData));
 };
 
 /**
@@ -22,8 +23,8 @@ export const actionLocaleGetMessages = (locale) => (dispatch) => {
  * @return {*} Словарь.
  */
 export const actionLocaleGetList = () => (dispatch) => {
-  dispatch(actionLoadStart(localeActions.getList));
-  return localeApi.getList().then(dispatchData(dispatch, localeActions.getList)).then(dispatchLoadStop(dispatch, localeActions.getList));
+  dispatch(status.actions.loadStart(localeActions.getList));
+  return localeApi.getList().then(dispatchData(dispatch, localeActions.getList)).then(loadStop(dispatch, localeActions.getList));
 };
 
 /**
