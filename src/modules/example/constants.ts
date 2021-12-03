@@ -4,3 +4,8 @@ export const exampleActions = {
 };
 
 export const moduleName = 'example';
+
+export const examplePath = {
+  list: '/list',
+  root: '/',
+};

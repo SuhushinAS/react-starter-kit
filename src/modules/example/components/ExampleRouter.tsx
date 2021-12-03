@@ -1,21 +1,16 @@
-import {Routes, TRoute} from 'modules/common/components/Routes';
 import {Example} from 'modules/example/components/Example';
 import {ExampleListContainer} from 'modules/example/components/ExampleList';
+import {examplePath} from 'modules/example/constants';
 import React from 'react';
-
-const routeList: TRoute[] = [
-  {
-    component: ExampleListContainer,
-    path: '/list',
-  },
-  {
-    component: Example,
-    path: '/',
-  },
-];
+import {Route, Routes} from 'react-router-dom';
 
 /**
  * Вывести роутинг.
  * @return {JSX.Element} Роуты.
  */
-export const ExampleRouter = () => <Routes list={routeList} />;
+export const ExampleRouter = () => (
+  <Routes>
+    <Route element={<ExampleListContainer />} path={examplePath.list} />
+    <Route element={<Example />} path={examplePath.root} />
+  </Routes>
+);
