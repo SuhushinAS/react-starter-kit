@@ -5,7 +5,7 @@ import {status} from 'modules/status/reducers';
 import {combineReducers} from 'redux';
 
 export const rootReducer = combineReducers({
-  config,
+  [config.name]: config.reducer,
   example,
   locale,
   [status.name]: status.reducer,

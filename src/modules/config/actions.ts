@@ -1,7 +1,8 @@
 import type {TDispatch} from 'app/types';
-import {dispatchData} from 'helpers/action';
-import {configApi} from 'modules/config/api';
-import {configActions} from 'modules/config/constants';
+import {dispatchData} from 'modules/common/helpers/action';
+import {api} from 'modules/common/helpers/api';
+import {config} from 'modules/config/redux';
+import {TConfig} from 'modules/config/types';
 import {loadStop} from 'modules/status/actions';
 import {status} from 'modules/status/reducers';
 
@@ -10,7 +11,10 @@ import {status} from 'modules/status/reducers';
  * @return {*} Список.
  */
 export const actionConfigGet = () => (dispatch: TDispatch) => {
-  dispatch(status.actions.loadStart(configActions.update));
+  dispatch(status.actions.loadStart(config.actions.update.type));
 
-  return configApi.get().then(dispatchData(dispatch, configActions.update)).then(loadStop(dispatch, configActions.update));
+  return api
+    .requestLocal<TConfig>('/api/v1/config.json')
+    .then(dispatchData(dispatch, config.actions.update))
+    .then(loadStop(dispatch, config.actions.update.type));
 };
