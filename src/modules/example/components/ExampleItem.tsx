@@ -1,17 +1,12 @@
-import type {TExample} from 'modules/example/types';
+import {useAppSelector} from 'app/hooks';
+import {selectExampleItem} from 'modules/example/selectors';
 import React from 'react';
+import {useParams} from 'react-router-dom';
+import './ExampleItem.less';
 
-type TExampleItemProps = {
-  item: TExample;
-};
+export const ExampleItem = () => {
+  const {id = ''} = useParams();
+  const item = useAppSelector(selectExampleItem(id));
 
-/**
- * Функциональный компонент.
- * @param props Свойства компонента.
- * @return {*} Представление.
- */
-export const ExampleItem = ({item}: TExampleItemProps) => <div>{item.name}</div>;
-
-ExampleItem.defaultProps = {
-  name: 'ExampleItem',
+  return <pre className="ExampleItem">{JSON.stringify(item, undefined, 2)}</pre>;
 };

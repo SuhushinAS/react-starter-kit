@@ -1,3 +1,8 @@
 {
-    "home.header.title": "Главная"
+  "example.item.description": "Описание примера элемента",
+  "example.list.description": "Описание примера списка",
+  "example.list.title": "Пример списка",
+  "footer.power.title": "Сделано в",
+  "home.description": "Описание главной",
+  "home.title": "Главная"
 }
