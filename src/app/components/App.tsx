@@ -1,5 +1,5 @@
 import {appPath} from 'app/constants';
-import {ExampleContainer} from 'modules/example/components/Example2';
+import {ExampleContainer} from 'modules/example/components/Example';
 import {Home} from 'modules/home/components/Home';
 import {Layout} from 'modules/layout/components/Layout';
 import React from 'react';
