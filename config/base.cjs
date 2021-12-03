@@ -1,13 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (options) => {
-  const {dist, mode} = options;
-  const isProd = 'production' === mode;
-  const stats = {
-    colors: true,
-    errorDetails: true,
-    reasons: isProd,
-  };
+  const isProd = 'production' === options.mode;
 
   return {
     bail: isProd,
@@ -21,12 +15,12 @@ module.exports = (options) => {
       },
     devtool: isProd ? false : 'eval-source-map',
     entry: 'index.tsx',
-    mode,
+    mode: options.mode,
     output: {
       clean: true,
       filename: '[name].min.js',
       library: ['reactStarterKit'],
-      path: dist,
+      path: options.dist,
       publicPath: '/',
     },
     plugins: [new CopyWebpackPlugin({patterns: [{from: options.public, to: options.dist}]})],
@@ -41,7 +35,11 @@ module.exports = (options) => {
       },
       modules: ['src', 'node_modules'],
     },
-    stats,
+    stats: {
+      colors: true,
+      errorDetails: true,
+      reasons: isProd,
+    },
     target: isProd ? 'browserslist' : 'web',
     watchOptions: {aggregateTimeout: 300},
   };

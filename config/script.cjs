@@ -7,27 +7,29 @@ const webpack = require('webpack');
  */
 const customInterpolateName = (url) => url.toLowerCase();
 
-module.exports = ({mode}) => {
-  const isProd = 'production' === mode;
-
-  const plugins = isProd
+/**
+ * Получить плагины.
+ * @param {boolean} isProd Продакшен.
+ * @return {*} Плагины.
+ */
+const getPlugins = (isProd) =>
+  isProd
     ? [new webpack.LoaderOptionsPlugin({debug: false, minimize: true, options: {customInterpolateName}})]
     : [new webpack.HotModuleReplacementPlugin()];
 
-  return {
-    module: {
-      rules: [
-        {
-          exclude: /node_modules/u,
-          test: /\.(js|jsx|ts|tsx)$/u,
-          use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
-        },
-      ],
-    },
-    plugins: [
-      new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(mode)}}),
-      new webpack.IgnorePlugin({contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u}),
-      ...plugins,
+module.exports = ({mode}) => ({
+  module: {
+    rules: [
+      {
+        exclude: /node_modules/u,
+        test: /\.(js|jsx|ts|tsx)$/u,
+        use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
+      },
     ],
-  };
-};
+  },
+  plugins: [
+    new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(mode)}}),
+    new webpack.IgnorePlugin({contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u}),
+    ...getPlugins('production' === mode),
+  ],
+});
