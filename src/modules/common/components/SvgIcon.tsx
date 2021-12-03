@@ -29,7 +29,7 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
   static defaultProps = {
     name: '',
   };
-  isMount = true;
+  isMount = false;
   state = {
     symbol: '',
     view: '',
@@ -45,11 +45,22 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
     super(props);
     const {name} = props;
 
-    if (name && 'string' === typeof name) {
+    if (name) {
       this.importSvg(name);
     } else {
       console.warn(`${name} is not correct`);
     }
+  }
+
+  /**
+   * Компонент примонтировался.
+   * В данный момент у нас есть возможность использовать refs,
+   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
+   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
+   * @return {undefined}
+   */
+  componentDidMount() {
+    this.isMount = true;
   }
 
   /**
