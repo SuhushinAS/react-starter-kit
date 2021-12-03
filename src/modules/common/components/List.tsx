@@ -12,7 +12,7 @@ type TListProps = {
 export class List extends React.Component<TListProps> {
   /**
    * Вывести компонент.
-   * @return {JSX.Element} Представление.
+   * @return {*} Представление.
    */
   render() {
     return <div className="list">{this.props.list.map(this.renderItem)}</div>;
@@ -20,8 +20,8 @@ export class List extends React.Component<TListProps> {
 
   /**
    * Вывести элемент.
-   * @param {*} id Идентификатор.
-   * @return {JSX.Element} Представление.
+   * @param id Идентификатор.
+   * @return {*} Представление.
    */
   renderItem = (id: string) => {
     const {ItemComponent} = this.props;

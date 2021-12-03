@@ -29,7 +29,7 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
   static defaultProps = {
     name: '',
   };
-  isMount = true;
+  isMount = false;
   state = {
     symbol: '',
     view: '',
@@ -38,14 +38,13 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
 
   /**
    * Конструктор компонента.
-   * @param {*} props Свойства переданные в компонент.
-   * @return {undefined}
+   * @param props Свойства переданные в компонент.
    */
   constructor(props: TIconProps) {
     super(props);
     const {name} = props;
 
-    if (name && 'string' === typeof name) {
+    if (name) {
       this.importSvg(name);
     } else {
       console.warn(`${name} is not correct`);
@@ -53,11 +52,20 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
   }
 
   /**
+   * Компонент примонтировался.
+   * В данный момент у нас есть возможность использовать refs,
+   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
+   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
+   */
+  componentDidMount() {
+    this.isMount = true;
+  }
+
+  /**
    * Вызывается сразу после render.
    * Не вызывается в момент первого render компонента.
-   * @param {*} props Предыдущие свойства.
-   // * @param {*} state Предыдущее состояние.
-   * @return {undefined}
+   * @param props Предыдущие свойства.
+   // * @param state Предыдущее состояние.
    */
   componentDidUpdate(props: TIconProps) {
     const {name} = this.props;
@@ -68,7 +76,6 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
 
   /**
    * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   * @return {undefined}
    */
   componentWillUnmount() {
     this.isMount = false;
@@ -83,7 +90,7 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
 
   /**
    * Обработать импорт.
-   * @param {*} icon Иконка.
+   * @param icon Иконка.
    */
   handleImport = (icon: TImport): void => {
     if (this.isMount) {
@@ -93,7 +100,7 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
 
   /**
    * Импоритровать СВГ.
-   * @param {string} name Название.
+   * @param name Название.
    */
   importSvg(name: string) {
     import(

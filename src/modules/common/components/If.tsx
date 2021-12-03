@@ -7,8 +7,8 @@ type TIfProps = {
 
 /**
  * Вывести компонент по условию.
- * @param {*} children Дети.
- * @param {boolean} condition Условие.
+ * @param children Дети.
+ * @param condition Условие.
  * @return {*} Компонент по условию.
  */
 export const If = ({children, condition}: TIfProps) => condition && children;

@@ -9,10 +9,10 @@ export type TMenuItemProps = {
 
 /**
  * Вывести пункт меню.
- * @param {*} location Местоположение.
- * @param {*} name Название.
- * @param {*} path Путь.
- * @return {JSX.Element} Представление.
+ * @param location Местоположение.
+ * @param name Название.
+ * @param path Путь.
+ * @return {*} Представление.
  */
 export const MenuItem = ({name, path}: TMenuItemProps) => {
   return (

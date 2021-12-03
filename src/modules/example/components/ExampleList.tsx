@@ -1,62 +1,54 @@
-import type {TDispatch, TState} from 'app/types';
-import {actionExampleListGet} from 'modules/example/actions';
-import {ExampleItem} from 'modules/example/components/ExampleItem';
+import {appPath} from 'app/constants';
+import {useAppSelector} from 'app/hooks';
+import {exampleIdKey} from 'modules/example/constants';
+import {example} from 'modules/example/reducers';
 import {selectExampleList} from 'modules/example/selectors';
-import type {TExample} from 'modules/example/types';
+import {TExample} from 'modules/example/types';
+import {selectLoadItem} from 'modules/status/selectors';
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
+import {Link} from 'react-router-dom';
+import './ExampleList.less';
 
-type TExampleListProps = {
-  dispatch: TDispatch;
-  exampleList: TExample[];
-};
+const fields: Array<keyof TExample> = ['name', 'email', 'age', 'balance'];
 
 /**
- * Пример компонента.
+ * Компонент.
+ * @return {*} Представление.
  */
-export class ExampleList extends React.Component<TExampleListProps> {
-  /**
-   * Значения свойств по-умолчанию.
-   * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-   */
-  static defaultProps = {
-    exampleList: [],
-  };
+export const ExampleList = () => {
+  const list = useAppSelector(selectExampleList);
+  const load = useAppSelector(selectLoadItem(example.actions.getList.type));
 
-  /**
-   * Вывести компонент.
-   * @return {JSX.Element} Представление.
-   */
-  render() {
-    return <div className="box">{this.props.exampleList.map(this.renderItem)}</div>;
+  if ('undefined' === typeof load) {
+    return null;
   }
 
-  /**
-   * Вывести элемент.
-   * @param {*} item Идентификатор.
-   * @return {JSX.Element} Представление.
-   */
-  renderItem = (item: TExample) => (
-    <div className="example__item" key={item.id}>
-      <ExampleItem item={item} />
-    </div>
+  if (load) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <table className="ExampleList">
+      <thead>
+        <tr>
+          {fields.map((field) => (
+            <th className="ExampleList__Cell" key={field}>
+              {field}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {list.map((item) => (
+          <tr key={item[exampleIdKey]}>
+            {fields.map((field) => (
+              <td className="ExampleList__Cell" key={field}>
+                <Link to={`${appPath.example}/${item[exampleIdKey]}`}>{item[field]}</Link>
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
-
-  /**
-   * Компонент примонтировался.
-   * В данный момент у нас есть возможность использовать refs,
-   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
-   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-   * @return {undefined}
-   */
-  componentDidMount() {
-    this.props.dispatch(actionExampleListGet());
-  }
-}
-
-export const ExampleListContainer = compose(
-  connect((state: TState) => ({
-    exampleList: selectExampleList(state),
-  }))
-)(ExampleList);
+};

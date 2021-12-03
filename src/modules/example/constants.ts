@@ -1,6 +1,6 @@
-export const exampleActions = {
-  listGet: 'example__list_get',
-  update: 'example__update',
+export const examplePaths = {
+  item: '/:id',
+  list: '/',
 };
 
-export const moduleName = 'example';
+export const exampleIdKey = '_id';

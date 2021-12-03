@@ -4,13 +4,13 @@ import React from 'react';
 
 /**
  * Пример компонента.
- * @return {JSX.Element} Представление.
+ * @return {*} Представление.
  */
 export const Home = () => (
   <div className="home">
     <div className="box">
       <h1>
-        <Message id="home.header.title" />
+        <Message id="home.title" />
       </h1>
       <h2>
         <SvgIcon name="logo" />

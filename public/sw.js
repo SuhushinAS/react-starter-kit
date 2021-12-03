@@ -3,9 +3,9 @@ const urlList = ['/main.min.js', '/vendor.min.js', '/sprite.svg', '/'];
 
 /**
  * Привязать событие.
- * @param {*} el Елемент.
- * @param {*} event Событие.
- * @param {*} handler Обработчик.
+ * @param el Елемент.
+ * @param event Событие.
+ * @param handler Обработчик.
  */
 function attachEvent(el, event, handler) {
   el.removeEventListener(event, handler);
@@ -17,7 +17,7 @@ attachEvent(self, 'fetch', onFetch);
 
 /**
  * Обработать установку сервис-воркера.
- * @param {*} e Событие
+ * @param e Событие
  */
 function onInstall(e) {
   caches.open(cacheName).then(function (cache) {
@@ -27,7 +27,7 @@ function onInstall(e) {
 
 /**
  * Обработать отправку запроса.
- * @param {*} event Событие
+ * @param event Событие
  */
 function onFetch(event) {
   const {request} = event;

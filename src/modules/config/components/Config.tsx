@@ -1,6 +1,6 @@
 import type {TDispatch} from 'app/types';
 import {TState} from 'app/types';
-import {Api} from 'helpers/api';
+import {Api} from 'modules/common/helpers/api';
 import {actionConfigGet} from 'modules/config/actions';
 import {selectConfig} from 'modules/config/selectors';
 import type {TConfig} from 'modules/config/types';
@@ -26,8 +26,7 @@ export class Config extends React.Component<TConfigProps, TConfigState> {
 
   /**
    * Конструктор компонента.
-   * @param {*} props Свойства переданные в компонент.
-   * @return {undefined}
+   * @param props Свойства переданные в компонент.
    */
   constructor(props: TConfigProps) {
     super(props);
@@ -36,7 +35,7 @@ export class Config extends React.Component<TConfigProps, TConfigState> {
 
   /**
    * Вывести компонент.
-   * @return {JSX.Element} Представление.
+   * @return {*} Представление.
    */
   render() {
     if (this.state?.config) {
@@ -49,8 +48,7 @@ export class Config extends React.Component<TConfigProps, TConfigState> {
   /**
    * Вызывается сразу после render.
    * Не вызывается в момент первого render компонента.
-   * @param {*} props Предыдущие свойства.
-   * @return {undefined}
+   * @param props Предыдущие свойства.
    */
   componentDidUpdate(props) {
     const {config} = this.props;
