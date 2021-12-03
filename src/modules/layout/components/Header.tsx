@@ -7,7 +7,7 @@ import './Header.less';
 
 /**
  * Пример компонента.
- * @return {JSX.Element} Представление.
+ * @return {*} Представление.
  */
 export const Header = () => (
   <div className="header">

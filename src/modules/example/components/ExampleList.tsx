@@ -26,7 +26,7 @@ export class ExampleList extends React.Component<TExampleListProps> {
 
   /**
    * Вывести компонент.
-   * @return {JSX.Element} Представление.
+   * @return {*} Представление.
    */
   render() {
     return <div className="box">{this.props.exampleList.map(this.renderItem)}</div>;
@@ -34,8 +34,8 @@ export class ExampleList extends React.Component<TExampleListProps> {
 
   /**
    * Вывести элемент.
-   * @param {*} item Идентификатор.
-   * @return {JSX.Element} Представление.
+   * @param item Идентификатор.
+   * @return {*} Представление.
    */
   renderItem = (item: TExample) => (
     <div className="example__item" key={item.id}>
@@ -48,7 +48,6 @@ export class ExampleList extends React.Component<TExampleListProps> {
    * В данный момент у нас есть возможность использовать refs,
    * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
    * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-   * @return {undefined}
    */
   componentDidMount() {
     this.props.dispatch(actionExampleListGet());

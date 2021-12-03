@@ -6,7 +6,7 @@ import {Api} from 'helpers/api';
 export class LocaleApi extends Api {
   /**
    * Получить словарь переводов.
-   * @param {string} language Язык.
+   * @param language Язык.
    * @return {*} Словарь.
    */
   getData(language) {

@@ -3,7 +3,7 @@ import './Footer.less';
 
 /**
  * Пример компонента.
- * @return {JSX.Element} Представление.
+ * @return {*} Представление.
  */
 export const Footer = () => <div className="footer">Footer</div>;
 

@@ -17,7 +17,7 @@ type TLocaleSelectorProps = {
 export class LocaleSelector extends React.Component<TLocaleSelectorProps> {
   /**
    * Вывести компонент.
-   * @return {JSX.Element} Представление.
+   * @return {*} Представление.
    */
   render() {
     const {localeCurrent, localeList} = this.props;
@@ -31,8 +31,8 @@ export class LocaleSelector extends React.Component<TLocaleSelectorProps> {
 
   /**
    * Вывести вариант локали.
-   * @param {*} locale Локаль
-   * @return {JSX.Element} вариант локали.
+   * @param locale Локаль
+   * @return {*} Вариант локали.
    */
   renderLocaleOption = (locale) => (
     <option key={locale} value={locale}>
@@ -42,7 +42,7 @@ export class LocaleSelector extends React.Component<TLocaleSelectorProps> {
 
   /**
    * Обработать изменение локали.
-   * @param {*} e Событие.
+   * @param e Событие.
    */
   onLocaleChange = (e) => {
     this.props.dispatch(actionLocaleSetCurrent(e.target.value));

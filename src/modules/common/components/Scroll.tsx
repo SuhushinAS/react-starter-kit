@@ -1,5 +1,5 @@
 import baron from 'baron';
-import {debounce} from 'modules/common/helpers';
+import {debounce} from 'modules/common/helpers/debounce';
 import React, {ReactNode} from 'react';
 import './Scroll.less';
 
@@ -12,7 +12,7 @@ type TDirection = 'h' | 'v';
 
 /**
  * Получить размер скролла.
- * @return {number} Размер скролла.
+ * @return {*} Размер скролла.
  */
 function getScrollbarWidth() {
   const outer = document.createElement('div');
@@ -39,8 +39,8 @@ const needCustomScrollbar = 0 !== scrollbarWidth;
 
 /**
  * Получить ключ для бара.
- * @param {'h'|'v'} dir Направление.
- * @return {string} Ключ для бара.
+ * @param dir Направление.
+ * @return {*} Ключ для бара.
  */
 function getBarKey(dir) {
   return `bar_${dir}`;
@@ -48,8 +48,8 @@ function getBarKey(dir) {
 
 /**
  * Получить ключ для трека.
- * @param {'h'|'v'} dir Направление.
- * @return {string} Ключ для трека.
+ * @param dir Направление.
+ * @return {*} Ключ для трека.
  */
 function getTrackKey(dir) {
   return `track_${dir}`;
@@ -68,8 +68,7 @@ export class Scroll extends React.Component<TScrollProps> {
 
   /**
    * Конструктор компонента.
-   * @param {*} props Свойства переданые в компонент.
-   * @return {undefined}
+   * @param props Свойства переданые в компонент.
    */
   constructor(props: TScrollProps) {
     super(props);
@@ -78,8 +77,8 @@ export class Scroll extends React.Component<TScrollProps> {
 
   /**
    * Инициировать рефы для скроллбаров.
-   * @param {*} acc Аккумулятор.
-   * @param {'h'|'v'} dir Направление.
+   * @param acc Аккумулятор.
+   * @param dir Направление.
    * @return {*} Рефы для скроллбаров.
    */
   referencesInit = (acc, dir) => ({
@@ -105,7 +104,7 @@ export class Scroll extends React.Component<TScrollProps> {
 
   /**
    * Вывести скролл.
-   * @param {*} dir Направление.
+   * @param dir Направление.
    * @return {*} Скролл.
    */
   renderScrollbar = (dir) => (
@@ -119,7 +118,6 @@ export class Scroll extends React.Component<TScrollProps> {
    * В данный момент у нас есть возможность использовать refs,
    * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
    * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-   * @return {undefined}
    */
   componentDidMount() {
     if (needCustomScrollbar) {
@@ -131,7 +129,7 @@ export class Scroll extends React.Component<TScrollProps> {
 
   /**
    * Инициировать скролл.
-   * @param {*} dir Направление.
+   * @param dir Направление.
    * @return {*} Скролл.
    */
   scrollInit = (dir) =>
@@ -154,7 +152,6 @@ export class Scroll extends React.Component<TScrollProps> {
   /**
    * Вызывается сразу после render.
    * Не вызывается в момент первого render'а компонента.
-   * @return {undefined}
    */
   componentDidUpdate() {
     this.updateOnLayoutChange();
@@ -162,7 +159,7 @@ export class Scroll extends React.Component<TScrollProps> {
 
   /**
    * Обновить
-   * @param {*} scroll Экземпляр скролла.
+   * @param scroll Экземпляр скролла.
    */
   update(scroll) {
     scroll.update();
@@ -170,7 +167,6 @@ export class Scroll extends React.Component<TScrollProps> {
 
   /**
    * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   * @return {undefined}
    */
   componentWillUnmount() {
     this.isMount = false;
@@ -179,7 +175,7 @@ export class Scroll extends React.Component<TScrollProps> {
 
   /**
    * Удалить.
-   * @param {*} scroll Экземпляр скролла.
+   * @param scroll Экземпляр скролла.
    */
   dispose(scroll) {
     scroll.dispose();

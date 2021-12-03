@@ -10,8 +10,8 @@ type TLayoutProps = {
 
 /**
  * Лейаут.
- * @param {JSX.Element} children Дети.
- * @return {JSX.Element} Лейаут.
+ * @param children Дети.
+ * @return {*} Лейаут.
  */
 export const Layout = ({children}: TLayoutProps) => {
   return (

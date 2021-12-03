@@ -24,8 +24,7 @@ type TLocaleProps = {
 export class LocaleProvider extends React.Component<TLocaleProps> {
   /**
    * Конструктор компонента.
-   * @param {*} props Свойства переданные в компонент.
-   * @return {undefined}
+   * @param props Свойства переданные в компонент.
    */
   constructor(props: TLocaleProps) {
     super(props);
@@ -35,7 +34,7 @@ export class LocaleProvider extends React.Component<TLocaleProps> {
 
   /**
    * Вывести компонент.
-   * @return {JSX.Element} Представление.
+   * @return {*} Представление.
    */
   render() {
     const {children, locale, messages} = this.props;
@@ -54,7 +53,6 @@ export class LocaleProvider extends React.Component<TLocaleProps> {
   /**
    * Вызывается сразу после render.
    * Не вызывается в момент первого render компонента.
-   * @return {undefined}
    */
   componentDidUpdate() {
     const {dispatch, loadMessages, locale, messages} = this.props;

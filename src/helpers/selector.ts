@@ -6,21 +6,21 @@ export const createEqualSelector = createSelectorCreator(defaultMemoize, isEqual
 
 /**
  * Получить параметр.
- * @param {*} key Ключ.
+ * @param key Ключ.
  * @return {*} Параметр.
  */
 export const getParam = (key: string) => (_: TState, params: any) => params[key];
 
 /**
  * Создать селектор параметра.
- * @param {*} key Ключ.
+ * @param key Ключ.
  * @return {*} Селектор параметра.
  */
 export const makeSelectParam = (key: string) => createEqualSelector(getParam(key), (param) => param);
 
 /**
  * Создать селектор фильтра.
- * @param {*} selectList селектор списка.
+ * @param selectList селектор списка.
  * @return {*} селектор фильтра.
  */
 export const makeSelectFilter = (selectList: any) =>
@@ -30,7 +30,7 @@ export const makeSelectFilter = (selectList: any) =>
 
 /**
  * Создать селектор сортировки.
- * @param {*} selectList селектор списка.
+ * @param selectList селектор списка.
  * @return {*} Селектор сортировки.
  */
 export const makeSelectSort = (selectList: any) =>
@@ -40,7 +40,7 @@ export const makeSelectSort = (selectList: any) =>
 
 /**
  * Создать селектор сортировки.
- * @param {*} selectList селектор списка.
+ * @param selectList селектор списка.
  * @return {*} Селектор сортировки.
  */
 export const makeSelectProcess = (selectList: any) =>
@@ -50,15 +50,15 @@ export const makeSelectProcess = (selectList: any) =>
 
 /**
  * Получить список.
- * @param {*} data Данные.
- * @param {*} list Список.
+ * @param data Данные.
+ * @param list Список.
  * @return {*} Список.
  */
 export const getList = (data: any, list: any) => list.map((id) => data[id]);
 
 /**
  * Получить секцию.
- * @param {*} section Название.
+ * @param section Название.
  * @return {*} Секцию.
  */
 export const selectSection = (section: string) => (selectModule: any) => (state: TState) => selectModule(state)[section];
@@ -69,7 +69,7 @@ export const selectIdList = selectSection('list');
 
 /**
  * Выбрать элемент.
- * @param {*} data Данные.
+ * @param data Данные.
  * @return {*} Элемент.
  */
 export const selectItem = (data: any) => (state: TState, id: string) => data(state)[id];

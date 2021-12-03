@@ -32,7 +32,7 @@ export class Menu extends React.Component<TMenuProps> {
 
   /**
    * Вывести компонент.
-   * @return {JSX.Element} Представление.
+   * @return {*} Представление.
    */
   render() {
     return <ul className="menu">{this.props.list.map(this.renderItem)}</ul>;
@@ -40,10 +40,10 @@ export class Menu extends React.Component<TMenuProps> {
 
   /**
    * Вывести элемент.
-   * @param {*} id Идентификатор.
-   * @param {*} name Название.
-   * @param {*} path Путь.
-   * @return {JSX.Element} Представление.
+   * @param id Идентификатор.
+   * @param name Название.
+   * @param path Путь.
+   * @return {*} Представление.
    */
   renderItem = ({id, name, path}: TMenuItem) => (
     <li className="menu__item" key={id}>

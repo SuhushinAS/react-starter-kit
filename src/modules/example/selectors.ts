@@ -5,7 +5,7 @@ import {createSelector} from 'reselect';
 
 /**
  * Выбрать модуль.
- * @param {*} state Стейт.
+ * @param state Стейт.
  * @return {*} модуль.
  */
 export const selectExample = (state: TState) => state[moduleName];

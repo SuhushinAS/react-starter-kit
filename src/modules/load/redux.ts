@@ -8,7 +8,7 @@ const initialState: TLoadStore = {
 
 /**
  * Обработать загрузку.
- * @param {string} type Тип.
+ * @param type Тип.
  * @return {*} Стейт.
  */
 const reducerLoad = (type) => (state, id) => ({

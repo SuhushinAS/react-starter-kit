@@ -14,7 +14,7 @@ export const selectMessages = selectItem(selectLocaleData);
 
 /**
  * Получить текущий язык.
- * @param {*} state Стейт.
- * @return {string} Текущий язык.
+ * @param state Стейт.
+ * @return {*} Текущий язык.
  */
 export const selectLocaleCurrent = (state: TState) => selectLocale(state).current;

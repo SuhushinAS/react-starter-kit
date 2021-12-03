@@ -6,9 +6,9 @@ import {Api} from 'helpers/api';
 export class ConfigApi extends Api {
   /**
    * Получить список.
-   // * @param {*} filter Фильтр.
-   // * @param {*} limit Лимит.
-   // * @param {*} offset Смещение.
+   // * @param filter Фильтр.
+   // * @param limit Лимит.
+   // * @param offset Смещение.
    * @return {*} Список.
    */
   get() {

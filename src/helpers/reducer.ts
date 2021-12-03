@@ -6,8 +6,8 @@ type GReducers<T> = {
 
 /**
  * Создать редьюсер.
- * @param {*} initialState Начальное состояние.
- * @param {*} reducers Редьюсеры.
+ * @param initialState Начальное состояние.
+ * @param reducers Редьюсеры.
  * @return {*} редьюсер.
  */
 export function createReducer<T = any>(initialState, reducers: GReducers<T>) {
@@ -24,9 +24,9 @@ export function createReducer<T = any>(initialState, reducers: GReducers<T>) {
 
 /**
  * Получить список.
- * @param {*} state Стейт.
- * @param {*} data Данные.
- * @param {*} list Список.
+ * @param state Стейт.
+ * @param data Данные.
+ * @param list Список.
  * @return {*} Стейт.
  */
 export const listGet = (state: any, {data, list}: any) => ({
@@ -37,7 +37,7 @@ export const listGet = (state: any, {data, list}: any) => ({
 
 /**
  * Обновить элемент.
- * @param {*} state Стейт.
+ * @param state Стейт.
  * @param item Элемент.
  * @return {*} Стейт.
  */

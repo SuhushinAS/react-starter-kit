@@ -4,7 +4,7 @@ import React from 'react';
 
 /**
  * Пример компонента.
- * @return {JSX.Element} Представление.
+ * @return {*} Представление.
  */
 export const Home = () => (
   <div className="home">

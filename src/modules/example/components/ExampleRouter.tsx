@@ -6,7 +6,7 @@ import {Route, Routes} from 'react-router-dom';
 
 /**
  * Вывести роутинг.
- * @return {JSX.Element} Роуты.
+ * @return {*} Роуты.
  */
 export const ExampleRouter = () => (
   <Routes>

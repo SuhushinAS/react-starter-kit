@@ -8,10 +8,10 @@ type TMessageProps = {
 
 /**
  * Сообщение
- * @param {string} id Идентификатор.
- * @param {*} intl Интл
- * @param {*} values Значения
- * @return {string} Сообщение.
+ * @param id Идентификатор.
+ * @param intl Интл
+ * @param values Значения
+ * @return {*} Сообщение.
  */
 export function message({id, intl, values}: TMessageProps) {
   return intl.formatMessage({defaultMessage: '\u00A0', id}, values);

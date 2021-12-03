@@ -2,9 +2,9 @@
  * АПИ.
  */
 export class Api {
-  static host: string = '';
+  static host = '';
 
-  static options: any = {
+  static options = {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -15,7 +15,7 @@ export class Api {
    * Конструктор.
    * @param host Хост.
    */
-  constructor(host: string = '') {
+  constructor(host = '') {
     Api.host = host;
   }
 
@@ -24,15 +24,18 @@ export class Api {
    * @param response Ответ.
    * @return {*} JSON.
    */
-  getJSON = (response: Response) => response.json();
+  getJSON<T>(response: Response): Promise<T> {
+    return response.json();
+  }
 
   /**
    * Получить опции.
    * @param options Опции.
    * @return {*} Опции.
    */
-  getOptions(options: any = {}) {
+  getOptions(options: RequestInit = {}): RequestInit {
     const {headers = {}} = options;
+
     return {
       ...Api.options,
       headers: {...Api.options.headers, ...headers},
@@ -46,8 +49,8 @@ export class Api {
    * @param options Опции.
    * @return {*} Запрос.
    */
-  request(url: string = '', options) {
-    return this.fetch(url, Api.host, options);
+  request<T>(url = '', options?: RequestInit): Promise<T> {
+    return this.fetch<T>(url, Api.host, options);
   }
 
   /**
@@ -57,8 +60,8 @@ export class Api {
    * @param options Опции.
    * @return {*} Запрос.
    */
-  fetch(url: string = '', host: string = '', options = {}) {
-    return fetch(`${host}${url}`, this.getOptions(options)).then(this.getJSON);
+  fetch<T>(url = '', host = '', options = {}): Promise<T> {
+    return fetch(`${host}${url}`, this.getOptions(options)).then((resp) => this.getJSON<T>(resp));
   }
 
   /**
@@ -66,22 +69,9 @@ export class Api {
    * @param url Адрес.
    * @return {*} Ответ.
    */
-  requestLocal(url = '') {
+  requestLocal<T>(url = ''): Promise<T> {
     return this.fetch(url, '/local');
   }
 }
 
-export type TApiResponseData = any;
-
-export type TResponse = TGenApiResponse<TApiResponseData>;
-
-export type TGenApiResponse<Data> = {
-  body: Data;
-  headers: THeaders;
-};
-
-export type THeaders = {
-  ok: boolean;
-  status: number;
-  statusText: string;
-};
+export const api = new Api();

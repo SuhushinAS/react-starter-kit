@@ -3,7 +3,7 @@ import {loadActions} from 'modules/load/constants';
 
 /**
  * Установить загрузку.
- * @param {*} type Тип.
+ * @param type Тип.
  * @return {*} Загрузка.
  */
 const actionLoad = (type) => (data: any) => ({data, type});

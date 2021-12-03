@@ -7,8 +7,8 @@ type TExampleItemProps = {
 
 /**
  * Функциональный компонент.
- * @param {*} props Свойства компонента.
- * @return {JSX.Element} Представление.
+ * @param props Свойства компонента.
+ * @return {*} Представление.
  */
 export const ExampleItem = ({item}: TExampleItemProps) => <div>{item.name}</div>;
 

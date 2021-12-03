@@ -6,8 +6,8 @@ export type TGetId<T = any> = (id: string) => T;
 
 /**
  * Получить идентификатор.
- * @param {string} prop Свойство.
- * @return {*} Идентификатор.
+ * @param prop Свойство.
+ * @return Идентификатор.
  */
 export const getId = (prop: string) => (item: any) => `${item[prop]}`;
 
@@ -15,14 +15,14 @@ export const getIdDefault = getId(idProp);
 
 /**
  * Получить данные.
- * @param {*} getIdFn Получить идентификатор.
+ * @param getIdFn Получить идентификатор.
  * @return {*} данные.
  */
 export const getData = (getIdFn: TGetId) => (acc: any, item: any) => ({...acc, [getIdFn(item)]: item});
 
 /**
  * Нормализовать список.
- * @param {*} getIdFn Получить идентификатор.
+ * @param getIdFn Получить идентификатор.
  * @return {*} Нормализованный список.
  */
 export const normalizeList =
@@ -38,16 +38,16 @@ export const normalizeList =
 
 /**
  * Нормализовать список.
- * @param {*} data Данные.
+ * @param data Данные.
  * @return {*} Нормализованный список.
  */
 export const normalizeListDefault = normalizeList(getIdDefault);
 
 /**
  * Диспатчить данные.
- * @param {*} dispatch Диспатч
- * @param {string} type Тип.
- * @param {*} add Тип.
+ * @param dispatch Диспатч
+ * @param type Тип.
+ * @param add Тип.
  * @return {*} Данные.
  */
 export const dispatchData =

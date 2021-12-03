@@ -6,7 +6,7 @@ import {selectLocaleCurrent} from 'modules/locale/selectors';
 
 /**
  * Получить словарь.
- * @param {string} locale Язык.
+ * @param locale Язык.
  * @return {*} Словарь.
  */
 export const actionLocaleGetMessages = (locale) => (dispatch) => {
@@ -28,7 +28,7 @@ export const actionLocaleGetList = () => (dispatch) => {
 
 /**
  * Установить текущую локаль
- * @param {string} locale Локаль
+ * @param locale Локаль
  * @return {*} Экшен.
  */
 export const actionLocaleSetCurrent = (locale) => {
