@@ -1,75 +1,44 @@
-import type {TDispatch} from 'app/types';
-import {TState} from 'app/types';
-import {actionLocaleGetList, actionLocaleGetMessages, actionLocaleInit} from 'modules/locale/actions';
-import {localeActions} from 'modules/locale/constants';
-import {selectLocaleCurrent, selectLocaleList, selectMessages} from 'modules/locale/selectors';
-import type {TLocale} from 'modules/locale/types';
+import {useAppDispatch, useAppSelector} from 'app/hooks';
+import {actionLocaleGetMessages, actionLocaleInit, actionLocaleGetList} from 'modules/locale/actions';
+import {locale} from 'modules/locale/reducers';
+import {selectLocaleCurrent, selectMessages} from 'modules/locale/selectors';
 import {selectLoadItem} from 'modules/status/selectors';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {IntlProvider} from 'react-intl';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
 
 type TLocaleProps = {
   children: React.ReactNode;
-  dispatch: TDispatch;
-  loadMessages?: boolean;
-  locale: string;
-  messages?: TLocale;
 };
 
 /**
- * Провайдер переводов.
+ * Компонент.
+ * @return {*} Представление.
  */
-export class LocaleProvider extends React.Component<TLocaleProps> {
-  /**
-   * Конструктор компонента.
-   * @param props Свойства переданные в компонент.
-   */
-  constructor(props: TLocaleProps) {
-    super(props);
-    props.dispatch(actionLocaleGetList());
-    props.dispatch(actionLocaleInit());
-  }
+export const LocaleProviderContainer = ({children}: TLocaleProps) => {
+  const dispatch = useAppDispatch();
 
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
-  render() {
-    const {children, locale, messages} = this.props;
+  useEffect(() => {
+    dispatch(actionLocaleGetList);
+    dispatch(actionLocaleInit);
+  }, [dispatch]);
 
-    if (!messages) {
-      return null;
+  const language = useAppSelector(selectLocaleCurrent);
+  const loadMessages = useAppSelector(selectLoadItem(locale.actions.getMessages.type));
+  const messages = useAppSelector(selectMessages(language));
+
+  useEffect(() => {
+    if (!messages && !loadMessages && language) {
+      dispatch(actionLocaleGetMessages(language));
     }
+  }, [dispatch, loadMessages, language, messages]);
 
-    return (
-      <IntlProvider locale={locale} messages={messages}>
-        {children}
-      </IntlProvider>
-    );
+  if (!messages) {
+    return null;
   }
 
-  /**
-   * Вызывается сразу после render.
-   * Не вызывается в момент первого render компонента.
-   */
-  componentDidUpdate() {
-    const {dispatch, loadMessages, locale, messages} = this.props;
-    if (!messages && !loadMessages) {
-      dispatch(actionLocaleGetMessages(locale));
-    }
-  }
-}
-
-export const LocaleProviderContainer = compose(
-  connect((state: TState) => {
-    const locale = selectLocaleCurrent(state);
-    return {
-      loadMessages: selectLoadItem(localeActions.getData)(state),
-      locale,
-      localeList: selectLocaleList(state),
-      messages: selectMessages(state, locale),
-    };
-  })
-)(LocaleProvider);
+  return (
+    <IntlProvider locale={language} messages={messages}>
+      {children}
+    </IntlProvider>
+  );
+};

@@ -10,6 +10,10 @@ import {Message} from 'modules/locale/components/Message';
 import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
+/**
+ * Компонент.
+ * @return {*} Представление.
+ */
 export const Example = () => {
   const dispatch = useAppDispatch();
 

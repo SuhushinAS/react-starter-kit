@@ -4,6 +4,10 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import './ExampleItem.less';
 
+/**
+ * Компонент.
+ * @return {*} Представление.
+ */
 export const ExampleItem = () => {
   const {id = ''} = useParams();
   const item = useAppSelector(selectExampleItem(id));

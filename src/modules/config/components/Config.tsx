@@ -1,6 +1,6 @@
 import type {TDispatch} from 'app/types';
 import {TState} from 'app/types';
-import {Api} from 'helpers/api';
+import {Api} from 'modules/common/helpers/api';
 import {actionConfigGet} from 'modules/config/actions';
 import {selectConfig} from 'modules/config/selectors';
 import type {TConfig} from 'modules/config/types';

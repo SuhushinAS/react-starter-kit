@@ -8,6 +8,7 @@ import {status} from 'modules/status/reducers';
 
 /**
  * Получить список.
+ * @param dispatch Диспатч.
  * @return {*} Список.
  */
 export const actionExampleGetList: TAction<TExample[]> = (dispatch) => {

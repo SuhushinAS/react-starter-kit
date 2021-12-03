@@ -6,6 +6,10 @@ import {Message} from 'modules/locale/components/Message';
 import React from 'react';
 import {useParams} from 'react-router-dom';
 
+/**
+ * Компонент.
+ * @return {*} Представление.
+ */
 export const ExampleItemPageHead = () => {
   const {id = ''} = useParams();
   const {name} = useAppSelector(selectExampleItem(id)) || {};

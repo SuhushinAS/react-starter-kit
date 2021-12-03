@@ -11,6 +11,10 @@ import './ExampleList.less';
 
 const fields: Array<keyof TExample> = ['name', 'email', 'age', 'balance'];
 
+/**
+ * Компонент.
+ * @return {*} Представление.
+ */
 export const ExampleList = () => {
   const list = useAppSelector(selectExampleList);
   const load = useAppSelector(selectLoadItem(example.actions.getList.type));
