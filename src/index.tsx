@@ -38,10 +38,10 @@ if (module.hot) {
   module.hot.accept('app/components/App', renderApp);
 }
 
-// window.addEventListener('load', () => {
-//   if ('serviceWorker' in navigator && navigator.serviceWorker) {
-//     navigator.serviceWorker.register('/sw.js').catch((registrationError) => {
-//       console.error('SW registration failed: ', registrationError);
-//     });
-//   }
-// });
+window.addEventListener('load', () => {
+  if ('serviceWorker' in navigator && navigator.serviceWorker) {
+    navigator.serviceWorker.register('/sw.js').catch((registrationError) => {
+      console.error('SW registration failed: ', registrationError);
+    });
+  }
+});
