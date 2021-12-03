@@ -8,26 +8,26 @@ const webpack = require('webpack');
 const customInterpolateName = (url) => url.toLowerCase();
 
 module.exports = ({mode}) => {
-    const isProd = 'production' === mode;
+  const isProd = 'production' === mode;
 
-    const plugins = isProd
-        ? [new webpack.LoaderOptionsPlugin({debug: false, minimize: true, options: {customInterpolateName}})]
-        : [new webpack.HotModuleReplacementPlugin()];
+  const plugins = isProd
+    ? [new webpack.LoaderOptionsPlugin({debug: false, minimize: true, options: {customInterpolateName}})]
+    : [new webpack.HotModuleReplacementPlugin()];
 
-    return {
-        module: {
-            rules: [
-                {
-                    exclude: /node_modules/u,
-                    test: /\.(js|jsx|ts|tsx)$/u,
-                    use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
-                },
-            ],
+  return {
+    module: {
+      rules: [
+        {
+          exclude: /node_modules/u,
+          test: /\.(js|jsx|ts|tsx)$/u,
+          use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
         },
-        plugins: [
-            new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(mode)}}),
-            new webpack.IgnorePlugin({contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u}),
-            ...plugins,
-        ],
-    };
+      ],
+    },
+    plugins: [
+      new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(mode)}}),
+      new webpack.IgnorePlugin({contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u}),
+      ...plugins,
+    ],
+  };
 };
