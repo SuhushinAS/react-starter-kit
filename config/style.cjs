@@ -1,24 +1,44 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = ({mode, root}) => {
-    const isProd = 'production' === mode;
-    const styleLoader = isProd ? MiniCssExtractPlugin.loader : 'style-loader';
-    const cssLoader = {loader: 'css-loader', options: {esModule: false}};
-    const plugins = isProd ? [new MiniCssExtractPlugin({filename: '[name].min.css'})] : [];
+/**
+ * Получить Загрузчик стилей.
+ * @param mode Режим.
+ * @return {*} Загрузчик стилей.
+ */
+const getStyleLoader = ({mode}) => ('production' === mode ? MiniCssExtractPlugin.loader : 'style-loader');
 
-    return {
-        module: {
-            rules: [
-                {
-                    test: /\.css$/u,
-                    use: [styleLoader, cssLoader, 'postcss-loader'],
-                },
-                {
-                    test: /\.less$/u,
-                    use: [styleLoader, cssLoader, 'postcss-loader', {loader: 'less-loader', options: {lessOptions: {paths: [root]}}}],
-                },
-            ],
-        },
-        plugins,
-    };
-};
+/**
+ * Получить Загрузчик CSS.
+ * @return {*} Загрузчик CSS.
+ */
+const getCssLoader = () => ({loader: 'css-loader', options: {esModule: false}});
+
+/**
+ * Получить Загрузчик Less.
+ * @param mode Режим.
+ * @return {*} Загрузчик Less.
+ */
+const getLessLoader = ({root}) => ({loader: 'less-loader', options: {lessOptions: {paths: [root]}}});
+
+/**
+ * Получить Плагины.
+ * @param root Корень.
+ * @return {*} Плагины.
+ */
+const getPlugins = ({mode}) => 'production' === mode ? [new MiniCssExtractPlugin({filename: '[name].min.css'})] : [];
+
+module.exports = (config) => ({
+  module: {
+    rules: [
+      {
+        test: /\.css$/u,
+        use: [getStyleLoader(config), getCssLoader(), 'postcss-loader'],
+      },
+      {
+        test: /\.less$/u,
+        use: [getStyleLoader(config), getCssLoader(), 'postcss-loader', getLessLoader(config)],
+      },
+    ],
+  },
+  plugins: getPlugins(config),
+});
