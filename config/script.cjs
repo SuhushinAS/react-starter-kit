@@ -7,17 +7,25 @@ const webpack = require('webpack');
  */
 const customInterpolateName = (url) => url.toLowerCase();
 
+const LoaderOptionsPluginOptions = {
+  debug: false,
+  minimize: true,
+  options: {customInterpolateName},
+};
+
+const IgnorePluginOptions = {contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u};
+
 /**
  * Получить плагины.
  * @param {boolean} isProd Продакшен.
  * @return {*} Плагины.
  */
-const getPlugins = (isProd) =>
-  isProd
-    ? [new webpack.LoaderOptionsPlugin({ debug: false, minimize: true, options: { customInterpolateName } })]
+const getPlugins = ({mode}) =>
+  'production' === mode
+    ? [new webpack.LoaderOptionsPlugin(LoaderOptionsPluginOptions)]
     : [new webpack.HotModuleReplacementPlugin()];
 
-module.exports = ({ mode }) => ({
+module.exports = (config) => ({
   module: {
     rules: [
       {
@@ -29,7 +37,7 @@ module.exports = ({ mode }) => ({
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(mode) } }),
-    new webpack.IgnorePlugin({ contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u }),
-    ...getPlugins('production' === mode),
+    new webpack.IgnorePlugin(IgnorePluginOptions),
+    ...getPlugins(config),
   ],
 });
