@@ -12,9 +12,6 @@ function attachEvent(el, event, handler) {
   el.addEventListener(event, handler);
 }
 
-attachEvent(self, 'install', onInstall);
-attachEvent(self, 'fetch', onFetch);
-
 /**
  * Обработать установку сервис-воркера.
  * @param e Событие
@@ -23,19 +20,6 @@ function onInstall(e) {
   caches.open(cacheName).then(function (cache) {
     cache.addAll(urlList);
   });
-}
-
-/**
- * Обработать отправку запроса.
- * @param event Событие
- */
-function onFetch(event) {
-  const {request} = event;
-  const url = new URL(request.url);
-
-  if (url.origin === location.origin) {
-    event.respondWith(cacheLite(request));
-  }
 }
 
 /**
@@ -64,3 +48,19 @@ function cacheLite(request) {
       });
   });
 }
+
+/**
+ * Обработать отправку запроса.
+ * @param event Событие
+ */
+function onFetch(event) {
+  const {request} = event;
+  const url = new URL(request.url);
+
+  if (url.origin === location.origin) {
+    event.respondWith(cacheLite(request));
+  }
+}
+
+attachEvent(self, 'install', onInstall);
+attachEvent(self, 'fetch', onFetch);

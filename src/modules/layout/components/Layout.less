@@ -1,61 +1,61 @@
 @import (reference) 'src/styles/mixins';
 
 .layout {
-    background-color: @c-gray-10;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-    position: fixed;
+  background-color: @c-gray-10;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+
+  &__header {
+    .fluid-prop-md(height, 55px, 80px);
+
+    bottom: 0;
+    flex-shrink: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
     width: 100%;
+    z-index: 10;
+  }
 
-    &__header {
-        .fluid-prop-md(height, 55px, 80px);
+  &__header-size {
+    .fluid-prop-md(height, 55px, 80px);
 
-        bottom: 0;
-        flex-shrink: 0;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 100%;
-        z-index: 10;
+    flex-shrink: 0;
+
+    &_transparent {
+      height: 0;
     }
+  }
 
-    &__header-size {
-        .fluid-prop-md(height, 55px, 80px);
+  &__scroll {
+    flex: 1 0 0;
+    overflow: hidden;
 
-        flex-shrink: 0;
-
-        &_transparent {
-            height: 0;
-        }
+    & > .scroll > .scroll__track {
+      .fluid-prop-md(top, 60px, 85px);
     }
+  }
 
-    &__scroll {
-        flex: 1 0 0;
-        overflow: hidden;
+  &__inner {
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 1;
+  }
 
-        & > .scroll > .scroll__track {
-            .fluid-prop-md(top, 60px, 85px);
-        }
-    }
+  &__body {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+  }
 
-    &__inner {
-        display: flex;
-        flex-basis: auto;
-        flex-direction: column;
-        flex-grow: 1;
-    }
-
-    &__body {
-        display: flex;
-        flex: 1 0 auto;
-        flex-direction: column;
-    }
-
-    &__footer {
-        background-color: @c-secondary-30;
-        flex-shrink: 0;
-    }
+  &__footer {
+    background-color: @c-secondary-30;
+    flex-shrink: 0;
+  }
 }

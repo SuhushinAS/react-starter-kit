@@ -1,6 +1,6 @@
-import {TItem, TMap} from 'modules/common/types';
 import type {TState} from 'app/types';
 import isEqual from 'lodash.isequal';
+import {TItem, TMap} from 'modules/common/types';
 import {createSelector, createSelectorCreator, defaultMemoize} from 'reselect';
 
 type TGetList = <T = TItem>(data: TMap<T>, list: string[]) => T[];
@@ -64,7 +64,8 @@ export const makeSelectProcess = (selectList: any) =>
  * @param section Название.
  * @return {*} Секцию.
  */
-export const selectSection = (section: string) => (selectModule: any) => (state: TState) => selectModule(state)[section];
+export const selectSection = (section: string) => (selectModule: any) => (state: TState) =>
+  selectModule(state)[section];
 
 export const selectData = selectSection('data');
 

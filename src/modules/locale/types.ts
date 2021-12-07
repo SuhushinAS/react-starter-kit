@@ -1,4 +1,4 @@
-import { FormatXMLElementFn, PrimitiveType } from 'intl-messageformat';
+import {FormatXMLElementFn, PrimitiveType} from 'intl-messageformat';
 
 export type TLocaleStore = {
   current: string;

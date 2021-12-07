@@ -42,7 +42,13 @@ export class Example extends React.Component<TProps> {
       <div>
         <Routes>
           <Route
-            element={<ExamplePageHead linkText={<Message id="home.title" />} linkUrl={appPath.home} title={<Message id="example.list.title" />} />}
+            element={
+              <ExamplePageHead
+                linkText={<Message id="home.title" />}
+                linkUrl={appPath.home}
+                title={<Message id="example.list.title" />}
+              />
+            }
             path={examplePaths.list}
           />
           <Route element={<ExampleItemPageHead />} path={examplePaths.item} />

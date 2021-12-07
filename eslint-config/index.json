@@ -1,38 +1,50 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "jest": true,
-        "node": true
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "./rules/eslint.json",
+    "./rules/import.json",
+    "./rules/jsx-a11y.json",
+    "./rules/prettier.json",
+    "./rules/react.json",
+    "./rules/typescript.json"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "./rules/eslint.json",
-        "./rules/import.json",
-        "./rules/jsx-a11y.json",
-        "./rules/prettier.json",
-        "./rules/react.json",
-        "./rules/typescript.json"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2020,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "import",
-        "react",
-        "react-hooks",
-        "jsx-a11y"
-    ],
-    "rules": {
-    },
-    "settings": {
-        "react": {
-            "version": "^16.8.0"
-        }
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "import",
+    "react",
+    "react-hooks",
+    "jsx-a11y"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      2,
+      {
+        "arrowParens": "always",
+        "bracketSpacing": false,
+        "jsxBracketSameLine": false,
+        "printWidth": 120,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "^16.8.0"
     }
+  }
 }

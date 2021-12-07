@@ -2,87 +2,87 @@
 @import (reference) 'src/styles/mixins';
 
 .header {
-    background-color: @c-gray-40;
-    color: @c-gray-100;
+  background-color: @c-gray-40;
+  color: @c-gray-100;
+  height: 100%;
+  transition: background-color @animation, box-shadow @animation, color @animation;
+
+  &__inner {
+    align-items: center;
+    display: flex;
     height: 100%;
-    transition: background-color @animation, box-shadow @animation, color @animation;
+  }
 
-    &__inner {
-        align-items: center;
-        display: flex;
-        height: 100%;
+  &__hamburger {
+    .fluid-prop-md(margin-right, -16px, 0);
+
+    flex-basis: 0;
+    flex-shrink: 0;
+    line-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: flex-basis @animation-x3, opacity @animation-x3;
+
+    @media @md-max {
+      flex-basis: 49px;
+      opacity: 1;
     }
+  }
 
-    &__hamburger {
-        .fluid-prop-md(margin-right, -16px, 0);
+  &__hamburger-button {
+    .fluid-prop-md(font-size, 24px, 38px);
 
-        flex-basis: 0;
-        flex-shrink: 0;
-        line-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: flex-basis @animation-x3, opacity @animation-x3;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    line-height: 0;
+    margin: -6px;
+    overflow: hidden;
+    padding: 6px;
+  }
 
-        @media @md-max {
-            flex-basis: 49px;
-            opacity: 1;
-        }
+  &__logo {
+    .fluid-prop-md(font-size, 24px, 38px);
+
+    color: @c-primary-100;
+    display: block;
+    flex-shrink: 0;
+    margin-left: -6px;
+    margin-right: -6px;
+    padding: 6px;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: @c-primary-100;
     }
+  }
 
-    &__hamburger-button {
-        .fluid-prop-md(font-size, 24px, 38px);
+  &__menu {
+    flex-basis: 100%;
+    margin-top: 2px;
+    opacity: 1;
+    overflow: hidden;
+    text-align: right;
+    transition: flex-basis @animation-x3, opacity @animation-x3;
 
-        background-color: transparent;
-        border: 0;
-        cursor: pointer;
-        line-height: 0;
-        margin: -6px;
-        overflow: hidden;
-        padding: 6px;
+    @media @md-max {
+      flex-basis: 0;
+      opacity: 0;
     }
+  }
 
-    &__logo {
-        .fluid-prop-md(font-size, 24px, 38px);
+  &__divider {
+    flex-basis: 0;
+    transition: flex-basis @animation-x3;
 
-        color: @c-primary-100;
-        display: block;
-        flex-shrink: 0;
-        margin-left: -6px;
-        margin-right: -6px;
-        padding: 6px;
-
-        &:active,
-        &:focus,
-        &:hover {
-            color: @c-primary-100;
-        }
+    @media @md-max {
+      flex-basis: 100%;
     }
+  }
 
-    &__menu {
-        flex-basis: 100%;
-        margin-top: 2px;
-        opacity: 1;
-        overflow: hidden;
-        text-align: right;
-        transition: flex-basis @animation-x3, opacity @animation-x3;
-
-        @media @md-max {
-            flex-basis: 0;
-            opacity: 0;
-        }
-    }
-
-    &__divider {
-        flex-basis: 0;
-        transition: flex-basis @animation-x3;
-
-        @media @md-max {
-            flex-basis: 100%;
-        }
-    }
-
-    &__lang {
-        flex-shrink: 0;
-        margin-left: 32px;
-    }
+  &__lang {
+    flex-shrink: 0;
+    margin-left: 32px;
+  }
 }

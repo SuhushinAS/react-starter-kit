@@ -4,30 +4,30 @@
 @import (reference) 'font';
 
 * {
-    box-sizing: border-box;
-    outline: none;
-    touch-action: pan-x pan-y;
+  box-sizing: border-box;
+  outline: none;
+  touch-action: pan-x pan-y;
 
-    &::before,
-    &::after {
-        box-sizing: border-box;
-    }
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
 }
 
 html,
 body,
 #root {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
 }
 
 body {
-    .font-family-primary();
-    .f_p();
+  .font-family-primary();
+  .f_p();
 
-    color: @c-primary-90;
+  color: @c-primary-90;
 }
 
 h1,
@@ -38,60 +38,60 @@ h5,
 h6,
 p,
 li {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    .f_h1();
+  .f_h1();
 }
 
 h2 {
-    .f_h2();
+  .f_h2();
 }
 
 h3 {
-    .f_h3();
+  .f_h3();
 }
 
 h4 {
-    .f_h4();
+  .f_h4();
 }
 
 h5 {
-    .f_h5();
+  .f_h5();
 }
 
 h6 {
-    .f_h6();
+  .f_h6();
 }
 
 li,
 p {
-    .f_p();
+  .f_p();
 }
 
 img {
-    display: inline-block;
-    font-size: 0;
-    line-height: 0;
-    max-width: 100%;
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
+  max-width: 100%;
 }
 
 label {
-    display: block;
-    margin: 0;
+  display: block;
+  margin: 0;
 }
 
 input,
 textarea {
-    .prop(-webkit-appearance, none);
+  .prop(-webkit-appearance, none);
 
-    &:-internal-autofill-selected {
-        -webkit-box-shadow: inset 0 0 0 30px @c-white;
-    }
+  &:-internal-autofill-selected {
+    -webkit-box-shadow: inset 0 0 0 30px @c-white;
+  }
 }
 
 a {
-    .link();
+  .link();
 }

@@ -1,40 +1,40 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-        "baseUrl": "src",
-        "declaration": false,
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "importHelpers": true,
-        "isolatedModules": true,
-        "jsx": "react",
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "noEmit": true,
-        "noImplicitAny": false,
-        "noImplicitReturns": false,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "removeComments": true,
-        "skipLibCheck": true,
-        "sourceMap": true,
-        "strict": true,
-        "target": "es5",
-        "types": [
-            "react",
-            "node",
-            "webpack-env"
-        ]
-    },
-    "files": [
-        "types/index.d.ts"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "src",
+    "declaration": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
-    "include": [
-        "src"
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es5",
+    "types": [
+      "react",
+      "node",
+      "webpack-env"
     ]
+  },
+  "files": [
+    "types/index.d.ts"
+  ],
+  "include": [
+    "src"
+  ]
 }

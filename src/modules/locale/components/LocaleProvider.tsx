@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from 'app/hooks';
-import {actionLocaleGetMessages, actionLocaleInit, actionLocaleGetList} from 'modules/locale/actions';
+import {actionLocaleGetList, actionLocaleGetMessages, actionLocaleInit} from 'modules/locale/actions';
 import {locale} from 'modules/locale/reducers';
 import {selectLocaleCurrent, selectMessages} from 'modules/locale/selectors';
 import {selectLoadItem} from 'modules/status/selectors';

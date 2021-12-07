@@ -65,6 +65,11 @@ export class Scroll extends React.Component<TScrollProps> {
     scroll: React.createRef<HTMLDivElement>(),
     scroller: React.createRef<HTMLDivElement>(),
   };
+  updateOnLayoutChange = debounce(() => {
+    if (this.isMount) {
+      this.instanceList.forEach(this.update);
+    }
+  }, 300);
 
   /**
    * Конструктор компонента.
@@ -142,12 +147,6 @@ export class Scroll extends React.Component<TScrollProps> {
       scroller: this.references.scroller.current,
       track: this.references[getTrackKey(dir)].current,
     });
-
-  updateOnLayoutChange = debounce(() => {
-    if (this.isMount) {
-      this.instanceList.forEach(this.update);
-    }
-  }, 300);
 
   /**
    * Вызывается сразу после render.

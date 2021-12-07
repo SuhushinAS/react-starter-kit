@@ -1,23 +1,23 @@
 .font-face(@title, @path, @weight, @style) {
-    @ttf: url('~fonts/@{path}.ttf') format('truetype');
-    @woff: url('~fonts/@{path}.woff') format('woff');
-    @woff2: url('~fonts/@{path}.woff2') format('woff2');
+  @ttf: url('~fonts/@{path}.ttf') format('truetype');
+  @woff: url('~fonts/@{path}.woff') format('woff');
+  @woff2: url('~fonts/@{path}.woff2') format('woff2');
 
-    @font-face {
-        font-display: swap;
-        font-family: @title;
-        font-style: @style;
-        font-weight: @weight;
-        src: @woff, @woff2, @ttf;
-    }
+  @font-face {
+    font-display: swap;
+    font-family: @title;
+    font-style: @style;
+    font-weight: @weight;
+    src: @woff, @woff2, @ttf;
+  }
 }
 
 .font-face-single(@title, @path, @weight, @style, @format) {
-    @font-face {
-        font-display: swap;
-        font-family: @title;
-        font-style: @style;
-        font-weight: @weight;
-        src: url('~fonts/@{path}') format('@{format}');
-    }
+  @font-face {
+    font-display: swap;
+    font-family: @title;
+    font-style: @style;
+    font-weight: @weight;
+    src: url('~fonts/@{path}') format('@{format}');
+  }
 }

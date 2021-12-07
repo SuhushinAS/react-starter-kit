@@ -23,7 +23,7 @@ module.exports = (options) => {
       path: options.dist,
       publicPath: '/',
     },
-    plugins: [new CopyWebpackPlugin({patterns: [{from: options.public, to: options.dist}]})],
+    plugins: [new CopyWebpackPlugin({ patterns: [{ from: options.public, to: options.dist }] })],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       fallback: {
@@ -41,6 +41,6 @@ module.exports = (options) => {
       reasons: isProd,
     },
     target: isProd ? 'browserslist' : 'web',
-    watchOptions: {aggregateTimeout: 300},
+    watchOptions: { aggregateTimeout: 300 },
   };
 };

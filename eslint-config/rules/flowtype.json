@@ -1,63 +1,63 @@
 {
-    "plugins": [
-        "flowtype"
+  "plugins": [
+    "flowtype"
+  ],
+  "rules": {
+    "flowtype/boolean-style": [
+      2,
+      "boolean"
     ],
-    "rules": {
-        "flowtype/boolean-style": [
-            2,
-            "boolean"
-        ],
-        "flowtype/define-flow-type": 2,
-        "flowtype/generic-spacing": [
-            2,
-            "never"
-        ],
-        "flowtype/newline-after-flow-annotation": [
-            2,
-            "never"
-        ],
-        "flowtype/no-dupe-keys": 2,
-        "flowtype/no-existential-type": 2,
-        "flowtype/no-primitive-constructor-types": 2,
-        "flowtype/no-types-missing-file-annotation": 2,
-        "flowtype/no-weak-types": [
-            2,
-            {
-                "Function": true,
-                "Object": true,
-                "any": false
-            }
-        ],
-        "flowtype/require-valid-file-annotation": 2,
-        "flowtype/sort-keys": [
-            2,
-            "asc",
-            {
-                "caseSensitive": true,
-                "natural": true
-            }
-        ],
-        "flowtype/space-after-type-colon": [
-            2,
-            "always"
-        ],
-        "flowtype/space-before-generic-bracket": [
-            2,
-            "never"
-        ],
-        "flowtype/space-before-type-colon": [
-            2,
-            "never"
-        ],
-        "flowtype/union-intersection-spacing": [
-            2,
-            "always"
-        ],
-        "flowtype/use-flow-type": 2
-    },
-    "settings": {
-        "flowtype": {
-            "onlyFilesWithFlowAnnotation": false
-        }
+    "flowtype/define-flow-type": 2,
+    "flowtype/generic-spacing": [
+      2,
+      "never"
+    ],
+    "flowtype/newline-after-flow-annotation": [
+      2,
+      "never"
+    ],
+    "flowtype/no-dupe-keys": 2,
+    "flowtype/no-existential-type": 2,
+    "flowtype/no-primitive-constructor-types": 2,
+    "flowtype/no-types-missing-file-annotation": 2,
+    "flowtype/no-weak-types": [
+      2,
+      {
+        "Function": true,
+        "Object": true,
+        "any": false
+      }
+    ],
+    "flowtype/require-valid-file-annotation": 2,
+    "flowtype/sort-keys": [
+      2,
+      "asc",
+      {
+        "caseSensitive": true,
+        "natural": true
+      }
+    ],
+    "flowtype/space-after-type-colon": [
+      2,
+      "always"
+    ],
+    "flowtype/space-before-generic-bracket": [
+      2,
+      "never"
+    ],
+    "flowtype/space-before-type-colon": [
+      2,
+      "never"
+    ],
+    "flowtype/union-intersection-spacing": [
+      2,
+      "always"
+    ],
+    "flowtype/use-flow-type": 2
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
     }
+  }
 }

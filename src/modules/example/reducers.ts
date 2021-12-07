@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {getId, getNormalize} from 'modules/common/helpers/normalize';
 import {exampleIdKey} from 'modules/example/constants';
 import {TExample, TExampleStore} from 'modules/example/types';
-import {getId, getNormalize} from 'modules/common/helpers/normalize';
 
 const getExampleId = getId(exampleIdKey);
 

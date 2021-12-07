@@ -4,33 +4,33 @@
 @import (reference) 'prop';
 
 .fluid-prop(@prop, @p-min, @w-min, @p-max, @w-max) {
-    @p-k: unit((@p-max - @p-min)/(@w-max - @w-min));
-    @p-b: @p-min - @p-k * @w-min;
-    @p-x: @p-k * 100vw;
+  @p-k: unit((@p-max - @p-min)/(@w-max - @w-min));
+  @p-b: @p-min - @p-k * @w-min;
+  @p-x: @p-k * 100vw;
 
-    @media (min-width: @w-min) and (max-width: @w-max) {
-        .prop(@prop, ~'calc(@{p-x} + @{p-b})');
-    }
+  @media (min-width: @w-min) and (max-width: @w-max) {
+    .prop(@prop, ~'calc(@{p-x} + @{p-b})');
+  }
 }
 
 .fluid-prop-2x(@prop, @p-1, @p-2, @s-1, @s-2) {
-    .fluid-prop(@prop, @p-1, @s-1, @p-2, .prev-size(@s-2)[]);
+  .fluid-prop(@prop, @p-1, @s-1, @p-2, .prev-size(@s-2)[]);
 
-    .prop(@prop, @p-2);
+  .prop(@prop, @p-2);
 
-    @media (max-width: .prev-size(@s-1)[]) {
-        .prop(@prop, @p-1);
-    }
+  @media (max-width: .prev-size(@s-1)[]) {
+    .prop(@prop, @p-1);
+  }
 }
 
 .fluid-prop-sm(@prop, @p-1, @p-2) {
-    .fluid-prop-2x(@prop, @p-1, @p-2, @size-sm-min, @size-md-min);
+  .fluid-prop-2x(@prop, @p-1, @p-2, @size-sm-min, @size-md-min);
 }
 
 .fluid-prop-md(@prop, @p-1, @p-2) {
-    .fluid-prop-2x(@prop, @p-1, @p-2, @size-md-min, @size-lg-min);
+  .fluid-prop-2x(@prop, @p-1, @p-2, @size-md-min, @size-lg-min);
 }
 
 .fluid-prop-lg(@prop, @p-1, @p-2) {
-    .fluid-prop-2x(@prop, @p-1, @p-2, @size-lg-min, @size-xl-min);
+  .fluid-prop-2x(@prop, @p-1, @p-2, @size-lg-min, @size-xl-min);
 }

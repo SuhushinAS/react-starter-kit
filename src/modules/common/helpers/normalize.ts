@@ -1,4 +1,4 @@
-import {TItem, TGetEntry, TGetId, TNormalize} from 'modules/common/types';
+import {TGetEntry, TGetId, TItem, TNormalize} from 'modules/common/types';
 
 const idKey = 'id';
 
