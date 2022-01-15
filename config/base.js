@@ -8,12 +8,12 @@ module.exports = (options) => {
     devServer: isProd
       ? {}
       : {
-        historyApiFallback: true,
-        host: '0.0.0.0',
-        hot: true,
-        port: 8000,
-        static: options.public,
-      },
+          historyApiFallback: true,
+          host: '0.0.0.0',
+          hot: true,
+          port: 8000,
+          static: options.public,
+        },
     devtool: isProd ? false : 'eval-source-map',
     entry: 'index.tsx',
     mode: options.mode,
@@ -24,7 +24,7 @@ module.exports = (options) => {
       path: options.dist,
       publicPath: '/',
     },
-    plugins: [new CopyWebpackPlugin({ patterns: [{ from: options.public, to: options.dist }] })],
+    plugins: [new CopyWebpackPlugin({patterns: [{from: options.public, to: options.dist}]})],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       fallback: {
@@ -42,6 +42,6 @@ module.exports = (options) => {
       reasons: isProd,
     },
     target: isProd ? 'browserslist' : 'web',
-    watchOptions: { aggregateTimeout: 300 },
+    watchOptions: {aggregateTimeout: 300},
   };
 };

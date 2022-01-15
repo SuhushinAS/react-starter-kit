@@ -8,7 +8,7 @@ module.exports = () => ({
         use: [
           {
             loader: SvgSpriteLoaderPlugin.loader,
-            options: { name: 'sprite.svg' },
+            options: {name: 'sprite.svg'},
           },
         ],
       },

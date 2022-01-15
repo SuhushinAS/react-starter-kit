@@ -1,18 +1,18 @@
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
-module.exports = ({ mode }) => ({
+module.exports = ({mode}) => ({
   optimization: {
     chunkIds: 'named',
     emitOnErrors: false,
     minimizer: [
       new TerserWebpackPlugin({
         extractComments: false,
-        terserOptions: { output: { comments: false } },
+        terserOptions: {output: {comments: false}},
       }),
       new CssMinimizerPlugin({
         minimizerOptions: {
-          preset: ['default', { discardComments: { removeAll: true } }],
+          preset: ['default', {discardComments: {removeAll: true}}],
         },
       }),
     ],

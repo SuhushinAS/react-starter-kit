@@ -31,12 +31,12 @@ module.exports = (config) => ({
       {
         exclude: /node_modules/u,
         test: /\.(js|jsx|ts|tsx)$/u,
-        use: [{ loader: 'babel-loader', options: { cacheDirectory: true } }],
+        use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
       },
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(config.mode) } }),
+    new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(config.mode)}}),
     new webpack.IgnorePlugin(IgnorePluginOptions),
     ...getPlugins(config),
   ],

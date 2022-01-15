@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = ({ pages, src }) => ({
+module.exports = ({pages, src}) => ({
   plugins: pages.map(
     (page) =>
       new HtmlWebpackPlugin({
