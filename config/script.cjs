@@ -36,7 +36,7 @@ module.exports = (config) => ({
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(mode) } }),
+    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify(config.mode) } }),
     new webpack.IgnorePlugin(IgnorePluginOptions),
     ...getPlugins(config),
   ],

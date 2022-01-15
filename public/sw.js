@@ -41,9 +41,9 @@ function cacheLite(request) {
         caches.match(request).then(function (response) {
           if (response) {
             resolve(response);
+          } else {
+            resolve(caches.match('/'));
           }
-
-          resolve(caches.match('/'));
         });
       });
   });
