@@ -2,22 +2,18 @@ module.exports = () => ({
   module: {
     rules: [
       {
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
         test: /\.(ttf|eot|woff|woff2)(\?[a-z0-9]+)?$/u,
-        use: [
-          {
-            loader: 'file-loader',
-            options: { name: 'fonts/[name].[ext]' },
-          },
-        ],
+        type: 'asset/resource',
       },
       {
+        generator: {
+          filename: 'images/[name][ext]',
+        },
         test: /.*\.(png|jpg|jpeg|gif)$/iu,
-        use: [
-          {
-            loader: 'file-loader',
-            options: { name: 'images/[name].[ext]' },
-          },
-        ],
+        type: 'asset/resource',
       },
     ],
   },
