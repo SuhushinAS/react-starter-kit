@@ -18,7 +18,7 @@ const getCssLoader = () => ({ loader: 'css-loader', options: { esModule: false }
  * @param mode Режим.
  * @return {*} Загрузчик Less.
  */
-const getLessLoader = ({ root }) => ({ loader: 'less-loader', options: { lessOptions: { paths: [root] } } });
+const getLessLoader = ({ root }) => ({ loader: 'less-loader', options: { lessOptions: { math: 'always', paths: [root] } } });
 
 /**
  * Получить Плагины.
