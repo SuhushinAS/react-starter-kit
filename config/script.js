@@ -2,8 +2,8 @@ const webpack = require('webpack');
 
 /**
  * Обработка имён файлов.
- * @param url Путь до файла.
- * @return {*} Имя файлов.
+ * @param {string} url Путь до файла.
+ * @return {string} Имя файлов.
  */
 const customInterpolateName = (url) => url.toLowerCase();
 
