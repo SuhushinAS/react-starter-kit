@@ -1,4 +1,4 @@
-const {default: MiniCssExtractPlugin} = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
  * Получить Загрузчик стилей.
