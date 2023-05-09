@@ -1,12 +1,11 @@
-import {useAppSelector} from 'app/hooks';
-import {selectExampleItem} from 'modules/example/selectors';
+import {TExample} from 'modules/example/types';
 import React from 'react';
-import {useParams} from 'react-router-dom';
 import './ExampleItem.less';
 
-export const ExampleItem = () => {
-  const {id = ''} = useParams();
-  const item = useAppSelector(selectExampleItem(id));
+type TProps = {
+  example: TExample;
+};
 
-  return <pre className="ExampleItem">{JSON.stringify(item, undefined, 2)}</pre>;
+export const ExampleItem = ({example}: TProps) => {
+  return <pre className="ExampleItem">{JSON.stringify(example, undefined, 2)}</pre>;
 };
