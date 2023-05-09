@@ -1,7 +1,8 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const getIsProd = require('./get-is-prod');
 
 module.exports = (options) => {
-  const isProd = 'production' === options.mode;
+  const isProd = getIsProd(options.mode);
 
   return {
     bail: isProd,

@@ -12,11 +12,6 @@ import {Action} from 'redux';
 
 type TLocaleList = {list: string[]};
 
-/**
- * Получить список.
- * @param dispatch Диспатч.
- * @return {*} Список.
- */
 export const actionLocaleGetList: TAction<TLocaleList> = (dispatch) => {
   dispatch(status.actions.loadStart(locale.actions.getList.type));
 
@@ -28,11 +23,6 @@ export const actionLocaleGetList: TAction<TLocaleList> = (dispatch) => {
 
 type TLocaleSetCurrent = (currentLocale: string) => (dispatch: TDispatch) => Action<string>;
 
-/**
- * Установить текущую локаль
- * @param {string} currentLocale Локаль
- * @return {*} Экшен.
- */
 export const actionLocaleSetCurrent: TLocaleSetCurrent = (currentLocale) => (dispatch) => {
   localStorage.setItem(currentLocaleKey, currentLocale);
 
@@ -41,12 +31,6 @@ export const actionLocaleSetCurrent: TLocaleSetCurrent = (currentLocale) => (dis
 
 type TLocaleInit = (dispatch: TDispatch, getState: TGetState) => Action<string>;
 
-/**
- * Получить Словарь.
- * @param dispatch Диспатч.
- * @param getState Получить стейт.
- * @return {*} Словарь.
- */
 export const actionLocaleInit: TLocaleInit = (dispatch, getState) => {
   const state = getState();
   const currentLocale = selectLocaleCurrent(state) || localStorage.getItem(currentLocaleKey) || defaultLocale;
@@ -58,11 +42,6 @@ type TMessages = {
   data: TLocale[];
 };
 
-/**
- * Получить словарь.
- * @param {string} language Язык.
- * @return {*} Словарь.
- */
 export const actionLocaleGetMessages: TActionData<TMessages, string> = (language) => (dispatch) => {
   dispatch(status.actions.loadStart(locale.actions.getMessages.type));
 

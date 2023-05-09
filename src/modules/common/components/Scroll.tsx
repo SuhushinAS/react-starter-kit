@@ -10,10 +10,6 @@ type TScrollProps = {
 
 type TDirection = 'h' | 'v';
 
-/**
- * Получить размер скролла.
- * @return {*} Размер скролла.
- */
 function getScrollbarWidth() {
   const outer = document.createElement('div');
   outer.style.visibility = 'hidden';
@@ -37,27 +33,14 @@ const scrollbarWidth = getScrollbarWidth();
 
 const needCustomScrollbar = 0 !== scrollbarWidth;
 
-/**
- * Получить ключ для бара.
- * @param dir Направление.
- * @return {*} Ключ для бара.
- */
 function getBarKey(dir) {
   return `bar_${dir}`;
 }
 
-/**
- * Получить ключ для трека.
- * @param dir Направление.
- * @return {*} Ключ для трека.
- */
 function getTrackKey(dir) {
   return `track_${dir}`;
 }
 
-/**
- * Компонент скролла
- */
 export class Scroll extends React.Component<TScrollProps> {
   instanceList: baron[] = [];
   isMount = false;
@@ -71,35 +54,21 @@ export class Scroll extends React.Component<TScrollProps> {
     }
   }, 300);
 
-  /**
-   * Конструктор компонента.
-   * @param props Свойства переданые в компонент.
-   */
   constructor(props: TScrollProps) {
     super(props);
     this.references = this.props.dirList.reduce(this.referencesInit, this.references);
   }
 
-  /**
-   * Инициировать рефы для скроллбаров.
-   * @param acc Аккумулятор.
-   * @param dir Направление.
-   * @return {*} Рефы для скроллбаров.
-   */
   referencesInit = (acc, dir) => ({
     ...acc,
     [getBarKey(dir)]: React.createRef<HTMLDivElement>(),
     [getTrackKey(dir)]: React.createRef<HTMLDivElement>(),
   });
 
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
   render() {
     return (
-      <div className="scroll" ref={this.references.scroll}>
-        <div className="scroll__scroller" ref={this.references.scroller}>
+      <div className="Scroll" ref={this.references.scroll}>
+        <div className="Scroll__Scroller" ref={this.references.scroller}>
           {this.props.children}
         </div>
         {this.props.dirList.map(this.renderScrollbar)}
@@ -107,23 +76,12 @@ export class Scroll extends React.Component<TScrollProps> {
     );
   }
 
-  /**
-   * Вывести скролл.
-   * @param dir Направление.
-   * @return {*} Скролл.
-   */
   renderScrollbar = (dir) => (
-    <div className={`scroll__track scroll__track_${dir}`} key={dir} ref={this.references[getTrackKey(dir)]}>
-      <div className={`scroll__bar scroll__bar_${dir}`} ref={this.references[getBarKey(dir)]} />
+    <div className={`Scroll__Track Scroll__Track_${dir}`} key={dir} ref={this.references[getTrackKey(dir)]}>
+      <div className={`Scroll__Bar Scroll__Bar_${dir}`} ref={this.references[getBarKey(dir)]} />
     </div>
   );
 
-  /**
-   * Компонент примонтировался.
-   * В данный момент у нас есть возможность использовать refs,
-   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
-   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-   */
   componentDidMount() {
     if (needCustomScrollbar) {
       this.instanceList = this.props.dirList.map(this.scrollInit);
@@ -132,15 +90,10 @@ export class Scroll extends React.Component<TScrollProps> {
     }
   }
 
-  /**
-   * Инициировать скролл.
-   * @param dir Направление.
-   * @return {*} Скролл.
-   */
   scrollInit = (dir) =>
     baron({
       bar: this.references[getBarKey(dir)].current,
-      barOnCls: `scroll_on_${dir}`,
+      barOnCls: `Scroll_On_${dir}`,
       direction: dir,
       impact: 'scroller',
       root: this.references.scroll.current,
@@ -148,37 +101,20 @@ export class Scroll extends React.Component<TScrollProps> {
       track: this.references[getTrackKey(dir)].current,
     });
 
-  /**
-   * Вызывается сразу после render.
-   * Не вызывается в момент первого render'а компонента.
-   */
   componentDidUpdate() {
     this.updateOnLayoutChange();
   }
 
-  /**
-   * Обновить
-   * @param scroll Экземпляр скролла.
-   */
   update(scroll) {
     scroll.update();
   }
 
-  /**
-   * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   */
   componentWillUnmount() {
     this.isMount = false;
     this.instanceList.forEach(this.dispose);
   }
 
-  /**
-   * Удалить.
-   * @param scroll Экземпляр скролла.
-   */
   dispose(scroll) {
     scroll.dispose();
   }
 }
-
-export default Scroll;

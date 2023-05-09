@@ -1,10 +1,6 @@
 const webpack = require('webpack');
+const getIsProd = require('./get-is-prod');
 
-/**
- * Обработка имён файлов.
- * @param {string} url Путь до файла.
- * @return {string} Имя файлов.
- */
 const customInterpolateName = (url) => url.toLowerCase();
 
 const LoaderOptionsPluginOptions = {
@@ -15,15 +11,7 @@ const LoaderOptionsPluginOptions = {
 
 const IgnorePluginOptions = {contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u};
 
-/**
- * Получить плагины.
- * @param {boolean} isProd Продакшен.
- * @return {*} Плагины.
- */
-const getPlugins = ({mode}) =>
-  'production' === mode
-    ? [new webpack.LoaderOptionsPlugin(LoaderOptionsPluginOptions)]
-    : [new webpack.HotModuleReplacementPlugin()];
+const getPlugins = ({mode}) => (getIsProd(mode) ? [new webpack.LoaderOptionsPlugin(LoaderOptionsPluginOptions)] : []);
 
 module.exports = (config) => ({
   module: {

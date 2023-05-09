@@ -1,13 +1,13 @@
 @import (reference) 'src/styles/mixins';
 
-.scroll {
+.Scroll {
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
   width: 100%;
 
-  &__scroller {
+  &__Scroller {
     border: 0;
     box-sizing: border-box;
     display: flex;
@@ -21,7 +21,7 @@
     width: 100%;
   }
 
-  &__track {
+  &__Track {
     background-color: fade(@c-gray-40, 25%);
     border-radius: 4px;
     bottom: 5px;
@@ -41,15 +41,15 @@
     }
   }
 
-  &_on_h > &__track_h {
+  &_On_h > &__Track_h {
     display: block;
   }
 
-  &_on_v > &__track_v {
+  &_On_v > &__Track_v {
     display: block;
   }
 
-  &__bar {
+  &__Bar {
     background-color: @c-gray-60;
     border-radius: 3px;
     position: absolute;

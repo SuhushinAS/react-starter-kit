@@ -6,18 +6,11 @@ type TGetOptions = (id: string) => {
   id: string;
 };
 
-/**
- * Получить Опции.
- * @param id Идентификатор.
- * @return {*} Опции.
- */
 export const getOptions: TGetOptions = (id: string) => ({defaultMessage: '\u00A0', id});
 
 export type TGetMessage = (intl: IntlShape) => TMessage;
 
-/**
- * Получить Сообщение.
- * @param intl Интл.
- * @return {*} Сообщение.
- */
-export const getMessage: TGetMessage = (intl) => (id, values) => intl.formatMessage(getOptions(id), values);
+export const getMessage: TGetMessage =
+  <V>(intl) =>
+  (id, values: V) =>
+    intl.formatMessage(getOptions(id), values);

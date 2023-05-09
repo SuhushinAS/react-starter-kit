@@ -6,10 +6,6 @@ import {TConfig} from 'modules/config/types';
 import {loadStop} from 'modules/status/actions';
 import {status} from 'modules/status/reducers';
 
-/**
- * Получить список.
- * @return {*} Список.
- */
 export const actionConfigGet = () => (dispatch: TDispatch) => {
   dispatch(status.actions.loadStart(config.actions.update.type));
 

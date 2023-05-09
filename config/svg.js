@@ -1,6 +1,7 @@
 const SvgSpriteLoaderPlugin = require('external-svg-sprite-loader');
+const getIsProd = require('./get-is-prod');
 
-module.exports = () => ({
+module.exports = ({mode}) => ({
   module: {
     rules: [
       {
@@ -13,6 +14,9 @@ module.exports = () => ({
         ],
       },
     ],
+  },
+  output: {
+    clean: getIsProd(mode) ? true : {keep: /\.svg$/u},
   },
   plugins: [new SvgSpriteLoaderPlugin()],
 });

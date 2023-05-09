@@ -7,16 +7,9 @@ export type TMenuItemProps = {
   path: string;
 };
 
-/**
- * Вывести пункт меню.
- * @param location Местоположение.
- * @param name Название.
- * @param path Путь.
- * @return {*} Представление.
- */
 export const MenuItem = ({name, path}: TMenuItemProps) => {
   return (
-    <Link className="menu-item" to={path}>
+    <Link className="MenuItem" to={path}>
       {name}
     </Link>
   );

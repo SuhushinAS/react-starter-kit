@@ -10,11 +10,7 @@ type TLocaleProps = {
   children: React.ReactNode;
 };
 
-/**
- * Компонент.
- * @return {*} Представление.
- */
-export const LocaleProviderContainer = ({children}: TLocaleProps) => {
+export const LocaleProvider = ({children}: TLocaleProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

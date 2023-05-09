@@ -8,10 +8,6 @@ type TProps = {
   title: React.ReactNode;
 };
 
-/**
- * Компонент.
- * @return {*} Представление.
- */
 export const ExamplePageHead = ({linkText, linkUrl, title}: TProps) => (
   <>
     <h1 className="ExamplePageHead__Title">{title}</h1>

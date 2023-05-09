@@ -6,7 +6,6 @@ import {selectConfig} from 'modules/config/selectors';
 import type {TConfig} from 'modules/config/types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {compose} from 'redux';
 
 type TConfigProps = {
   children: React.ReactNode;
@@ -14,31 +13,16 @@ type TConfigProps = {
   dispatch: TDispatch;
 };
 
-type TConfigState = {
-  config?: TConfig;
-};
-
-/**
- * Пример компонента.
- */
-export class Config extends React.Component<TConfigProps, TConfigState> {
+export class ConfigComponent extends React.Component<TConfigProps, TConfig> {
   state;
 
-  /**
-   * Конструктор компонента.
-   * @param props Свойства переданные в компонент.
-   */
   constructor(props: TConfigProps) {
     super(props);
     props.dispatch(actionConfigGet());
   }
 
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
   render() {
-    if (this.state?.config) {
+    if (this.state) {
       return this.props.children;
     }
 
@@ -55,13 +39,9 @@ export class Config extends React.Component<TConfigProps, TConfigState> {
 
     if (props.config !== config) {
       Api.host = config.host;
-      this.setState({config});
+      this.setState(config);
     }
   }
 }
 
-export const ConfigContainer = compose(
-  connect((state: TState) => ({
-    config: selectConfig(state),
-  }))
-)(Config);
+export const Config = connect((state: TState) => ({config: selectConfig(state)}))(ConfigComponent);

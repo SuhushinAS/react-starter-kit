@@ -15,28 +15,13 @@ type TProps = {
   dispatch: TDispatch;
 };
 
-/**
- * Пример компонента.
- */
-export class Example extends React.Component<TProps> {
-  /**
-   * Значения свойств по-умолчанию.
-   * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-   */
+export class ExampleComponent extends React.Component<TProps> {
   static defaultProps = {};
 
-  /**
-   * Конструктор компонента.
-   * @param {*} props Свойства переданные в компонент.
-   */
   // constructor(props: TExampleProps) {
   //     super(props);
   // }
 
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
   render() {
     return (
       <div>
@@ -61,39 +46,15 @@ export class Example extends React.Component<TProps> {
     );
   }
 
-  /**
-   * Компонент примонтировался.
-   * В данный момент у нас есть возможность использовать refs,
-   * а следовательно это то самое место, где мы хотели бы указать установку фокуса.
-   * Так же, таймауты, ajax-запросы и взаимодействие с другими библиотеками стоит обрабатывать здесь.
-   */
   componentDidMount() {
-    const {dispatch} = this.props;
-    dispatch(actionExampleGetList);
+    this.props.dispatch(actionExampleGetList);
   }
 
-  /**
-   * Должен ли компонент обновиться?
-   * На самом деле, обычно реакт сам отлично разбирается.
-   * Но иногда ручное управление позволяет существенно ускорить работу в "узких местах".
-   * @param {*} props Новые свойства.
-   * @param {*} state Новое состояние.
-   * @return {*} Должен ли компонент обновиться?
-   */
   // shouldComponentUpdate(props, state) {}
 
-  /**
-   * Вызывается сразу после render.
-   * Не вызывается в момент первого render'а компонента.
-   * @param {*} props Предыдущие свойства.
-   * @param {*} state Предыдущее состояние.
-   */
   // componentDidUpdate(props, state) {}
 
-  /**
-   * Вызывается сразу перед тем, как компонент будет удален из DOM.
-   */
   // componentWillUnmount() {}
 }
 
-export const ExampleContainer = connect(null)(Example);
+export const Example = connect()(ExampleComponent);

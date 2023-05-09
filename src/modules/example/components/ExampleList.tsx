@@ -11,10 +11,6 @@ import './ExampleList.less';
 
 const fields: Array<keyof TExample> = ['name', 'email', 'age', 'balance'];
 
-/**
- * Компонент.
- * @return {*} Представление.
- */
 export const ExampleList = () => {
   const list = useAppSelector(selectExampleList);
   const load = useAppSelector(selectLoadItem(example.actions.getList.type));
@@ -43,7 +39,7 @@ export const ExampleList = () => {
           <tr key={item[exampleIdKey]}>
             {fields.map((field) => (
               <td className="ExampleList__Cell" key={field}>
-                <Link to={`${appPath.example}/${item[exampleIdKey]}`}>{item[field]}</Link>
+                <Link to={`${appPath.example}/${item[exampleIdKey]}`}>{`${item[field]}`}</Link>
               </td>
             ))}
           </tr>

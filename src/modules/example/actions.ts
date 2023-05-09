@@ -6,11 +6,6 @@ import {TExample} from 'modules/example/types';
 import {loadStop} from 'modules/status/actions';
 import {status} from 'modules/status/reducers';
 
-/**
- * Получить список.
- * @param dispatch Диспатч.
- * @return {*} Список.
- */
 export const actionExampleGetList: TAction<TExample[]> = (dispatch) => {
   dispatch(status.actions.loadStart(example.actions.getList.type));
 

@@ -5,26 +5,22 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './Header.less';
 
-/**
- * Пример компонента.
- * @return {*} Представление.
- */
 export const Header = () => (
-  <div className="header">
-    <div className="header__inner box">
-      <div className="header__hamburger">
-        <button aria-label="Menu" className="header__hamburger-button">
+  <div className="Header">
+    <div className="Header__Inner box">
+      <div className="Header__Hamburger">
+        <button aria-label="Menu" className="Header__HamburgerButton">
           <SvgIcon name="logo" />
         </button>
       </div>
-      <Link className="header__logo" to="/">
+      <Link className="Header__Logo" to="/">
         <SvgIcon name="logo" />
       </Link>
-      <div className="header__menu">
+      <div className="Header__Menu">
         <Menu />
       </div>
-      <div className="header__divider" />
-      <div className="header__lang">
+      <div className="Header__Divider" />
+      <div className="Header__Lang">
         <LocaleSelectorContainer />
       </div>
     </div>

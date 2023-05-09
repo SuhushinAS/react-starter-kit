@@ -3,10 +3,6 @@ import {TMessage} from 'modules/locale/types';
 import {useMemo} from 'react';
 import {useIntl} from 'react-intl';
 
-/**
- * Получить Сообщение.
- * @return {*} Сообщение.
- */
 export const useMessage = (): TMessage => {
   const intl = useIntl();
 

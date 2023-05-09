@@ -1,5 +1,5 @@
 import {Scroll} from 'modules/common/components/Scroll';
-import Footer from 'modules/layout/components/Footer';
+import {Footer} from 'modules/layout/components/Footer';
 import {Header} from 'modules/layout/components/Header';
 import React from 'react';
 import './Layout.less';
@@ -8,24 +8,19 @@ type TLayoutProps = {
   children: React.ReactNode;
 };
 
-/**
- * Лейаут.
- * @param children Дети.
- * @return {*} Лейаут.
- */
 export const Layout = ({children}: TLayoutProps) => {
   return (
-    <div className="layout">
-      <header className="layout__header">
+    <div className="Layout">
+      <header className="Layout__Header">
         <Header />
       </header>
       {/* mobile-menu */}
-      <div className="layout__scroll">
+      <div className="Layout__Scroll">
         <Scroll dirList={['h', 'v']}>
-          <div className="layout__inner">
-            <div className="layout__header-size" />
-            <main className="layout__body">{children}</main>
-            <footer className="layout__footer">
+          <div className="Layout__Inner">
+            <div className="Layout__HeaderSize" />
+            <main className="Layout__Body">{children}</main>
+            <footer className="Layout__Footer">
               <Footer />
             </footer>
           </div>

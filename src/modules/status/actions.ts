@@ -4,14 +4,4 @@ import {status} from 'modules/status/reducers';
 
 type TLoadStop = <TD>(dispatch: TDispatch, type: string) => (data: TD) => TD;
 
-/**
- * Остановить загрузку.
- */
-
-/**
- * Остановить загрузку.
- * @param dispatch Диспатч.
- * @param type Тип.
- * @return {*} Остановить загрузку.
- */
 export const loadStop: TLoadStop = (dispatch, type) => dispatchAction(dispatch, status.actions.loadStop(type));

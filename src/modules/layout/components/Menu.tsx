@@ -12,14 +12,7 @@ type TMenuItem = {
   path: string;
 };
 
-/**
- * Меню.
- */
 export class Menu extends React.Component<TMenuProps> {
-  /**
-   * Значения свойств по-умолчанию.
-   * https://facebook.github.io/react/docs/typechecking-with-proptypes.html
-   */
   static defaultProps = {
     list: [
       {
@@ -30,23 +23,12 @@ export class Menu extends React.Component<TMenuProps> {
     ],
   };
 
-  /**
-   * Вывести компонент.
-   * @return {*} Представление.
-   */
   render() {
-    return <ul className="menu">{this.props.list.map(this.renderItem)}</ul>;
+    return <ul className="Menu">{this.props.list.map(this.renderItem)}</ul>;
   }
 
-  /**
-   * Вывести элемент.
-   * @param id Идентификатор.
-   * @param name Название.
-   * @param path Путь.
-   * @return {*} Представление.
-   */
   renderItem = ({id, name, path}: TMenuItem) => (
-    <li className="menu__item" key={id}>
+    <li className="Menu__Item" key={id}>
       <MenuItem name={name} path={path} />
     </li>
   );
