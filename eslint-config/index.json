@@ -28,23 +28,9 @@
     "react-hooks",
     "jsx-a11y"
   ],
-  "rules": {
-    "prettier/prettier": [
-      2,
-      {
-        "arrowParens": "always",
-        "bracketSpacing": false,
-        "jsxBracketSameLine": false,
-        "printWidth": 120,
-        "singleQuote": true,
-        "tabWidth": 2,
-        "trailingComma": "es5"
-      }
-    ]
-  },
   "settings": {
     "react": {
-      "version": "^16.8.0"
+      "version": "^18.2.0"
     }
   }
 }

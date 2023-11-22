@@ -59,18 +59,6 @@
     "operator-linebreak": 0,
     "padded-blocks": 0,
     "prefer-arrow-callback": 0,
-    "prettier/prettier": [
-      2,
-      {
-        "arrowParens": "always",
-        "bracketSpacing": false,
-        "jsxBracketSameLine": false,
-        "printWidth": 150,
-        "singleQuote": true,
-        "tabWidth": 2,
-        "trailingComma": "es5"
-      }
-    ],
     "quote-props": 0,
     "quotes": 0,
     "rest-spread-spacing": 0,
