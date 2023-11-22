@@ -1,5 +1,8 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const getIsProd = require('./get-is-prod');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
+const getPlugins = ({mode}) => (getIsProd(mode) ? [] : [new ReactRefreshPlugin()]);
 
 module.exports = (options) => {
   const isProd = getIsProd(options.mode);
@@ -25,7 +28,7 @@ module.exports = (options) => {
       path: options.dist,
       publicPath: '/',
     },
-    plugins: [new CopyWebpackPlugin({patterns: [{from: options.public, to: options.dist}]})],
+    plugins: [new CopyWebpackPlugin({patterns: [{from: options.public, to: options.dist}]}), ...getPlugins(options)],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       fallback: {

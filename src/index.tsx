@@ -31,10 +31,6 @@ if (container) {
   const render = getRender(root);
 
   render();
-
-  if (module.hot) {
-    module.hot.accept('app/components/App', render);
-  }
 }
 
 const onRegisterError = (error) => {
