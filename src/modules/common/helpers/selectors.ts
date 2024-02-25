@@ -2,14 +2,14 @@ import type {TState} from 'app/types';
 import isEqual from 'lodash.isequal';
 import {TItem, TMap} from 'modules/common/types';
 import {shallowEqual} from 'react-redux';
-import {createSelector, createSelectorCreator, defaultMemoize} from 'reselect';
+import {createSelector, createSelectorCreator, lruMemoize} from '@reduxjs/toolkit';
 
 type TGetList = <T = TItem>(data: TMap<T>, list: string[]) => T[];
 
 export const getList: TGetList = (data, list) => list.map((id) => data[id]);
 
-export const createEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
-export const createShallowEqualSelector = createSelectorCreator(defaultMemoize, shallowEqual);
+export const createEqualSelector = createSelectorCreator(lruMemoize, isEqual);
+export const createShallowEqualSelector = createSelectorCreator(lruMemoize, shallowEqual);
 
 export const getParam = (key: string) => (_: TState, params: any) => params[key];
 
@@ -30,8 +30,7 @@ export const makeSelectProcess = (selectList: any) =>
     process ? process(list, processData) : list
   );
 
-export const selectSection = (section: string) => (selectModule: any) => (state: TState) =>
-  selectModule(state)[section];
+export const selectSection = (section: string) => (selectModule: any) => (state: TState) => selectModule(state)[section];
 
 export const selectData = selectSection('data');
 
