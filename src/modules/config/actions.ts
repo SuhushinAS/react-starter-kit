@@ -1,16 +1,17 @@
 import type {TDispatch} from 'app/types';
-import {dispatchData} from 'modules/common/helpers/action';
 import {api} from 'modules/common/helpers/api';
-import {config} from 'modules/config/redux';
+import {configActions} from 'modules/config/reducers';
 import {TConfig} from 'modules/config/types';
-import {loadStop} from 'modules/status/actions';
-import {status} from 'modules/status/reducers';
+import {statusError, statusLoading, statusSuccess} from 'modules/status/actions';
 
 export const actionConfigGet = () => (dispatch: TDispatch) => {
-  dispatch(status.actions.loadStart(config.actions.update.type));
+  dispatch(statusLoading(configActions.update.type));
 
   return api
     .requestLocal<TConfig>('/api/v1/config.json')
-    .then(dispatchData(dispatch, config.actions.update))
-    .then(loadStop(dispatch, config.actions.update.type));
+    .then((data) => {
+      dispatch(configActions.update(data));
+      dispatch(statusSuccess(configActions.update.type));
+    })
+    .catch(() => dispatch(statusError(configActions.update.type)));
 };

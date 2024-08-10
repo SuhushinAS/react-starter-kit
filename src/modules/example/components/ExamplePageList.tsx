@@ -4,13 +4,11 @@ import {ExampleList} from 'modules/example/components/ExampleList';
 import {Message} from 'modules/locale/components/Message';
 import React from 'react';
 
-export const ExamplePageList = () => (
-  <>
-    <ExampleHead
-      linkText={<Message id="home.title" />}
-      linkUrl={appPath.home}
-      title={<Message id="example.list.title" />}
-    />
-    <ExampleList />
-  </>
-);
+export const ExamplePageList = () => {
+  return (
+    <>
+      <ExampleHead linkText={<Message id="home.title" />} linkUrl={appPath.home} title={<Message id="example.list.title" />} />
+      <ExampleList />
+    </>
+  );
+};

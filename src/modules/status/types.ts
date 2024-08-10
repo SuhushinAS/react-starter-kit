@@ -1,7 +1,14 @@
 export type TStatusStore = {
-  load: TLoadMap;
+  [key: string]: Status | undefined;
 };
 
-export type TLoadMap = {
-  [key: string]: boolean;
+export enum Status {
+  idle,
+  loading,
+  success,
+  error,
+}
+
+export type TStatusMap = {
+  [key: string]: Status;
 };

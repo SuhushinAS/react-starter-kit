@@ -1,47 +1,34 @@
-import type {TDispatch} from 'app/types';
-import {TState} from 'app/types';
+import {useAppDispatch, useAppSelector} from 'app/hooks';
 import {Api} from 'modules/common/helpers/api';
 import {actionConfigGet} from 'modules/config/actions';
+import {configActions} from 'modules/config/reducers';
 import {selectConfig} from 'modules/config/selectors';
-import type {TConfig} from 'modules/config/types';
-import React from 'react';
-import {connect} from 'react-redux';
+import {selectStatusItem} from 'modules/status/selectors';
+import {Status} from 'modules/status/types';
+import React, {useEffect} from 'react';
 
 type TConfigProps = {
   children: React.ReactNode;
-  config: TConfig;
-  dispatch: TDispatch;
 };
 
-export class ConfigComponent extends React.Component<TConfigProps, TConfig> {
-  state;
+export const Config = (props: TConfigProps) => {
+  const config = useAppSelector(selectConfig);
+  const configStatus = useAppSelector(selectStatusItem(configActions.update.type));
+  const dispatch = useAppDispatch();
 
-  constructor(props: TConfigProps) {
-    super(props);
-    props.dispatch(actionConfigGet());
-  }
-
-  render() {
-    if (this.state) {
-      return this.props.children;
+  useEffect(() => {
+    if (configStatus === undefined) {
+      dispatch(actionConfigGet());
     }
+  }, [dispatch, configStatus]);
 
+  useEffect(() => {
+    Api.host = config.host;
+  }, [config]);
+
+  if (Status.success !== configStatus) {
     return null;
   }
 
-  /**
-   * Вызывается сразу после render.
-   * Не вызывается в момент первого render компонента.
-   * @param props Предыдущие свойства.
-   */
-  componentDidUpdate(props) {
-    const {config} = this.props;
-
-    if (props.config !== config) {
-      Api.host = config.host;
-      this.setState(config);
-    }
-  }
-}
-
-export const Config = connect((state: TState) => ({config: selectConfig(state)}))(ConfigComponent);
+  return props.children;
+};

@@ -1,8 +1,9 @@
 import {useAppDispatch, useAppSelector} from 'app/hooks';
 import {actionLocaleGetList, actionLocaleGetMessages, actionLocaleInit} from 'modules/locale/actions';
-import {locale} from 'modules/locale/reducers';
+import {localeActions} from 'modules/locale/reducers';
 import {selectLocaleCurrent, selectMessages} from 'modules/locale/selectors';
-import {selectLoadItem} from 'modules/status/selectors';
+import {selectStatusItem} from 'modules/status/selectors';
+import {Status} from 'modules/status/types';
 import React, {useEffect} from 'react';
 import {IntlProvider} from 'react-intl';
 
@@ -19,16 +20,16 @@ export const LocaleProvider = ({children}: TLocaleProps) => {
   }, [dispatch]);
 
   const language = useAppSelector(selectLocaleCurrent);
-  const loadMessages = useAppSelector(selectLoadItem(locale.actions.getMessages.type));
+  const messagesStatus = useAppSelector(selectStatusItem(localeActions.getMessages.type));
   const messages = useAppSelector(selectMessages(language));
 
   useEffect(() => {
-    if (!messages && !loadMessages && language) {
+    if (messagesStatus === undefined && language) {
       dispatch(actionLocaleGetMessages(language));
     }
-  }, [dispatch, loadMessages, language, messages]);
+  }, [dispatch, language, messagesStatus]);
 
-  if (!messages) {
+  if (messagesStatus !== Status.success) {
     return null;
   }
 

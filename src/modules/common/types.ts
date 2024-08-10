@@ -1,5 +1,3 @@
-import {TDispatch} from 'app/types';
-
 export type TItem = {
   id: string;
 };
@@ -14,7 +12,3 @@ export type TNormalize<T = TItem> = (list: T[]) => {
   data: TMap<T>;
   list: string[];
 };
-
-export type TAction<TResult> = (dispatch: TDispatch) => Promise<TResult>;
-
-export type TActionData<TResult, TData = never> = (data: TData) => (dispatch: TDispatch) => Promise<TResult>;

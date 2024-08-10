@@ -10,7 +10,7 @@ type TScrollProps = {
 
 type TDirection = 'h' | 'v';
 
-function getScrollbarWidth() {
+const getScrollbarWidth = () => {
   const outer = document.createElement('div');
   outer.style.visibility = 'hidden';
   outer.style.overflow = 'scroll';
@@ -27,19 +27,27 @@ function getScrollbarWidth() {
   }
 
   return scrollbarWidth;
-}
+};
 
 const scrollbarWidth = getScrollbarWidth();
 
 const needCustomScrollbar = 0 !== scrollbarWidth;
 
-function getBarKey(dir) {
+const getBarKey = (dir) => {
   return `bar_${dir}`;
-}
+};
 
-function getTrackKey(dir) {
+const getTrackKey = (dir) => {
   return `track_${dir}`;
-}
+};
+
+const scrollUpdate = (scroll: baron) => {
+  scroll.update();
+};
+
+const scrollDispose = (scroll: baron) => {
+  scroll.dispose();
+};
 
 export class Scroll extends React.Component<TScrollProps> {
   instanceList: baron[] = [];
@@ -50,7 +58,7 @@ export class Scroll extends React.Component<TScrollProps> {
   };
   updateOnLayoutChange = debounce(() => {
     if (this.isMount) {
-      this.instanceList.forEach(this.update);
+      this.instanceList.forEach(scrollUpdate);
     }
   }, 300);
 
@@ -105,16 +113,8 @@ export class Scroll extends React.Component<TScrollProps> {
     this.updateOnLayoutChange();
   }
 
-  update(scroll) {
-    scroll.update();
-  }
-
   componentWillUnmount() {
     this.isMount = false;
-    this.instanceList.forEach(this.dispose);
-  }
-
-  dispose(scroll) {
-    scroll.dispose();
+    this.instanceList.forEach(scrollDispose);
   }
 }

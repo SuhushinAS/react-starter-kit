@@ -1,24 +1,22 @@
 import {TDispatch, TGetState} from 'app/types';
-import {dispatchData} from 'modules/common/helpers/action';
 import {api} from 'modules/common/helpers/api';
-import {TAction, TActionData} from 'modules/common/types';
 import {currentLocaleKey, defaultLocale} from 'modules/locale/constants';
-import {locale} from 'modules/locale/reducers';
+import {localeActions} from 'modules/locale/reducers';
 import {selectLocaleCurrent} from 'modules/locale/selectors';
 import {TLocale} from 'modules/locale/types';
-import {loadStop} from 'modules/status/actions';
-import {status} from 'modules/status/reducers';
+import {statusError, statusLoading, statusSuccess} from 'modules/status/actions';
 import {Action} from 'redux';
 
-type TLocaleList = {list: string[]};
-
-export const actionLocaleGetList: TAction<TLocaleList> = (dispatch) => {
-  dispatch(status.actions.loadStart(locale.actions.getList.type));
+export const actionLocaleGetList = (dispatch: TDispatch) => {
+  dispatch(statusLoading(localeActions.getList.type));
 
   return api
-    .requestLocal<TLocaleList>('/api/v1/locale.json')
-    .then(dispatchData(dispatch, locale.actions.getList))
-    .then(loadStop(dispatch, locale.actions.getList.type));
+    .requestLocal<string[]>('/api/v1/locale.json')
+    .then((data) => {
+      dispatch(localeActions.getList(data));
+      dispatch(statusSuccess(localeActions.getList.type));
+    })
+    .catch(() => dispatch(statusError(localeActions.getList.type)));
 };
 
 type TLocaleSetCurrent = (currentLocale: string) => (dispatch: TDispatch) => Action<string>;
@@ -26,7 +24,7 @@ type TLocaleSetCurrent = (currentLocale: string) => (dispatch: TDispatch) => Act
 export const actionLocaleSetCurrent: TLocaleSetCurrent = (currentLocale) => (dispatch) => {
   localStorage.setItem(currentLocaleKey, currentLocale);
 
-  return dispatch(locale.actions.setCurrent(currentLocale));
+  return dispatch(localeActions.setCurrent(currentLocale));
 };
 
 type TLocaleInit = (dispatch: TDispatch, getState: TGetState) => Action<string>;
@@ -38,19 +36,14 @@ export const actionLocaleInit: TLocaleInit = (dispatch, getState) => {
   return dispatch(actionLocaleSetCurrent(currentLocale));
 };
 
-type TMessages = {
-  data: TLocale[];
-};
-
-export const actionLocaleGetMessages: TActionData<TMessages, string> = (language) => (dispatch) => {
-  dispatch(status.actions.loadStart(locale.actions.getMessages.type));
+export const actionLocaleGetMessages = (language: string) => (dispatch: TDispatch) => {
+  dispatch(statusLoading(localeActions.getMessages.type));
 
   return api
-    .requestLocal<TMessages>(`/api/v1/locale-${language}.json`)
+    .requestLocal<TLocale>(`/api/v1/locale-${language}.json`)
     .then((data) => {
-      dispatchData(dispatch, locale.actions.getMessages)({data, language});
-
-      return data;
+      dispatch(localeActions.getMessages({data, language}));
+      dispatch(statusSuccess(localeActions.getMessages.type));
     })
-    .then(loadStop(dispatch, locale.actions.getMessages.type));
+    .catch(() => dispatch(statusError(localeActions.getMessages.type)));
 };

@@ -55,11 +55,11 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
     this.isMount = false;
   }
 
-  handleError = (): void => {
+  onError = (): void => {
     console.warn(`${this.props.name} is not found`);
   };
 
-  handleImport = (icon: TImport): void => {
+  onImport = (icon: TImport): void => {
     if (this.isMount) {
       this.setState({...icon.default});
     }
@@ -70,8 +70,8 @@ export class SvgIcon extends React.PureComponent<TIconProps, TIconState> {
       /* webpackChunkName: "icon" */
       `icons/${name}.svg`
     )
-      .then(this.handleImport)
-      .catch(this.handleError);
+      .then(this.onImport)
+      .catch(this.onError);
   }
 
   render() {

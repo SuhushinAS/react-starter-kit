@@ -1,26 +1,16 @@
 import {TGetEntry, TGetId, TItem, TNormalize} from 'modules/common/types';
 
-const idKey = 'id';
+type GetId = <T = TItem>(key: keyof T) => TGetId<T>;
 
-export const getId =
-  <T = TItem>(key: keyof T): TGetId<T> =>
-  (item) =>
-    `${item[key]}`;
+export const getId: GetId = (key) => (item) => `${item[key]}`;
 
-export const getIdDefault = getId(idKey);
+type GetEntries = <T = TItem>(_getId: TGetId<T>) => TGetEntry<T>;
 
-export const getEntries =
-  <T = TItem>(_getId: TGetId<T>): TGetEntry<T> =>
-  (item) =>
-    [_getId(item), item];
+export const getEntries: GetEntries = (_getId) => (item) => [_getId(item), item];
 
-export const getEntriesDefault = getEntries(getIdDefault);
+type GetNormalize = <T = TItem>(_getId: TGetId<T>) => TNormalize<T>;
 
-export const getNormalize =
-  <T = TItem>(_getId: TGetId<T>): TNormalize<T> =>
-  (list) => ({
-    data: Object.fromEntries(list.map(getEntries(_getId))),
-    list: list.map(_getId),
-  });
-
-export const normalizeDefault = getNormalize(getIdDefault);
+export const getNormalize: GetNormalize = (_getId) => (list) => ({
+  data: Object.fromEntries(list.map(getEntries(_getId))),
+  list: list.map(_getId),
+});
