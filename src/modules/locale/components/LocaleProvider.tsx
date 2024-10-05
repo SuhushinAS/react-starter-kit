@@ -1,14 +1,11 @@
 import {useAppSelector} from 'app/lib/hooks';
 import {
+  useLocaleCurrent,
   useLocaleGetList,
   useLocaleGetMessages,
-  useLocaleInit,
 } from 'modules/locale/model/actions';
 import {localeActions} from 'modules/locale/model/reducers';
-import {
-  selectLocaleCurrent,
-  selectMessages,
-} from 'modules/locale/model/selectors';
+import {selectMessages} from 'modules/locale/model/selectors';
 import {selectStatusItem} from 'modules/status/model/selectors';
 import {Status} from 'modules/status/model/types';
 import React, {useEffect} from 'react';
@@ -20,15 +17,13 @@ type TLocaleProps = {
 
 export const LocaleProvider = ({children}: TLocaleProps) => {
   const localeGetList = useLocaleGetList();
-  const localeInit = useLocaleInit();
   const localeGetMessages = useLocaleGetMessages();
 
   useEffect(() => {
     localeGetList();
-    localeInit();
-  }, [localeGetList, localeInit]);
+  }, [localeGetList]);
 
-  const language = useAppSelector(selectLocaleCurrent);
+  const language = useLocaleCurrent();
   const messagesStatus = useAppSelector(
     selectStatusItem(localeActions.getMessages.type)
   );

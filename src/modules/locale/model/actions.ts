@@ -48,15 +48,6 @@ export const useLocaleCurrent = () => {
   );
 };
 
-export const useLocaleInit = () => {
-  const localeSetCurrent = useLocaleSetCurrent();
-  const localeCurrent = useLocaleCurrent();
-
-  return useCallback(() => {
-    localeSetCurrent(localeCurrent);
-  }, [localeCurrent, localeSetCurrent]);
-};
-
 export const useLocaleGetMessages = () => {
   const dispatch = useAppDispatch();
   const localeGetMessagesStatusSet = useStatusSet(
