@@ -1,41 +1,21 @@
-import {TDispatch} from 'app/types';
-import {actionExampleGetList} from 'modules/example/actions';
 import {ExamplePageItem} from 'modules/example/components/ExamplePageItem';
 import {ExamplePageList} from 'modules/example/components/ExamplePageList';
-import {examplePaths} from 'modules/example/constants';
-import React from 'react';
-import {connect} from 'react-redux';
+import {useExampleGetList} from 'modules/example/model/actions';
+import {examplePaths} from 'modules/example/model/constants';
+import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
-type TProps = {
-  dispatch: TDispatch;
+export const Example = () => {
+  const exampleGetList = useExampleGetList();
+
+  useEffect(() => {
+    exampleGetList();
+  }, [exampleGetList]);
+
+  return (
+    <Routes>
+      <Route element={<ExamplePageList />} path={examplePaths.list} />
+      <Route element={<ExamplePageItem />} path={examplePaths.item} />
+    </Routes>
+  );
 };
-
-export class ExampleComponent extends React.Component<TProps> {
-  static defaultProps = {};
-
-  // constructor(props: TExampleProps) {
-  //     super(props);
-  // }
-
-  render() {
-    return (
-      <Routes>
-        <Route element={<ExamplePageList />} path={examplePaths.list} />
-        <Route element={<ExamplePageItem />} path={examplePaths.item} />
-      </Routes>
-    );
-  }
-
-  componentDidMount() {
-    this.props.dispatch(actionExampleGetList);
-  }
-
-  // shouldComponentUpdate(props, state) {}
-
-  // componentDidUpdate(props, state) {}
-
-  // componentWillUnmount() {}
-}
-
-export const Example = connect()(ExampleComponent);

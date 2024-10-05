@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {PayloadAction} from '@reduxjs/toolkit/dist/createAction';
-import {Status, TStatusStore} from 'modules/status/types';
+import {Status, TStatusStore} from 'modules/status/model/types';
 
 const initialState: TStatusStore = {};
 

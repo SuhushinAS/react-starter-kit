@@ -1,31 +1,45 @@
 const webpack = require('webpack');
 const getIsProd = require('./get-is-prod');
 
-const customInterpolateName = (url) => url.toLowerCase();
-
-const LoaderOptionsPluginOptions = {
-  debug: false,
-  minimize: true,
-  options: {customInterpolateName},
+const customInterpolateName = (url) => {
+  return url.toLowerCase();
 };
 
-const IgnorePluginOptions = {contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u};
+const getPlugins = (options) => {
+  const result = [
+    new webpack.DefinePlugin({
+      'process.env': {NODE_ENV: JSON.stringify(options.mode)},
+    }),
+    new webpack.IgnorePlugin({
+      contextRegExp: /moment$/u,
+      resourceRegExp: /^\.\/locale$/u,
+    }),
+  ];
 
-const getPlugins = ({mode}) => (getIsProd(mode) ? [new webpack.LoaderOptionsPlugin(LoaderOptionsPluginOptions)] : []);
+  if (getIsProd(options.mode)) {
+    result.push(
+      new webpack.LoaderOptionsPlugin({
+        debug: false,
+        minimize: true,
+        options: {customInterpolateName},
+      })
+    );
+  }
 
-module.exports = (config) => ({
-  module: {
-    rules: [
-      {
-        exclude: /node_modules/u,
-        test: /\.(js|jsx|ts|tsx)$/u,
-        use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
-      },
-    ],
-  },
-  plugins: [
-    new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(config.mode)}}),
-    new webpack.IgnorePlugin(IgnorePluginOptions),
-    ...getPlugins(config),
-  ],
-});
+  return result;
+};
+
+module.exports = (options) => {
+  return {
+    module: {
+      rules: [
+        {
+          exclude: /node_modules/u,
+          test: /\.(js|jsx|ts|tsx)$/u,
+          use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
+        },
+      ],
+    },
+    plugins: getPlugins(options),
+  };
+};

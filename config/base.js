@@ -1,23 +1,41 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const getIsProd = require('./get-is-prod');
-const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const webpack = require('webpack');
 
-const getPlugins = ({mode}) => (getIsProd(mode) ? [] : [new ReactRefreshPlugin()]);
+const getPlugins = (options) => {
+  const result = [
+    new CopyWebpackPlugin({
+      patterns: [{from: options.public, to: options.dist}],
+    }),
+  ];
+
+  if (!getIsProd(options.mode)) {
+    result.push(new webpack.HotModuleReplacementPlugin());
+  }
+
+  return result;
+};
+
+const getDevServer = (options) => {
+  if (getIsProd(options.mode)) {
+    return {};
+  }
+
+  return {
+    historyApiFallback: true,
+    host: '0.0.0.0',
+    hot: true,
+    port: 8000,
+    static: options.public,
+  };
+};
 
 module.exports = (options) => {
   const isProd = getIsProd(options.mode);
 
   return {
     bail: isProd,
-    devServer: isProd
-      ? {}
-      : {
-          historyApiFallback: true,
-          host: '0.0.0.0',
-          hot: true,
-          port: 8000,
-          static: options.public,
-        },
+    devServer: getDevServer(options),
     devtool: isProd ? false : 'eval-source-map',
     entry: 'index.tsx',
     mode: options.mode,
@@ -28,7 +46,7 @@ module.exports = (options) => {
       path: options.dist,
       publicPath: '/',
     },
-    plugins: [new CopyWebpackPlugin({patterns: [{from: options.public, to: options.dist}]}), ...getPlugins(options)],
+    plugins: getPlugins(options),
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       fallback: {

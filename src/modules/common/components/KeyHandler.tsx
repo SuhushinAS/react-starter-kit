@@ -1,10 +1,10 @@
 import React from 'react';
 
-type TKeyHandlerProps = {
+type TProps = {
   keyList: any;
 };
 
-export class KeyHandler extends React.Component<TKeyHandlerProps> {
+export class KeyHandler extends React.Component<TProps, unknown> {
   handlerAdd = (eventName) => {
     document.addEventListener(eventName, this.handler);
   };

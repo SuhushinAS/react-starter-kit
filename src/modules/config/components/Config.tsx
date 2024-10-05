@@ -1,10 +1,10 @@
-import {useAppDispatch, useAppSelector} from 'app/hooks';
-import {Api} from 'modules/common/helpers/api';
-import {actionConfigGet} from 'modules/config/actions';
-import {configActions} from 'modules/config/reducers';
-import {selectConfig} from 'modules/config/selectors';
-import {selectStatusItem} from 'modules/status/selectors';
-import {Status} from 'modules/status/types';
+import {useAppSelector} from 'app/lib/hooks';
+import {Api} from 'modules/common/lib/api';
+import {useConfigGet} from 'modules/config/model/actions';
+import {configActions} from 'modules/config/model/reducers';
+import {selectConfig} from 'modules/config/model/selectors';
+import {selectStatusItem} from 'modules/status/model/selectors';
+import {Status} from 'modules/status/model/types';
 import React, {useEffect} from 'react';
 
 type TConfigProps = {
@@ -13,14 +13,16 @@ type TConfigProps = {
 
 export const Config = (props: TConfigProps) => {
   const config = useAppSelector(selectConfig);
-  const configStatus = useAppSelector(selectStatusItem(configActions.update.type));
-  const dispatch = useAppDispatch();
+  const configStatus = useAppSelector(
+    selectStatusItem(configActions.update.type)
+  );
+  const configGet = useConfigGet();
 
   useEffect(() => {
     if (configStatus === undefined) {
-      dispatch(actionConfigGet());
+      configGet();
     }
-  }, [dispatch, configStatus]);
+  }, [configGet, configStatus]);
 
   useEffect(() => {
     Api.host = config.host;

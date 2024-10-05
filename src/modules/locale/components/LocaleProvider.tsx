@@ -1,9 +1,16 @@
-import {useAppDispatch, useAppSelector} from 'app/hooks';
-import {actionLocaleGetList, actionLocaleGetMessages, actionLocaleInit} from 'modules/locale/actions';
-import {localeActions} from 'modules/locale/reducers';
-import {selectLocaleCurrent, selectMessages} from 'modules/locale/selectors';
-import {selectStatusItem} from 'modules/status/selectors';
-import {Status} from 'modules/status/types';
+import {useAppSelector} from 'app/lib/hooks';
+import {
+  useLocaleGetList,
+  useLocaleGetMessages,
+  useLocaleInit,
+} from 'modules/locale/model/actions';
+import {localeActions} from 'modules/locale/model/reducers';
+import {
+  selectLocaleCurrent,
+  selectMessages,
+} from 'modules/locale/model/selectors';
+import {selectStatusItem} from 'modules/status/model/selectors';
+import {Status} from 'modules/status/model/types';
 import React, {useEffect} from 'react';
 import {IntlProvider} from 'react-intl';
 
@@ -12,22 +19,26 @@ type TLocaleProps = {
 };
 
 export const LocaleProvider = ({children}: TLocaleProps) => {
-  const dispatch = useAppDispatch();
+  const localeGetList = useLocaleGetList();
+  const localeInit = useLocaleInit();
+  const localeGetMessages = useLocaleGetMessages();
 
   useEffect(() => {
-    dispatch(actionLocaleGetList);
-    dispatch(actionLocaleInit);
-  }, [dispatch]);
+    localeGetList();
+    localeInit();
+  }, [localeGetList, localeInit]);
 
   const language = useAppSelector(selectLocaleCurrent);
-  const messagesStatus = useAppSelector(selectStatusItem(localeActions.getMessages.type));
+  const messagesStatus = useAppSelector(
+    selectStatusItem(localeActions.getMessages.type)
+  );
   const messages = useAppSelector(selectMessages(language));
 
   useEffect(() => {
     if (messagesStatus === undefined && language) {
-      dispatch(actionLocaleGetMessages(language));
+      localeGetMessages(language);
     }
-  }, [dispatch, language, messagesStatus]);
+  }, [language, localeGetMessages, messagesStatus]);
 
   if (messagesStatus !== Status.success) {
     return null;

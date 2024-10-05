@@ -1,26 +1,55 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getIsProd = require('./get-is-prod');
 
-const getStyleLoader = ({mode}) => (getIsProd(mode) ? MiniCssExtractPlugin.loader : 'style-loader');
+const getStyleLoader = (options) => {
+  if (getIsProd(options.mode)) {
+    return MiniCssExtractPlugin.loader;
+  }
 
-const getCssLoader = () => ({loader: 'css-loader', options: {esModule: false}});
+  return 'style-loader';
+};
 
-const getLessLoader = ({root}) => ({loader: 'less-loader', options: {lessOptions: {math: 'always', paths: [root]}}});
+const getCssLoader = () => {
+  return {
+    loader: 'css-loader',
+    options: {esModule: false},
+  };
+};
 
-const getPlugins = ({mode}) => (getIsProd(mode) ? [new MiniCssExtractPlugin({filename: '[name].min.css'})] : []);
+const getLessLoader = (options) => {
+  return {
+    loader: 'less-loader',
+    options: {lessOptions: {math: 'always', paths: [options.root]}},
+  };
+};
 
-module.exports = (config) => ({
-  module: {
-    rules: [
-      {
-        test: /\.css$/u,
-        use: [getStyleLoader(config), getCssLoader(), 'postcss-loader'],
-      },
-      {
-        test: /\.less$/u,
-        use: [getStyleLoader(config), getCssLoader(), 'postcss-loader', getLessLoader(config)],
-      },
-    ],
-  },
-  plugins: getPlugins(config),
-});
+const getPlugins = (options) => {
+  if (getIsProd(options.mode)) {
+    return [new MiniCssExtractPlugin({filename: '[name].min.css'})];
+  }
+
+  return [];
+};
+
+module.exports = (options) => {
+  return {
+    module: {
+      rules: [
+        {
+          test: /\.css$/u,
+          use: [getStyleLoader(options), getCssLoader(), 'postcss-loader'],
+        },
+        {
+          test: /\.less$/u,
+          use: [
+            getStyleLoader(options),
+            getCssLoader(),
+            'postcss-loader',
+            getLessLoader(options),
+          ],
+        },
+      ],
+    },
+    plugins: getPlugins(options),
+  };
+};

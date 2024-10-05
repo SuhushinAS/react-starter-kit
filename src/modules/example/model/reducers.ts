@@ -1,10 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {PayloadAction} from '@reduxjs/toolkit/dist/createAction';
-import {getId, getNormalize} from 'modules/common/helpers/normalize';
-import {exampleIdKey} from 'modules/example/constants';
-import {TExample, TExampleStore} from 'modules/example/types';
+import {getId, getNormalize} from 'modules/common/lib/normalize';
+import {exampleIdKey} from 'modules/example/model/constants';
+import {TExample, TExampleStore} from 'modules/example/model/types';
 
-const getExampleId = getId(exampleIdKey);
+const getExampleId = getId<TExample>(exampleIdKey);
 
 const normalizeExample = getNormalize<TExample>(getExampleId);
 

@@ -1,6 +1,9 @@
-import {useAppDispatch, useAppSelector} from 'app/hooks';
-import {actionLocaleSetCurrent} from 'modules/locale/actions';
-import {selectLocaleCurrent, selectLocaleList} from 'modules/locale/selectors';
+import {useAppSelector} from 'app/lib/hooks';
+import {
+  useLocaleCurrent,
+  useLocaleSetCurrent,
+} from 'modules/locale/model/actions';
+import {selectLocaleList} from 'modules/locale/model/selectors';
 import React, {useCallback} from 'react';
 
 const renderLocaleOption = (locale: string) => (
@@ -10,15 +13,15 @@ const renderLocaleOption = (locale: string) => (
 );
 
 export const LocaleSelectorContainer = () => {
-  const dispatch = useAppDispatch();
-  const localeCurrent = useAppSelector(selectLocaleCurrent);
+  const localeCurrent = useLocaleCurrent();
   const localeList = useAppSelector(selectLocaleList);
+  const localeSetCurrent = useLocaleSetCurrent();
 
   const onLocaleChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
-      dispatch(actionLocaleSetCurrent(event.target.value || ''));
+      localeSetCurrent(event.target.value || '');
     },
-    [dispatch]
+    [localeSetCurrent]
   );
 
   return (
