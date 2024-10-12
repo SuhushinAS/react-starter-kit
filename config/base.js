@@ -24,7 +24,6 @@ const getDevServer = (options) => {
   return {
     historyApiFallback: true,
     host: '0.0.0.0',
-    hot: true,
     port: 8000,
     static: options.public,
   };
