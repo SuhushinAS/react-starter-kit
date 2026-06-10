@@ -7,7 +7,6 @@ module.exports = (options) => {
       rules: [
         {
           include: path.join(options.root, options.src, 'icons'),
-          resourceQuery: /source/u,
           test: /\.svg$/u,
           type: 'asset/source',
         },

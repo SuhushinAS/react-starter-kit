@@ -28,10 +28,6 @@ declare module '*.svg' {
   export default src;
 }
 
-declare module '*.svg?source' {
-  const src: string;
-  export default src;
-}
 
 declare module '*.less' {
   const classes: {readonly [key: string]: string};
