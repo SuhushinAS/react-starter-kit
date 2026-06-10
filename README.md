@@ -105,7 +105,8 @@ The main reference implementation for new modules is `src/modules/example`.
 - The entry point is `src/index.tsx`.
 - The main application composition lives in `src/app/components/App.tsx`.
 - The shell is composed in this order:
-  - Redux `Provider`
+  - `React.StrictMode`
+  - `ReduxProvider`
   - `LocaleProvider`
   - `BrowserRouter`
   - `Config`
@@ -121,6 +122,7 @@ The main reference implementation for new modules is `src/modules/example`.
 #### State and async flow
 
 - Shared state is built with `Redux Toolkit`.
+- Use the typed Redux helpers from `src/app/lib/hooks.ts` (`useAppDispatch`, `useAppSelector`) instead of raw `react-redux` hooks.
 - Async logic is implemented with hooks in `model/actions.ts`, not thunks.
 - Request statuses are centralized in the `status` slice and read via `selectStatusItem(action.type)`.
 - Collections are often stored in normalized `{data, list}` form.
@@ -130,7 +132,7 @@ The main reference implementation for new modules is `src/modules/example`.
 - Absolute imports are resolved from `src` (`tsconfig.json#baseUrl = "src"`).
 - Component styles live beside components and use side-effect imports.
 - Global styles are imported once in `src/styles/index.less`.
-- SVG icons are loaded by name through `src/modules/common/components/SvgIcon.tsx` and bundled into a sprite.
+- SVG icons are loaded by name through `src/modules/common/components/SvgIcon.tsx`; `src/modules/common/lib/icon-map.ts` builds the allowed name → `viewBox` map with `require.context(...)`, and missing `viewBox` values only show as dev warnings. Webpack bundles the sprite into `sprite.svg`.
 
 ### Localization
 
@@ -146,6 +148,7 @@ When adding a new feature module, you usually need to:
 2. Add the reducer to `src/app/model/reducers.ts`.
 3. Check whether app-level types/hooks also need updates in `src/app/model` and `src/app/lib/hooks.ts`.
 4. If the module loads data, use the shared status pattern via `useStatusSet(action.type)`.
+5. If the module should appear in the header navigation, also extend `src/modules/layout/components/Menu.tsx` (`Menu.defaultProps.list`).
 
 ### Validation
 
@@ -156,6 +159,8 @@ npm run eslint
 npm run stylelint
 npm run build
 ```
+
+Both lint scripts run with `--fix`, and the same autofixers are wired into `lint-staged`/Husky pre-commit for staged `!(*min).{js,jsx,ts,tsx}` and `!(*min).{css,less}` files.
 
 ### Known limitations
 
@@ -273,6 +278,7 @@ npm run start
 - Точка входа — `src/index.tsx`.
 - Основная композиция приложения находится в `src/app/components/App.tsx`.
 - Shell собирается в таком порядке:
+  - `React.StrictMode`
   - Redux `Provider`
   - `LocaleProvider`
   - `BrowserRouter`
@@ -289,6 +295,7 @@ npm run start
 #### State и async flow
 
 - Shared state построен на `Redux Toolkit`.
+- Используйте типизированные Redux-хелперы из `src/app/lib/hooks.ts` (`useAppDispatch`, `useAppSelector`) вместо raw hooks из `react-redux`.
 - Async логика реализована через hooks в `model/actions.ts`, а не через thunks.
 - Статусы запросов централизованы в slice `status` и читаются через `selectStatusItem(action.type)`.
 - Коллекции часто хранятся в нормализованном формате `{data, list}`.
@@ -298,7 +305,7 @@ npm run start
 - Импорты абсолютные от `src` (`tsconfig.json#baseUrl = "src"`).
 - Стили компонентов лежат рядом с компонентами и подключаются через side-effect imports.
 - Глобальные стили подключаются один раз в `src/styles/index.less`.
-- SVG icons грузятся по имени через `src/modules/common/components/SvgIcon.tsx` и собираются в sprite.
+- SVG icons грузятся по имени через `src/modules/common/components/SvgIcon.tsx`; `src/modules/common/lib/icon-map.ts` строит карту допустимых имен → `viewBox` через `require.context(...)`, а отсутствие `viewBox` проявляется только как dev warning. Webpack собирает sprite в `sprite.svg`.
 
 ### Локализация
 
@@ -314,6 +321,7 @@ npm run start
 2. Добавить reducer в `src/app/model/reducers.ts`.
 3. Проверить, нужны ли обновления app-level types/hooks в `src/app/model` и `src/app/lib/hooks.ts`.
 4. Если модуль загружает данные, использовать общий status pattern через `useStatusSet(action.type)`.
+5. Если модуль должен появиться в header navigation, также обновить `src/modules/layout/components/Menu.tsx` (`Menu.defaultProps.list`).
 
 ### Проверка изменений
 
@@ -324,6 +332,8 @@ npm run eslint
 npm run stylelint
 npm run build
 ```
+
+Оба lint-скрипта запускаются с `--fix`, и те же autofixer-ы подключены в `lint-staged`/Husky pre-commit для staged `!(*min).{js,jsx,ts,tsx}` и `!(*min).{css,less}` файлов.
 
 ### Известные ограничения
 
