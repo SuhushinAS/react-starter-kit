@@ -1,9 +1,8 @@
 import {getMessage} from 'src/modules/locale/lib/helpers';
-import {TMessage} from 'src/modules/locale/model/types';
 import {useMemo} from 'react';
 import {useIntl} from 'react-intl';
 
-export const useMessage = (): TMessage => {
+export const useGetMessage = (): ReturnType<typeof getMessage> => {
   const intl = useIntl();
 
   return useMemo(() => getMessage(intl), [intl]);

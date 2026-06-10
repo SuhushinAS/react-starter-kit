@@ -1,5 +1,7 @@
-import {FormatXMLElementFn, PrimitiveType} from 'intl-messageformat';
-import {ReactNode} from 'react';
+import {ComponentProps} from 'react';
+import {FormattedMessage} from 'react-intl';
+
+export type TMessageProps = Pick<ComponentProps<typeof FormattedMessage>, 'id' | 'values'>;
 
 export type TLocaleStore = {
   current: string;
@@ -14,17 +16,3 @@ export type TLocaleData = {
 export type TLocale = {
   [key: string]: string;
 };
-
-export type TMessageProps<V> = {
-  id: string;
-  values?: V;
-};
-
-export type TMessageFormatValues = Record<
-  string,
-  PrimitiveType | FormatXMLElementFn<string, string>
->;
-
-export type TMessageValues = Record<string, ReactNode | PrimitiveType | FormatXMLElementFn<ReactNode, ReactNode>>;
-
-export type TMessage = (id: string, values?: TMessageFormatValues) => string;
