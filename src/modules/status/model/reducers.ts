@@ -1,5 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {PayloadAction} from '@reduxjs/toolkit/dist/createAction';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Status, TStatusStore} from 'modules/status/model/types';
 
 const initialState: TStatusStore = {};
