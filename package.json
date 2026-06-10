@@ -5,15 +5,15 @@
     "@reduxjs/toolkit": "^2.12.0",
     "@types/node": "^25.9.2",
     "baron": "^3.0.3",
-    "lodash.isequal": "^4.5.0",
+    "intl-messageformat": "^11.2.8",
     "normalize.css": "^8.0.1",
     "prettier": "^3.8.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-intl": "^10.1.13",
     "react-redux": "^9.3.0",
-    "react-router": "^7.17.0",
     "react-router-dom": "^7.17.0",
+    "reselect": "^5.1.1",
     "redux": "^5.0.1"
   },
   "description": "reactStarterKit",
@@ -40,10 +40,8 @@
     "css-loader": "^7.1.4",
     "css-minimizer-webpack-plugin": "^8.0.0",
     "eslint": "^9.39.4",
-    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.6.0",
@@ -93,20 +91,13 @@
     ]
   },
   "name": "react-starter-kit",
+  "overrides": {
+    "uuid": "^11.1.1"
+  },
   "private": true,
   "repository": {
     "type": "git",
     "url": "git@github.com:SuhushinAS/react-starter-kit.git"
-  },
-  "overrides": {
-    "brace-expansion": "^1.1.15",
-    "fast-uri": "^3.1.2",
-    "follow-redirects": "^1.16.0",
-    "launch-editor": "^2.14.1",
-    "minimatch": "^3.1.5",
-    "picomatch": "^2.3.2",
-    "shell-quote": "^1.8.4",
-    "ws": "^8.21.0"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --mode=production",
