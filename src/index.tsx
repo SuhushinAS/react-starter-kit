@@ -1,7 +1,7 @@
-import {App} from 'app/components/App';
+import {App} from 'src/app/components/App';
 import React from 'react';
 import {createRoot} from 'react-dom/client';
-import 'styles/index.less';
+import 'src/styles/index.less';
 
 const container = document.getElementById('root');
 
@@ -11,7 +11,7 @@ if (container) {
   root.render(<App />);
 
   if (module.hot) {
-    module.hot.accept('app/components/App', () => {
+    module.hot.accept('src/app/components/App', () => {
       root.render(<App />);
     });
   }

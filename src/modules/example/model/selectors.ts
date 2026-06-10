@@ -1,11 +1,11 @@
-import {TState} from 'app/model/types';
-import {getList} from 'modules/common/lib/selectors';
-import {exampleName} from 'modules/example/model/reducers';
+import {TState} from 'src/app/model/types';
+import {getList} from 'src/modules/common/lib/selectors';
+import {exampleName} from 'src/modules/example/model/reducers';
 import {
   TExample,
   TExampleMap,
   TExampleStore,
-} from 'modules/example/model/types';
+} from 'src/modules/example/model/types';
 import {createSelector} from 'reselect';
 
 export const selectExample = (state: TState): TExampleStore => {

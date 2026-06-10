@@ -20,6 +20,11 @@ export type TMessageProps<V> = {
   values?: V;
 };
 
+export type TMessageFormatValues = Record<
+  string,
+  PrimitiveType | FormatXMLElementFn<string, string>
+>;
+
 export type TMessageValues = Record<string, ReactNode | PrimitiveType | FormatXMLElementFn<ReactNode, ReactNode>>;
 
-export type TMessage = <V>(id: string, values?: V) => string;
+export type TMessage = (id: string, values?: TMessageFormatValues) => string;

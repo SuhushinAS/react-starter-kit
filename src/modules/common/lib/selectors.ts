@@ -1,4 +1,4 @@
-import {TItem, TMap} from 'modules/common/model/types';
+import {TItem, TMap} from 'src/modules/common/model/types';
 
 type TGetList = <T = TItem>(data: TMap<T>, list: string[]) => T[];
 

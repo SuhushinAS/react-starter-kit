@@ -1,7 +1,7 @@
-import {ExamplePageItem} from 'modules/example/components/ExamplePageItem';
-import {ExamplePageList} from 'modules/example/components/ExamplePageList';
-import {useExampleGetList} from 'modules/example/model/actions';
-import {examplePaths} from 'modules/example/model/constants';
+import {ExamplePageItem} from 'src/modules/example/components/ExamplePageItem';
+import {ExamplePageList} from 'src/modules/example/components/ExamplePageList';
+import {useExampleGetList} from 'src/modules/example/model/actions';
+import {examplePaths} from 'src/modules/example/model/constants';
 import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 

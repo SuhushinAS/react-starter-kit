@@ -1,5 +1,6 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const getIsProd = require('./get-is-prod');
+const path = require('path');
 const webpack = require('webpack');
 
 const getPlugins = (options) => {
@@ -36,7 +37,7 @@ module.exports = (options) => {
     bail: isProd,
     devServer: getDevServer(options),
     devtool: isProd ? false : 'eval-source-map',
-    entry: 'index.tsx',
+    entry: path.join(options.root, options.src, 'index.tsx'),
     mode: options.mode,
     output: {
       clean: true,
@@ -47,6 +48,9 @@ module.exports = (options) => {
     },
     plugins: getPlugins(options),
     resolve: {
+      alias: {
+        src: path.join(options.root, options.src),
+      },
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       fallback: {
         child_process: 'empty',
@@ -55,7 +59,7 @@ module.exports = (options) => {
         net: 'empty',
         tls: 'empty',
       },
-      modules: ['src', 'node_modules'],
+      modules: ['node_modules'],
     },
     stats: {
       colors: true,

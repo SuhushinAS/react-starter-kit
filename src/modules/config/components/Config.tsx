@@ -1,10 +1,10 @@
-import {useAppSelector} from 'app/lib/hooks';
-import {Api} from 'modules/common/lib/api';
-import {useConfigGet} from 'modules/config/model/actions';
-import {configActions} from 'modules/config/model/reducers';
-import {selectConfig} from 'modules/config/model/selectors';
-import {selectStatusItem} from 'modules/status/model/selectors';
-import {Status} from 'modules/status/model/types';
+import {useAppSelector} from 'src/app/lib/hooks';
+import {Api} from 'src/modules/common/lib/api';
+import {useConfigGet} from 'src/modules/config/model/actions';
+import {configActions} from 'src/modules/config/model/reducers';
+import {selectConfig} from 'src/modules/config/model/selectors';
+import {selectStatusItem} from 'src/modules/status/model/selectors';
+import {Status} from 'src/modules/status/model/types';
 import React, {useEffect} from 'react';
 
 type TConfigProps = {

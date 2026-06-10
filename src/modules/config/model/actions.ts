@@ -1,9 +1,9 @@
-import {useAppDispatch} from 'app/lib/hooks';
-import {api} from 'modules/common/lib/api';
-import {configActions} from 'modules/config/model/reducers';
-import {TConfig} from 'modules/config/model/types';
-import {useStatusSet} from 'modules/status/model/actions';
-import {Status} from 'modules/status/model/types';
+import {useAppDispatch} from 'src/app/lib/hooks';
+import {api} from 'src/modules/common/lib/api';
+import {configActions} from 'src/modules/config/model/reducers';
+import {TConfig} from 'src/modules/config/model/types';
+import {useStatusSet} from 'src/modules/status/model/actions';
+import {Status} from 'src/modules/status/model/types';
 import {useCallback} from 'react';
 
 export const useConfigGet = () => {

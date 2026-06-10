@@ -1,7 +1,7 @@
-import {appPath} from 'app/model/constants';
-import {ExampleHead} from 'modules/example/components/ExampleHead';
-import {ExampleList} from 'modules/example/components/ExampleList';
-import {Message} from 'modules/locale/components/Message';
+import {appPath} from 'src/app/model/constants';
+import {ExampleHead} from 'src/modules/example/components/ExampleHead';
+import {ExampleList} from 'src/modules/example/components/ExampleList';
+import {Message} from 'src/modules/locale/components/Message';
 import React from 'react';
 
 export const ExamplePageList = () => {

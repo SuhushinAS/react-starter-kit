@@ -1,4 +1,4 @@
-import {getSvgViewBox} from 'modules/common/lib/get-svg-view-box';
+import {getSvgViewBox} from 'src/modules/common/lib/get-svg-view-box';
 
 type TIconMap = Record<string, string>;
 
@@ -8,7 +8,7 @@ const getName = (path: string): string => {
   return path.replace(/^\.\//u, '').replace(/\.svg$/u, '');
 };
 
-const context = require.context('icons', false, /\.svg$/u);
+const context = require.context('src/icons', false, /\.svg$/u);
 const invalidIcons: string[] = [];
 
 export const iconMap = context.keys().reduce<TIconMap>((result, path) => {

@@ -1,13 +1,13 @@
-import {useAppSelector} from 'app/lib/hooks';
+import {useAppSelector} from 'src/app/lib/hooks';
 import {
   useLocaleCurrent,
   useLocaleGetList,
   useLocaleGetMessages,
-} from 'modules/locale/model/actions';
-import {localeActions} from 'modules/locale/model/reducers';
-import {selectMessages} from 'modules/locale/model/selectors';
-import {selectStatusItem} from 'modules/status/model/selectors';
-import {Status} from 'modules/status/model/types';
+} from 'src/modules/locale/model/actions';
+import {localeActions} from 'src/modules/locale/model/reducers';
+import {selectMessages} from 'src/modules/locale/model/selectors';
+import {selectStatusItem} from 'src/modules/status/model/selectors';
+import {Status} from 'src/modules/status/model/types';
 import React, {useEffect} from 'react';
 import {IntlProvider} from 'react-intl';
 

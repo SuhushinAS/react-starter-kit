@@ -1,11 +1,11 @@
-import {useAppDispatch, useAppSelector} from 'app/lib/hooks';
-import {api} from 'modules/common/lib/api';
-import {currentLocaleKey, defaultLocale} from 'modules/locale/model/constants';
-import {localeActions} from 'modules/locale/model/reducers';
-import {selectLocaleCurrent} from 'modules/locale/model/selectors';
-import {TLocale} from 'modules/locale/model/types';
-import {useStatusSet} from 'modules/status/model/actions';
-import {Status} from 'modules/status/model/types';
+import {useAppDispatch, useAppSelector} from 'src/app/lib/hooks';
+import {api} from 'src/modules/common/lib/api';
+import {currentLocaleKey, defaultLocale} from 'src/modules/locale/model/constants';
+import {localeActions} from 'src/modules/locale/model/reducers';
+import {selectLocaleCurrent} from 'src/modules/locale/model/selectors';
+import {TLocale} from 'src/modules/locale/model/types';
+import {useStatusSet} from 'src/modules/status/model/actions';
+import {Status} from 'src/modules/status/model/types';
 import {useCallback} from 'react';
 
 export const useLocaleGetList = () => {

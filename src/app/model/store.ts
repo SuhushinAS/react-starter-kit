@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {rootReducer} from 'app/model/reducers';
+import {rootReducer} from 'src/app/model/reducers';
 
 const middlewareOptions = {
   immutableCheck: false,
@@ -14,7 +14,7 @@ export const store = configureStore({
 });
 
 if (module.hot) {
-  module.hot.accept('app/model/reducers', () =>
+  module.hot.accept('src/app/model/reducers', () =>
     store.replaceReducer(rootReducer)
   );
 }

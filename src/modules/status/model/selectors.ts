@@ -1,6 +1,6 @@
-import {TState} from 'app/model/types';
-import {statusName} from 'modules/status/model/reducers';
-import {TStatusStore} from 'modules/status/model/types';
+import {TState} from 'src/app/model/types';
+import {statusName} from 'src/modules/status/model/reducers';
+import {TStatusStore} from 'src/modules/status/model/types';
 
 export const selectStatus = (state: TState): TStatusStore => {
   return state[statusName] as TStatusStore;

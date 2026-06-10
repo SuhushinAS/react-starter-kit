@@ -1,10 +1,10 @@
-import {appPath} from 'app/model/constants';
-import {store} from 'app/model/store';
-import {Config} from 'modules/config/components/Config';
-import {Example} from 'modules/example/components/Example';
-import {Home} from 'modules/home/components/Home';
-import {Layout} from 'modules/layout/components/Layout';
-import {LocaleProvider} from 'modules/locale/components/LocaleProvider';
+import {appPath} from 'src/app/model/constants';
+import {store} from 'src/app/model/store';
+import {Config} from 'src/modules/config/components/Config';
+import {Example} from 'src/modules/example/components/Example';
+import {Home} from 'src/modules/home/components/Home';
+import {Layout} from 'src/modules/layout/components/Layout';
+import {LocaleProvider} from 'src/modules/locale/components/LocaleProvider';
 import React from 'react';
 import {Provider} from 'react-redux';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';

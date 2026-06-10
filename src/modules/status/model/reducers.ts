@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Status, TStatusStore} from 'modules/status/model/types';
+import {Status, TStatusStore} from 'src/modules/status/model/types';
 
 const initialState: TStatusStore = {};
 

@@ -1,4 +1,4 @@
-import {MenuItem} from 'modules/layout/components/MenuItem';
+import {MenuItem} from 'src/modules/layout/components/MenuItem';
 import React from 'react';
 import './Menu.less';
 

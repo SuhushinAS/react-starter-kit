@@ -1,6 +1,6 @@
-import {useAppDispatch} from 'app/lib/hooks';
-import {statusActions} from 'modules/status/model/reducers';
-import {Status} from 'modules/status/model/types';
+import {useAppDispatch} from 'src/app/lib/hooks';
+import {statusActions} from 'src/modules/status/model/reducers';
+import {Status} from 'src/modules/status/model/types';
 import {useCallback} from 'react';
 
 export const useStatusSet = (type: string) => {

@@ -1,6 +1,6 @@
-import {SvgIcon} from 'modules/common/components/SvgIcon';
-import {Menu} from 'modules/layout/components/Menu';
-import {LocaleSelectorContainer} from 'modules/locale/components/LocaleSelector';
+import {SvgIcon} from 'src/modules/common/components/SvgIcon';
+import {Menu} from 'src/modules/layout/components/Menu';
+import {LocaleSelectorContainer} from 'src/modules/locale/components/LocaleSelector';
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './Header.less';

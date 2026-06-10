@@ -1,4 +1,4 @@
-import {TDispatch, TState} from 'app/model/types';
+import {TDispatch, TState} from 'src/app/model/types';
 import {useDispatch, useSelector} from 'react-redux';
 import {createSelector} from 'reselect';
 

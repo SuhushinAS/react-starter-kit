@@ -1,5 +1,5 @@
-import {getMessage} from 'modules/locale/lib/helpers';
-import {TMessage} from 'modules/locale/model/types';
+import {getMessage} from 'src/modules/locale/lib/helpers';
+import {TMessage} from 'src/modules/locale/model/types';
 import {useMemo} from 'react';
 import {useIntl} from 'react-intl';
 

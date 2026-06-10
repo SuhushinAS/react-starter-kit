@@ -1,9 +1,9 @@
-import {useAppSelector} from 'app/lib/hooks';
+import {useAppSelector} from 'src/app/lib/hooks';
 import {
   useLocaleCurrent,
   useLocaleSetCurrent,
-} from 'modules/locale/model/actions';
-import {selectLocaleList} from 'modules/locale/model/selectors';
+} from 'src/modules/locale/model/actions';
+import {selectLocaleList} from 'src/modules/locale/model/selectors';
 import React, {useCallback} from 'react';
 
 const renderLocaleOption = (locale: string) => (

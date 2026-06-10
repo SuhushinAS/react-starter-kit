@@ -1,6 +1,6 @@
-import {TState} from 'app/model/types';
-import {localeName} from 'modules/locale/model/reducers';
-import {TLocale, TLocaleData, TLocaleStore} from 'modules/locale/model/types';
+import {TState} from 'src/app/model/types';
+import {localeName} from 'src/modules/locale/model/reducers';
+import {TLocale, TLocaleData, TLocaleStore} from 'src/modules/locale/model/types';
 
 export const selectLocale = (state: TState): TLocaleStore => {
   return state[localeName] as TLocaleStore;

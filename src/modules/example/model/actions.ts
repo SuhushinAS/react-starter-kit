@@ -1,9 +1,9 @@
-import {useAppDispatch} from 'app/lib/hooks';
-import {api} from 'modules/common/lib/api';
-import {exampleActions} from 'modules/example/model/reducers';
-import {TExample} from 'modules/example/model/types';
-import {useStatusSet} from 'modules/status/model/actions';
-import {Status} from 'modules/status/model/types';
+import {useAppDispatch} from 'src/app/lib/hooks';
+import {api} from 'src/modules/common/lib/api';
+import {exampleActions} from 'src/modules/example/model/reducers';
+import {TExample} from 'src/modules/example/model/types';
+import {useStatusSet} from 'src/modules/status/model/actions';
+import {Status} from 'src/modules/status/model/types';
 import {useCallback} from 'react';
 
 export const useExampleGetList = () => {

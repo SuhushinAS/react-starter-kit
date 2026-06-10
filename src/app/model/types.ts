@@ -1,4 +1,4 @@
-import {store} from 'app/model/store';
+import {store} from 'src/app/model/store';
 
 export type AppStore = typeof store;
 export type TGetState = AppStore['getState'];

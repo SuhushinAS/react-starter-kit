@@ -1,5 +1,5 @@
-import {SvgIcon} from 'modules/common/components/SvgIcon';
-import {Message} from 'modules/locale/components/Message';
+import {SvgIcon} from 'src/modules/common/components/SvgIcon';
+import {Message} from 'src/modules/locale/components/Message';
 import React from 'react';
 
 export const Home = () => {

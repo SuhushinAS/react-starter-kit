@@ -1,6 +1,6 @@
-import {Scroll} from 'modules/common/components/Scroll';
-import {Footer} from 'modules/layout/components/Footer';
-import {Header} from 'modules/layout/components/Header';
+import {Scroll} from 'src/modules/common/components/Scroll';
+import {Footer} from 'src/modules/layout/components/Footer';
+import {Header} from 'src/modules/layout/components/Header';
 import React from 'react';
 import './Layout.less';
 

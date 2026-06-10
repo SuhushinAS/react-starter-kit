@@ -1,7 +1,7 @@
 .font-face(@title, @path, @weight, @style) {
-  @ttf: url('~fonts/@{path}.ttf') format('truetype');
-  @woff: url('~fonts/@{path}.woff') format('woff');
-  @woff2: url('~fonts/@{path}.woff2') format('woff2');
+  @ttf: url('~src/fonts/@{path}.ttf') format('truetype');
+  @woff: url('~src/fonts/@{path}.woff') format('woff');
+  @woff2: url('~src/fonts/@{path}.woff2') format('woff2');
 
   @font-face {
     font-display: swap;
@@ -18,6 +18,6 @@
     font-family: @title;
     font-style: @style;
     font-weight: @weight;
-    src: url('~fonts/@{path}') format('@{format}');
+    src: url('~src/fonts/@{path}') format('@{format}');
   }
 }

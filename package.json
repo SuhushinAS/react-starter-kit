@@ -113,7 +113,8 @@
     "dev": "cross-env NODE_ENV=development webpack serve --mode=development",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src",
     "start": "cross-env NODE_ENV=production webpack serve --mode=production",
-    "stylelint": "stylelint ./**/*.{css,less} --fix"
+    "stylelint": "stylelint ./**/*.{css,less} --fix",
+    "typecheck": "tsc --noEmit --pretty false"
   },
   "version": "0.0.1"
 }

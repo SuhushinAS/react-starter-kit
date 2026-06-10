@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "src",
     "declaration": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,13 +12,18 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "noImplicitAny": false,
     "noImplicitReturns": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "paths": {
+      "src/*": [
+        "./src/*"
+      ]
+    },
     "removeComments": true,
     "skipLibCheck": true,
     "sourceMap": true,

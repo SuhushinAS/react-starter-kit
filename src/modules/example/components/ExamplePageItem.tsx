@@ -1,9 +1,9 @@
-import {useAppSelector} from 'app/lib/hooks';
-import {appPath} from 'app/model/constants';
-import {ExampleHead} from 'modules/example/components/ExampleHead';
-import {ExampleItem} from 'modules/example/components/ExampleItem';
-import {selectExampleItem} from 'modules/example/model/selectors';
-import {Message} from 'modules/locale/components/Message';
+import {useAppSelector} from 'src/app/lib/hooks';
+import {appPath} from 'src/app/model/constants';
+import {ExampleHead} from 'src/modules/example/components/ExampleHead';
+import {ExampleItem} from 'src/modules/example/components/ExampleItem';
+import {selectExampleItem} from 'src/modules/example/model/selectors';
+import {Message} from 'src/modules/locale/components/Message';
 import React from 'react';
 import {useParams} from 'react-router-dom';
 

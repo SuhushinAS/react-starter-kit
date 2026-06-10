@@ -1,5 +1,5 @@
 import baron from 'baron';
-import {debounce} from 'modules/common/lib/debounce';
+import {debounce} from 'src/modules/common/lib/debounce';
 import React, {ReactNode, RefObject} from 'react';
 import './Scroll.less';
 
@@ -52,7 +52,7 @@ const scrollDispose = (scroll: baron) => {
 export class Scroll extends React.Component<TProps, unknown> {
   instanceList: baron[] = [];
   isMount = false;
-  rfs: Record<string, RefObject<HTMLDivElement>> = {
+  rfs: Record<string, RefObject<HTMLDivElement | null>> = {
     scroll: React.createRef<HTMLDivElement>(),
     scroller: React.createRef<HTMLDivElement>(),
   };
@@ -67,7 +67,10 @@ export class Scroll extends React.Component<TProps, unknown> {
     this.rfs = this.props.dirList.reduce(this.rfsInit, this.rfs);
   }
 
-  rfsInit = (acc, dir: TDirection) => {
+  rfsInit = (
+    acc: Record<string, RefObject<HTMLDivElement | null>>,
+    dir: TDirection,
+  ): Record<string, RefObject<HTMLDivElement | null>> => {
     return {
       ...acc,
       [getBarKey(dir)]: React.createRef<HTMLDivElement>(),
@@ -86,7 +89,7 @@ export class Scroll extends React.Component<TProps, unknown> {
     );
   }
 
-  renderScrollbar = (dir) => {
+  renderScrollbar = (dir: TDirection) => {
     return (
       <div
         className={`Scroll__Track Scroll__Track_${dir}`}

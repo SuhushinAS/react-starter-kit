@@ -1,5 +1,5 @@
 import React from 'react';
-import {iconMap} from 'modules/common/lib/icon-map';
+import {iconMap} from 'src/modules/common/lib/icon-map';
 import './SvgIcon.less';
 
 type TIconProps = {
