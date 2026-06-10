@@ -30,7 +30,7 @@
 ## Developer workflows
 - Install dependencies first: `npm ci`.
 - Verified production build: `npm run build`. It writes the bundle to `www/` and copies everything from `public/` there via `CopyWebpackPlugin`.
-- Dev server command is `npm run start`; `config/base.js` binds it to `0.0.0.0:8000` with `historyApiFallback: true`.
+- Dev server command is `npm run dev`; `config/base.js` binds it to `0.0.0.0:8000` with `historyApiFallback: true`.
 - There are no test files or test scripts in this repo right now; validation is mainly build-based.
 - `npm run eslint` only targets `.js,.jsx` under `src`, so TypeScript changes are mainly checked by the build/TypeScript compiler.
 - `npm run stylelint` is declared in `package.json`, but `stylelint` is not in `devDependencies`; verify local tooling before relying on it.

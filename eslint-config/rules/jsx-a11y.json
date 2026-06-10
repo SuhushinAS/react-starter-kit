@@ -133,7 +133,6 @@
         "tags": []
       }
     ],
-    "jsx-a11y/no-onchange": 2,
     "jsx-a11y/no-redundant-roles": 2,
     "jsx-a11y/no-static-element-interactions": [
       2,
