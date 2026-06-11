@@ -70,6 +70,7 @@ npm run start
 | `npm run dev` | Run webpack dev-server in development mode |
 | `npm run build` | Build the production bundle into `www/` |
 | `npm run start` | Run webpack serve in production mode |
+| `npm run typecheck` | Run TypeScript checking without emitting files |
 | `npm run eslint` | Lint and auto-fix `.js,.jsx,.ts,.tsx` in `src` |
 | `npm run stylelint` | Lint and auto-fix `.css,.less` |
 
@@ -129,7 +130,7 @@ The main reference implementation for new modules is `src/modules/example`.
 
 ### Styling and assets
 
-- Absolute imports are resolved from `src` (`tsconfig.json#baseUrl = "src"`).
+- Imports use the `src` alias (`import {App} from 'src/app/components/App'`), wired through `tsconfig.json#compilerOptions.paths` and webpack `resolve.alias.src` in `config/base.js`.
 - Component styles live beside components and use side-effect imports.
 - Global styles are imported once in `src/styles/index.less`.
 - SVG icons are loaded by name through `src/modules/common/components/SvgIcon.tsx`; `src/modules/common/lib/icon-map.ts` builds the allowed name → `viewBox` map with `require.context(...)`, and missing `viewBox` values only show as dev warnings. Webpack bundles the sprite into `sprite.svg`.
@@ -155,16 +156,19 @@ When adding a new feature module, you usually need to:
 The repository does not currently include a dedicated test suite, so the main validation loop is:
 
 ```bash
+npm run typecheck
 npm run eslint
 npm run stylelint
 npm run build
 ```
 
+Run `npm run typecheck` when editing `.ts`/`.tsx`; webpack transpiles through `babel-loader` in `config/script.js`, so `npm run build` does not replace TypeScript checking.
+
 Both lint scripts run with `--fix`, and the same autofixers are wired into `lint-staged`/Husky pre-commit for staged `!(*min).{js,jsx,ts,tsx}` and `!(*min).{css,less}` files.
 
 ### Known limitations
 
-- `npm audit` still reports residual vulnerabilities in older transitive dependencies, mainly from `external-svg-sprite-loader` and part of the `webpack-dev-server` ecosystem.
+- `npm audit` may still report residual vulnerabilities in older transitive dependencies from the current tooling stack.
 - Reducing the audit count further will likely require package/tooling replacement rather than simple version bumps.
 
 ### License
@@ -243,6 +247,7 @@ npm run start
 | `npm run dev` | Запуск webpack dev-server в development-режиме |
 | `npm run build` | Production build в `www/` |
 | `npm run start` | Запуск webpack serve в production-режиме |
+| `npm run typecheck` | TypeScript-проверка без генерации файлов |
 | `npm run eslint` | Проверка и автоисправление `.js,.jsx,.ts,.tsx` в `src` |
 | `npm run stylelint` | Проверка и автоисправление `.css,.less` |
 
@@ -302,7 +307,7 @@ npm run start
 
 ### Работа со стилями и ассетами
 
-- Импорты абсолютные от `src` (`tsconfig.json#baseUrl = "src"`).
+- Импорты используют alias `src` (`import {App} from 'src/app/components/App'`), который настроен через `tsconfig.json#compilerOptions.paths` и webpack `resolve.alias.src` в `config/base.js`.
 - Стили компонентов лежат рядом с компонентами и подключаются через side-effect imports.
 - Глобальные стили подключаются один раз в `src/styles/index.less`.
 - SVG icons грузятся по имени через `src/modules/common/components/SvgIcon.tsx`; `src/modules/common/lib/icon-map.ts` строит карту допустимых имен → `viewBox` через `require.context(...)`, а отсутствие `viewBox` проявляется только как dev warning. Webpack собирает sprite в `sprite.svg`.
@@ -328,16 +333,19 @@ npm run start
 В репозитории сейчас нет отдельного test suite, поэтому основной цикл проверки такой:
 
 ```bash
+npm run typecheck
 npm run eslint
 npm run stylelint
 npm run build
 ```
 
+При изменениях в `.ts`/`.tsx` запускайте `npm run typecheck`; webpack транспилирует TypeScript через `babel-loader` в `config/script.js`, поэтому `npm run build` не заменяет полноценную TypeScript-проверку.
+
 Оба lint-скрипта запускаются с `--fix`, и те же autofixer-ы подключены в `lint-staged`/Husky pre-commit для staged `!(*min).{js,jsx,ts,tsx}` и `!(*min).{css,less}` файлов.
 
 ### Известные ограничения
 
-- `npm audit` все еще показывает остаточные уязвимости в старых transitive dependencies, в первую очередь из `external-svg-sprite-loader` и части `webpack-dev-server` ecosystem.
+- `npm audit` все еще может показывать остаточные уязвимости в старых transitive dependencies из текущего tooling stack.
 - Дальнейшее снижение `audit` потребует не просто version bump, а замены отдельных пакетов/tooling.
 
 ### Лицензия

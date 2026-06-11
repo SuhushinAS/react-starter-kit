@@ -26,7 +26,7 @@ React starter kit with `TypeScript`, `Redux Toolkit`, `React Router`, `react-int
 - SVG icons are loaded by name (`<SvgIcon name="logo" />`) from `src/icons/*.svg`; `src/modules/common/lib/icon-map.ts` builds the allowed name → `viewBox` map with `require.context(...)`, and missing `viewBox` values only surface as dev warnings. Webpack bundles the sprite into `sprite.svg` via `config/svg.js`.
 
 ### Codebase conventions
-- Imports are absolute from `src` (`import {App} from 'app/components/App'`) because `tsconfig.json` sets `baseUrl: "src"` and webpack resolves `modules: ['src', 'node_modules']`.
+- Imports use the `src` alias (`import {App} from 'src/app/components/App'`), wired through `tsconfig.json#compilerOptions.paths` and webpack `resolve.alias.src` in `config/base.js`.
 - Component styles live beside components and are imported for side effects (`import './Header.less'`). Shared global styles are composed once in `src/styles/index.less`.
 - Existing UI naming is BEM-like (`Layout__Header`, `ExampleList__Cell`) rather than CSS modules, even though `types/index.d.ts` declares `*.less` modules.
 - Many components intentionally render `null` until status becomes `Status.success`; preserve that behavior when extending bootstrapping flows.
@@ -38,12 +38,13 @@ React starter kit with `TypeScript`, `Redux Toolkit`, `React Router`, `react-int
 - Verified production build: `npm run build`. It writes the bundle to `www/` and copies everything from `public/` there via `CopyWebpackPlugin`.
 - Dev server command is `npm run dev`; `config/base.js` binds it to `0.0.0.0:8000` with `historyApiFallback: true`.
 - Production webpack serve command is `npm run start`.
-- There are no test files or test scripts in this repo right now; validation is mainly build-based.
+- There are no test files or test scripts in this repo right now; validation is mainly `npm run typecheck`, linting, and build-based checks.
+- Run `npm run typecheck` when editing `.ts`/`.tsx`; webpack transpiles through `babel-loader` in `config/script.js`, so `npm run build` does not replace TypeScript checking.
 - `npm run eslint` runs ESLint 9 with flat config from `eslint.config.cjs` and covers `.js,.jsx,.ts,.tsx` under `src`.
 - `npm run stylelint` is available and uses the root `.stylelintrc` with `stylelint-config-standard-less`.
 - Both lint scripts run with `--fix`, and the same autofixers are wired into `lint-staged`/Husky pre-commit for staged `!(*min).{js,jsx,ts,tsx}` and `!(*min).{css,less}` files.
 - `package.json#overrides` contains security-driven transitive pins; keep them unless you intentionally rework the affected toolchain.
-- `npm audit` still reports residual issues from `external-svg-sprite-loader` and `webpack-dev-server`; fixing those further likely requires package replacement, not just version bumps.
+- If `npm audit` still reports residual tooling issues, fixing those further likely requires package replacement, not just version bumps.
 
 ## Adding new modules
 - Mirror the existing module split from `README.md`: `components/`, `model/` (actions/reducers/selectors/types/constants), and optional `api/`.
