@@ -6,13 +6,13 @@ React starter kit with `TypeScript`, `Redux Toolkit`, `React Router`, `react-int
 - Entry point is `src/index.tsx`: it mounts `App`, imports global `less`, enables HMR, and registers `public/sw.js` on `window.load`.
 - `src/app/components/App.tsx` builds the shell in this order: `React.StrictMode` → Redux `Provider` → `LocaleProvider` → `BrowserRouter` → `Config` → `Layout` → route tree.
 - `Config` and `LocaleProvider` are bootstrap gates: both return `null` until async bootstrap finishes, so UI intentionally waits for config + i18n data before rendering.
-- Routes are small and module-owned: top-level routes live in `src/app/model/constants.ts`, while feature-local subroutes live in module constants such as `src/modules/example/model/constants.ts`.
+- Routes are small and module-owned: top-level routes live in `src/app/model/constants.ts` (`home`, `example`), while feature-local subroutes live in module constants such as `src/modules/example/model/constants.ts`.
 
 ## Architecture notes
 
 ### State and data flow
 - Redux Toolkit is the shared state boundary. `src/app/model/reducers.ts` combines module reducers; add new slices there and update app types/hooks under `src/app/model` and `src/app/lib/hooks.ts`.
-- Use the typed Redux helpers from `src/app/lib/hooks.ts` (`useAppDispatch`, `useAppSelector`) instead of raw `react-redux` hooks.
+- Use the typed Redux helpers from `src/app/lib/hooks.ts` (`useAppDispatch`, `useAppSelector`, `createAppSelector`) instead of raw `react-redux` hooks or untyped `reselect` factories.
 - Async work is implemented as React hooks, not thunks. Examples: `useConfigGet`, `useExampleGetList`, `useLocaleGetMessages` in `src/modules/*/model/actions.ts`.
 - Async hooks follow the same pattern: set status → call `api.requestLocal(...)` or `api.request(...)` → dispatch slice action → set status success/error.
 - Request status is centralized in the `status` slice and keyed by `sliceAction.type` (`selectStatusItem(configActions.update.type)`, `selectStatusItem(exampleActions.getList.type)`). Reuse that pattern instead of feature-specific loading flags.
@@ -22,7 +22,7 @@ React starter kit with `TypeScript`, `Redux Toolkit`, `React Router`, `react-int
 - `src/modules/common/lib/api.ts` is the only fetch wrapper. `Api.host` is mutable global state populated by `Config` from `/local/api/v1/config.json`; normal remote requests should go through `api.request()`.
 - Mock/bootstrap data is served from `public/local/api/v1/*.json` and fetched through `api.requestLocal(...)`, which prefixes `/local`.
 - Locale state is split across Redux + `localStorage`: `useLocaleSetCurrent()` writes `currentLocale`, and `useLocaleCurrent()` falls back to storage then `defaultLocale` (`ru`).
-- Text should go through `src/modules/locale/components/Message.tsx` or `useMessage()`, with keys stored in locale JSON files like `public/local/api/v1/locale-en.json`.
+- Text should go through `src/modules/locale/components/Message.tsx` or `useGetMessage()` from `src/modules/locale/lib/hooks.ts`, with keys stored in locale JSON files like `public/local/api/v1/locale-en.json`.
 - SVG icons are loaded by name (`<SvgIcon name="logo" />`) from `src/icons/*.svg`; `src/modules/common/lib/icon-map.ts` builds the allowed name → `viewBox` map with `require.context(...)`, and missing `viewBox` values only surface as dev warnings. Webpack bundles the sprite into `sprite.svg` via `config/svg.js`.
 
 ### Codebase conventions
@@ -42,6 +42,7 @@ React starter kit with `TypeScript`, `Redux Toolkit`, `React Router`, `react-int
 - Run `npm run typecheck` when editing `.ts`/`.tsx`; webpack transpiles through `babel-loader` in `config/script.js`, so `npm run build` does not replace TypeScript checking.
 - `npm run eslint` runs ESLint 9 with flat config from `eslint.config.cjs` and covers `.js,.jsx,.ts,.tsx` under `src`.
 - `npm run stylelint` is available and uses the root `.stylelintrc` with `stylelint-config-standard-less`.
+- `npm run prettier` formats the whole repo (`prettier --write . --ignore-unknown`); use it for Markdown/JSON/config files that are outside the ESLint/Stylelint globs.
 - Both lint scripts run with `--fix`, and the same autofixers are wired into `lint-staged`/Husky pre-commit for staged `!(*min).{js,jsx,ts,tsx}` and `!(*min).{css,less}` files.
 - `package.json#overrides` contains security-driven transitive pins; keep them unless you intentionally rework the affected toolchain.
 - If `npm audit` still reports residual tooling issues, fixing those further likely requires package replacement, not just version bumps.
