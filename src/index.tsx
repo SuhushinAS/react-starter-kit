@@ -23,7 +23,9 @@ const onRegisterError = (error) => {
 
 const onWindowLoad = () => {
   if ('serviceWorker' in navigator && navigator.serviceWorker) {
-    navigator.serviceWorker.register('/sw.js').catch(onRegisterError);
+    navigator.serviceWorker
+      .register('/sw.js', {updateViaCache: 'none'})
+      .catch(onRegisterError);
   }
 };
 

@@ -11,6 +11,17 @@ const svg = require('./config/svg');
 module.exports = (env, argv) => {
   const {mode} = argv;
   const root = __dirname;
+  const configFiles = [
+    path.join(root, 'webpack.config.js'),
+    path.join(root, 'config', 'asset.js'),
+    path.join(root, 'config', 'base.js'),
+    path.join(root, 'config', 'get-is-prod.js'),
+    path.join(root, 'config', 'html.js'),
+    path.join(root, 'config', 'optimization.js'),
+    path.join(root, 'config', 'script.js'),
+    path.join(root, 'config', 'style.js'),
+    path.join(root, 'config', 'svg.js'),
+  ];
   const options = {
     dist: path.join(root, 'www'),
     mode,
@@ -21,6 +32,13 @@ module.exports = (env, argv) => {
   };
   const clean = 'production' === mode ? true : {keep: /\.svg$/u};
   const result = {
+    cache: {
+      buildDependencies: {
+        config: configFiles,
+      },
+      cacheDirectory: path.join(root, 'node_modules', '.cache', 'webpack'),
+      type: 'filesystem',
+    },
     output: {
       clean,
     },

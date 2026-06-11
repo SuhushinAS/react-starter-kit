@@ -2,10 +2,20 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const getIsProd = require('./get-is-prod');
 const path = require('path');
 
+const ignoredStaticFiles = ['**/.DS_Store', '**/Thumbs.db'];
+
 const getPlugins = (options) => {
   return [
     new CopyWebpackPlugin({
-      patterns: [{from: options.public, to: options.dist}],
+      patterns: [
+        {
+          from: options.public,
+          globOptions: {
+            ignore: ignoredStaticFiles,
+          },
+          to: options.dist,
+        },
+      ],
     }),
   ];
 };
@@ -25,6 +35,7 @@ const getDevServer = (options) => {
 
 module.exports = (options) => {
   const isProd = getIsProd(options.mode);
+  const filename = isProd ? '[name].[contenthash:8].min.js' : '[name].min.js';
 
   return {
     bail: isProd,
@@ -34,7 +45,8 @@ module.exports = (options) => {
     mode: options.mode,
     output: {
       clean: true,
-      filename: '[name].min.js',
+      chunkFilename: filename,
+      filename,
       library: ['reactStarterKit'],
       path: options.dist,
       publicPath: '/',

@@ -4,7 +4,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 module.exports = (options) => {
   return {
     optimization: {
-      chunkIds: 'named',
+      chunkIds: 'deterministic',
       emitOnErrors: false,
       minimizer: [
         new TerserWebpackPlugin({
@@ -17,18 +17,28 @@ module.exports = (options) => {
           },
         }),
       ],
-      moduleIds: 'named',
+      moduleIds: 'deterministic',
       nodeEnv: options.mode,
+      runtimeChunk: 'single',
       splitChunks: {
+        chunks: 'all',
         cacheGroups: {
           common: {
-            chunks: 'initial',
             minChunks: 2,
             name: 'common',
+            priority: 10,
+            reuseExistingChunk: true,
+          },
+          framework: {
+            name: 'framework',
+            priority: 30,
+            reuseExistingChunk: true,
+            test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom|react-redux|redux|@reduxjs[\\/]toolkit)([\\/]|$)/u,
           },
           vendor: {
-            chunks: 'all',
             name: 'vendor',
+            priority: 20,
+            reuseExistingChunk: true,
             test: /[\\/]node_modules[\\/]/u,
           },
         },
