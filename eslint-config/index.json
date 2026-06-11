@@ -10,7 +10,6 @@
     "./rules/eslint.json",
     "./rules/import.json",
     "./rules/jsx-a11y.json",
-    "./rules/prettier.json",
     "./rules/react.json",
     "./rules/typescript.json"
   ],
@@ -22,12 +21,7 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": [
-    "import",
-    "react",
-    "react-hooks",
-    "jsx-a11y"
-  ],
+  "plugins": ["import", "react", "react-hooks", "jsx-a11y"],
   "settings": {
     "react": {
       "version": "^18.2.0"

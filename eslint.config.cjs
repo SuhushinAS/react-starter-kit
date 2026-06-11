@@ -9,7 +9,6 @@ const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const eslintRules = require('./eslint-config/rules/eslint.json').rules;
 const importRules = require('./eslint-config/rules/import.json').rules;
 const jsxA11yRules = require('./eslint-config/rules/jsx-a11y.json').rules;
-const prettierRules = require('./eslint-config/rules/prettier.json').rules;
 const reactRules = require('./eslint-config/rules/react.json').rules;
 const tsRules = require('./eslint-config/rules/typescript.json').rules;
 
@@ -53,7 +52,6 @@ module.exports = [
       ...eslintRules,
       ...importRules,
       ...jsxA11yRules,
-      ...prettierRules,
       ...reactRules,
       ...tsRules,
     },
@@ -65,4 +63,3 @@ module.exports = [
     },
   },
 ];
-
