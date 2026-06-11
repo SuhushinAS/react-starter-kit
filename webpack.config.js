@@ -12,6 +12,10 @@ module.exports = (env, argv) => {
   const {mode} = argv;
   const root = __dirname;
   const configFiles = [
+    path.join(root, '.babelrc'),
+    path.join(root, 'package.json'),
+    path.join(root, 'postcss.config.js'),
+    path.join(root, 'tsconfig.json'),
     path.join(root, 'webpack.config.js'),
     path.join(root, 'config', 'asset.js'),
     path.join(root, 'config', 'base.js'),

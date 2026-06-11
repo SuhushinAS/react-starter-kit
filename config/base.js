@@ -21,11 +21,21 @@ const getPlugins = (options) => {
 };
 
 const getDevServer = (options) => {
+  const result = {
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    },
+  };
+
   if (getIsProd(options.mode)) {
-    return {};
+    return result;
   }
 
   return {
+    ...result,
     historyApiFallback: true,
     host: '0.0.0.0',
     port: 8000,
