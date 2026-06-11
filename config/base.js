@@ -1,20 +1,13 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const getIsProd = require('./get-is-prod');
 const path = require('path');
-const webpack = require('webpack');
 
 const getPlugins = (options) => {
-  const result = [
+  return [
     new CopyWebpackPlugin({
       patterns: [{from: options.public, to: options.dist}],
     }),
   ];
-
-  if (!getIsProd(options.mode)) {
-    result.push(new webpack.HotModuleReplacementPlugin());
-  }
-
-  return result;
 };
 
 const getDevServer = (options) => {

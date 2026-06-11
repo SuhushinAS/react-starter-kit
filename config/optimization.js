@@ -26,11 +26,6 @@ module.exports = (options) => {
             minChunks: 2,
             name: 'common',
           },
-          icons: {
-            chunks: 'all',
-            name: 'icons',
-            test: /\.svg$/u,
-          },
           vendor: {
             chunks: 'all',
             name: 'vendor',
