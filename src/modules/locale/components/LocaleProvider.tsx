@@ -16,31 +16,37 @@ type TLocaleProps = {
 };
 
 export const LocaleProvider = ({children}: TLocaleProps) => {
+  const localeCurrent = useLocaleCurrent();
+  const messages = useAppSelector(selectMessages(localeCurrent));
+  const messagesStatus = useAppSelector(
+    selectStatusItem(localeActions.getMessages.type)
+  );
   const localeGetList = useLocaleGetList();
   const localeGetMessages = useLocaleGetMessages();
+  const [messagesState, setMessagesState] = React.useState(messages);
 
   useEffect(() => {
     localeGetList();
   }, [localeGetList]);
 
-  const language = useLocaleCurrent();
-  const messagesStatus = useAppSelector(
-    selectStatusItem(localeActions.getMessages.type)
-  );
-  const messages = useAppSelector(selectMessages(language));
+  useEffect(() => {
+    if (messages) {
+      setMessagesState(messages);
+    }
+  }, [messages]);
 
   useEffect(() => {
-    if (messagesStatus === undefined && language) {
-      localeGetMessages(language);
+    if (messagesStatus !== Status.loading && localeCurrent && !messages) {
+      localeGetMessages(localeCurrent);
     }
-  }, [language, localeGetMessages, messagesStatus]);
+  }, [localeCurrent, localeGetMessages, messages, messagesStatus]);
 
-  if (messagesStatus !== Status.success) {
+  if (messagesStatus !== Status.success && !messagesState) {
     return null;
   }
 
   return (
-    <IntlProvider locale={language} messages={messages}>
+    <IntlProvider locale={localeCurrent} messages={messagesState}>
       {children}
     </IntlProvider>
   );

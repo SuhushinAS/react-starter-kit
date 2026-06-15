@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from 'src/app/lib/hooks';
 import {api} from 'src/modules/common/lib/api';
-import {currentLocaleKey, defaultLocale} from 'src/modules/locale/model/constants';
+import {currentLocaleKey, getLocale} from 'src/modules/locale/model/constants';
 import {localeActions} from 'src/modules/locale/model/reducers';
 import {selectLocaleCurrent} from 'src/modules/locale/model/selectors';
 import {TLocale} from 'src/modules/locale/model/types';
@@ -43,9 +43,7 @@ export const useLocaleSetCurrent = () => {
 export const useLocaleCurrent = () => {
   const localeCurrent = useAppSelector(selectLocaleCurrent);
 
-  return (
-    localeCurrent ?? localStorage.getItem(currentLocaleKey) ?? defaultLocale
-  );
+  return getLocale(localeCurrent);
 };
 
 export const useLocaleGetMessages = () => {
