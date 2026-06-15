@@ -4,52 +4,24 @@ const path = require('path');
 
 const ignoredStaticFiles = ['**/.DS_Store', '**/Thumbs.db'];
 
-const getPlugins = (options) => {
-  return [
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: options.public,
-          globOptions: {
-            ignore: ignoredStaticFiles,
-          },
-          to: options.dist,
-        },
-      ],
-    }),
-  ];
-};
-
-const getDevServer = (options) => {
-  const result = {
-    client: {
-      overlay: {
-        errors: true,
-        warnings: false,
-      },
-    },
-  };
-
-  if (getIsProd(options.mode)) {
-    return result;
-  }
-
-  return {
-    ...result,
-    historyApiFallback: true,
-    host: '0.0.0.0',
-    port: 8000,
-    static: options.public,
-  };
-};
-
 module.exports = (options) => {
   const isProd = getIsProd(options.mode);
   const filename = isProd ? '[name].[contenthash:8].min.js' : '[name].min.js';
 
   return {
     bail: isProd,
-    devServer: getDevServer(options),
+    devServer: {
+      client: {
+        overlay: {
+          errors: true,
+          warnings: false,
+        },
+      },
+      historyApiFallback: true,
+      host: '0.0.0.0',
+      port: 8000,
+      static: options.public,
+    },
     devtool: isProd ? false : 'eval-source-map',
     entry: path.join(options.root, options.src, 'index.tsx'),
     mode: options.mode,
@@ -61,7 +33,19 @@ module.exports = (options) => {
       path: options.dist,
       publicPath: '/',
     },
-    plugins: getPlugins(options),
+    plugins: [
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: options.public,
+            globOptions: {
+              ignore: ignoredStaticFiles,
+            },
+            to: options.dist,
+          },
+        ],
+      }),
+    ],
     resolve: {
       alias: {
         src: path.join(options.root, options.src),

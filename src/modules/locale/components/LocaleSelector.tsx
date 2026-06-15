@@ -25,7 +25,12 @@ export const LocaleSelectorContainer = () => {
   );
 
   return (
-    <select name="locale" onChange={onLocaleChange} value={localeCurrent}>
+    <select
+      aria-label="Locale"
+      name="locale"
+      onChange={onLocaleChange}
+      value={localeCurrent}
+    >
       {localeList.map(renderLocaleOption)}
     </select>
   );

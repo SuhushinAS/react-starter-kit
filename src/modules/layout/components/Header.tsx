@@ -14,7 +14,11 @@ export const Header = () => {
             <SvgIcon name="logo" />
           </button>
         </div>
-        <Link className="Header__Logo" to="/">
+        <Link
+          aria-label="Read more about Seminole tax hike"
+          className="Header__Logo"
+          to="/"
+        >
           <SvgIcon name="logo" />
         </Link>
         <div className="Header__Menu">
