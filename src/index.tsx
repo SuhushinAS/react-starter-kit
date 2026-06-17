@@ -1,4 +1,4 @@
-import {App} from 'src/app/components/App';
+import {App} from 'src/app/ui/App';
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 import 'src/styles/index.less';
@@ -11,7 +11,7 @@ if (container) {
   root.render(<App />);
 
   if (module.hot) {
-    module.hot.accept('src/app/components/App', () => {
+    module.hot.accept('src/app/ui/App', () => {
       root.render(<App />);
     });
   }
