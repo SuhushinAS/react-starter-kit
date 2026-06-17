@@ -1,6 +1,6 @@
-const jsxA11yPlugin = require('eslint-plugin-jsx-a11y');
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 
-const {sourceFiles} = require('./shared.cjs');
+import {sourceFiles} from './shared.mjs';
 
 const contentRules = {
   'jsx-a11y/accessible-emoji': 2,
@@ -95,7 +95,7 @@ const interactionRules = {
   'jsx-a11y/tabindex-no-positive': 2,
 };
 
-module.exports = {
+export default {
   files: sourceFiles,
   plugins: {
     'jsx-a11y': jsxA11yPlugin,

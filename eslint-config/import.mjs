@@ -1,8 +1,8 @@
-const importPlugin = require('eslint-plugin-import');
+import importPlugin from 'eslint-plugin-import';
 
-const {sourceFiles} = require('./shared.cjs');
+import {sourceFiles} from './shared.mjs';
 
-module.exports = {
+export default {
   files: sourceFiles,
   plugins: {
     import: importPlugin,

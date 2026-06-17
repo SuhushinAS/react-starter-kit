@@ -1,4 +1,4 @@
-const {sourceFiles, sourceLanguageOptions} = require('./shared.cjs');
+import {sourceFiles, sourceLanguageOptions} from './shared.mjs';
 
 const bestPracticesRules = {
   'accessor-pairs': 2,
@@ -196,7 +196,7 @@ const legacyRules = {
   'valid-jsdoc': 0,
 };
 
-module.exports = {
+export default {
   files: sourceFiles,
   languageOptions: sourceLanguageOptions,
   rules: {

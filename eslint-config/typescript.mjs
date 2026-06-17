@@ -1,8 +1,8 @@
-const tsPlugin = require('@typescript-eslint/eslint-plugin');
+import tsPlugin from '@typescript-eslint/eslint-plugin';
 
-const {sourceFiles, typescriptFiles} = require('./shared.cjs');
+import {sourceFiles, typescriptFiles} from './shared.mjs';
 
-module.exports = [
+export default [
   {
     files: sourceFiles,
     plugins: {

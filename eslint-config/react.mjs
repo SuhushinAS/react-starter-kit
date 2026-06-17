@@ -1,7 +1,7 @@
-const reactPlugin = require('eslint-plugin-react');
-const reactHooksPlugin = require('eslint-plugin-react-hooks');
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import reactPlugin from 'eslint-plugin-react';
 
-const {sourceFiles} = require('./shared.cjs');
+import {sourceFiles} from './shared.mjs';
 
 const reactHooksRules = {
   'react-hooks/exhaustive-deps': 2,
@@ -49,7 +49,7 @@ const reactComponentRules = {
   'react/require-render-return': 2,
 };
 
-module.exports = {
+export default {
   files: sourceFiles,
   plugins: {
     react: reactPlugin,
