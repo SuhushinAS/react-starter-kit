@@ -84,25 +84,24 @@ understanding project structure, data flow, and developer workflow.
 ## Developer workflow
 
 - Install dependencies first: `npm ci`.
-- Required toolchain is `Node.js >= 20.19.0` and `npm >= 10.0.0` (
-  `package.json#engines`).
+- Required toolchain is `Node.js >= 22.23.0` and `npm >= 10.9.8` (`package.json#engines`).
 - Verified production build: `npm run build`. It writes the bundle to `www/` and
   copies everything from `public/` there via `CopyWebpackPlugin`.
 - Dev server command is `npm run dev`; `config/base.js` binds it to
   `0.0.0.0:8000` with `historyApiFallback: true`.
 - Production webpack serve command is `npm run start`.
 - There are no test files or test scripts in this repo right now; validation is
-  mainly `npm run typecheck`, linting, and build-based checks.
-- Run `npm run typecheck` when editing `.ts`/`.tsx`; webpack transpiles through
+  mainly `npm run type`, linting, and build-based checks.
+- Run `npm run type` when editing `.ts`/`.tsx`; webpack transpiles through
   `babel-loader` in `config/script.js`, so `npm run build` does not replace
   TypeScript checking.
-- `npm run eslint` runs ESLint 9 with flat config from `eslint.config.cjs` and
+- `npm run lint` runs ESLint 9 with the flat config in `eslint.config.mjs` and
   covers `.js,.jsx,.ts,.tsx` under `src`.
-- `npm run stylelint` is available and uses the root `.stylelintrc` with
+- `npm run style` is available and uses the root `.stylelintrc` with
   `stylelint-config-standard-less`.
-- `npm run prettier` formats the whole repo (
-  `prettier --write . --ignore-unknown`); use it for Markdown/JSON/config files
-  that are outside the ESLint/Stylelint globs.
+- `npm run format` / `npm run format:fix` run Prettier checks and fixes
+  (see `package.json#scripts`); prefer `format:fix` when you want to rewrite
+  files.
 - `package.json#overrides` contains security-driven transitive pins; keep them
   unless you intentionally rework the affected toolchain.
 - If `npm audit` still reports residual tooling issues, fixing those further
