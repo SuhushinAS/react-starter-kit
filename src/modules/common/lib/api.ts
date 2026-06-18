@@ -31,7 +31,9 @@ export class Api {
   }
 
   fetch<T>(url = '', host = '', options = {}): Promise<T> {
-    return fetch(`${host}${url}`, this.getOptions(options)).then((resp) => this.getJSON<T>(resp));
+    return fetch(`${host}${url}`, this.getOptions(options)).then((resp) => {
+      return this.getJSON<T>(resp);
+    });
   }
 
   requestLocal<T>(url = ''): Promise<T> {

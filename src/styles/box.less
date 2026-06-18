@@ -49,7 +49,9 @@
     flex-grow: 1;
     max-width: 100%;
     position: relative;
-    transition: flex-basis @animation, max-width @animation;
+    transition:
+      flex-basis @animation,
+      max-width @animation;
 
     &_no-offset {
       padding: 0;
@@ -79,7 +81,10 @@
   }
 
   &_left_@{class}_@{index} {
-    transition: flex-basis @animation, left @animation, max-width @animation;
+    transition:
+      flex-basis @animation,
+      left @animation,
+      max-width @animation;
 
     @media @query {
       left: percentage(@index / @grid-columns);
@@ -87,7 +92,10 @@
   }
 
   &_right_@{class}_@{index} {
-    transition: flex-basis @animation, max-width @animation, right @animation;
+    transition:
+      flex-basis @animation,
+      max-width @animation,
+      right @animation;
 
     @media @query {
       right: percentage(@index / @grid-columns);

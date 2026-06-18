@@ -13,7 +13,7 @@ module.exports = (options) => {
       ],
     },
     plugins: [
-      new SVGSpritemapPlugin(path.join(options.root, options.src, 'icons', '*.svg'), {
+      new SVGSpritemapPlugin('src/icons/**/*.svg', {
         output: {
           filename: 'sprite.svg',
         },

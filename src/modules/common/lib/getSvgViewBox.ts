@@ -26,4 +26,3 @@ export const getSvgViewBox = (content: string): string => {
 
   return '';
 };
-

@@ -1,15 +1,16 @@
 @import (reference) 'prev-size';
 
+@prev-size: 0.02px;
 @size-xs-min: 0;
 @size-sm-min: 640px;
 @size-md-min: 960px;
 @size-lg-min: 1280px;
 @size-xl-min: 1440px;
 
-@size-xs-max: .prev-size(@size-sm-min)[];
-@size-sm-max: .prev-size(@size-md-min)[];
-@size-md-max: .prev-size(@size-lg-min)[];
-@size-lg-max: .prev-size(@size-xl-min)[];
+@size-xs-max: @size-sm-min - @prev-size;
+@size-sm-max: @size-md-min - @prev-size;
+@size-md-max: @size-md-min - @prev-size;
+@size-lg-max: @size-md-min - @prev-size;
 
 @xs-min: ~'(min-width: @{size-xs-min})';
 @xs-max: ~'(max-width: @{size-xs-max})';

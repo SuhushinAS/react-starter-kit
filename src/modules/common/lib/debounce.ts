@@ -1,4 +1,8 @@
-export const debounce = (func: (...arg: any) => void, wait: number, immediate: boolean = false) => {
+export const debounce = (
+  func: (...arg: any) => void,
+  wait: number,
+  immediate: boolean = false
+) => {
   let timeout;
   return (...args) => {
     const later = () => {

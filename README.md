@@ -71,7 +71,7 @@ npm run start
 ### Scripts
 
 | Command             | Description                                    |
-|---------------------|------------------------------------------------|
+| ------------------- | ---------------------------------------------- |
 | `npm run dev`       | Run webpack dev-server in development mode     |
 | `npm run build`     | Build the production bundle into `www/`        |
 | `npm run start`     | Run webpack serve in production mode           |
@@ -185,10 +185,6 @@ Run `npm run typecheck` when editing `.ts`/`.tsx`; webpack transpiles through
 `babel-loader` in `config/script.js`, so `npm run build` does not replace
 TypeScript checking.
 
-Both lint scripts run with `--fix`, and the same autofixers are wired into
-`lint-staged`/Husky pre-commit for staged `!(*min).{js,jsx,ts,tsx}` and
-`!(*min).{css,less}` files.
-
 ### Known limitations
 
 - `npm audit` may still report residual vulnerabilities in older transitive
@@ -198,7 +194,7 @@ Both lint scripts run with `--fix`, and the same autofixers are wired into
 
 ### License
 
-The project is marked as `UNLICENSED` in `package.json`.
+The project is marked as `MIT` in `package.json`.
 
 ---
 
@@ -273,7 +269,7 @@ npm run start
 ### Скрипты
 
 | Команда             | Назначение                                             |
-|---------------------|--------------------------------------------------------|
+| ------------------- | ------------------------------------------------------ |
 | `npm run dev`       | Запуск webpack dev-server в development-режиме         |
 | `npm run build`     | Production build в `www/`                              |
 | `npm run start`     | Запуск webpack serve в production-режиме               |
@@ -388,10 +384,6 @@ npm run build
 транспилирует TypeScript через `babel-loader` в `config/script.js`, поэтому
 `npm run build` не заменяет полноценную TypeScript-проверку.
 
-Оба lint-скрипта запускаются с `--fix`, и те же autofixer-ы подключены в
-`lint-staged`/Husky pre-commit для staged `!(*min).{js,jsx,ts,tsx}` и
-`!(*min).{css,less}` файлов.
-
 ### Известные ограничения
 
 - `npm audit` все еще может показывать остаточные уязвимости в старых transitive
@@ -401,5 +393,4 @@ npm run build
 
 ### Лицензия
 
-Проект помечен как `UNLICENSED` в `package.json`.
-
+Проект помечен как `MIT` в `package.json`.

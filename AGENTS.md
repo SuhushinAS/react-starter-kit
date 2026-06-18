@@ -103,9 +103,6 @@ understanding project structure, data flow, and developer workflow.
 - `npm run prettier` formats the whole repo (
   `prettier --write . --ignore-unknown`); use it for Markdown/JSON/config files
   that are outside the ESLint/Stylelint globs.
-- Both lint scripts run with `--fix`, and the same autofixers are wired into
-  `lint-staged`/Husky pre-commit for staged `!(*min).{js,jsx,ts,tsx}` and
-  `!(*min).{css,less}` files.
 - `package.json#overrides` contains security-driven transitive pins; keep them
   unless you intentionally rework the affected toolchain.
 - If `npm audit` still reports residual tooling issues, fixing those further
@@ -132,4 +129,3 @@ understanding project structure, data flow, and developer workflow.
   label/path.
 - After adding a new slice, check whether app-level store/types or typed hooks
   also need updates under `src/app/lib`.
-

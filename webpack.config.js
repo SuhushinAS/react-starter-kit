@@ -48,5 +48,14 @@ module.exports = (env, argv) => {
     },
   };
 
-  return merge(asset(options), base(options), html(options), optimization(options), script(options), style(options), svg(options), result);
+  return merge(
+    asset(options),
+    base(options),
+    html(options),
+    optimization(options),
+    script(options),
+    style(options),
+    svg(options),
+    result
+  );
 };
