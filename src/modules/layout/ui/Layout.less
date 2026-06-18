@@ -1,0 +1,60 @@
+@import (reference) 'src/styles/mixins';
+
+.Layout {
+  background-color: @c-gray-10;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+
+  &__Header {
+    .fluid-prop-md(height, 55px, 80px);
+    bottom: 0;
+    flex-shrink: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+  }
+
+  &__HeaderSize {
+    .fluid-prop-md(height, 55px, 80px);
+
+    flex-shrink: 0;
+
+    &_Transparent {
+      height: 0;
+    }
+  }
+
+  &__Scroll {
+    flex: 1 0 0;
+    overflow: hidden;
+
+    & > .Scroll > .Scroll__Track {
+      .fluid-prop-md(top, 60px, 85px);
+    }
+  }
+
+  &__Inner {
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__Body {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+  }
+
+  &__Footer {
+    background-color: @c-secondary-30;
+    flex-shrink: 0;
+  }
+}

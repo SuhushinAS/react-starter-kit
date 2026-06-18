@@ -1,32 +1,26 @@
-const SvgSpriteLoaderPlugin = require('external-svg-sprite-loader');
-const getIsProd = require('./get-is-prod');
-
-const getClean = (options) => {
-  if (getIsProd(options.mode)) {
-    return true;
-  }
-
-  return {keep: /\.svg$/u};
-};
+const path = require('path');
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin').default;
 
 module.exports = (options) => {
   return {
     module: {
       rules: [
         {
+          include: path.join(options.root, options.src, 'icons'),
           test: /\.svg$/u,
-          use: [
-            {
-              loader: SvgSpriteLoaderPlugin.loader,
-              options: {name: 'sprite.svg'},
-            },
-          ],
+          type: 'asset/source',
         },
       ],
     },
-    output: {
-      clean: getClean(options),
-    },
-    plugins: [new SvgSpriteLoaderPlugin()],
+    plugins: [
+      new SVGSpritemapPlugin(path.join(options.root, options.src, 'icons', '*.svg'), {
+        output: {
+          filename: 'sprite.svg',
+        },
+        sprite: {
+          prefix: false,
+        },
+      }),
+    ],
   };
 };

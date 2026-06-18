@@ -6,7 +6,6 @@ module.exports = (options) => {
     plugins: options.pages.map((page) => {
       return new HtmlWebpackPlugin({
         filename: `${page}.html`,
-        hash: true,
         inject: true,
         minify: false,
         scriptLoading: 'defer',

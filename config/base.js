@@ -1,52 +1,55 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const getIsProd = require('./get-is-prod');
-const webpack = require('webpack');
+const path = require('path');
 
-const getPlugins = (options) => {
-  const result = [
-    new CopyWebpackPlugin({
-      patterns: [{from: options.public, to: options.dist}],
-    }),
-  ];
-
-  if (!getIsProd(options.mode)) {
-    result.push(new webpack.HotModuleReplacementPlugin());
-  }
-
-  return result;
-};
-
-const getDevServer = (options) => {
-  if (getIsProd(options.mode)) {
-    return {};
-  }
-
-  return {
-    historyApiFallback: true,
-    host: '0.0.0.0',
-    port: 8000,
-    static: options.public,
-  };
-};
+const ignoredStaticFiles = ['**/.DS_Store', '**/Thumbs.db'];
 
 module.exports = (options) => {
   const isProd = getIsProd(options.mode);
+  const filename = isProd ? '[name].[contenthash:8].min.js' : '[name].min.js';
 
   return {
     bail: isProd,
-    devServer: getDevServer(options),
+    devServer: {
+      client: {
+        overlay: {
+          errors: true,
+          warnings: false,
+        },
+      },
+      historyApiFallback: true,
+      host: '0.0.0.0',
+      port: 8000,
+      static: options.public,
+    },
     devtool: isProd ? false : 'eval-source-map',
-    entry: 'index.tsx',
+    entry: path.join(options.root, options.src, 'index.tsx'),
     mode: options.mode,
     output: {
       clean: true,
-      filename: '[name].min.js',
+      chunkFilename: filename,
+      filename,
       library: ['reactStarterKit'],
       path: options.dist,
       publicPath: '/',
     },
-    plugins: getPlugins(options),
+    plugins: [
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: options.public,
+            globOptions: {
+              ignore: ignoredStaticFiles,
+            },
+            to: options.dist,
+          },
+        ],
+      }),
+    ],
     resolve: {
+      alias: {
+        src: path.join(options.root, options.src),
+      },
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       fallback: {
         child_process: 'empty',
@@ -55,7 +58,7 @@ module.exports = (options) => {
         net: 'empty',
         tls: 'empty',
       },
-      modules: ['src', 'node_modules'],
+      modules: ['node_modules'],
     },
     stats: {
       colors: true,

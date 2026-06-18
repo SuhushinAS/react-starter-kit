@@ -25,7 +25,12 @@ const getLessLoader = (options) => {
 
 const getPlugins = (options) => {
   if (getIsProd(options.mode)) {
-    return [new MiniCssExtractPlugin({filename: '[name].min.css'})];
+    return [
+      new MiniCssExtractPlugin({
+        chunkFilename: '[name].[contenthash:8].min.css',
+        filename: '[name].[contenthash:8].min.css',
+      }),
+    ];
   }
 
   return [];

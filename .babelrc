@@ -3,7 +3,6 @@
     "production": {
       "plugins": [
         "@babel/plugin-transform-react-constant-elements",
-        "@babel/plugin-transform-react-inline-elements",
         "babel-plugin-transform-react-remove-prop-types"
       ]
     }
@@ -17,7 +16,10 @@
     [
       "@babel/preset-env",
       {
-        "modules": false
+        "bugfixes": true,
+        "corejs": 3,
+        "modules": false,
+        "useBuiltIns": "usage"
       }
     ],
     "@babel/preset-react",

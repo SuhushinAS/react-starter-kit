@@ -1,3 +1,29 @@
 {
-  "extends": "./stylelint-config/index.json"
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-standard-less"
+  ],
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "at-rule-descriptor-value-no-unknown": null,
+    "color-named": "never",
+    "declaration-block-no-redundant-longhand-properties": null,
+    "declaration-empty-line-before": null,
+    "less/no-duplicate-variables": null,
+    "no-descending-specificity": null,
+    "order/order": [
+      "custom-properties",
+      "dollar-variables",
+      "at-variables",
+      "less-mixins",
+      "declarations",
+      "at-rules",
+      "rules"
+    ],
+    "order/properties-alphabetical-order": true,
+    "property-no-vendor-prefix": null,
+    "selector-class-pattern": null
+  }
 }
