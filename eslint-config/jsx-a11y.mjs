@@ -44,7 +44,15 @@ const interactionRules = {
   'jsx-a11y/interactive-supports-focus': [
     2,
     {
-      tabbable: ['button', 'checkbox', 'link', 'searchbox', 'spinbutton', 'switch', 'textbox'],
+      tabbable: [
+        'button',
+        'checkbox',
+        'link',
+        'searchbox',
+        'spinbutton',
+        'switch',
+        'textbox',
+      ],
     },
   ],
   'jsx-a11y/mouse-events-have-key-events': 2,
@@ -63,7 +71,16 @@ const interactionRules = {
       alert: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
       body: ['onError', 'onLoad'],
       dialog: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
-      handlers: ['onClick', 'onError', 'onLoad', 'onMouseDown', 'onMouseUp', 'onKeyPress', 'onKeyDown', 'onKeyUp'],
+      handlers: [
+        'onClick',
+        'onError',
+        'onLoad',
+        'onMouseDown',
+        'onMouseUp',
+        'onKeyPress',
+        'onKeyDown',
+        'onKeyUp',
+      ],
       iframe: ['onError', 'onLoad'],
       img: ['onError', 'onLoad'],
     },
@@ -72,10 +89,26 @@ const interactionRules = {
     2,
     {
       li: ['menuitem', 'option', 'row', 'tab', 'treeitem'],
-      ol: ['listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid'],
+      ol: [
+        'listbox',
+        'menu',
+        'menubar',
+        'radiogroup',
+        'tablist',
+        'tree',
+        'treegrid',
+      ],
       table: ['grid'],
       td: ['gridcell'],
-      ul: ['listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid'],
+      ul: [
+        'listbox',
+        'menu',
+        'menubar',
+        'radiogroup',
+        'tablist',
+        'tree',
+        'treegrid',
+      ],
     },
   ],
   'jsx-a11y/no-noninteractive-tabindex': [
@@ -89,7 +122,14 @@ const interactionRules = {
   'jsx-a11y/no-static-element-interactions': [
     2,
     {
-      handlers: ['onClick', 'onMouseDown', 'onMouseUp', 'onKeyPress', 'onKeyDown', 'onKeyUp'],
+      handlers: [
+        'onClick',
+        'onMouseDown',
+        'onMouseUp',
+        'onKeyPress',
+        'onKeyDown',
+        'onKeyUp',
+      ],
     },
   ],
   'jsx-a11y/tabindex-no-positive': 2,
@@ -107,4 +147,3 @@ export default {
     ...interactionRules,
   },
 };
-

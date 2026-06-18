@@ -1,11 +1,6 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-standard-less"
-  ],
-  "plugins": [
-    "stylelint-order"
-  ],
+  "extends": ["stylelint-config-standard", "stylelint-config-standard-less"],
+  "plugins": ["stylelint-order"],
   "rules": {
     "at-rule-descriptor-value-no-unknown": null,
     "color-named": "never",

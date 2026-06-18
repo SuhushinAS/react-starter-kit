@@ -18,15 +18,7 @@
     "registered": "2019-10-30T01:41:13 -07:00",
     "latitude": 39.153516,
     "longitude": -56.288909,
-    "tags": [
-      "quis",
-      "duis",
-      "ut",
-      "eiusmod",
-      "incididunt",
-      "id",
-      "occaecat"
-    ],
+    "tags": ["quis", "duis", "ut", "eiusmod", "incididunt", "id", "occaecat"],
     "friends": [
       {
         "id": 0,
@@ -108,15 +100,7 @@
     "registered": "2021-03-10T09:34:06 -07:00",
     "latitude": 67.092481,
     "longitude": 21.997106,
-    "tags": [
-      "labore",
-      "do",
-      "pariatur",
-      "sint",
-      "qui",
-      "ad",
-      "ea"
-    ],
+    "tags": ["labore", "do", "pariatur", "sint", "qui", "ad", "ea"],
     "friends": [
       {
         "id": 0,
@@ -198,15 +182,7 @@
     "registered": "2015-07-06T06:31:53 -06:00",
     "latitude": -67.599498,
     "longitude": -178.329514,
-    "tags": [
-      "nulla",
-      "officia",
-      "laboris",
-      "id",
-      "id",
-      "labore",
-      "sint"
-    ],
+    "tags": ["nulla", "officia", "laboris", "id", "id", "labore", "sint"],
     "friends": [
       {
         "id": 0,
@@ -288,15 +264,7 @@
     "registered": "2014-03-29T08:13:34 -07:00",
     "latitude": -58.497636,
     "longitude": 62.884992,
-    "tags": [
-      "ipsum",
-      "incididunt",
-      "veniam",
-      "id",
-      "labore",
-      "dolore",
-      "elit"
-    ],
+    "tags": ["ipsum", "incididunt", "veniam", "id", "labore", "dolore", "elit"],
     "friends": [
       {
         "id": 0,

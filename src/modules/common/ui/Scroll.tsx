@@ -69,7 +69,7 @@ export class Scroll extends React.Component<TProps, unknown> {
 
   rfsInit = (
     acc: Record<string, RefObject<HTMLDivElement | null>>,
-    dir: TDirection,
+    dir: TDirection
   ): Record<string, RefObject<HTMLDivElement | null>> => {
     return {
       ...acc,

@@ -1,7 +1,10 @@
 import {ComponentProps} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-export type TMessageProps = Pick<ComponentProps<typeof FormattedMessage>, 'id' | 'values'>;
+export type TMessageProps = Pick<
+  ComponentProps<typeof FormattedMessage>,
+  'id' | 'values'
+>;
 
 export type TLocaleStore = {
   current: string;

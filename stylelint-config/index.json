@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "./rules/pre.json"
-  ]
+  "extends": ["./rules/pre.json"]
 }
