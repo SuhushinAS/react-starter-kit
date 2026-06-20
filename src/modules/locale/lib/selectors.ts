@@ -1,21 +1,18 @@
-import {TState} from 'src/app/lib/types';
-import {localeName} from 'src/modules/locale/lib/reducers';
-import {TLocale, TLocaleData, TLocaleStore} from 'src/modules/locale/lib/types';
+import { TState } from 'src/app/lib/types';
+import { localeName } from 'src/modules/locale/lib/reducers';
+import { TLocale, TLocaleData, TLocaleStore } from 'src/modules/locale/lib/types';
 
 export const selectLocale = (state: TState): TLocaleStore => {
   return state[localeName] as TLocaleStore;
 };
 
-export const selectLocaleData = (state: TState): TLocaleData =>
-  selectLocale(state).data;
+export const selectLocaleData = (state: TState): TLocaleData => selectLocale(state).data;
 
-export const selectLocaleList = (state: TState): string[] =>
-  selectLocale(state).list;
+export const selectLocaleList = (state: TState): string[] => selectLocale(state).list;
 
 export const selectMessages =
   (language: string) =>
   (state: TState): TLocale =>
     selectLocaleData(state)[language];
 
-export const selectLocaleCurrent = (state: TState): string =>
-  selectLocale(state).current;
+export const selectLocaleCurrent = (state: TState): string => selectLocale(state).current;

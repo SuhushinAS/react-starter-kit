@@ -15,7 +15,7 @@ function onInstall(event) {
       })
       .then(function () {
         return self.skipWaiting();
-      })
+      }),
   );
 }
 
@@ -31,12 +31,12 @@ function onActivate(event) {
             }
 
             return Promise.resolve(false);
-          })
+          }),
         );
       })
       .then(function () {
         return self.clients.claim();
-      })
+      }),
   );
 }
 
@@ -69,7 +69,7 @@ function cacheLite(request) {
 }
 
 function onFetch(event) {
-  const {request} = event;
+  const { request } = event;
   const url = new URL(request.url);
 
   if ('GET' !== request.method) {

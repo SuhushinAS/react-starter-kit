@@ -1,5 +1,5 @@
-import {ReactNode} from 'react';
-import {Link} from 'react-router-dom';
+import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import './ExampleHead.less';
 
 type TProps = {
@@ -8,7 +8,7 @@ type TProps = {
   title: ReactNode;
 };
 
-export const ExampleHead = ({linkText, linkUrl, title}: TProps) => {
+export const ExampleHead = ({ linkText, linkUrl, title }: TProps) => {
   return (
     <>
       <h1 className="ExampleHead__Title">{title}</h1>

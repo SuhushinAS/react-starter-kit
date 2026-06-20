@@ -1,10 +1,7 @@
-import {useAppSelector} from 'src/app/lib/hooks';
-import {
-  useLocaleCurrent,
-  useLocaleSetCurrent,
-} from 'src/modules/locale/lib/actions';
-import {selectLocaleList} from 'src/modules/locale/lib/selectors';
-import {ChangeEvent, useCallback} from 'react';
+import { ChangeEvent, useCallback } from 'react';
+import { useAppSelector } from 'src/app/lib/hooks';
+import { useLocaleCurrent, useLocaleSetCurrent } from 'src/modules/locale/lib/actions';
+import { selectLocaleList } from 'src/modules/locale/lib/selectors';
 
 const renderLocaleOption = (locale: string) => (
   <option key={locale} value={locale}>
@@ -21,16 +18,11 @@ export const LocaleSelectorContainer = () => {
     (event: ChangeEvent<HTMLSelectElement>) => {
       localeSetCurrent(event.target.value || '');
     },
-    [localeSetCurrent]
+    [localeSetCurrent],
   );
 
   return (
-    <select
-      aria-label="Locale"
-      name="locale"
-      onChange={onLocaleChange}
-      value={localeCurrent}
-    >
+    <select aria-label="Locale" name="locale" onChange={onLocaleChange} value={localeCurrent}>
       {localeList.map(renderLocaleOption)}
     </select>
   );

@@ -1,13 +1,13 @@
-import {useAppDispatch, useAppSelector} from 'src/app/lib/hooks';
-import {api} from 'src/modules/common/lib/api';
-import {currentLocaleKey} from 'src/modules/locale/lib/constants';
-import {localeActions} from 'src/modules/locale/lib/reducers';
-import {selectLocaleCurrent} from 'src/modules/locale/lib/selectors';
-import {TLocale} from 'src/modules/locale/lib/types';
-import {useStatusSet} from 'src/modules/status/lib/actions';
-import {Status} from 'src/modules/status/lib/types';
-import {useCallback} from 'react';
-import {getLocale} from 'src/modules/locale/lib/getLocale';
+import { useCallback } from 'react';
+import { useAppDispatch, useAppSelector } from 'src/app/lib/hooks';
+import { api } from 'src/modules/common/lib/api';
+import { currentLocaleKey } from 'src/modules/locale/lib/constants';
+import { getLocale } from 'src/modules/locale/lib/getLocale';
+import { localeActions } from 'src/modules/locale/lib/reducers';
+import { selectLocaleCurrent } from 'src/modules/locale/lib/selectors';
+import { TLocale } from 'src/modules/locale/lib/types';
+import { useStatusSet } from 'src/modules/status/lib/actions';
+import { Status } from 'src/modules/status/lib/types';
 
 export const useLocaleGetList = () => {
   const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ export const useLocaleSetCurrent = () => {
 
       return dispatch(localeActions.setCurrent(currentLocale));
     },
-    [dispatch]
+    [dispatch],
   );
 };
 
@@ -49,9 +49,7 @@ export const useLocaleCurrent = () => {
 
 export const useLocaleGetMessages = () => {
   const dispatch = useAppDispatch();
-  const localeGetMessagesStatusSet = useStatusSet(
-    localeActions.getMessages.type
-  );
+  const localeGetMessagesStatusSet = useStatusSet(localeActions.getMessages.type);
 
   return useCallback(
     (language: string) => {
@@ -60,13 +58,13 @@ export const useLocaleGetMessages = () => {
       api
         .requestLocal<TLocale>(`/api/v1/locale-${language}.json`)
         .then((data) => {
-          dispatch(localeActions.getMessages({data, language}));
+          dispatch(localeActions.getMessages({ data, language }));
           localeGetMessagesStatusSet(Status.success);
         })
         .catch(() => {
           localeGetMessagesStatusSet(Status.error);
         });
     },
-    [dispatch, localeGetMessagesStatusSet]
+    [dispatch, localeGetMessagesStatusSet],
   );
 };

@@ -55,15 +55,7 @@
     "registered": "2019-08-31T04:23:34 -07:00",
     "latitude": -80.591334,
     "longitude": -130.30176,
-    "tags": [
-      "adipisicing",
-      "non",
-      "dolore",
-      "ullamco",
-      "anim",
-      "est",
-      "ullamco"
-    ],
+    "tags": ["adipisicing", "non", "dolore", "ullamco", "anim", "est", "ullamco"],
     "friends": [
       {
         "id": 0,
@@ -137,15 +129,7 @@
     "registered": "2016-07-28T03:07:14 -07:00",
     "latitude": 2.518145,
     "longitude": 124.515053,
-    "tags": [
-      "do",
-      "consectetur",
-      "proident",
-      "magna",
-      "occaecat",
-      "irure",
-      "nulla"
-    ],
+    "tags": ["do", "consectetur", "proident", "magna", "occaecat", "irure", "nulla"],
     "friends": [
       {
         "id": 0,
@@ -219,15 +203,7 @@
     "registered": "2014-12-09T06:08:13 -06:00",
     "latitude": 52.444651,
     "longitude": 95.19997,
-    "tags": [
-      "nostrud",
-      "cupidatat",
-      "officia",
-      "et",
-      "ullamco",
-      "Lorem",
-      "veniam"
-    ],
+    "tags": ["nostrud", "cupidatat", "officia", "et", "ullamco", "Lorem", "veniam"],
     "friends": [
       {
         "id": 0,
@@ -301,15 +277,7 @@
     "registered": "2019-02-21T05:18:46 -07:00",
     "latitude": -43.883939,
     "longitude": -97.330506,
-    "tags": [
-      "excepteur",
-      "anim",
-      "anim",
-      "proident",
-      "non",
-      "adipisicing",
-      "culpa"
-    ],
+    "tags": ["excepteur", "anim", "anim", "proident", "non", "adipisicing", "culpa"],
     "friends": [
       {
         "id": 0,
@@ -346,15 +314,7 @@
     "registered": "2016-10-17T11:39:20 -07:00",
     "latitude": -2.058177,
     "longitude": 21.755919,
-    "tags": [
-      "laboris",
-      "velit",
-      "deserunt",
-      "quis",
-      "proident",
-      "officia",
-      "ullamco"
-    ],
+    "tags": ["laboris", "velit", "deserunt", "quis", "proident", "officia", "ullamco"],
     "friends": [
       {
         "id": 0,

@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import { Component } from 'react';
 
 type TKeyList = Record<string, Record<string, (e: Event) => void>>;
 
@@ -16,7 +16,7 @@ export class KeyHandler extends Component<TProps, unknown> {
   };
 
   handler: EventListener = (e) => {
-    const {keyList} = this.props;
+    const { keyList } = this.props;
     const handlersForType = keyList[e.type];
 
     if (handlersForType) {

@@ -66,6 +66,6 @@ module.exports = (options) => {
       reasons: isProd,
     },
     target: isProd ? 'browserslist' : 'web',
-    watchOptions: {aggregateTimeout: 300},
+    watchOptions: { aggregateTimeout: 300 },
   };
 };

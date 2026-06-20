@@ -1,7 +1,4 @@
-export const plural = (
-  n: number,
-  [one, few, many]: [string, string, string]
-): string => {
+export const plural = (n: number, [one, few, many]: [string, string, string]): string => {
   const mod100 = n % 100;
   const mod10 = n % 10;
 

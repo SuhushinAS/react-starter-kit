@@ -29,12 +29,12 @@ declare module '*.svg' {
 }
 
 declare module '*.less' {
-  const classes: {readonly [key: string]: string};
+  const classes: { readonly [key: string]: string };
   export default classes;
 }
 
 declare module 'baron' {
-  import type {HTMLElement} from 'react';
+  import type { HTMLElement } from 'react';
 
   export type BaronDirection = 'h' | 'v';
 

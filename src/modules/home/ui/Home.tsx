@@ -1,5 +1,5 @@
-import {SvgIcon} from 'src/modules/common/ui/SvgIcon';
-import {Message} from 'src/modules/locale/ui/Message';
+import { SvgIcon } from 'src/modules/common/ui/SvgIcon';
+import { Message } from 'src/modules/locale/ui/Message';
 
 export const Home = () => {
   return (

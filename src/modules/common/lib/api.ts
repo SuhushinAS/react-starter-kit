@@ -17,11 +17,11 @@ export class Api {
   }
 
   getOptions(options: RequestInit = {}): RequestInit {
-    const {headers = {}} = options;
+    const { headers = {} } = options;
 
     return {
       ...Api.options,
-      headers: {...Api.options.headers, ...headers},
+      headers: { ...Api.options.headers, ...headers },
       ...options,
     };
   }

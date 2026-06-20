@@ -1,7 +1,7 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {getId, getNormalize} from 'src/modules/common/lib/normalize';
-import {exampleIdKey} from 'src/modules/example/lib/constants';
-import {TExample, TExampleStore} from 'src/modules/example/lib/types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getId, getNormalize } from 'src/modules/common/lib/normalize';
+import { exampleIdKey } from 'src/modules/example/lib/constants';
+import { TExample, TExampleStore } from 'src/modules/example/lib/types';
 
 const getExampleId = getId<TExample>(exampleIdKey);
 
@@ -16,8 +16,8 @@ export const example = createSlice({
   initialState,
   name: 'example',
   reducers: {
-    getList(state, {payload}: PayloadAction<TExample[]>) {
-      return {...state, ...normalizeExample(payload)};
+    getList(state, { payload }: PayloadAction<TExample[]>) {
+      return { ...state, ...normalizeExample(payload) };
     },
   },
 });

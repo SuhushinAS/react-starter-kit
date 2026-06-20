@@ -1,6 +1,6 @@
-import {useMemo} from 'react';
-import {useIntl} from 'react-intl';
-import {getMessage} from 'src/modules/locale/lib/getMessage';
+import { useMemo } from 'react';
+import { useIntl } from 'react-intl';
+import { getMessage } from 'src/modules/locale/lib/getMessage';
 
 export const useGetMessage = (): ReturnType<typeof getMessage> => {
   const intl = useIntl();

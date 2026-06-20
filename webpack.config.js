@@ -1,5 +1,5 @@
 const path = require('path');
-const {merge} = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const asset = require('./config/webpack/asset');
 const base = require('./config/webpack/base');
 const html = require('./config/webpack/html');
@@ -9,7 +9,7 @@ const style = require('./config/webpack/style');
 const svg = require('./config/webpack/svg');
 
 module.exports = (env, argv) => {
-  const {mode} = argv;
+  const { mode } = argv;
   const root = __dirname;
   const configFiles = [
     path.join(root, '.babelrc'),
@@ -34,7 +34,7 @@ module.exports = (env, argv) => {
     root,
     src: 'src',
   };
-  const clean = 'production' === mode ? true : {keep: /\.svg$/u};
+  const clean = 'production' === mode ? true : { keep: /\.svg$/u };
   const result = {
     cache: {
       buildDependencies: {
@@ -56,6 +56,6 @@ module.exports = (env, argv) => {
     script(options),
     style(options),
     svg(options),
-    result
+    result,
   );
 };

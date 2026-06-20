@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import type {TConfig} from 'src/modules/config/lib/types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { TConfig } from 'src/modules/config/lib/types';
 
 const initialState: TConfig = {
   host: '',
@@ -9,8 +9,8 @@ export const config = createSlice({
   initialState,
   name: 'config',
   reducers: {
-    update(state, {payload}: PayloadAction<TConfig>) {
-      return {...state, ...payload};
+    update(state, { payload }: PayloadAction<TConfig>) {
+      return { ...state, ...payload };
     },
   },
 });

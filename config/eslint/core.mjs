@@ -1,4 +1,4 @@
-import {sourceFiles, sourceLanguageOptions} from './shared.mjs';
+import { sourceFiles, sourceLanguageOptions } from './shared.mjs';
 
 const bestPracticesRules = {
   'accessor-pairs': 2,
@@ -121,6 +121,29 @@ const styleRules = {
     },
   ],
   'spaced-comment': 2,
+  // enforce blank lines between logical blocks (variable declarations, control statements, return)
+  'padding-line-between-statements': [
+    2,
+    // always require a blank line after variable declarations
+    { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
+    // but allow consecutive variable declarations without blank lines
+    { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
+    // require blank line before control statements
+    { blankLine: 'always', prev: '*', next: ['if', 'for', 'while', 'do', 'switch'] },
+    // require blank line after control statements
+    { blankLine: 'always', prev: ['if', 'for', 'while', 'do', 'switch'], next: '*' },
+    // require blank line before return
+    { blankLine: 'always', prev: '*', next: 'return' },
+  ],
+  // prefer const where possible
+  'prefer-const': 2,
+  // require blank lines between class members
+  'lines-between-class-members': [2, 'always', { exceptAfterSingleLine: true }],
+  // max line length warning (synchronized with Prettier's printWidth below)
+  'max-len': [
+    1,
+    { code: 100, ignoreUrls: true, ignoreStrings: true, ignoreTemplateLiterals: true },
+  ],
 };
 
 const variablesRules = {

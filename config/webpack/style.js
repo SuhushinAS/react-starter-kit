@@ -12,14 +12,14 @@ const getStyleLoader = (options) => {
 const getCssLoader = () => {
   return {
     loader: 'css-loader',
-    options: {esModule: false},
+    options: { esModule: false },
   };
 };
 
 const getLessLoader = (options) => {
   return {
     loader: 'less-loader',
-    options: {lessOptions: {math: 'always', paths: [options.root]}},
+    options: { lessOptions: { math: 'always', paths: [options.root] } },
   };
 };
 
@@ -46,12 +46,7 @@ module.exports = (options) => {
         },
         {
           test: /\.less$/u,
-          use: [
-            getStyleLoader(options),
-            getCssLoader(),
-            'postcss-loader',
-            getLessLoader(options),
-          ],
+          use: [getStyleLoader(options), getCssLoader(), 'postcss-loader', getLessLoader(options)],
         },
       ],
     },

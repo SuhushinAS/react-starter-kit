@@ -1,5 +1,5 @@
-import {App} from 'src/app/ui/App';
-import {createRoot} from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
+import { App } from 'src/app/ui/App';
 import 'src/styles/index.less';
 
 const container = document.getElementById('root');
@@ -22,9 +22,7 @@ const onRegisterError = (error: Error) => {
 
 const onWindowLoad = () => {
   if ('serviceWorker' in navigator && navigator.serviceWorker) {
-    navigator.serviceWorker
-      .register('/sw.js', {updateViaCache: 'none'})
-      .catch(onRegisterError);
+    navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).catch(onRegisterError);
   }
 };
 

@@ -1,6 +1,6 @@
-import baron, {type BaronInstance} from 'baron';
-import {debounce} from 'src/modules/common/lib/debounce';
-import {Component, createRef, ReactNode, RefObject} from 'react';
+import baron, { type BaronInstance } from 'baron';
+import { Component, createRef, ReactNode, RefObject } from 'react';
+import { debounce } from 'src/modules/common/lib/debounce';
 import './Scroll.less';
 
 type TProps = {
@@ -12,12 +12,14 @@ type TDirection = 'h' | 'v';
 
 const getScrollbarWidth = () => {
   const outer = document.createElement('div');
+
   outer.style.visibility = 'hidden';
   outer.style.overflow = 'scroll';
   outer.style.setProperty('msOverflowStyle', 'scrollbar');
   document.body.appendChild(outer);
 
   const inner = document.createElement('div');
+
   outer.appendChild(inner);
 
   const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
@@ -56,6 +58,7 @@ export class Scroll extends Component<TProps, unknown> {
     scroll: createRef<HTMLDivElement>(),
     scroller: createRef<HTMLDivElement>(),
   };
+
   updateOnLayoutChange = debounce(() => {
     if (this.isMount) {
       this.instanceList.forEach(scrollUpdate);
@@ -69,7 +72,7 @@ export class Scroll extends Component<TProps, unknown> {
 
   rfsInit = (
     acc: Record<string, RefObject<HTMLDivElement | null>>,
-    dir: TDirection
+    dir: TDirection,
   ): Record<string, RefObject<HTMLDivElement | null>> => {
     return {
       ...acc,
@@ -96,10 +99,7 @@ export class Scroll extends Component<TProps, unknown> {
         key={dir}
         ref={this.rfs[getTrackKey(dir)]}
       >
-        <div
-          className={`Scroll__Bar Scroll__Bar_${dir}`}
-          ref={this.rfs[getBarKey(dir)]}
-        />
+        <div className={`Scroll__Bar Scroll__Bar_${dir}`} ref={this.rfs[getBarKey(dir)]} />
       </div>
     );
   };

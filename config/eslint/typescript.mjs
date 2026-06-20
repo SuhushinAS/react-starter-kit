@@ -1,6 +1,6 @@
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 
-import {sourceFiles, typescriptFiles} from './shared.mjs';
+import { sourceFiles, typescriptFiles } from './shared.mjs';
 
 export default [
   {
