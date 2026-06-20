@@ -5,10 +5,10 @@ import {configActions} from 'src/modules/config/lib/reducers';
 import {selectConfig} from 'src/modules/config/lib/selectors';
 import {selectStatusItem} from 'src/modules/status/lib/selectors';
 import {Status} from 'src/modules/status/lib/types';
-import React, {useEffect} from 'react';
+import {ReactNode, useEffect} from 'react';
 
 type TConfigProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const Config = (props: TConfigProps) => {

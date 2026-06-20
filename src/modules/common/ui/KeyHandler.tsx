@@ -1,24 +1,30 @@
-import React from 'react';
+import {Component} from 'react';
+
+type TKeyList = Record<string, Record<string, (e: Event) => void>>;
 
 type TProps = {
-  keyList: any;
+  keyList: TKeyList;
 };
 
-export class KeyHandler extends React.Component<TProps, unknown> {
-  handlerAdd = (eventName) => {
+export class KeyHandler extends Component<TProps, unknown> {
+  handlerAdd = (eventName: string) => {
     document.addEventListener(eventName, this.handler);
   };
 
-  handlerRemove = (eventName) => {
+  handlerRemove = (eventName: string) => {
     document.removeEventListener(eventName, this.handler);
   };
 
-  handler = (e) => {
+  handler: EventListener = (e) => {
     const {keyList} = this.props;
+    const handlersForType = keyList[e.type];
 
-    if (keyList[e.type]) {
-      if (keyList[e.type][e.keyCode]) {
-        keyList[e.type][e.keyCode](e);
+    if (handlersForType) {
+      const keyCode = (e as KeyboardEvent).code;
+      const fn = handlersForType[keyCode];
+
+      if (fn) {
+        fn(e);
       }
     }
   };
@@ -35,9 +41,10 @@ export class KeyHandler extends React.Component<TProps, unknown> {
     Object.keys(this.props.keyList).forEach(this.handlerRemove);
   }
 
-  shouldComponentUpdate(props) {
+  shouldComponentUpdate(props: TProps) {
     Object.keys(this.props.keyList).forEach(this.handlerRemove);
     Object.keys(props.keyList).forEach(this.handlerAdd);
+
     return false;
   }
 }

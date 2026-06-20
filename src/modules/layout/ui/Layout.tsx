@@ -1,11 +1,11 @@
 import {Scroll} from 'src/modules/common/ui/Scroll';
 import {Footer} from 'src/modules/layout/ui/Footer';
 import {Header} from 'src/modules/layout/ui/Header';
-import React from 'react';
 import './Layout.less';
+import {ReactNode} from 'react';
 
 type TLayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const Layout = ({children}: TLayoutProps) => {

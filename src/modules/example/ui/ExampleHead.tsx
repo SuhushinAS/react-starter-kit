@@ -1,11 +1,11 @@
-import React from 'react';
+import {ReactNode} from 'react';
 import {Link} from 'react-router-dom';
 import './ExampleHead.less';
 
 type TProps = {
-  linkText: React.ReactNode;
+  linkText: ReactNode;
   linkUrl: string;
-  title: React.ReactNode;
+  title: ReactNode;
 };
 
 export const ExampleHead = ({linkText, linkUrl, title}: TProps) => {

@@ -1,5 +1,4 @@
 import {TExample} from 'src/modules/example/lib/types';
-import React from 'react';
 import './ExampleItem.less';
 
 type TProps = {

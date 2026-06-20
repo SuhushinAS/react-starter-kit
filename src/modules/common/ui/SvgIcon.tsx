@@ -1,4 +1,3 @@
-import React from 'react';
 import {iconMap} from 'src/modules/common/lib/iconMap';
 import './SvgIcon.less';
 

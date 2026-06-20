@@ -1,6 +1,6 @@
-import baron from 'baron';
+import baron, {type BaronInstance} from 'baron';
 import {debounce} from 'src/modules/common/lib/debounce';
-import React, {ReactNode, RefObject} from 'react';
+import {Component, createRef, ReactNode, RefObject} from 'react';
 import './Scroll.less';
 
 type TProps = {
@@ -41,20 +41,20 @@ const getTrackKey = (dir: TDirection) => {
   return `track_${dir}`;
 };
 
-const scrollUpdate = (scroll: baron) => {
+const scrollUpdate = (scroll: BaronInstance) => {
   scroll.update();
 };
 
-const scrollDispose = (scroll: baron) => {
+const scrollDispose = (scroll: BaronInstance) => {
   scroll.dispose();
 };
 
-export class Scroll extends React.Component<TProps, unknown> {
-  instanceList: baron[] = [];
+export class Scroll extends Component<TProps, unknown> {
+  instanceList: BaronInstance[] = [];
   isMount = false;
   rfs: Record<string, RefObject<HTMLDivElement | null>> = {
-    scroll: React.createRef<HTMLDivElement>(),
-    scroller: React.createRef<HTMLDivElement>(),
+    scroll: createRef<HTMLDivElement>(),
+    scroller: createRef<HTMLDivElement>(),
   };
   updateOnLayoutChange = debounce(() => {
     if (this.isMount) {
@@ -73,8 +73,8 @@ export class Scroll extends React.Component<TProps, unknown> {
   ): Record<string, RefObject<HTMLDivElement | null>> => {
     return {
       ...acc,
-      [getBarKey(dir)]: React.createRef<HTMLDivElement>(),
-      [getTrackKey(dir)]: React.createRef<HTMLDivElement>(),
+      [getBarKey(dir)]: createRef<HTMLDivElement>(),
+      [getTrackKey(dir)]: createRef<HTMLDivElement>(),
     };
   };
 

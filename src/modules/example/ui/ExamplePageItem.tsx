@@ -4,7 +4,6 @@ import {ExampleHead} from 'src/modules/example/ui/ExampleHead';
 import {ExampleItem} from 'src/modules/example/ui/ExampleItem';
 import {selectExampleItem} from 'src/modules/example/lib/selectors';
 import {Message} from 'src/modules/locale/ui/Message';
-import React from 'react';
 import {useParams} from 'react-router-dom';
 
 export const ExamplePageItem = () => {

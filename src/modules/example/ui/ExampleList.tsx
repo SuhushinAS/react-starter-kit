@@ -7,7 +7,6 @@ import {selectExampleList} from 'src/modules/example/lib/selectors';
 import {TExample} from 'src/modules/example/lib/types';
 import {selectStatusItem} from 'src/modules/status/lib/selectors';
 import {Status} from 'src/modules/status/lib/types';
-import React from 'react';
 import {Link} from 'react-router-dom';
 import './ExampleList.less';
 

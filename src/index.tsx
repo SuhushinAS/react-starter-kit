@@ -1,5 +1,4 @@
 import {App} from 'src/app/ui/App';
-import React from 'react';
 import {createRoot} from 'react-dom/client';
 import 'src/styles/index.less';
 
@@ -17,7 +16,7 @@ if (container) {
   }
 }
 
-const onRegisterError = (error) => {
+const onRegisterError = (error: Error) => {
   console.error('SW registration failed: ', error);
 };
 
