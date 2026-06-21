@@ -78,7 +78,8 @@
   "license": "MIT",
   "name": "react-starter-kit",
   "overrides": {
-    "uuid": "^11.1.1"
+    "uuid": "^11.1.1",
+    "http-proxy-middleware": "^3.0.6"
   },
   "private": true,
   "repository": {
