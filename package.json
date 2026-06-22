@@ -94,8 +94,8 @@
     "format": "prettier . --check --ignore-unknown",
     "format:fix": "npm run format --  --write",
     "start": "cross-env NODE_ENV=production webpack serve --mode=production",
-    "style": "stylelint ./src/**/*.{css,less} --fix",
-    "style:fix": "npm run stylelint --fix",
+    "style": "stylelint ./src/**/*.{css,less}",
+    "style:fix": "npm run style -- --fix",
     "type": "tsc --noEmit --pretty false"
   },
   "version": "0.0.1",

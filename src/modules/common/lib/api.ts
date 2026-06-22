@@ -13,6 +13,10 @@ export class Api {
   }
 
   getJSON<T>(response: Response): Promise<T> {
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}: ${response.statusText}`);
+    }
+
     return response.json();
   }
 
