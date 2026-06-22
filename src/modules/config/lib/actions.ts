@@ -16,6 +16,7 @@ export const useConfigGet = () => {
     api
       .requestLocal<TConfig>('/api/v1/config.json')
       .then((data) => {
+        api.host = data.host;
         dispatch(configActions.update(data));
         configUpdateStatusSet(Status.success);
       })

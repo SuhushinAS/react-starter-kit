@@ -1,5 +1,5 @@
 export class Api {
-  static host = '';
+  host = '';
 
   static options = {
     headers: {
@@ -9,7 +9,7 @@ export class Api {
   };
 
   constructor(host = '') {
-    Api.host = host;
+    this.host = host;
   }
 
   getJSON<T>(response: Response): Promise<T> {
@@ -31,7 +31,7 @@ export class Api {
   }
 
   request<T>(url = '', options?: RequestInit): Promise<T> {
-    return this.fetch<T>(url, Api.host, options);
+    return this.fetch<T>(url, this.host, options);
   }
 
   fetch<T>(url = '', host = '', options = {}): Promise<T> {

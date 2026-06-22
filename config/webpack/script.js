@@ -10,10 +10,6 @@ const getPlugins = (options) => {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(options.mode) },
     }),
-    new webpack.IgnorePlugin({
-      contextRegExp: /moment$/u,
-      resourceRegExp: /^\.\/locale$/u,
-    }),
   ];
 
   if (getIsProd(options.mode)) {
