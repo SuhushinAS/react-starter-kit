@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/app/lib/hooks';
-import { api } from 'src/modules/common/lib/api';
+import { useRequestLocal } from 'src/modules/common/lib/api';
 import { currentLocaleKey } from 'src/modules/locale/lib/constants';
 import { getLocale } from 'src/modules/locale/lib/getLocale';
 import { localeActions } from 'src/modules/locale/lib/reducers';
@@ -12,12 +12,12 @@ import { Status } from 'src/modules/status/lib/types';
 export const useLocaleGetList = () => {
   const dispatch = useAppDispatch();
   const localeGetListStatusSet = useStatusSet(localeActions.getList.type);
+  const requestLocal = useRequestLocal();
 
   return useCallback(() => {
     localeGetListStatusSet(Status.loading);
 
-    api
-      .requestLocal<string[]>('/api/v1/locale.json')
+    requestLocal<string[]>('/api/v1/locale.json')
       .then((data) => {
         dispatch(localeActions.getList(data));
         localeGetListStatusSet(Status.success);
@@ -25,7 +25,7 @@ export const useLocaleGetList = () => {
       .catch(() => {
         localeGetListStatusSet(Status.error);
       });
-  }, [dispatch, localeGetListStatusSet]);
+  }, [dispatch, localeGetListStatusSet, requestLocal]);
 };
 
 export const useLocaleSetCurrent = () => {
@@ -50,13 +50,13 @@ export const useLocaleCurrent = () => {
 export const useLocaleGetMessages = () => {
   const dispatch = useAppDispatch();
   const localeGetMessagesStatusSet = useStatusSet(localeActions.getMessages.type);
+  const requestLocal = useRequestLocal();
 
   return useCallback(
     (language: string) => {
       localeGetMessagesStatusSet(Status.loading);
 
-      api
-        .requestLocal<TLocale>(`/api/v1/locale-${language}.json`)
+      requestLocal<TLocale>(`/api/v1/locale-${language}.json`)
         .then((data) => {
           dispatch(localeActions.getMessages({ data, language }));
           localeGetMessagesStatusSet(Status.success);
@@ -65,6 +65,6 @@ export const useLocaleGetMessages = () => {
           localeGetMessagesStatusSet(Status.error);
         });
     },
-    [dispatch, localeGetMessagesStatusSet],
+    [dispatch, localeGetMessagesStatusSet, requestLocal],
   );
 };

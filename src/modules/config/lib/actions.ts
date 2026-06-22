@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useAppDispatch } from 'src/app/lib/hooks';
-import { api } from 'src/modules/common/lib/api';
+import { api, useRequestLocal } from 'src/modules/common/lib/api';
 import { configActions } from 'src/modules/config/lib/reducers';
 import { TConfig } from 'src/modules/config/lib/types';
 import { useStatusSet } from 'src/modules/status/lib/actions';
@@ -9,12 +9,12 @@ import { Status } from 'src/modules/status/lib/types';
 export const useConfigGet = () => {
   const dispatch = useAppDispatch();
   const configUpdateStatusSet = useStatusSet(configActions.update.type);
+  const requestLocal = useRequestLocal();
 
   return useCallback(() => {
     configUpdateStatusSet(Status.loading);
 
-    api
-      .requestLocal<TConfig>('/api/v1/config.json')
+    requestLocal<TConfig>('/api/v1/config.json')
       .then((data) => {
         api.host = data.host;
         dispatch(configActions.update(data));
@@ -23,5 +23,5 @@ export const useConfigGet = () => {
       .catch(() => {
         configUpdateStatusSet(Status.error);
       });
-  }, [configUpdateStatusSet, dispatch]);
+  }, [configUpdateStatusSet, dispatch, requestLocal]);
 };
