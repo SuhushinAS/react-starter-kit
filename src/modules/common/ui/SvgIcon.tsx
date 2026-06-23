@@ -1,5 +1,4 @@
-import React from 'react';
-import {iconMap} from 'src/modules/common/lib/iconMap';
+import { iconMap } from 'src/modules/common/lib/iconMap';
 import './SvgIcon.less';
 
 type TIconProps = {
@@ -18,7 +17,7 @@ const warn = (name: string, message: string): void => {
   }
 };
 
-export const SvgIcon = ({name = ''}: TIconProps) => {
+export const SvgIcon = ({ name = '' }: TIconProps) => {
   if (!name) {
     warn(name, `${name} is not correct`);
 

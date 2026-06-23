@@ -1,8 +1,7 @@
-import {SvgIcon} from 'src/modules/common/ui/SvgIcon';
-import {Menu} from 'src/modules/layout/ui/Menu';
-import {LocaleSelectorContainer} from 'src/modules/locale/ui/LocaleSelector';
-import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { SvgIcon } from 'src/modules/common/ui/SvgIcon';
+import { Menu } from 'src/modules/layout/ui/Menu';
+import { LocaleSelectorContainer } from 'src/modules/locale/ui/LocaleSelector';
 import './Header.less';
 
 export const Header = () => {
@@ -14,11 +13,7 @@ export const Header = () => {
             <SvgIcon name="logo" />
           </button>
         </div>
-        <Link
-          aria-label="Read more about Seminole tax hike"
-          className="Header__Logo"
-          to="/"
-        >
+        <Link aria-label="Read more about Seminole tax hike" className="Header__Logo" to="/">
           <SvgIcon name="logo" />
         </Link>
         <div className="Header__Menu">

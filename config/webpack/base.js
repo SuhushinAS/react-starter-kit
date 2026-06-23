@@ -52,11 +52,11 @@ module.exports = (options) => {
       },
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       fallback: {
-        child_process: 'empty',
-        dgram: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
+        child_process: false,
+        dgram: false,
+        fs: false,
+        net: false,
+        tls: false,
       },
       modules: ['node_modules'],
     },
@@ -66,6 +66,6 @@ module.exports = (options) => {
       reasons: isProd,
     },
     target: isProd ? 'browserslist' : 'web',
-    watchOptions: {aggregateTimeout: 300},
+    watchOptions: { aggregateTimeout: 300 },
   };
 };

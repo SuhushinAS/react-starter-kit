@@ -29,6 +29,31 @@ declare module '*.svg' {
 }
 
 declare module '*.less' {
-  const classes: {readonly [key: string]: string};
+  const classes: { readonly [key: string]: string };
   export default classes;
+}
+
+declare module 'baron' {
+  import type { HTMLElement } from 'react';
+
+  export type BaronDirection = 'h' | 'v';
+
+  export type BaronOptions = {
+    bar?: HTMLElement | null;
+    barOnCls?: string;
+    direction?: BaronDirection;
+    impact?: string;
+    root?: HTMLElement | null;
+    scroller?: HTMLElement | null;
+    track?: HTMLElement | null;
+    [key: string]: unknown;
+  };
+
+  export interface BaronInstance {
+    update: () => void;
+    dispose: () => void;
+    [key: string]: unknown;
+  }
+
+  export default function baron(opts?: BaronOptions): BaronInstance;
 }

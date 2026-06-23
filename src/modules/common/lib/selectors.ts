@@ -1,14 +1,12 @@
-import {TItem, TMap} from 'src/modules/common/lib/types';
+import { TItem, TMap } from 'src/modules/common/lib/types';
 
 type TGetList = <T = TItem>(data: TMap<T>, list: string[]) => T[];
 
 export const getList: TGetList = (data, list) => list.map((id) => data[id]);
 
-type Compare = Record<string, {from: unknown; to: unknown}>;
+type Compare = Record<string, { from: unknown; to: unknown }>;
 
-const isObject = (
-  value: unknown
-): value is Record<string | number | symbol, unknown> => {
+const isObject = (value: unknown): value is Record<string | number | symbol, unknown> => {
   return null !== value && 'object' === typeof value;
 };
 

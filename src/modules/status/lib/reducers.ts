@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Status, TStatusStore} from 'src/modules/status/lib/types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Status, TStatusStore } from 'src/modules/status/lib/types';
 
 const initialState: TStatusStore = {};
 
@@ -12,7 +12,7 @@ export const status = createSlice({
   initialState,
   name: 'status',
   reducers: {
-    setStatus(state, {payload}: PayloadAction<SetStatusPayload>) {
+    setStatus(state, { payload }: PayloadAction<SetStatusPayload>) {
       state[payload.type] = payload.status;
     },
   },

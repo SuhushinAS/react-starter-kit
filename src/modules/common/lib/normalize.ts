@@ -1,9 +1,4 @@
-import {
-  TGetEntry,
-  TGetId,
-  TItem,
-  TNormalize,
-} from 'src/modules/common/lib/types';
+import { TGetEntry, TGetId, TItem, TNormalize } from 'src/modules/common/lib/types';
 
 type GetId = <T = TItem>(key: keyof T) => TGetId<T>;
 

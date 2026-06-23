@@ -1,10 +1,7 @@
 {
   "env": {
     "production": {
-      "plugins": [
-        "@babel/plugin-transform-react-constant-elements",
-        "babel-plugin-transform-react-remove-prop-types"
-      ]
+      "plugins": ["@babel/plugin-transform-react-constant-elements"]
     }
   },
   "plugins": [
@@ -22,7 +19,12 @@
         "useBuiltIns": "usage"
       }
     ],
-    "@babel/preset-react",
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
+    ],
     "@babel/preset-typescript"
   ]
 }

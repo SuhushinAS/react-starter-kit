@@ -1,6 +1,6 @@
 import importPlugin from 'eslint-plugin-import';
 
-import {sourceFiles} from './shared.mjs';
+import { sourceFiles } from './shared.mjs';
 
 export default {
   files: sourceFiles,
@@ -30,6 +30,7 @@ export default {
       2,
       {
         groups: [],
+        alphabetize: { order: 'asc', caseInsensitive: true },
       },
     ],
   },

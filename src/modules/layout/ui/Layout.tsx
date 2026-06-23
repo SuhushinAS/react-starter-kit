@@ -1,14 +1,14 @@
-import {Scroll} from 'src/modules/common/ui/Scroll';
-import {Footer} from 'src/modules/layout/ui/Footer';
-import {Header} from 'src/modules/layout/ui/Header';
-import React from 'react';
+import { ReactNode } from 'react';
+import { Scroll } from 'src/modules/common/ui/Scroll';
+import { Footer } from 'src/modules/layout/ui/Footer';
+import { Header } from 'src/modules/layout/ui/Header';
 import './Layout.less';
 
 type TLayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export const Layout = ({children}: TLayoutProps) => {
+export const Layout = ({ children }: TLayoutProps) => {
   return (
     <div className="Layout">
       <header className="Layout__Header">

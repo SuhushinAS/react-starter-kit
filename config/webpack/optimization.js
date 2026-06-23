@@ -9,11 +9,11 @@ module.exports = (options) => {
       minimizer: [
         new TerserWebpackPlugin({
           extractComments: false,
-          terserOptions: {output: {comments: false}},
+          terserOptions: { output: { comments: false } },
         }),
         new CssMinimizerPlugin({
           minimizerOptions: {
-            preset: ['default', {discardComments: {removeAll: true}}],
+            preset: ['default', { discardComments: { removeAll: true } }],
           },
         }),
       ],

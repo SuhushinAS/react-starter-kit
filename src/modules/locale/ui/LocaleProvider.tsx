@@ -1,29 +1,27 @@
-import {useAppSelector} from 'src/app/lib/hooks';
+import { ReactNode, useEffect, useState } from 'react';
+import { IntlProvider } from 'react-intl';
+import { useAppSelector } from 'src/app/lib/hooks';
 import {
   useLocaleCurrent,
   useLocaleGetList,
   useLocaleGetMessages,
 } from 'src/modules/locale/lib/actions';
-import {localeActions} from 'src/modules/locale/lib/reducers';
-import {selectMessages} from 'src/modules/locale/lib/selectors';
-import {selectStatusItem} from 'src/modules/status/lib/selectors';
-import {Status} from 'src/modules/status/lib/types';
-import React, {useEffect} from 'react';
-import {IntlProvider} from 'react-intl';
+import { localeActions } from 'src/modules/locale/lib/reducers';
+import { selectMessages } from 'src/modules/locale/lib/selectors';
+import { selectStatusItem } from 'src/modules/status/lib/selectors';
+import { Status } from 'src/modules/status/lib/types';
 
 type TLocaleProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export const LocaleProvider = ({children}: TLocaleProps) => {
+export const LocaleProvider = ({ children }: TLocaleProps) => {
   const localeCurrent = useLocaleCurrent();
   const messages = useAppSelector(selectMessages(localeCurrent));
-  const messagesStatus = useAppSelector(
-    selectStatusItem(localeActions.getMessages.type)
-  );
+  const messagesStatus = useAppSelector(selectStatusItem(localeActions.getMessages.type));
   const localeGetList = useLocaleGetList();
   const localeGetMessages = useLocaleGetMessages();
-  const [messagesState, setMessagesState] = React.useState(messages);
+  const [messagesState, setMessagesState] = useState(messages);
 
   useEffect(() => {
     localeGetList();

@@ -1,6 +1,6 @@
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 
-import {sourceFiles, typescriptFiles} from './shared.mjs';
+import { sourceFiles, typescriptFiles } from './shared.mjs';
 
 export default [
   {
@@ -16,7 +16,7 @@ export default [
       '@typescript-eslint/no-array-constructor': 2,
       '@typescript-eslint/no-empty-function': 2,
       '@typescript-eslint/no-empty-interface': 2,
-      '@typescript-eslint/no-explicit-any': 0,
+      '@typescript-eslint/no-explicit-any': 2,
       '@typescript-eslint/no-inferrable-types': 0,
       '@typescript-eslint/no-misused-new': 2,
       '@typescript-eslint/no-namespace': 2,

@@ -1,6 +1,6 @@
-import baron from 'baron';
-import {debounce} from 'src/modules/common/lib/debounce';
-import React, {ReactNode, RefObject} from 'react';
+import baron, { type BaronInstance } from 'baron';
+import { Component, createRef, ReactNode, RefObject } from 'react';
+import { debounce } from 'src/modules/common/lib/debounce';
 import './Scroll.less';
 
 type TProps = {
@@ -12,12 +12,14 @@ type TDirection = 'h' | 'v';
 
 const getScrollbarWidth = () => {
   const outer = document.createElement('div');
+
   outer.style.visibility = 'hidden';
   outer.style.overflow = 'scroll';
   outer.style.setProperty('msOverflowStyle', 'scrollbar');
   document.body.appendChild(outer);
 
   const inner = document.createElement('div');
+
   outer.appendChild(inner);
 
   const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
@@ -41,21 +43,22 @@ const getTrackKey = (dir: TDirection) => {
   return `track_${dir}`;
 };
 
-const scrollUpdate = (scroll: baron) => {
+const scrollUpdate = (scroll: BaronInstance) => {
   scroll.update();
 };
 
-const scrollDispose = (scroll: baron) => {
+const scrollDispose = (scroll: BaronInstance) => {
   scroll.dispose();
 };
 
-export class Scroll extends React.Component<TProps, unknown> {
-  instanceList: baron[] = [];
+export class Scroll extends Component<TProps, unknown> {
+  instanceList: BaronInstance[] = [];
   isMount = false;
   rfs: Record<string, RefObject<HTMLDivElement | null>> = {
-    scroll: React.createRef<HTMLDivElement>(),
-    scroller: React.createRef<HTMLDivElement>(),
+    scroll: createRef<HTMLDivElement>(),
+    scroller: createRef<HTMLDivElement>(),
   };
+
   updateOnLayoutChange = debounce(() => {
     if (this.isMount) {
       this.instanceList.forEach(scrollUpdate);
@@ -69,12 +72,12 @@ export class Scroll extends React.Component<TProps, unknown> {
 
   rfsInit = (
     acc: Record<string, RefObject<HTMLDivElement | null>>,
-    dir: TDirection
+    dir: TDirection,
   ): Record<string, RefObject<HTMLDivElement | null>> => {
     return {
       ...acc,
-      [getBarKey(dir)]: React.createRef<HTMLDivElement>(),
-      [getTrackKey(dir)]: React.createRef<HTMLDivElement>(),
+      [getBarKey(dir)]: createRef<HTMLDivElement>(),
+      [getTrackKey(dir)]: createRef<HTMLDivElement>(),
     };
   };
 
@@ -96,10 +99,7 @@ export class Scroll extends React.Component<TProps, unknown> {
         key={dir}
         ref={this.rfs[getTrackKey(dir)]}
       >
-        <div
-          className={`Scroll__Bar Scroll__Bar_${dir}`}
-          ref={this.rfs[getBarKey(dir)]}
-        />
+        <div className={`Scroll__Bar Scroll__Bar_${dir}`} ref={this.rfs[getBarKey(dir)]} />
       </div>
     );
   };

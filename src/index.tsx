@@ -1,6 +1,5 @@
-import {App} from 'src/app/ui/App';
-import React from 'react';
-import {createRoot} from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
+import { App } from 'src/app/ui/App';
 import 'src/styles/index.less';
 
 const container = document.getElementById('root');
@@ -17,15 +16,13 @@ if (container) {
   }
 }
 
-const onRegisterError = (error) => {
+const onRegisterError = (error: Error) => {
   console.error('SW registration failed: ', error);
 };
 
 const onWindowLoad = () => {
   if ('serviceWorker' in navigator && navigator.serviceWorker) {
-    navigator.serviceWorker
-      .register('/sw.js', {updateViaCache: 'none'})
-      .catch(onRegisterError);
+    navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).catch(onRegisterError);
   }
 };
 

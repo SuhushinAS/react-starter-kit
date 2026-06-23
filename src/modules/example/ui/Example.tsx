@@ -1,9 +1,9 @@
-import {ExamplePageItem} from 'src/modules/example/ui/ExamplePageItem';
-import {ExamplePageList} from 'src/modules/example/ui/ExamplePageList';
-import {useExampleGetList} from 'src/modules/example/lib/actions';
-import {examplePaths} from 'src/modules/example/lib/constants';
-import React, {useEffect} from 'react';
-import {Route, Routes} from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useExampleGetList } from 'src/modules/example/lib/actions';
+import { examplePaths } from 'src/modules/example/lib/constants';
+import { ExamplePageItem } from 'src/modules/example/ui/ExamplePageItem';
+import { ExamplePageList } from 'src/modules/example/ui/ExamplePageList';
 
 export const Example = () => {
   const exampleGetList = useExampleGetList();

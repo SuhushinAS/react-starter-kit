@@ -1,5 +1,5 @@
-import {MenuItem} from 'src/modules/layout/ui/MenuItem';
-import React from 'react';
+import { Component } from 'react';
+import { MenuItem } from 'src/modules/layout/ui/MenuItem';
 import './Menu.less';
 
 type TMenuProps = {
@@ -12,7 +12,7 @@ type TMenuItem = {
   path: string;
 };
 
-export class Menu extends React.Component<TMenuProps> {
+export class Menu extends Component<TMenuProps> {
   static defaultProps = {
     list: [
       {
@@ -27,7 +27,7 @@ export class Menu extends React.Component<TMenuProps> {
     return <ul className="Menu">{this.props.list.map(this.renderItem)}</ul>;
   }
 
-  renderItem = ({id, name, path}: TMenuItem) => (
+  renderItem = ({ id, name, path }: TMenuItem) => (
     <li className="Menu__Item" key={id}>
       <MenuItem name={name} path={path} />
     </li>

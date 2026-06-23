@@ -2,11 +2,9 @@
   "author": "SuhushinAS",
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
-    "@types/node": "^25.9.2",
     "baron": "^3.0.3",
     "core-js": "^3.46.0",
     "normalize.css": "^8.0.1",
-    "prettier": "^3.8.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-intl": "^10.1.13",
@@ -30,11 +28,11 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@types/webpack-env": "^1.18.8",
+    "@types/node": "^25.9.2",
     "@typescript-eslint/eslint-plugin": "^8.61.0",
     "@typescript-eslint/parser": "^8.61.0",
     "autoprefixer": "^10.5.0",
     "babel-loader": "^10.1.1",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "copy-webpack-plugin": "^14.0.0",
     "cross-env": "^10.1.0",
     "css-loader": "^7.1.4",
@@ -54,6 +52,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-less": "^6.0.0",
     "postcss-loader": "^8.2.1",
+    "prettier": "^3.8.4",
     "style-loader": "^4.0.0",
     "stylelint": "^17.13.0",
     "stylelint-config-standard": "^40.0.0",
@@ -78,7 +77,8 @@
   "license": "MIT",
   "name": "react-starter-kit",
   "overrides": {
-    "uuid": "^11.1.1"
+    "uuid": "^11.1.1",
+    "http-proxy-middleware": "^3.0.6"
   },
   "private": true,
   "repository": {
@@ -93,8 +93,8 @@
     "format": "prettier . --check --ignore-unknown",
     "format:fix": "npm run format --  --write",
     "start": "cross-env NODE_ENV=production webpack serve --mode=production",
-    "style": "stylelint ./src/**/*.{css,less} --fix",
-    "style:fix": "npm run stylelint --fix",
+    "style": "stylelint ./src/**/*.{css,less}",
+    "style:fix": "npm run style -- --fix",
     "type": "tsc --noEmit --pretty false"
   },
   "version": "0.0.1",

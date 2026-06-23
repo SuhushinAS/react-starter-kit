@@ -1,7 +1,7 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import type {TLocaleStore} from 'src/modules/locale/lib/types';
-import {TLocale} from 'src/modules/locale/lib/types';
-import {getLocale} from 'src/modules/locale/lib/getLocale';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getLocale } from 'src/modules/locale/lib/getLocale';
+import type { TLocaleStore } from 'src/modules/locale/lib/types';
+import { TLocale } from 'src/modules/locale/lib/types';
 
 const initialState: TLocaleStore = {
   current: getLocale(),
@@ -18,15 +18,15 @@ export const locale = createSlice({
   initialState,
   name: 'locale',
   reducers: {
-    getList(state, {payload}: PayloadAction<string[]>) {
+    getList(state, { payload }: PayloadAction<string[]>) {
       state.list = payload;
     },
-    getMessages(state, {payload}: PayloadAction<GetMessagesPayload>) {
-      const {data, language} = payload;
+    getMessages(state, { payload }: PayloadAction<GetMessagesPayload>) {
+      const { data, language } = payload;
 
       state.data[language] = data;
     },
-    setCurrent(state, {payload}: PayloadAction<string>) {
+    setCurrent(state, { payload }: PayloadAction<string>) {
       state.current = payload;
     },
   },

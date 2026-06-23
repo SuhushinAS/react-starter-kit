@@ -8,11 +8,7 @@ const customInterpolateName = (url) => {
 const getPlugins = (options) => {
   const result = [
     new webpack.DefinePlugin({
-      'process.env': {NODE_ENV: JSON.stringify(options.mode)},
-    }),
-    new webpack.IgnorePlugin({
-      contextRegExp: /moment$/u,
-      resourceRegExp: /^\.\/locale$/u,
+      'process.env': { NODE_ENV: JSON.stringify(options.mode) },
     }),
   ];
 
@@ -21,8 +17,8 @@ const getPlugins = (options) => {
       new webpack.LoaderOptionsPlugin({
         debug: false,
         minimize: true,
-        options: {customInterpolateName},
-      })
+        options: { customInterpolateName },
+      }),
     );
   }
 
@@ -36,7 +32,7 @@ module.exports = (options) => {
         {
           exclude: /node_modules/u,
           test: /\.(js|jsx|ts|tsx)$/u,
-          use: [{loader: 'babel-loader', options: {cacheDirectory: true}}],
+          use: [{ loader: 'babel-loader', options: { cacheDirectory: true } }],
         },
       ],
     },

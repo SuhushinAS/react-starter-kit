@@ -1,4 +1,4 @@
-import {getSvgViewBox} from 'src/modules/common/lib/getSvgViewBox';
+import { getSvgViewBox } from 'src/modules/common/lib/getSvgViewBox';
 
 type TIconMap = Record<string, string>;
 
@@ -25,7 +25,5 @@ export const iconMap = context.keys().reduce<TIconMap>((result, path) => {
 }, {});
 
 if (isDev && invalidIcons.length) {
-  console.warn(
-    `[SvgIcon] Missing viewBox in SVG icons: ${invalidIcons.join(', ')}`
-  );
+  console.warn(`[SvgIcon] Missing viewBox in SVG icons: ${invalidIcons.join(', ')}`);
 }

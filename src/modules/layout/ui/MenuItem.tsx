@@ -1,5 +1,4 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './MenuItem.less';
 
 export type TMenuItemProps = {
@@ -7,7 +6,7 @@ export type TMenuItemProps = {
   path: string;
 };
 
-export const MenuItem = ({name, path}: TMenuItemProps) => {
+export const MenuItem = ({ name, path }: TMenuItemProps) => {
   return (
     <Link className="MenuItem" to={path}>
       {name}

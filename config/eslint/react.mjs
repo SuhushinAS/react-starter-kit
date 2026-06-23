@@ -1,7 +1,7 @@
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactPlugin from 'eslint-plugin-react';
 
-import {sourceFiles} from './shared.mjs';
+import { sourceFiles } from './shared.mjs';
 
 const reactHooksRules = {
   'react-hooks/exhaustive-deps': 2,
@@ -27,9 +27,9 @@ const reactJsxRules = {
   'react/jsx-no-target-blank': 2,
   'react/jsx-no-undef': 2,
   'react/jsx-sort-props': 2,
-  'react/jsx-uses-react': 2,
+  'react/jsx-uses-react': 0,
   'react/jsx-uses-vars': 2,
-  'react/react-in-jsx-scope': 2,
+  'react/react-in-jsx-scope': 0,
 };
 
 const reactComponentRules = {

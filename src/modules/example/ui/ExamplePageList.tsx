@@ -1,8 +1,7 @@
-import {appPath} from 'src/app/lib/constants';
-import {ExampleHead} from 'src/modules/example/ui/ExampleHead';
-import {ExampleList} from 'src/modules/example/ui/ExampleList';
-import {Message} from 'src/modules/locale/ui/Message';
-import React from 'react';
+import { appPath } from 'src/app/lib/constants';
+import { ExampleHead } from 'src/modules/example/ui/ExampleHead';
+import { ExampleList } from 'src/modules/example/ui/ExampleList';
+import { Message } from 'src/modules/locale/ui/Message';
 
 export const ExamplePageList = () => {
   return (
